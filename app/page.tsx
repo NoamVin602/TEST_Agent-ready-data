@@ -9,6 +9,7 @@ import { HomeView, IssueCategory } from "./components/views/HomeView";
 import { AnalysisView } from "./components/views/AnalysisView";
 import { ContentGapsView } from "./components/views/ContentGapsView";
 import { ArchivedView } from "./components/views/ArchivedView";
+import { DataCurationView } from "./components/data-curation/DataCurationView";
 import "./globals.css";
 
 // Placeholder for ScanProgressModal
@@ -54,6 +55,7 @@ const TABS = [
   { id: "analysis" as TabId, label: "Analysis", count: 10 },
   { id: "content-gaps" as TabId, label: "Content Gaps", count: 7 },
   { id: "archived" as TabId, label: "Archived", count: 5 },
+  { id: "curation" as TabId, label: "Curation" },
   { id: "activity" as TabId, label: "Activity" },
   { id: "run-log" as TabId, label: "Run Log" },
   { id: "config" as TabId, label: "Config" },
@@ -119,6 +121,12 @@ export default function DataCurationPage() {
           return <ContentGapsView />;
         case "archived":
           return <ArchivedView />;
+        case "curation":
+          return (
+            <div style={{ height: '100%', display: 'flex', flexDirection: 'column' }}>
+              <DataCurationView />
+            </div>
+          );
         case "activity":
           return (
             <div style={{ 
@@ -197,7 +205,7 @@ export default function DataCurationPage() {
 
       {/* Tab Content with Optional Quick Fixes Sidebar */}
       <div style={{ display: 'flex', flex: 1, overflow: 'hidden' }}>
-        <div style={{ flex: 1, overflow: 'auto' }}>
+        <div style={{ flex: 1, overflow: activeTab === "curation" ? "hidden" : 'auto', display: 'flex', flexDirection: 'column' }}>
           {renderTabContent()}
         </div>
         {activeTab === "home" && <QuickFixesSidebar />}

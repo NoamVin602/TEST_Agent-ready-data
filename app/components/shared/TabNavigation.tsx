@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion";
 
-export type TabId = "home" | "analysis" | "content-gaps" | "archived" | "activity" | "run-log" | "config";
+export type TabId = "home" | "analysis" | "content-gaps" | "archived" | "activity" | "run-log" | "config" | "curation";
 
 interface Tab {
   id: TabId;
