@@ -91,7 +91,7 @@ export function GlobalNavigation({ activeTab = "home" }: GlobalNavigationProps) 
               padding: '0 16px',
               backgroundColor: 'transparent',
               border: 'none',
-              borderBottom: activeTab === 'home' ? '2px solid #0176D3' : '2px solid transparent',
+              borderBottom: activeTab === 'home' ? '2px solid rgba(2, 80, 217, 1)' : '2px solid transparent',
               fontFamily: "'SF Pro', -apple-system, BlinkMacSystemFont, sans-serif",
               fontSize: '13px',
               fontWeight: activeTab === 'home' ? 590 : 400,
