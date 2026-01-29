@@ -30,6 +30,12 @@
   --slds-g-color-electric-blue-50: #066AFE;
   --slds-g-color-electric-blue-90: #D6E6FF;
   
+  /* Accent Colors (from Figma - Button Brand) */
+  --slds-g-color-accent-2: #0250D9;
+  --slds-g-color-accent-3: #022AC0;
+  --slds-g-color-accent-container-1: #066AFE;
+  --slds-g-color-on-accent-1: #FFFFFF;
+  
   /* Surface Container Inverse */
   --slds-g-color-surface-container-inverse-1: #032D60;
   --slds-g-color-on-surface-inverse-1: #FFFFFF;

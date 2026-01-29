@@ -427,23 +427,23 @@ export const AnalysisView = forwardRef<HTMLDivElement, AnalysisViewProps>(
                       <button
                         type="button"
                         style={{
-                          padding: '6px 16px',
-                          borderRadius: '4px',
+                          padding: '6px var(--slds-g-spacing-4)', // 6px 16px
+                          borderRadius: 'var(--slds-g-radius-border-1)', // 4px
                           border: 'none',
-                          backgroundColor: '#0176D3',
-                          color: '#FFFFFF',
-                          fontFamily: "'SF Pro', -apple-system, BlinkMacSystemFont, sans-serif",
-                          fontSize: '13px',
-                          fontWeight: 590,
-                          lineHeight: '19px',
+                          backgroundColor: 'var(--slds-g-color-accent-container-1)', // #066AFE from Figma
+                          color: 'var(--slds-g-color-on-accent-1)', // #FFFFFF from Figma
+                          fontFamily: 'var(--slds-g-font-family)',
+                          fontSize: 'var(--slds-g-font-scale-1)', // 14px from Figma
+                          fontWeight: 'var(--slds-g-font-weight-6)', // 590 Semibold
+                          lineHeight: 'var(--slds-g-line-height-body)', // 19px from Figma
                           cursor: 'pointer',
-                          transition: 'background-color 0.15s ease-in-out',
+                          transition: 'background-color var(--slds-g-transition-fast)',
                         }}
                         onMouseEnter={(e) => {
-                          e.currentTarget.style.backgroundColor = '#014486';
+                          e.currentTarget.style.backgroundColor = 'var(--slds-g-color-accent-2)'; // #0250D9 darker blue
                         }}
                         onMouseLeave={(e) => {
-                          e.currentTarget.style.backgroundColor = '#0176D3';
+                          e.currentTarget.style.backgroundColor = 'var(--slds-g-color-accent-container-1)'; // #066AFE
                         }}
                       >
                         Mark Resolved(?)
@@ -451,23 +451,23 @@ export const AnalysisView = forwardRef<HTMLDivElement, AnalysisViewProps>(
                       <button
                         type="button"
                         style={{
-                          padding: '6px 16px',
-                          borderRadius: '4px',
-                          border: '1px solid #C9C9C9',
-                          backgroundColor: '#FFFFFF',
-                          color: '#5C5C5C',
-                          fontFamily: "'SF Pro', -apple-system, BlinkMacSystemFont, sans-serif",
-                          fontSize: '13px',
-                          fontWeight: 590,
-                          lineHeight: '19px',
+                          padding: '6px var(--slds-g-spacing-4)', // 6px 16px
+                          borderRadius: 'var(--slds-g-radius-border-1)', // 4px
+                          border: '1px solid var(--slds-g-color-border-1)', // #C9C9C9
+                          backgroundColor: 'var(--slds-g-color-neutral-base-100)', // #FFFFFF
+                          color: 'var(--slds-g-color-on-surface-1)', // #5C5C5C from Figma
+                          fontFamily: 'var(--slds-g-font-family)',
+                          fontSize: 'var(--slds-g-font-scale-base)', // 13px from Figma
+                          fontWeight: 'var(--slds-g-font-weight-6)', // 590 Semibold
+                          lineHeight: 'var(--slds-g-line-height-body-base)', // 18px from Figma
                           cursor: 'pointer',
-                          transition: 'background-color 0.15s ease-in-out',
+                          transition: 'background-color var(--slds-g-transition-fast)',
                         }}
                         onMouseEnter={(e) => {
-                          e.currentTarget.style.backgroundColor = '#F3F3F3';
+                          e.currentTarget.style.backgroundColor = 'var(--slds-g-color-neutral-base-95)'; // #F3F3F3
                         }}
                         onMouseLeave={(e) => {
-                          e.currentTarget.style.backgroundColor = '#FFFFFF';
+                          e.currentTarget.style.backgroundColor = 'var(--slds-g-color-neutral-base-100)'; // #FFFFFF
                         }}
                       >
                         View Document Preview

@@ -208,21 +208,23 @@ export function IssueCard({
                 style={{
                   display: 'inline-flex',
                   alignItems: 'center',
-                  padding: '6px var(--slds-g-spacing-4)',
-                  backgroundColor: 'var(--slds-g-color-brand-base-50)',
+                  padding: '6px var(--slds-g-spacing-4)', // 6px 16px
+                  backgroundColor: 'var(--slds-g-color-accent-container-1)', // #066AFE from Figma
                   border: 'none',
-                  borderRadius: 'var(--slds-g-radius-border-2)',
-                  color: 'var(--slds-g-color-neutral-base-100)',
-                  fontSize: 'var(--slds-g-font-scale-1)',
-                  fontWeight: 'var(--slds-g-font-weight-6)',
+                  borderRadius: 'var(--slds-g-radius-border-1)', // 4px from Figma
+                  color: 'var(--slds-g-color-on-accent-1)', // #FFFFFF from Figma
+                  fontFamily: 'var(--slds-g-font-family)',
+                  fontSize: 'var(--slds-g-font-scale-1)', // 14px from Figma
+                  fontWeight: 'var(--slds-g-font-weight-6)', // 590 Semibold
+                  lineHeight: 'var(--slds-g-line-height-body)', // 19px from Figma
                   cursor: 'pointer',
-                  transition: 'all var(--slds-g-transition-base)'
+                  transition: 'background-color var(--slds-g-transition-fast)',
                 }}
                 onMouseEnter={(e) => {
-                  e.currentTarget.style.backgroundColor = 'var(--slds-g-color-brand-base-60)';
+                  e.currentTarget.style.backgroundColor = 'var(--slds-g-color-accent-2)'; // #0250D9 darker blue
                 }}
                 onMouseLeave={(e) => {
-                  e.currentTarget.style.backgroundColor = 'var(--slds-g-color-brand-base-50)';
+                  e.currentTarget.style.backgroundColor = 'var(--slds-g-color-accent-container-1)'; // #066AFE
                 }}
               >
                 Mark Resolved(?)
