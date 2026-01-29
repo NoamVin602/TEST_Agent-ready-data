@@ -8,6 +8,7 @@ import { QuickFixesSidebar } from "./components/shared/QuickFixesSidebar";
 import { HomeView, IssueCategory } from "./components/views/HomeView";
 import { AnalysisView } from "./components/views/AnalysisView";
 import { ContentGapsView } from "./components/views/ContentGapsView";
+import { ArchivedView } from "./components/views/ArchivedView";
 import "./globals.css";
 
 // Placeholder for ScanProgressModal
@@ -117,17 +118,7 @@ export default function DataCurationPage() {
         case "content-gaps":
           return <ContentGapsView />;
         case "archived":
-          return (
-            <div style={{ 
-              maxWidth: '1440px', 
-              margin: '0 auto', 
-              padding: 'var(--slds-g-spacing-6)',
-              textAlign: 'center',
-              color: 'var(--slds-g-color-text-weak)'
-            }}>
-              Archived view - Coming soon
-            </div>
-          );
+          return <ArchivedView />;
         case "activity":
           return (
             <div style={{ 
