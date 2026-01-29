@@ -60,7 +60,7 @@ export function RecentActivityTable({ activities }: RecentActivityTableProps) {
             <input
               type="text"
               className="slds-input"
-              placeholder="Search…"
+              placeholder="Q Search..."
               style={{
                 height: '32px',
                 paddingLeft: '32px',

@@ -165,25 +165,53 @@ export function HomeView({ onMetricClick }: HomeViewProps) {
         padding: 'var(--slds-g-spacing-4)',
         display: 'flex',
         gap: 'var(--slds-g-spacing-4)',
-        height: '100%'
+        height: '100%',
+        maxWidth: '1440px',
+        margin: '0 auto',
+        width: '100%'
       }}
     >
       {/* Left Column - Current State Dashboard (75%) */}
       <div style={{ flex: '0 0 75%', display: 'flex', flexDirection: 'column', gap: 'var(--slds-g-spacing-4)', minWidth: 0 }}>
         {/* Main Card Container */}
-        <div className="slds-card" style={{ borderRadius: 'var(--slds-g-radius-border-4)' }}>
+        <div className="slds-card" style={{ borderRadius: 'var(--slds-g-radius-border-4)', backgroundColor: '#FFFFFF' }}>
           {/* Card Header */}
-          <div className="slds-card__header">
+          <div className="slds-card__header" style={{ padding: 'var(--slds-g-spacing-4)' }}>
             <div className="slds-grid slds-grid_align-spread slds-grid_vertical-align-center">
-              <div className="slds-grid slds-grid_vertical-align-center slds-gap_small">
+              <div className="slds-grid slds-grid_vertical-align-center" style={{ gap: 'var(--slds-g-spacing-2)' }}>
                 <ActivityIcon 
                   size={20}
                   color="var(--slds-g-color-on-surface-1)"
                   style={{ flexShrink: 0 }}
                 />
-                <h2 className="slds-text-heading_section" style={{ margin: 0 }}>
-                  Current State
-                </h2>
+                <div>
+                  <h2 
+                    className="slds-text-heading_section" 
+                    style={{ 
+                      margin: 0,
+                      fontFamily: 'var(--slds-g-font-family)',
+                      fontSize: 'var(--slds-g-font-scale-3)',
+                      fontWeight: 'var(--slds-g-font-weight-6)',
+                      lineHeight: '28px',
+                      color: 'var(--slds-g-color-on-surface-3)'
+                    }}
+                  >
+                    Current State
+                  </h2>
+                  <p 
+                    style={{
+                      margin: 0,
+                      marginTop: '2px',
+                      fontFamily: 'var(--slds-g-font-family)',
+                      fontSize: 'var(--slds-g-font-scale-1)',
+                      fontWeight: 'var(--slds-g-font-weight-4)',
+                      lineHeight: '19px',
+                      color: 'var(--slds-g-color-on-surface-1)'
+                    }}
+                  >
+                    Your knowledge base AI-readiness overview
+                  </p>
+                </div>
               </div>
               <button
                 type="button"
@@ -196,22 +224,9 @@ export function HomeView({ onMetricClick }: HomeViewProps) {
           </div>
 
           {/* Card Body */}
-          <div className="slds-card__body">
-            {/* Subtitle */}
-            <p 
-              className="slds-text-body"
-              style={{
-                fontSize: 'var(--slds-g-font-scale-1)',
-                lineHeight: '19px',
-                color: 'var(--slds-g-color-on-surface-1)',
-                marginBottom: 'var(--slds-g-spacing-4)',
-                marginTop: 0
-              }}
-            >
-              Your knowledge base AI-readiness overview
-            </p>
+          <div className="slds-card__body" style={{ padding: 'var(--slds-g-spacing-4)' }}>
 
-            {/* AI Ready Score - Compact Metric Style */}
+            {/* AI Ready Score - Teal Background Card */}
             <div
               style={{
                 backgroundColor: '#DEF9F3',
@@ -222,24 +237,41 @@ export function HomeView({ onMetricClick }: HomeViewProps) {
                 boxShadow: '0px 0px 2px 0px rgba(0, 0, 0, 0.18), 0px 2px 2px 0px rgba(0, 0, 0, 0.18), 0px -1px 2px 0px rgba(0, 0, 0, 0.1)'
               }}
             >
-              <div className="slds-grid slds-grid_vertical-align-center slds-gap_small" style={{ marginBottom: 'var(--slds-g-spacing-1)' }}>
-                <AlertTriangleIcon size={16} color="#01C3B3" />
+              <div className="slds-grid slds-grid_vertical-align-center" style={{ gap: 'var(--slds-g-spacing-2)', marginBottom: 'var(--slds-g-spacing-2)' }}>
+                <AlertTriangleIcon size={16} color="#01C3B3" style={{ flexShrink: 0 }} />
                 <div className="slds-grid slds-grid_vertical-align-center" style={{ flex: 1, gap: 'var(--slds-g-spacing-1)' }}>
-                  <span className="slds-text-body_semibold" style={{ fontSize: 'var(--slds-g-font-scale-neg-1)', lineHeight: '17px', color: 'var(--slds-g-color-on-surface-1)' }}>
+                  <span 
+                    style={{ 
+                      fontFamily: 'var(--slds-g-font-family)',
+                      fontSize: 'var(--slds-g-font-scale-neg-1)', 
+                      lineHeight: '17px', 
+                      fontWeight: 'var(--slds-g-font-weight-6)',
+                      color: 'var(--slds-g-color-on-surface-1)' 
+                    }}
+                  >
                     AI Ready Score
                   </span>
-                  <span className="slds-text-body_semibold" style={{ fontSize: 'var(--slds-g-font-scale-neg-1)', lineHeight: '17px', color: '#2E844A' }}>
+                  <span 
+                    style={{ 
+                      fontFamily: 'var(--slds-g-font-family)',
+                      fontSize: 'var(--slds-g-font-scale-neg-1)', 
+                      lineHeight: '17px', 
+                      fontWeight: 'var(--slds-g-font-weight-6)',
+                      color: '#2E844A' 
+                    }}
+                  >
                     ▲ 1.3%
                   </span>
                 </div>
               </div>
-              <div style={{ marginBottom: 'var(--slds-g-spacing-1)' }}>
+              <div>
                 <div
                   style={{
                     height: '8px',
                     backgroundColor: 'var(--slds-g-color-surface-container-3)',
                     borderRadius: '9999px',
-                    overflow: 'hidden'
+                    overflow: 'hidden',
+                    marginBottom: '2px'
                   }}
                 >
                   <div
@@ -252,11 +284,27 @@ export function HomeView({ onMetricClick }: HomeViewProps) {
                     }}
                   />
                 </div>
-                <div className="slds-grid slds-grid_align-spread" style={{ marginTop: '2px' }}>
-                  <span className="slds-text-body_semibold" style={{ fontSize: 'var(--slds-g-font-scale-neg-2)', lineHeight: '14px', color: 'var(--slds-g-color-on-surface-2)' }}>
+                <div className="slds-grid slds-grid_align-spread">
+                  <span 
+                    style={{ 
+                      fontFamily: 'var(--slds-g-font-family)',
+                      fontSize: 'var(--slds-g-font-scale-neg-2)', 
+                      lineHeight: '14px', 
+                      fontWeight: 'var(--slds-g-font-weight-6)',
+                      color: 'var(--slds-g-color-on-surface-2)' 
+                    }}
+                  >
                     60%
                   </span>
-                  <span className="slds-text-body" style={{ fontSize: 'var(--slds-g-font-scale-neg-2)', lineHeight: '14px', color: 'var(--slds-g-color-on-surface-1)', textAlign: 'right' }}>
+                  <span 
+                    style={{ 
+                      fontFamily: 'var(--slds-g-font-family)',
+                      fontSize: 'var(--slds-g-font-scale-neg-2)', 
+                      lineHeight: '14px', 
+                      fontWeight: 'var(--slds-g-font-weight-4)',
+                      color: 'var(--slds-g-color-on-surface-1)' 
+                    }}
+                  >
                     100%
                   </span>
                 </div>
@@ -290,13 +338,13 @@ export function HomeView({ onMetricClick }: HomeViewProps) {
         </div>
 
         {/* Recent Activity - Nested Card */}
-        <div className="slds-card" style={{ borderRadius: 'var(--slds-g-radius-border-3)' }}>
+        <div className="slds-card" style={{ borderRadius: 'var(--slds-g-radius-border-3)', backgroundColor: '#FFFFFF' }}>
           <RecentActivityTable activities={recentActivityData} />
         </div>
       </div>
 
       {/* Right Column - Quick Fixes Panel (25%) */}
-      <div style={{ flex: '0 0 25%', minWidth: 0 }}>
+      <div style={{ flex: '0 0 25%', minWidth: 0, display: 'flex', flexDirection: 'column' }}>
         <QuickFixesSidebar />
       </div>
     </div>

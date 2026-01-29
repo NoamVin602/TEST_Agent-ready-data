@@ -1,13 +1,13 @@
 "use client";
 
-import { AlertTriangle, Archive, FileEdit } from "lucide-react";
+import { AlertTriangleIcon, ArchiveIcon, FileEditIcon } from "../../lib/slds-icons";
 
 interface QuickFix {
   id: string;
   title: string;
   description: string;
   scoreImpact: string;
-  icon: any;
+  icon: React.ComponentType<{ size?: number; color?: string; style?: React.CSSProperties }>;
   iconBg: string;
   iconColor: string;
 }
@@ -18,7 +18,7 @@ const QUICK_FIXES: QuickFix[] = [
     title: "Contradicting refund policies",
     description: "2 documents have conflicting information",
     scoreImpact: "+3% score",
-    icon: AlertTriangle,
+    icon: AlertTriangleIcon,
     iconBg: "rgba(194, 57, 52, 0.1)",
     iconColor: "var(--slds-g-color-error-base-50)"
   },
@@ -27,16 +27,7 @@ const QUICK_FIXES: QuickFix[] = [
     title: "Archive stale pricing guide",
     description: "Product Guide v2.1 is 8 months outdated",
     scoreImpact: "+2% score",
-    icon: Archive,
-    iconBg: "rgba(254, 147, 57, 0.1)",
-    iconColor: "var(--slds-g-color-warning-base-50)"
-  },
-  {
-    id: "review-drafts",
-    title: "Review 3 draft articles",
-    description: "Articles contain [TODO] markers",
-    scoreImpact: "+1% score",
-    icon: FileEdit,
+    icon: ArchiveIcon,
     iconBg: "rgba(254, 147, 57, 0.1)",
     iconColor: "var(--slds-g-color-warning-base-50)"
   }
@@ -57,18 +48,25 @@ export function QuickFixesSidebar() {
       <div style={{ marginBottom: 'var(--slds-g-spacing-4)' }}>
         <h3 
           style={{
-            fontSize: 'var(--slds-g-font-scale-2)',
-            fontWeight: 'var(--slds-g-font-weight-semibold)',
-            color: 'var(--slds-g-color-text-default)',
-            marginBottom: 'var(--slds-g-spacing-1)'
+            fontFamily: 'var(--slds-g-font-family)',
+            fontSize: 'var(--slds-g-font-scale-3)',
+            fontWeight: 'var(--slds-g-font-weight-6)',
+            lineHeight: '28px',
+            color: 'var(--slds-g-color-on-surface-3)',
+            marginBottom: '2px',
+            marginTop: 0
           }}
         >
           Quick Fixes
         </h3>
         <p 
           style={{
-            fontSize: 'var(--slds-g-font-scale-neg-1)',
-            color: 'var(--slds-g-color-text-weak)'
+            fontFamily: 'var(--slds-g-font-family)',
+            fontSize: 'var(--slds-g-font-scale-1)',
+            fontWeight: 'var(--slds-g-font-weight-4)',
+            lineHeight: '19px',
+            color: 'var(--slds-g-color-on-surface-1)',
+            margin: 0
           }}
         >
           3 issues affecting your AI readiness score
@@ -80,20 +78,22 @@ export function QuickFixesSidebar() {
         {QUICK_FIXES.map(({ id, title, description, scoreImpact, icon: Icon, iconBg, iconColor }) => (
           <div
             key={id}
+            className="slds-card"
             style={{
               padding: 'var(--slds-g-spacing-4)',
-              backgroundColor: 'var(--slds-g-color-neutral-base-100)',
+              backgroundColor: '#FFFFFF',
               border: '1px solid var(--slds-g-color-border-1)',
               borderRadius: 'var(--slds-g-radius-border-2)',
               transition: 'all var(--slds-g-transition-base)',
-              cursor: 'pointer'
+              cursor: 'pointer',
+              boxShadow: '0px 0px 2px 0px rgba(0, 0, 0, 0.18), 0px 2px 2px 0px rgba(0, 0, 0, 0.18), 0px -1px 2px 0px rgba(0, 0, 0, 0.1)'
             }}
             onMouseEnter={(e) => {
-              e.currentTarget.style.boxShadow = 'var(--slds-g-shadow-2)';
+              e.currentTarget.style.boxShadow = '0px 0px 4px 0px rgba(0, 0, 0, 0.2), 0px 4px 4px 0px rgba(0, 0, 0, 0.2), 0px -1px 2px 0px rgba(0, 0, 0, 0.15)';
               e.currentTarget.style.transform = 'translateY(-2px)';
             }}
             onMouseLeave={(e) => {
-              e.currentTarget.style.boxShadow = 'none';
+              e.currentTarget.style.boxShadow = '0px 0px 2px 0px rgba(0, 0, 0, 0.18), 0px 2px 2px 0px rgba(0, 0, 0, 0.18), 0px -1px 2px 0px rgba(0, 0, 0, 0.1)';
               e.currentTarget.style.transform = 'translateY(0)';
             }}
           >
@@ -111,15 +111,17 @@ export function QuickFixesSidebar() {
                   flexShrink: 0
                 }}
               >
-                <Icon style={{ width: '16px', height: '16px', color: iconColor }} />
+                <Icon size={16} color={iconColor} />
               </div>
               <span
                 style={{
+                  fontFamily: 'var(--slds-g-font-family)',
                   fontSize: 'var(--slds-g-font-scale-neg-1)',
                   fontWeight: 'var(--slds-g-font-weight-6)',
-                  color: 'var(--slds-g-color-success-base-50)',
+                  lineHeight: '17px',
+                  color: '#2E844A',
                   padding: '2px var(--slds-g-spacing-2)',
-                  backgroundColor: 'var(--slds-g-color-success-tint)',
+                  backgroundColor: 'transparent',
                   borderRadius: 'var(--slds-g-radius-border-1)'
                 }}
               >
@@ -130,11 +132,13 @@ export function QuickFixesSidebar() {
             {/* Title */}
             <h4
               style={{
+                fontFamily: 'var(--slds-g-font-family)',
                 fontSize: 'var(--slds-g-font-scale-1)',
                 fontWeight: 'var(--slds-g-font-weight-6)',
-                color: 'var(--slds-g-color-text-default)',
+                lineHeight: '19px',
+                color: 'var(--slds-g-color-on-surface-1)',
                 marginBottom: 'var(--slds-g-spacing-1)',
-                lineHeight: 1.4
+                marginTop: 0
               }}
             >
               {title}
@@ -143,35 +147,31 @@ export function QuickFixesSidebar() {
             {/* Description */}
             <p
               style={{
+                fontFamily: 'var(--slds-g-font-family)',
                 fontSize: 'var(--slds-g-font-scale-neg-1)',
-                color: 'var(--slds-g-color-text-weak)',
+                fontWeight: 'var(--slds-g-font-weight-4)',
+                lineHeight: '17px',
+                color: 'var(--slds-g-color-on-surface-1)',
                 marginBottom: 'var(--slds-g-spacing-3)',
-                lineHeight: 1.5
+                marginTop: 0
               }}
             >
               {description}
             </p>
 
-            {/* Action Button */}
+            {/* Action Button - SLDS Cosmos Button */}
             <button
               type="button"
+              className="slds-button slds-button_brand"
               style={{
                 width: '100%',
-                padding: '6px var(--slds-g-spacing-3)',
-                backgroundColor: 'var(--slds-g-color-brand-base-50)',
-                border: 'none',
-                borderRadius: 'var(--slds-g-radius-border-2)',
-                color: 'var(--slds-g-color-neutral-base-100)',
+                padding: 'var(--slds-g-spacing-2) var(--slds-g-spacing-3)',
                 fontSize: 'var(--slds-g-font-scale-neg-1)',
                 fontWeight: 'var(--slds-g-font-weight-6)',
-                cursor: 'pointer',
-                transition: 'background-color var(--slds-g-transition-base)'
-              }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.backgroundColor = 'var(--slds-g-color-brand-base-60)';
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.backgroundColor = 'var(--slds-g-color-brand-base-50)';
+                fontFamily: 'var(--slds-g-font-family)',
+                lineHeight: '18px',
+                borderRadius: 'var(--slds-g-radius-border-2)',
+                transition: 'all var(--slds-g-transition-base)'
               }}
             >
               Resolve
@@ -180,68 +180,6 @@ export function QuickFixesSidebar() {
         ))}
       </div>
 
-      {/* Progress Footer */}
-      <div
-        style={{
-          marginTop: 'var(--slds-g-spacing-5)',
-          padding: 'var(--slds-g-spacing-4)',
-          backgroundColor: 'var(--slds-g-color-neutral-base-95)',
-          borderRadius: 'var(--slds-g-radius-border-2)'
-        }}
-      >
-        <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: 'var(--slds-g-spacing-2)' }}>
-          <span style={{ fontSize: 'var(--slds-g-font-scale-neg-1)', color: 'var(--slds-g-color-text-weak)' }}>
-            <strong style={{ color: 'var(--slds-g-color-text-default)' }}>1</strong> of <strong style={{ color: 'var(--slds-g-color-text-default)' }}>3</strong> resolved
-          </span>
-          <span style={{ fontSize: 'var(--slds-g-font-scale-neg-1)', fontWeight: 'var(--slds-g-font-weight-6)', color: 'var(--slds-g-color-success-base-50)' }}>
-            +5% health potential
-          </span>
-        </div>
-        <div
-          style={{
-            width: '100%',
-            height: '6px',
-            backgroundColor: 'var(--slds-g-color-neutral-base-100)',
-            borderRadius: 'var(--slds-g-radius-border-3)',
-            overflow: 'hidden'
-          }}
-        >
-          <div
-            style={{
-              width: '33%',
-              height: '100%',
-              backgroundColor: 'var(--slds-g-color-brand-base-50)',
-              transition: 'width var(--slds-g-transition-slow)'
-            }}
-          />
-        </div>
-      </div>
-
-      {/* Action Buttons */}
-      <button
-        type="button"
-        style={{
-          width: '100%',
-          marginTop: 'var(--slds-g-spacing-4)',
-          padding: '8px var(--slds-g-spacing-4)',
-          backgroundColor: 'var(--slds-g-color-brand-base-50)',
-          border: 'none',
-          borderRadius: 'var(--slds-g-radius-border-2)',
-          color: 'var(--slds-g-color-neutral-base-100)',
-          fontSize: 'var(--slds-g-font-scale-1)',
-          fontWeight: 'var(--slds-g-font-weight-6)',
-          cursor: 'pointer',
-          transition: 'background-color var(--slds-g-transition-base)'
-        }}
-        onMouseEnter={(e) => {
-          e.currentTarget.style.backgroundColor = 'var(--slds-g-color-brand-base-60)';
-        }}
-        onMouseLeave={(e) => {
-          e.currentTarget.style.backgroundColor = 'var(--slds-g-color-brand-base-50)';
-        }}
-      >
-        Resolve All Recommendations
-      </button>
     </div>
   );
 }
