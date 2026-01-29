@@ -340,4 +340,13 @@ export const ArrowLeftIcon: React.FC<IconProps> = (props) => (
   </SLDSIcon>
 );
 
+// More Icon (SLDS: more)
+export const MoreIcon: React.FC<IconProps> = (props) => (
+  <SLDSIcon {...props}>
+    <circle cx="12" cy="5" r="1.5" fill="currentColor"/>
+    <circle cx="12" cy="12" r="1.5" fill="currentColor"/>
+    <circle cx="12" cy="19" r="1.5" fill="currentColor"/>
+  </SLDSIcon>
+);
+
 // Additional SLDS icons can be added here as needed

@@ -95,12 +95,13 @@
   --slds-g-font-family: 'SF Pro', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   
   /* Font Sizes (from Figma) */
-  --slds-g-font-scale-neg-1: 11px;
+  --slds-g-font-scale-neg-2: 10px;
+  --slds-g-font-scale-neg-1: 12px;
   --slds-g-font-scale-base: 13px; /* Base font size */
   --slds-g-font-scale-1: 14px;
   --slds-g-font-scale-2: 14px;
-  --slds-g-font-scale-3: 16px;
-  --slds-g-font-scale-4: 14px;
+  --slds-g-font-scale-3: 20px;
+  --slds-g-font-scale-4: 24px;
   --slds-g-font-scale-5: 28px;
   
   /* Font Weights */
