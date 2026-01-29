@@ -82,7 +82,8 @@ export function LeftNavigation() {
           display: 'flex',
           flexDirection: 'column',
           padding: 'var(--slds-g-spacing-2) 0',
-          transition: 'width var(--slds-g-transition-base)'
+          transition: 'width var(--slds-g-transition-base)',
+          height: '100%',
         }}
       >
         {NAV_ITEMS.map(({ id, icon: Icon }) => (
@@ -110,6 +111,34 @@ export function LeftNavigation() {
             <Icon style={{ width: '20px', height: '20px' }} />
           </button>
         ))}
+        
+        {/* Expand Button */}
+        <button
+          type="button"
+          onClick={() => setIsCollapsed(false)}
+          style={{
+            width: '100%',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            padding: 'var(--slds-g-spacing-2)',
+            border: 'none',
+            borderTop: '1px solid var(--slds-g-color-border-1)',
+            background: 'transparent',
+            cursor: 'pointer',
+            fontSize: 'var(--slds-g-font-scale-neg-1)',
+            color: 'var(--slds-g-color-text-weak)',
+            marginTop: 'auto'
+          }}
+          onMouseEnter={(e) => {
+            e.currentTarget.style.backgroundColor = 'var(--slds-g-color-neutral-base-95)';
+          }}
+          onMouseLeave={(e) => {
+            e.currentTarget.style.backgroundColor = 'transparent';
+          }}
+        >
+          Expand
+        </button>
       </div>
     );
   }
@@ -123,7 +152,8 @@ export function LeftNavigation() {
         display: 'flex',
         flexDirection: 'column',
         overflowY: 'auto',
-        transition: 'width var(--slds-g-transition-base)'
+        transition: 'width var(--slds-g-transition-base)',
+        height: '100%'
       }}
     >
       {/* Quick Find */}
@@ -278,7 +308,15 @@ export function LeftNavigation() {
           background: 'transparent',
           cursor: 'pointer',
           fontSize: 'var(--slds-g-font-scale-neg-1)',
-          color: 'var(--slds-g-color-text-weak)'
+          color: 'var(--slds-g-color-text-weak)',
+          transition: 'background-color var(--slds-g-transition-fast)',
+          marginTop: 'auto'
+        }}
+        onMouseEnter={(e) => {
+          e.currentTarget.style.backgroundColor = 'var(--slds-g-color-neutral-base-95)';
+        }}
+        onMouseLeave={(e) => {
+          e.currentTarget.style.backgroundColor = 'transparent';
         }}
       >
         Collapse
