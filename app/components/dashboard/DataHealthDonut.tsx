@@ -13,6 +13,7 @@ export function DataHealthDonut({ percentage }: DataHealthDonutProps) {
   return (
     <div 
       style={{
+        position: 'relative',
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
@@ -54,14 +55,18 @@ export function DataHealthDonut({ percentage }: DataHealthDonutProps) {
         />
       </svg>
       
-      {/* Center Text */}
+      {/* Center Text - Positioned absolutely within the relative container */}
       <div 
         style={{
           position: 'absolute',
+          top: '50%',
+          left: '50%',
+          transform: 'translate(-50%, -50%)',
           display: 'flex',
           flexDirection: 'column',
           alignItems: 'center',
-          justifyContent: 'center'
+          justifyContent: 'center',
+          pointerEvents: 'none'
         }}
       >
         <div 
@@ -69,7 +74,8 @@ export function DataHealthDonut({ percentage }: DataHealthDonutProps) {
             fontSize: '48px',
             fontWeight: 'var(--slds-g-font-weight-semibold)',
             color: 'var(--slds-g-color-text-default)',
-            lineHeight: 1
+            lineHeight: 1,
+            textAlign: 'center'
           }}
         >
           {percentage}%
@@ -78,7 +84,8 @@ export function DataHealthDonut({ percentage }: DataHealthDonutProps) {
           style={{
             fontSize: 'var(--slds-g-font-scale-1)',
             color: 'var(--slds-g-color-text-weak)',
-            marginTop: 'var(--slds-g-spacing-1)'
+            marginTop: 'var(--slds-g-spacing-1)',
+            textAlign: 'center'
           }}
         >
           Overall Health
