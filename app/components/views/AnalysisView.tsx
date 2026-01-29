@@ -1,8 +1,9 @@
 "use client";
 
 import { forwardRef, useState } from "react";
-import { ChevronRight, Filter } from "lucide-react";
+import { motion } from "framer-motion";
 import { IssueCategory } from "./HomeView";
+import { SeverityBadge } from "../analysis/SeverityBadge";
 
 interface AnalysisViewProps {
   initialCategory?: IssueCategory;
@@ -26,7 +27,7 @@ const MOCK_ISSUES = [
     id: "1",
     title: "Conflicting refund policy",
     type: "Contradiction",
-    severity: "High" as const,
+    severity: "high" as const,
     docs: 2,
     owner: "Sarah Chen",
     detected: "14-day window",
@@ -37,7 +38,7 @@ const MOCK_ISSUES = [
     id: "2",
     title: "Deprecated API references",
     type: "Outdated",
-    severity: "High" as const,
+    severity: "high" as const,
     docs: 1,
     owner: "Mike Wilson",
   },
@@ -45,7 +46,7 @@ const MOCK_ISSUES = [
     id: "3",
     title: "[WIP] New Feature Documentation",
     type: "Draft/Incomplete",
-    severity: "High" as const,
+    severity: "high" as const,
     docs: 1,
     owner: "Dev Team",
   },
@@ -53,7 +54,7 @@ const MOCK_ISSUES = [
     id: "4",
     title: "PII detected: Customer email addresses",
     type: "Sensitive Data",
-    severity: "High" as const,
+    severity: "high" as const,
     docs: 1,
     owner: "Privacy Team",
   },
@@ -61,7 +62,7 @@ const MOCK_ISSUES = [
     id: "5",
     title: "Employee salary data in shared doc",
     type: "Sensitive Data",
-    severity: "High" as const,
+    severity: "high" as const,
     docs: 1,
     owner: "HR Team",
   },
@@ -69,7 +70,7 @@ const MOCK_ISSUES = [
     id: "6",
     title: "API credentials exposed in documentation",
     type: "Sensitive Data",
-    severity: "High" as const,
+    severity: "high" as const,
     docs: 1,
     owner: "Security",
   },
@@ -77,7 +78,7 @@ const MOCK_ISSUES = [
     id: "7",
     title: "Platform Guide needs splitting",
     type: "Draft/Incomplete",
-    severity: "Medium" as const,
+    severity: "medium" as const,
     docs: 1,
   },
 ];
@@ -93,206 +94,195 @@ export const AnalysisView = forwardRef<HTMLDivElement, AnalysisViewProps>(
       );
     };
 
+    const filteredIssues = MOCK_ISSUES.filter((issue) => {
+      if (activeFilter === "all") return true;
+      const typeMap: Record<string, FilterType> = {
+        "Contradiction": "contradiction",
+        "Duplicate": "duplicate",
+        "Outdated": "outdated",
+        "Multi-topic": "multi-topic",
+        "Poor Feedback": "poor-feedback",
+        "Draft/Incomplete": "draft-incomplete",
+        "Sensitive Data": "sensitive-data",
+      };
+      return typeMap[issue.type] === activeFilter;
+    });
+
     return (
       <div
         ref={ref}
         style={{
-          backgroundColor: '#FFFFFF',
-          padding: '16px',
-          borderRadius: '20px',
-          margin: '16px',
           maxWidth: '1440px',
-          marginLeft: 'auto',
-          marginRight: 'auto',
+          margin: '0 auto',
+          padding: '0 var(--slds-g-spacing-6)',
+          width: '100%',
         }}
       >
-        {/* Meta Text Row */}
+        {/* Scoped Tabs Container - Exact Figma Design */}
         <div
           style={{
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'space-between',
-            gap: '4px',
-            height: '32px',
-            marginBottom: '8px',
+            border: '1px solid var(--slds-g-color-border-1)', // #C9C9C9
+            borderRadius: 'var(--slds-g-radius-border-3)', // 12px from Figma
+            backgroundColor: 'var(--slds-g-color-neutral-base-100)', // #FFFFFF
+            overflow: 'hidden',
+            marginTop: 'var(--slds-g-spacing-4)',
           }}
         >
-          <p
+          {/* Tabset - Scoped Tabs */}
+          <div
             style={{
-              flex: '1 0 0',
-              fontFamily: "'SF Pro', -apple-system, BlinkMacSystemFont, sans-serif",
-              fontSize: '13px',
-              fontWeight: 400,
-              lineHeight: '18px',
-              color: '#5C5C5C',
-              margin: 0,
-              overflow: 'hidden',
-              textOverflow: 'ellipsis',
-              whiteSpace: 'nowrap',
+              display: 'flex',
+              alignItems: 'stretch',
+              backgroundColor: 'var(--slds-g-color-neutral-base-100)', // #FFFFFF
+              borderBottom: '1px solid var(--slds-g-color-border-1)', // #C9C9C9
             }}
           >
-            50+ items • Sorted by Severity • Updated a few seconds ago
-          </p>
+            {FILTER_TABS.map((tab, index) => {
+              const isActive = activeFilter === tab.id;
+              const isFirst = index === 0;
+              const isLast = index === FILTER_TABS.length - 1;
 
-          {/* Action Buttons */}
-          <div style={{ display: 'flex', gap: '8px', alignItems: 'center' }}>
-            <button
-              type="button"
-              style={{
-                display: 'inline-flex',
-                alignItems: 'center',
-                gap: '8px',
-                padding: '6px 16px',
-                height: '32px',
-                borderRadius: '4px',
-                border: '1px solid #C9C9C9',
-                backgroundColor: '#FFFFFF',
-                color: '#0176D3',
-                fontFamily: "'SF Pro', -apple-system, BlinkMacSystemFont, sans-serif",
-                fontSize: '13px',
-                fontWeight: 590,
-                lineHeight: '19px',
-                cursor: 'pointer',
-                transition: 'background-color 0.15s ease-in-out',
-              }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.backgroundColor = '#F3F3F3';
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.backgroundColor = '#FFFFFF';
-              }}
-            >
-              Auto-Fix All
-            </button>
-
-            <button
-              type="button"
-              style={{
-                display: 'inline-flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                width: '32px',
-                height: '32px',
-                borderRadius: '4px',
-                border: '1px solid #C9C9C9',
-                backgroundColor: '#FFFFFF',
-                cursor: 'pointer',
-                transition: 'background-color 0.15s ease-in-out',
-              }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.backgroundColor = '#F3F3F3';
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.backgroundColor = '#FFFFFF';
-              }}
-            >
-              <Filter style={{ width: '14px', height: '14px', color: '#5C5C5C' }} />
-            </button>
-          </div>
-        </div>
-
-        {/* Filter Tabs (Scoped Tabs) */}
-        <div
-          style={{
-            display: 'flex',
-            gap: '8px',
-            padding: '0 0 16px 0',
-            borderBottom: '1px solid #E5E5E5',
-            marginBottom: '16px',
-            overflowX: 'auto',
-          }}
-        >
-          {FILTER_TABS.map((tab) => {
-            const isActive = activeFilter === tab.id;
-            return (
-              <button
-                key={tab.id}
-                type="button"
-                onClick={() => setActiveFilter(tab.id)}
-                style={{
-                  padding: '6px 12px',
-                  borderRadius: '4px',
-                  border: isActive ? '1px solid #0176D3' : '1px solid #C9C9C9',
-                  backgroundColor: isActive ? '#E8F4FF' : '#FFFFFF',
-                  color: isActive ? '#0176D3' : '#5C5C5C',
-                  fontFamily: "'SF Pro', -apple-system, BlinkMacSystemFont, sans-serif",
-                  fontSize: '13px',
-                  fontWeight: isActive ? 590 : 400,
-                  lineHeight: '19px',
-                  cursor: 'pointer',
-                  transition: 'all 0.15s ease-in-out',
-                  whiteSpace: 'nowrap',
-                }}
-                onMouseEnter={(e) => {
-                  if (!isActive) {
-                    e.currentTarget.style.borderColor = '#0176D3';
-                  }
-                }}
-                onMouseLeave={(e) => {
-                  if (!isActive) {
-                    e.currentTarget.style.borderColor = '#C9C9C9';
-                  }
-                }}
-              >
-                {tab.label}
-              </button>
-            );
-          })}
-        </div>
-
-        {/* Issue Cards */}
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
-          {MOCK_ISSUES.map((issue) => {
-            const isExpanded = expandedIssues.includes(issue.id);
-            const severityColor = issue.severity === 'High' ? '#C23934' : issue.severity === 'Medium' ? '#FE9339' : '#0176D3';
-            const severityBg = issue.severity === 'High' ? '#FDECEC' : issue.severity === 'Medium' ? '#FEF4E6' : '#E8F4FF';
-
-            return (
-              <div
-                key={issue.id}
-                style={{
-                  border: '1px solid #E5E5E5',
-                  borderRadius: '8px',
-                  backgroundColor: '#FFFFFF',
-                  overflow: 'hidden',
-                  transition: 'all 0.15s ease-in-out',
-                }}
-              >
-                {/* Issue Header - Always Visible */}
+              return (
                 <button
+                  key={tab.id}
                   type="button"
-                  onClick={() => toggleIssue(issue.id)}
+                  onClick={() => setActiveFilter(tab.id)}
                   style={{
-                    width: '100%',
+                    height: '40px', // Exact Figma height
+                    maxWidth: '160px', // Exact Figma max-width
+                    padding: `0 var(--slds-g-spacing-4)`, // 0 16px from Figma
                     display: 'flex',
                     alignItems: 'center',
-                    justifyContent: 'space-between',
-                    padding: '12px 16px',
-                    backgroundColor: 'transparent',
+                    justifyContent: 'center',
+                    backgroundColor: 'var(--slds-g-color-neutral-base-100)', // #FFFFFF
                     border: 'none',
+                    borderTop: isActive ? `1px solid var(--slds-g-color-border-1)` : 'none', // #C9C9C9
+                    borderLeft: isActive && !isFirst ? `1px solid var(--slds-g-color-border-1)` : 'none',
+                    borderRight: isActive && !isLast ? `1px solid var(--slds-g-color-border-1)` : 'none',
+                    borderBottom: !isActive ? `1px solid var(--slds-g-color-border-1)` : 'none',
+                    fontFamily: 'var(--slds-g-font-family)',
+                    fontSize: 'var(--slds-g-font-scale-1)', // 14px from Figma
+                    fontWeight: 'var(--slds-g-font-weight-6)', // 590 Semibold
+                    lineHeight: 'var(--slds-g-line-height-body)', // 19px from Figma
+                    color: isActive 
+                      ? 'var(--slds-g-color-accent-2)' // #0250D9 from Figma (active)
+                      : 'var(--slds-g-color-on-surface-1)', // #5C5C5C from Figma (inactive)
                     cursor: 'pointer',
-                    textAlign: 'left',
+                    transition: 'all var(--slds-g-transition-fast)',
+                    overflow: 'hidden',
+                    textOverflow: 'ellipsis',
+                    whiteSpace: 'nowrap',
+                    textAlign: 'center',
+                  }}
+                  onMouseEnter={(e) => {
+                    if (!isActive) {
+                      e.currentTarget.style.backgroundColor = 'var(--slds-g-color-neutral-base-95)'; // #F3F3F3
+                    }
+                  }}
+                  onMouseLeave={(e) => {
+                    if (!isActive) {
+                      e.currentTarget.style.backgroundColor = 'var(--slds-g-color-neutral-base-100)'; // #FFFFFF
+                    }
                   }}
                 >
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '12px', flex: 1 }}>
-                    <ChevronRight
+                  {tab.label}
+                </button>
+              );
+            })}
+            {/* Spacer - Takes remaining space */}
+            <div
+              style={{
+                flex: '1 0 0',
+                height: '40px',
+                borderBottom: '1px solid var(--slds-g-color-border-1)', // #C9C9C9
+              }}
+            />
+          </div>
+
+          {/* Content Area - Exact Figma Design */}
+          <div
+            style={{
+              backgroundColor: 'var(--slds-g-color-neutral-base-100)', // #FFFFFF
+              padding: 'var(--slds-g-spacing-4)', // 16px from Figma
+              display: 'flex',
+              flexDirection: 'column',
+              gap: 'var(--slds-g-spacing-1)', // 4px gap between items from Figma
+            }}
+          >
+            {/* Issue Cards */}
+            {filteredIssues.map((issue) => {
+              const isExpanded = expandedIssues.includes(issue.id);
+
+              return (
+                <motion.div
+                  key={issue.id}
+                  layout
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                  style={{
+                    display: 'flex',
+                    flexDirection: 'column',
+                    cursor: 'pointer',
+                  }}
+                >
+                  {/* Issue Card Header */}
+                  <button
+                    type="button"
+                    onClick={() => toggleIssue(issue.id)}
+                    style={{
+                      width: '100%',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'space-between',
+                      padding: 'var(--slds-g-spacing-3) var(--slds-g-spacing-4)', // 12px 16px
+                      backgroundColor: 'transparent',
+                      border: 'none',
+                      cursor: 'pointer',
+                      textAlign: 'left',
+                      gap: 'var(--slds-g-spacing-3)', // 12px
+                    }}
+                  >
+                    {/* Chevron Icon */}
+                    <div
                       style={{
                         width: '16px',
                         height: '16px',
-                        color: '#5C5C5C',
-                        transform: isExpanded ? 'rotate(90deg)' : 'rotate(0deg)',
-                        transition: 'transform 0.15s ease-in-out',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
                         flexShrink: 0,
+                        color: 'var(--slds-g-color-on-surface-1)', // #5C5C5C
+                        transform: isExpanded ? 'rotate(90deg)' : 'rotate(0deg)',
+                        transition: 'transform var(--slds-g-transition-fast)',
                       }}
-                    />
+                    >
+                      <svg
+                        width="16"
+                        height="16"
+                        viewBox="0 0 16 16"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          d="M6 4L10 8L6 12"
+                          stroke="currentColor"
+                          strokeWidth="1.5"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                        />
+                      </svg>
+                    </div>
+
+                    {/* Title and Meta */}
                     <div style={{ flex: 1, minWidth: 0 }}>
                       <h3
                         style={{
-                          fontFamily: "'SF Pro', -apple-system, BlinkMacSystemFont, sans-serif",
-                          fontSize: '14px',
-                          fontWeight: 590,
-                          lineHeight: '19px',
-                          color: '#0176D3',
+                          fontFamily: 'var(--slds-g-font-family)',
+                          fontSize: 'var(--slds-g-font-scale-1)', // 14px from Figma
+                          fontWeight: 'var(--slds-g-font-weight-6)', // 590 Semibold
+                          lineHeight: 'var(--slds-g-line-height-body)', // 19px from Figma
+                          color: 'var(--slds-g-color-accent-2)', // #0250D9 from Figma
                           margin: 0,
                           overflow: 'hidden',
                           textOverflow: 'ellipsis',
@@ -303,181 +293,186 @@ export const AnalysisView = forwardRef<HTMLDivElement, AnalysisViewProps>(
                       </h3>
                       <p
                         style={{
-                          fontFamily: "'SF Pro', -apple-system, BlinkMacSystemFont, sans-serif",
-                          fontSize: '13px',
-                          fontWeight: 400,
-                          lineHeight: '18px',
-                          color: '#5C5C5C',
+                          fontFamily: 'var(--slds-g-font-family)',
+                          fontSize: 'var(--slds-g-font-scale-base)', // 13px from Figma
+                          fontWeight: 'var(--slds-g-font-weight-4)', // 400 Regular
+                          lineHeight: 'var(--slds-g-line-height-body-base)', // 18px from Figma
+                          color: 'var(--slds-g-color-on-surface-1)', // #5C5C5C
                           margin: '2px 0 0 0',
                         }}
                       >
-                        {issue.type} • {issue.docs} {issue.docs === 1 ? 'doc' : 'docs'} • Owner: {issue.owner}
+                        {issue.type} • {issue.docs} {issue.docs === 1 ? 'doc' : 'docs'} • Owner: {issue.owner || 'Unassigned'}
                       </p>
                     </div>
-                  </div>
-                  <span
-                    style={{
-                      display: 'inline-block',
-                      padding: '2px 8px',
-                      borderRadius: '4px',
-                      backgroundColor: severityBg,
-                      border: `1px solid ${severityColor}`,
-                      color: severityColor,
-                      fontFamily: "'SF Pro', -apple-system, BlinkMacSystemFont, sans-serif",
-                      fontSize: '11px',
-                      fontWeight: 590,
-                      lineHeight: '17px',
-                      textTransform: 'capitalize',
-                      flexShrink: 0,
-                      marginLeft: '12px',
-                    }}
-                  >
-                    {issue.severity}
-                  </span>
-                </button>
 
-                {/* Expanded Content */}
-                {isExpanded && (
-                  <div style={{ padding: '0 16px 16px 44px' }}>
-                    {issue.detected && issue.authoritative && (
-                      <div style={{ marginBottom: '12px' }}>
-                        <div style={{ display: 'flex', gap: '8px', alignItems: 'center', marginBottom: '4px' }}>
-                          <span
-                            style={{
-                              padding: '4px 8px',
-                              borderRadius: '12px',
-                              backgroundColor: '#FFE5E5',
-                              color: '#8B0000',
-                              fontFamily: "'SF Pro', -apple-system, BlinkMacSystemFont, sans-serif",
-                              fontSize: '11px',
-                              fontWeight: 590,
-                            }}
-                          >
-                            Detected
-                          </span>
-                          <span
-                            style={{
-                              fontFamily: "'SF Pro', -apple-system, BlinkMacSystemFont, sans-serif",
-                              fontSize: '13px',
-                              color: '#03234D',
-                            }}
-                          >
-                            {issue.detected}
-                          </span>
+                    {/* Severity Badge */}
+                    <SeverityBadge severity={issue.severity} />
+                  </button>
+
+                  {/* Expanded Content */}
+                  {isExpanded && (
+                    <motion.div
+                      initial={{ height: 0, opacity: 0 }}
+                      animate={{ height: 'auto', opacity: 1 }}
+                      exit={{ height: 0, opacity: 0 }}
+                      transition={{ duration: 0.2 }}
+                      style={{
+                        padding: `0 var(--slds-g-spacing-4) var(--slds-g-spacing-4) 44px`, // Left padding accounts for chevron + gap
+                        overflow: 'hidden',
+                      }}
+                    >
+                      {/* Detected vs Authoritative */}
+                      {issue.detected && issue.authoritative && (
+                        <div style={{ marginBottom: 'var(--slds-g-spacing-3)' }}>
+                          <div style={{ display: 'flex', gap: 'var(--slds-g-spacing-2)', alignItems: 'center', marginBottom: 'var(--slds-g-spacing-1)' }}>
+                            <span
+                              style={{
+                                padding: '4px var(--slds-g-spacing-2)', // 4px 8px
+                                borderRadius: 'var(--slds-g-radius-border-4)', // 20px
+                                backgroundColor: 'var(--slds-g-color-badge-detected)', // #FFE5E5
+                                color: 'var(--slds-g-color-badge-detected-text)', // #8B0000
+                                fontFamily: 'var(--slds-g-font-family)',
+                                fontSize: 'var(--slds-g-font-scale-neg-1)', // 11px
+                                fontWeight: 'var(--slds-g-font-weight-6)', // 590
+                                flexShrink: 0,
+                              }}
+                            >
+                              Detected
+                            </span>
+                            <span
+                              style={{
+                                fontFamily: 'var(--slds-g-font-family)',
+                                fontSize: 'var(--slds-g-font-scale-base)', // 13px
+                                fontWeight: 'var(--slds-g-font-weight-4)', // 400
+                                lineHeight: 'var(--slds-g-line-height-body-base)', // 18px
+                                color: 'var(--slds-g-color-on-surface-2)', // #2E2E2E
+                              }}
+                            >
+                              {issue.detected}
+                            </span>
+                          </div>
+                          <div style={{ display: 'flex', gap: 'var(--slds-g-spacing-2)', alignItems: 'center' }}>
+                            <span
+                              style={{
+                                padding: '4px var(--slds-g-spacing-2)', // 4px 8px
+                                borderRadius: 'var(--slds-g-radius-border-4)', // 20px
+                                backgroundColor: 'var(--slds-g-color-badge-authoritative)', // #D4F4DD
+                                color: 'var(--slds-g-color-badge-authoritative-text)', // #0B5D1E
+                                fontFamily: 'var(--slds-g-font-family)',
+                                fontSize: 'var(--slds-g-font-scale-neg-1)', // 11px
+                                fontWeight: 'var(--slds-g-font-weight-6)', // 590
+                                flexShrink: 0,
+                              }}
+                            >
+                              Authoritative
+                            </span>
+                            <span
+                              style={{
+                                fontFamily: 'var(--slds-g-font-family)',
+                                fontSize: 'var(--slds-g-font-scale-base)', // 13px
+                                fontWeight: 'var(--slds-g-font-weight-4)', // 400
+                                lineHeight: 'var(--slds-g-line-height-body-base)', // 18px
+                                color: 'var(--slds-g-color-on-surface-2)', // #2E2E2E
+                              }}
+                            >
+                              {issue.authoritative}
+                            </span>
+                          </div>
                         </div>
-                        <div style={{ display: 'flex', gap: '8px', alignItems: 'center' }}>
-                          <span
-                            style={{
-                              padding: '4px 8px',
-                              borderRadius: '12px',
-                              backgroundColor: '#D4F4DD',
-                              color: '#0B5D1E',
-                              fontFamily: "'SF Pro', -apple-system, BlinkMacSystemFont, sans-serif",
-                              fontSize: '11px',
-                              fontWeight: 590,
-                            }}
-                          >
-                            Authoritative
-                          </span>
-                          <span
-                            style={{
-                              fontFamily: "'SF Pro', -apple-system, BlinkMacSystemFont, sans-serif",
-                              fontSize: '13px',
-                              color: '#03234D',
-                            }}
-                          >
-                            {issue.authoritative}
-                          </span>
+                      )}
+
+                      {/* Action Text */}
+                      {issue.action && (
+                        <div style={{ marginBottom: 'var(--slds-g-spacing-3)' }}>
+                          <div style={{ display: 'flex', gap: 'var(--slds-g-spacing-2)', alignItems: 'flex-start' }}>
+                            <span
+                              style={{
+                                padding: '4px var(--slds-g-spacing-2)', // 4px 8px
+                                borderRadius: 'var(--slds-g-radius-border-3)', // 12px
+                                backgroundColor: 'var(--slds-g-color-badge-action)', // #E8F4FF
+                                color: 'var(--slds-g-color-badge-action-text)', // #014486
+                                fontFamily: 'var(--slds-g-font-family)',
+                                fontSize: 'var(--slds-g-font-scale-neg-1)', // 11px
+                                fontWeight: 'var(--slds-g-font-weight-6)', // 590
+                                flexShrink: 0,
+                              }}
+                            >
+                              Action
+                            </span>
+                            <span
+                              style={{
+                                fontFamily: 'var(--slds-g-font-family)',
+                                fontSize: 'var(--slds-g-font-scale-base)', // 13px
+                                fontWeight: 'var(--slds-g-font-weight-4)', // 400
+                                lineHeight: 'var(--slds-g-line-height-body-base)', // 18px
+                                color: 'var(--slds-g-color-on-surface-2)', // #2E2E2E
+                              }}
+                            >
+                              {issue.action}
+                            </span>
+                          </div>
                         </div>
+                      )}
+
+                      {/* Action Buttons */}
+                      <div style={{ display: 'flex', gap: 'var(--slds-g-spacing-2)', justifyContent: 'flex-end', marginTop: 'var(--slds-g-spacing-3)' }}>
+                        <button
+                          type="button"
+                          onClick={(e) => e.stopPropagation()}
+                          style={{
+                            padding: '6px var(--slds-g-spacing-4)', // 6px 16px
+                            borderRadius: 'var(--slds-g-radius-border-1)', // 4px
+                            border: '1px solid var(--slds-g-color-border-1)', // #C9C9C9
+                            backgroundColor: 'var(--slds-g-color-neutral-base-100)', // #FFFFFF
+                            color: 'var(--slds-g-color-on-surface-1)', // #5C5C5C
+                            fontFamily: 'var(--slds-g-font-family)',
+                            fontSize: 'var(--slds-g-font-scale-base)', // 13px
+                            fontWeight: 'var(--slds-g-font-weight-6)', // 590
+                            lineHeight: 'var(--slds-g-line-height-body-base)', // 18px
+                            cursor: 'pointer',
+                            transition: 'background-color var(--slds-g-transition-fast)',
+                          }}
+                          onMouseEnter={(e) => {
+                            e.currentTarget.style.backgroundColor = 'var(--slds-g-color-neutral-base-95)'; // #F3F3F3
+                          }}
+                          onMouseLeave={(e) => {
+                            e.currentTarget.style.backgroundColor = 'var(--slds-g-color-neutral-base-100)'; // #FFFFFF
+                          }}
+                        >
+                          View Document Preview
+                        </button>
+                        <button
+                          type="button"
+                          onClick={(e) => e.stopPropagation()}
+                          style={{
+                            padding: '6px var(--slds-g-spacing-4)', // 6px 16px
+                            borderRadius: 'var(--slds-g-radius-border-1)', // 4px
+                            border: 'none',
+                            backgroundColor: 'var(--slds-g-color-accent-container-1)', // #066AFE from Figma
+                            color: 'var(--slds-g-color-on-accent-1)', // #FFFFFF
+                            fontFamily: 'var(--slds-g-font-family)',
+                            fontSize: 'var(--slds-g-font-scale-1)', // 14px
+                            fontWeight: 'var(--slds-g-font-weight-6)', // 590
+                            lineHeight: 'var(--slds-g-line-height-body)', // 19px
+                            cursor: 'pointer',
+                            transition: 'background-color var(--slds-g-transition-fast)',
+                          }}
+                          onMouseEnter={(e) => {
+                            e.currentTarget.style.backgroundColor = 'var(--slds-g-color-accent-2)'; // #0250D9
+                          }}
+                          onMouseLeave={(e) => {
+                            e.currentTarget.style.backgroundColor = 'var(--slds-g-color-accent-container-1)'; // #066AFE
+                          }}
+                        >
+                          Mark Resolved(?)
+                        </button>
                       </div>
-                    )}
-
-                    {issue.action && (
-                      <div style={{ marginBottom: '12px' }}>
-                        <div style={{ display: 'flex', gap: '8px', alignItems: 'flex-start' }}>
-                          <span
-                            style={{
-                              padding: '4px 8px',
-                              borderRadius: '12px',
-                              backgroundColor: '#E8F4FF',
-                              color: '#014486',
-                              fontFamily: "'SF Pro', -apple-system, BlinkMacSystemFont, sans-serif",
-                              fontSize: '11px',
-                              fontWeight: 590,
-                              flexShrink: 0,
-                            }}
-                          >
-                            Action
-                          </span>
-                          <span
-                            style={{
-                              fontFamily: "'SF Pro', -apple-system, BlinkMacSystemFont, sans-serif",
-                              fontSize: '13px',
-                              color: '#03234D',
-                              lineHeight: '18px',
-                            }}
-                          >
-                            {issue.action}
-                          </span>
-                        </div>
-                      </div>
-                    )}
-
-                    <div style={{ display: 'flex', gap: '8px' }}>
-                      <button
-                        type="button"
-                        style={{
-                          padding: '6px var(--slds-g-spacing-4)', // 6px 16px
-                          borderRadius: 'var(--slds-g-radius-border-1)', // 4px
-                          border: 'none',
-                          backgroundColor: 'var(--slds-g-color-accent-container-1)', // #066AFE from Figma
-                          color: 'var(--slds-g-color-on-accent-1)', // #FFFFFF from Figma
-                          fontFamily: 'var(--slds-g-font-family)',
-                          fontSize: 'var(--slds-g-font-scale-1)', // 14px from Figma
-                          fontWeight: 'var(--slds-g-font-weight-6)', // 590 Semibold
-                          lineHeight: 'var(--slds-g-line-height-body)', // 19px from Figma
-                          cursor: 'pointer',
-                          transition: 'background-color var(--slds-g-transition-fast)',
-                        }}
-                        onMouseEnter={(e) => {
-                          e.currentTarget.style.backgroundColor = 'var(--slds-g-color-accent-2)'; // #0250D9 darker blue
-                        }}
-                        onMouseLeave={(e) => {
-                          e.currentTarget.style.backgroundColor = 'var(--slds-g-color-accent-container-1)'; // #066AFE
-                        }}
-                      >
-                        Mark Resolved(?)
-                      </button>
-                      <button
-                        type="button"
-                        style={{
-                          padding: '6px var(--slds-g-spacing-4)', // 6px 16px
-                          borderRadius: 'var(--slds-g-radius-border-1)', // 4px
-                          border: '1px solid var(--slds-g-color-border-1)', // #C9C9C9
-                          backgroundColor: 'var(--slds-g-color-neutral-base-100)', // #FFFFFF
-                          color: 'var(--slds-g-color-on-surface-1)', // #5C5C5C from Figma
-                          fontFamily: 'var(--slds-g-font-family)',
-                          fontSize: 'var(--slds-g-font-scale-base)', // 13px from Figma
-                          fontWeight: 'var(--slds-g-font-weight-6)', // 590 Semibold
-                          lineHeight: 'var(--slds-g-line-height-body-base)', // 18px from Figma
-                          cursor: 'pointer',
-                          transition: 'background-color var(--slds-g-transition-fast)',
-                        }}
-                        onMouseEnter={(e) => {
-                          e.currentTarget.style.backgroundColor = 'var(--slds-g-color-neutral-base-95)'; // #F3F3F3
-                        }}
-                        onMouseLeave={(e) => {
-                          e.currentTarget.style.backgroundColor = 'var(--slds-g-color-neutral-base-100)'; // #FFFFFF
-                        }}
-                      >
-                        View Document Preview
-                      </button>
-                    </div>
-                  </div>
-                )}
-              </div>
-            );
-          })}
+                    </motion.div>
+                  )}
+                </motion.div>
+              );
+            })}
+          </div>
         </div>
       </div>
     );
