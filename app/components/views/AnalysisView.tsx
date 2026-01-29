@@ -146,23 +146,33 @@ export const AnalysisView = forwardRef<HTMLDivElement, AnalysisViewProps>(
                 <button
                   key={tab.id}
                   type="button"
-                  data-scoped-tab
                   onClick={() => setActiveFilter(tab.id)}
                   style={{
                     height: '40px', // Exact Figma height
                     maxWidth: '160px', // Exact Figma max-width
                     padding: `0 var(--slds-g-spacing-4)`, // 0 16px from Figma
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
                     backgroundColor: 'var(--slds-g-color-neutral-base-100)', // #FFFFFF
+                    border: 'none',
                     borderTop: isActive ? `1px solid var(--slds-g-color-border-1)` : 'none', // #C9C9C9
                     borderLeft: isActive && !isFirst ? `1px solid var(--slds-g-color-border-1)` : 'none',
                     borderRight: isActive && !isLast ? `1px solid var(--slds-g-color-border-1)` : 'none',
                     borderBottom: !isActive ? `1px solid var(--slds-g-color-border-1)` : 'none',
+                    fontFamily: 'var(--slds-g-font-family)',
+                    fontSize: 'var(--slds-g-font-scale-1)', // 14px from Figma
+                    fontWeight: 'var(--slds-g-font-weight-6)', // 590 Semibold
+                    lineHeight: 'var(--slds-g-line-height-body)', // 19px from Figma
                     color: isActive 
                       ? 'var(--slds-g-color-accent-2)' // #0250D9 from Figma (active)
                       : 'var(--slds-g-color-on-surface-1)', // #5C5C5C from Figma (inactive)
+                    cursor: 'pointer',
+                    transition: 'all var(--slds-g-transition-fast)',
                     overflow: 'hidden',
                     textOverflow: 'ellipsis',
                     whiteSpace: 'nowrap',
+                    textAlign: 'center',
                   }}
                   onMouseEnter={(e) => {
                     if (!isActive) {
@@ -408,14 +418,51 @@ export const AnalysisView = forwardRef<HTMLDivElement, AnalysisViewProps>(
                       <div style={{ display: 'flex', gap: 'var(--slds-g-spacing-2)', justifyContent: 'flex-end', marginTop: 'var(--slds-g-spacing-3)' }}>
                         <button
                           type="button"
-                          data-variant="secondary"
                           onClick={(e) => e.stopPropagation()}
+                          style={{
+                            padding: '6px var(--slds-g-spacing-4)', // 6px 16px
+                            borderRadius: 'var(--slds-g-radius-border-1)', // 4px
+                            border: '1px solid var(--slds-g-color-border-1)', // #C9C9C9
+                            backgroundColor: 'var(--slds-g-color-neutral-base-100)', // #FFFFFF
+                            color: 'var(--slds-g-color-on-surface-1)', // #5C5C5C
+                            fontFamily: 'var(--slds-g-font-family)',
+                            fontSize: 'var(--slds-g-font-scale-base)', // 13px
+                            fontWeight: 'var(--slds-g-font-weight-6)', // 590
+                            lineHeight: 'var(--slds-g-line-height-body-base)', // 18px
+                            cursor: 'pointer',
+                            transition: 'background-color var(--slds-g-transition-fast)',
+                          }}
+                          onMouseEnter={(e) => {
+                            e.currentTarget.style.backgroundColor = 'var(--slds-g-color-neutral-base-95)'; // #F3F3F3
+                          }}
+                          onMouseLeave={(e) => {
+                            e.currentTarget.style.backgroundColor = 'var(--slds-g-color-neutral-base-100)'; // #FFFFFF
+                          }}
                         >
                           View Document Preview
                         </button>
                         <button
                           type="button"
                           onClick={(e) => e.stopPropagation()}
+                          style={{
+                            padding: '6px var(--slds-g-spacing-4)', // 6px 16px
+                            borderRadius: 'var(--slds-g-radius-border-1)', // 4px
+                            border: 'none',
+                            backgroundColor: 'var(--slds-g-color-accent-container-1)', // #066AFE from Figma
+                            color: 'var(--slds-g-color-on-accent-1)', // #FFFFFF
+                            fontFamily: 'var(--slds-g-font-family)',
+                            fontSize: 'var(--slds-g-font-scale-1)', // 14px
+                            fontWeight: 'var(--slds-g-font-weight-6)', // 590
+                            lineHeight: 'var(--slds-g-line-height-body)', // 19px
+                            cursor: 'pointer',
+                            transition: 'background-color var(--slds-g-transition-fast)',
+                          }}
+                          onMouseEnter={(e) => {
+                            e.currentTarget.style.backgroundColor = 'var(--slds-g-color-accent-2)'; // #0250D9
+                          }}
+                          onMouseLeave={(e) => {
+                            e.currentTarget.style.backgroundColor = 'var(--slds-g-color-accent-container-1)'; // #066AFE
+                          }}
                         >
                           Mark Resolved(?)
                         </button>

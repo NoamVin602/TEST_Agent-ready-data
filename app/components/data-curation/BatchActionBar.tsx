@@ -58,11 +58,22 @@ export function BatchActionBar({
         <button
           onClick={onExcludeAll}
           disabled={isProcessing}
-          data-variant="error"
           style={{
+            display: 'flex',
+            alignItems: 'center',
+            gap: '6px',
+            padding: 'var(--slds-g-spacing-2) var(--slds-g-spacing-4)', // 8px 16px
+            borderRadius: 'var(--slds-g-radius-border-1)', // 4px
             border: '1px solid #EF4444',
             backgroundColor: 'var(--slds-g-color-neutral-base-100)', // #FFFFFF
             color: '#EF4444',
+            fontSize: 'var(--slds-g-font-scale-base)', // 13px from Figma
+            fontWeight: 'var(--slds-g-font-weight-6)', // 590
+            fontFamily: 'var(--slds-g-font-family)',
+            lineHeight: 'var(--slds-g-line-height-body-base)', // 18px from Figma
+            cursor: isProcessing ? 'not-allowed' : 'pointer',
+            opacity: isProcessing ? 0.5 : 1,
+            transition: 'all var(--slds-g-transition-fast)',
           }}
           onMouseEnter={(e) => {
             if (!isProcessing) {
@@ -71,7 +82,7 @@ export function BatchActionBar({
           }}
           onMouseLeave={(e) => {
             if (!isProcessing) {
-              e.currentTarget.style.backgroundColor = 'var(--slds-g-color-neutral-base-100)'; // #FFFFFF
+              e.currentTarget.style.backgroundColor = '#FFFFFF';
             }
           }}
         >
@@ -86,7 +97,33 @@ export function BatchActionBar({
         <button
           onClick={onApproveAll}
           disabled={isProcessing}
-          data-variant="success"
+          style={{
+            display: 'flex',
+            alignItems: 'center',
+            gap: '6px',
+            padding: 'var(--slds-g-spacing-2) var(--slds-g-spacing-4)', // 8px 16px
+            borderRadius: 'var(--slds-g-radius-border-1)', // 4px
+            border: 'none',
+            backgroundColor: '#2E844A',
+            color: 'var(--slds-g-color-icon-white)', // #FFFFFF
+            fontSize: 'var(--slds-g-font-scale-base)', // 13px from Figma
+            fontWeight: 'var(--slds-g-font-weight-6)', // 590
+            fontFamily: 'var(--slds-g-font-family)',
+            lineHeight: 'var(--slds-g-line-height-body-base)', // 18px from Figma
+            cursor: isProcessing ? 'not-allowed' : 'pointer',
+            opacity: isProcessing ? 0.5 : 1,
+            transition: 'all var(--slds-g-transition-fast)',
+          }}
+          onMouseEnter={(e) => {
+            if (!isProcessing) {
+              e.currentTarget.style.backgroundColor = '#0C8A5F';
+            }
+          }}
+          onMouseLeave={(e) => {
+            if (!isProcessing) {
+              e.currentTarget.style.backgroundColor = '#2E844A';
+            }
+          }}
         >
           {isProcessing ? (
             <Loader2 size={14} style={{ animation: 'spin 1s linear infinite' }} />
