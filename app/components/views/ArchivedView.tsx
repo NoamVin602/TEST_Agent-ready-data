@@ -202,7 +202,7 @@ export function ArchivedView() {
                 borderRadius: '4px',
                 border: isActive ? '1px solid #0176D3' : '1px solid #C9C9C9',
                 backgroundColor: isActive ? '#E8F4FF' : '#FFFFFF',
-                color: isActive ? '#0176D3' : '#5C5C5C',
+                color: isActive ? 'rgba(2, 80, 217, 1)' : '#5C5C5C',
                 fontFamily: "'SF Pro', -apple-system, BlinkMacSystemFont, sans-serif",
                 fontSize: '13px',
                 fontWeight: isActive ? 590 : 400,
@@ -244,7 +244,7 @@ export function ArchivedView() {
               : item.originalSeverity === 'Medium'
               ? '#FEF4E6'
               : '#E8F4FF';
-          const typeColor = item.type === 'Auto-Fixed' ? '#2E844A' : '#0176D3';
+          const typeColor = item.type === 'Auto-Fixed' ? '#2E844A' : 'rgba(2, 80, 217, 1)';
           const typeBg = item.type === 'Auto-Fixed' ? '#E8F5EC' : '#E8F4FF';
 
           return (
@@ -385,7 +385,7 @@ export function ArchivedView() {
                         borderRadius: '4px',
                         border: '1px solid #C9C9C9',
                         backgroundColor: '#FFFFFF',
-                        color: '#0176D3',
+                        color: 'rgba(2, 80, 217, 1)',
                         fontFamily: "'SF Pro', -apple-system, BlinkMacSystemFont, sans-serif",
                         fontSize: '13px',
                         fontWeight: 590,

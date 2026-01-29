@@ -93,7 +93,7 @@ export function PageHeader({ onRunScan, isScanning }: PageHeaderProps) {
           onClick={onRunScan}
           disabled={isScanning}
           style={{
-            color: '#0176D3',
+            color: 'rgba(2, 80, 217, 1)',
           }}
         >
           {isScanning ? (
@@ -101,7 +101,7 @@ export function PageHeader({ onRunScan, isScanning }: PageHeaderProps) {
               style={{
                 width: '14px',
                 height: '14px',
-                color: '#0176D3',
+                color: 'rgba(2, 80, 217, 1)',
                 animation: 'spin 1s linear infinite',
               }}
             />
@@ -110,8 +110,8 @@ export function PageHeader({ onRunScan, isScanning }: PageHeaderProps) {
               style={{
                 width: '14px',
                 height: '14px',
-                color: '#0176D3',
-                fill: '#0176D3',
+                color: 'rgba(2, 80, 217, 1)',
+                fill: 'rgba(2, 80, 217, 1)',
               }}
             />
           )}

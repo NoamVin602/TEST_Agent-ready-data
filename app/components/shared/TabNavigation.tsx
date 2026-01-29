@@ -60,7 +60,7 @@ export function TabNavigation({ tabs, activeTab, onTabChange }: TabNavigationPro
                 fontSize: '13px',
                 fontWeight: isActive ? 590 : 400,
                 lineHeight: '19px',
-                color: isActive ? '#0176D3' : '#5C5C5C',
+                color: isActive ? 'rgba(2, 80, 217, 1)' : '#5C5C5C',
                 cursor: 'pointer',
                 transition: 'all 0.15s ease-in-out',
                 outline: 'none',
@@ -76,7 +76,7 @@ export function TabNavigation({ tabs, activeTab, onTabChange }: TabNavigationPro
                 }
               }}
               onFocus={(e) => {
-                e.currentTarget.style.outline = '2px solid #0176D3';
+                e.currentTarget.style.outline = '2px solid rgba(2, 80, 217, 1)';
                 e.currentTarget.style.outlineOffset = '-2px';
               }}
               onBlur={(e) => {
