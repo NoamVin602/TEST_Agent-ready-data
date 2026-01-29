@@ -144,9 +144,9 @@ export function DataChunkCard({
       transition={{ duration: 0.3, ease: 'easeInOut' }}
       style={{
         position: 'relative',
-        borderRadius: '8px',
-        padding: '16px',
-        marginBottom: '12px',
+        borderRadius: 'var(--slds-g-radius-border-2)', // 8px from Figma
+        padding: 'var(--slds-g-spacing-4)', // 16px from Figma
+        marginBottom: 'var(--slds-g-spacing-3)', // 12px from Figma
         cursor: isEditing ? 'default' : 'pointer',
         ...getStatusStyles(),
         boxShadow: isHighlighted 
@@ -202,9 +202,11 @@ export function DataChunkCard({
           <Sparkles size={14} color="#10B981" />
           <span
             style={{
-              fontSize: '11px',
-              fontWeight: 590,
+              fontSize: 'var(--slds-g-font-scale-neg-1)', // 11px
+              fontWeight: 'var(--slds-g-font-weight-6)', // 590
               color: '#10B981',
+              fontFamily: 'var(--slds-g-font-family)',
+              lineHeight: 'var(--slds-g-line-height-body-base)', // 18px
             }}
           >
             Agent-Ready
@@ -252,9 +254,11 @@ export function DataChunkCard({
           <CheckCircle2 size={16} color="#2E844A" />
           <span
             style={{
-              fontSize: '11px',
-              fontWeight: 590,
+              fontSize: 'var(--slds-g-font-scale-neg-1)', // 11px
+              fontWeight: 'var(--slds-g-font-weight-6)', // 590
               color: '#2E844A',
+              fontFamily: 'var(--slds-g-font-family)',
+              lineHeight: 'var(--slds-g-line-height-body-base)', // 18px
             }}
           >
             Verified
@@ -266,11 +270,14 @@ export function DataChunkCard({
       {(chunk.category || chunk.source) && (
         <div
           style={{
-            marginBottom: '8px',
-            fontSize: '12px',
-            color: '#5C5C5C',
+            marginBottom: 'var(--slds-g-spacing-2)', // 8px from Figma
+            fontSize: 'var(--slds-g-font-scale-base)', // 13px from Figma
+            fontWeight: 'var(--slds-g-font-weight-4)', // 400 Regular
+            color: 'var(--slds-g-color-on-surface-1)', // #5C5C5C from Figma
+            fontFamily: 'var(--slds-g-font-family)',
+            lineHeight: 'var(--slds-g-line-height-body-base)', // 18px from Figma
             display: 'flex',
-            gap: '12px',
+            gap: 'var(--slds-g-spacing-3)', // 12px from Figma
           }}
         >
           {chunk.category && (
@@ -316,16 +323,18 @@ export function DataChunkCard({
                 e.stopPropagation();
                 handleCancel();
               }}
-              style={{
-                padding: '6px 12px',
-                borderRadius: '4px',
-                border: '1px solid #C9C9C9',
-                backgroundColor: '#FFFFFF',
-                color: '#03234D',
-                fontSize: '13px',
-                fontWeight: 590,
-                cursor: 'pointer',
-              }}
+            style={{
+              padding: '6px var(--slds-g-spacing-3)', // 6px 12px
+              borderRadius: 'var(--slds-g-radius-border-1)', // 4px
+              border: '1px solid var(--slds-g-color-border-1)', // #C9C9C9
+              backgroundColor: 'var(--slds-g-color-neutral-base-100)', // #FFFFFF
+              color: 'var(--slds-g-color-on-surface-2)', // #2E2E2E
+              fontSize: 'var(--slds-g-font-scale-base)', // 13px
+              fontWeight: 'var(--slds-g-font-weight-6)', // 590
+              fontFamily: 'var(--slds-g-font-family)',
+              lineHeight: 'var(--slds-g-line-height-body-base)', // 18px
+              cursor: 'pointer',
+            }}
             >
               Cancel
             </button>
@@ -334,16 +343,18 @@ export function DataChunkCard({
                 e.stopPropagation();
                 handleSave();
               }}
-              style={{
-                padding: '6px 12px',
-                borderRadius: '4px',
-                border: 'none',
-                backgroundColor: '#0176D3',
-                color: '#FFFFFF',
-                fontSize: '13px',
-                fontWeight: 590,
-                cursor: 'pointer',
-              }}
+            style={{
+              padding: '6px var(--slds-g-spacing-3)', // 6px 12px
+              borderRadius: 'var(--slds-g-radius-border-1)', // 4px
+              border: 'none',
+              backgroundColor: 'var(--slds-g-color-brand-base-50)', // #0176D3
+              color: 'var(--slds-g-color-icon-white)', // #FFFFFF
+              fontSize: 'var(--slds-g-font-scale-base)', // 13px
+              fontWeight: 'var(--slds-g-font-weight-6)', // 590
+              fontFamily: 'var(--slds-g-font-family)',
+              lineHeight: 'var(--slds-g-line-height-body-base)', // 18px
+              cursor: 'pointer',
+            }}
             >
               Save
             </button>
@@ -354,9 +365,11 @@ export function DataChunkCard({
           style={{
             position: 'relative',
             zIndex: 1,
-            fontSize: '14px',
-            lineHeight: '1.6',
-            color: chunk.status === 'excluded' ? '#5C5C5C' : '#03234D',
+            fontSize: 'var(--slds-g-font-scale-1)', // 14px from Figma
+            fontWeight: 'var(--slds-g-font-weight-4)', // 400 Regular
+            lineHeight: 'var(--slds-g-line-height-body)', // 19px from Figma
+            color: chunk.status === 'excluded' ? 'var(--slds-g-color-on-surface-1)' : 'var(--slds-g-color-on-surface-2)', // #5C5C5C or #2E2E2E
+            fontFamily: 'var(--slds-g-font-family)',
             paddingRight: chunk.status === 'pending' ? '80px' : '0',
           }}
           onClick={(e) => {
@@ -390,22 +403,22 @@ export function DataChunkCard({
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
-              borderRadius: '4px',
-              border: '1px solid #C9C9C9',
-              backgroundColor: '#FFFFFF',
+              borderRadius: 'var(--slds-g-radius-border-1)', // 4px
+              border: '1px solid var(--slds-g-color-border-1)', // #C9C9C9
+              backgroundColor: 'var(--slds-g-color-neutral-base-100)', // #FFFFFF
               cursor: 'pointer',
-              transition: 'all 0.15s ease-in-out',
+              transition: 'all var(--slds-g-transition-fast)',
             }}
             onMouseEnter={(e) => {
-              e.currentTarget.style.backgroundColor = '#F3F3F3';
-              e.currentTarget.style.borderColor = '#0176D3';
+              e.currentTarget.style.backgroundColor = 'var(--slds-g-color-neutral-base-95)'; // #F3F3F3
+              e.currentTarget.style.borderColor = 'var(--slds-g-color-brand-base-50)'; // #0176D3
             }}
             onMouseLeave={(e) => {
-              e.currentTarget.style.backgroundColor = '#FFFFFF';
-              e.currentTarget.style.borderColor = '#C9C9C9';
+              e.currentTarget.style.backgroundColor = 'var(--slds-g-color-neutral-base-100)'; // #FFFFFF
+              e.currentTarget.style.borderColor = 'var(--slds-g-color-border-1)'; // #C9C9C9
             }}
           >
-            <Edit2 size={16} color="#5C5C5C" />
+            <Edit2 size={16} color="var(--slds-g-color-icon-default)" /> {/* #747474 */}
           </button>
           <button
             onClick={handleReject}

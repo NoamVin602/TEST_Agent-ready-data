@@ -44,10 +44,12 @@ export function BatchActionBar({
       >
         <span
           style={{
-            fontSize: '14px',
-            fontWeight: 590,
-            color: '#03234D',
-            marginRight: '8px',
+            fontSize: 'var(--slds-g-font-scale-1)', // 14px from Figma
+            fontWeight: 'var(--slds-g-font-weight-6)', // 590
+            color: 'var(--slds-g-color-on-surface-2)', // #2E2E2E from Figma
+            fontFamily: 'var(--slds-g-font-family)',
+            lineHeight: 'var(--slds-g-line-height-body)', // 19px from Figma
+            marginRight: 'var(--slds-g-spacing-2)', // 8px
           }}
         >
           {selectedCount} item{selectedCount !== 1 ? 's' : ''} selected
@@ -60,16 +62,18 @@ export function BatchActionBar({
             display: 'flex',
             alignItems: 'center',
             gap: '6px',
-            padding: '8px 16px',
-            borderRadius: '4px',
+            padding: 'var(--slds-g-spacing-2) var(--slds-g-spacing-4)', // 8px 16px
+            borderRadius: 'var(--slds-g-radius-border-1)', // 4px
             border: '1px solid #EF4444',
-            backgroundColor: '#FFFFFF',
+            backgroundColor: 'var(--slds-g-color-neutral-base-100)', // #FFFFFF
             color: '#EF4444',
-            fontSize: '13px',
-            fontWeight: 590,
+            fontSize: 'var(--slds-g-font-scale-base)', // 13px from Figma
+            fontWeight: 'var(--slds-g-font-weight-6)', // 590
+            fontFamily: 'var(--slds-g-font-family)',
+            lineHeight: 'var(--slds-g-line-height-body-base)', // 18px from Figma
             cursor: isProcessing ? 'not-allowed' : 'pointer',
             opacity: isProcessing ? 0.5 : 1,
-            transition: 'all 0.15s ease-in-out',
+            transition: 'all var(--slds-g-transition-fast)',
           }}
           onMouseEnter={(e) => {
             if (!isProcessing) {
@@ -97,16 +101,18 @@ export function BatchActionBar({
             display: 'flex',
             alignItems: 'center',
             gap: '6px',
-            padding: '8px 16px',
-            borderRadius: '4px',
+            padding: 'var(--slds-g-spacing-2) var(--slds-g-spacing-4)', // 8px 16px
+            borderRadius: 'var(--slds-g-radius-border-1)', // 4px
             border: 'none',
             backgroundColor: '#2E844A',
-            color: '#FFFFFF',
-            fontSize: '13px',
-            fontWeight: 590,
+            color: 'var(--slds-g-color-icon-white)', // #FFFFFF
+            fontSize: 'var(--slds-g-font-scale-base)', // 13px from Figma
+            fontWeight: 'var(--slds-g-font-weight-6)', // 590
+            fontFamily: 'var(--slds-g-font-family)',
+            lineHeight: 'var(--slds-g-line-height-body-base)', // 18px from Figma
             cursor: isProcessing ? 'not-allowed' : 'pointer',
             opacity: isProcessing ? 0.5 : 1,
-            transition: 'all 0.15s ease-in-out',
+            transition: 'all var(--slds-g-transition-fast)',
           }}
           onMouseEnter={(e) => {
             if (!isProcessing) {

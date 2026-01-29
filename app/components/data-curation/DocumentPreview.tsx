@@ -40,7 +40,14 @@ export function DocumentPreview({
   const renderContent = () => {
     if (!highlightedChunk || !highlightedChunk.sourceLocation) {
       return (
-        <div style={{ padding: '16px', fontSize: '14px', lineHeight: '1.6', color: '#03234D' }}>
+        <div style={{ 
+          padding: 'var(--slds-g-spacing-4)', // 16px
+          fontSize: 'var(--slds-g-font-scale-1)', // 14px from Figma
+          fontWeight: 'var(--slds-g-font-weight-4)', // 400
+          lineHeight: 'var(--slds-g-line-height-body)', // 19px from Figma
+          color: 'var(--slds-g-color-on-surface-2)', // #2E2E2E from Figma
+          fontFamily: 'var(--slds-g-font-family)',
+        }}>
           {document.content}
         </div>
       );
@@ -110,9 +117,10 @@ export function DocumentPreview({
       >
         <h3
           style={{
-            fontSize: '16px',
-            fontWeight: 600,
-            color: '#03234D',
+            fontSize: 'var(--slds-g-font-scale-3)', // 16px
+            fontWeight: 'var(--slds-g-font-weight-semibold)', // 600
+            color: 'var(--slds-g-color-on-surface-2)', // #2E2E2E from Figma
+            fontFamily: 'var(--slds-g-font-family)',
             margin: 0,
           }}
         >
@@ -121,8 +129,11 @@ export function DocumentPreview({
         {highlightedChunk && (
           <p
             style={{
-              fontSize: '12px',
-              color: '#5C5C5C',
+              fontSize: 'var(--slds-g-font-scale-base)', // 13px from Figma
+              fontWeight: 'var(--slds-g-font-weight-4)', // 400
+              color: 'var(--slds-g-color-on-surface-1)', // #5C5C5C from Figma
+              fontFamily: 'var(--slds-g-font-family)',
+              lineHeight: 'var(--slds-g-line-height-body-base)', // 18px from Figma
               margin: '4px 0 0 0',
             }}
           >

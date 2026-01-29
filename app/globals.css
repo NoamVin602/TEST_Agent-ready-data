@@ -23,6 +23,16 @@
   --slds-g-color-text-weak: #747474;
   --slds-g-color-on-surface-3: #03234D;
   --slds-g-color-on-surface-1: #5C5C5C;
+  --slds-g-color-on-surface-2: #2E2E2E;
+  
+  /* Electric Blue Colors (from Figma) */
+  --slds-g-color-electric-blue-30: #022AC0;
+  --slds-g-color-electric-blue-50: #066AFE;
+  --slds-g-color-electric-blue-90: #D6E6FF;
+  
+  /* Surface Container Inverse */
+  --slds-g-color-surface-container-inverse-1: #032D60;
+  --slds-g-color-on-surface-inverse-1: #FFFFFF;
   
   /* Status Colors */
   --slds-g-color-success-base-50: #2E844A;
@@ -47,9 +57,12 @@
   /* Border Colors */
   --slds-g-color-border-1: #C9C9C9;
   --slds-g-color-border-2: #E5E5E5;
+  --slds-g-color-neutral-90: #E5E5E5;
+  --slds-g-color-neutral-50: #747474;
   
   /* Icon Colors */
   --slds-g-color-icon-white: #FFFFFF;
+  --slds-g-color-icon-default: #747474; /* Default icon color from Figma */
   
   /* Badge Colors */
   --slds-g-color-badge-detected: #FFE5E5;
@@ -75,24 +88,26 @@
   /* Font Family */
   --slds-g-font-family: 'SF Pro', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   
-  /* Font Sizes */
+  /* Font Sizes (from Figma) */
   --slds-g-font-scale-neg-1: 11px;
-  --slds-g-font-scale-1: 13px;
+  --slds-g-font-scale-base: 13px; /* Base font size */
+  --slds-g-font-scale-1: 14px;
   --slds-g-font-scale-2: 14px;
   --slds-g-font-scale-3: 16px;
   --slds-g-font-scale-4: 14px;
   --slds-g-font-scale-5: 28px;
   
   /* Font Weights */
-  --slds-g-font-weight-4: 400;
+  --slds-g-font-weight-4: 400; /* Regular */
   --slds-g-font-weight-medium: 500;
-  --slds-g-font-weight-6: 590;
+  --slds-g-font-weight-6: 590; /* Semibold */
   --slds-g-font-weight-semibold: 600;
   --slds-g-font-weight-bold: 700;
   
-  /* Line Heights */
+  /* Line Heights (from Figma) */
   --slds-g-line-height-heading: 35px;
-  --slds-g-line-height-body: 19px;
+  --slds-g-line-height-body-base: 18px; /* Base line height */
+  --slds-g-line-height-body: 19px; /* Scale-1 line height */
   --slds-g-line-height-base: 1.5;
   
   /* ========== Border Radius ========== */
@@ -106,6 +121,8 @@
   --slds-g-shadow-2: 0 2px 4px rgba(0, 0, 0, 0.07);
   --slds-g-shadow-3: 0 4px 8px rgba(0, 0, 0, 0.08);
   --slds-g-shadow-4: 0 8px 16px rgba(0, 0, 0, 0.1);
+  /* Box Shadow 3 from Figma */
+  --slds-g-shadow-3-down: 0px 0px 4.4px 0px rgba(0, 0, 0, 0.08), 0px 4.3px 4.4px 0px rgba(0, 0, 0, 0.17), 0px -1px 1.44px 0px rgba(0, 0, 0, 0.08);
   
   /* ========== Transitions ========== */
   --slds-g-transition-fast: 150ms;

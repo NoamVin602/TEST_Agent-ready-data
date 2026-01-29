@@ -260,16 +260,18 @@ export function DataCurationView() {
               key={filter}
               onClick={() => setActiveFilter(filter)}
               style={{
-                padding: '6px 12px',
-                borderRadius: '4px',
+                padding: '6px var(--slds-g-spacing-3)', // 6px 12px
+                borderRadius: 'var(--slds-g-radius-border-1)', // 4px
                 border: 'none',
-                backgroundColor: activeFilter === filter ? '#0176D3' : '#F3F3F3',
-                color: activeFilter === filter ? '#FFFFFF' : '#03234D',
-                fontSize: '13px',
-                fontWeight: activeFilter === filter ? 590 : 400,
+                backgroundColor: activeFilter === filter ? 'var(--slds-g-color-brand-base-50)' : 'var(--slds-g-color-neutral-base-95)', // #0176D3 or #F3F3F3
+                color: activeFilter === filter ? 'var(--slds-g-color-icon-white)' : 'var(--slds-g-color-on-surface-2)', // #FFFFFF or #2E2E2E
+                fontSize: 'var(--slds-g-font-scale-base)', // 13px from Figma
+                fontWeight: activeFilter === filter ? 'var(--slds-g-font-weight-6)' : 'var(--slds-g-font-weight-4)', // 590 or 400
+                fontFamily: 'var(--slds-g-font-family)',
+                lineHeight: 'var(--slds-g-line-height-body-base)', // 18px from Figma
                 cursor: 'pointer',
                 textTransform: 'capitalize',
-                transition: 'all 0.15s ease-in-out',
+                transition: 'all var(--slds-g-transition-fast)',
               }}
               onMouseEnter={(e) => {
                 if (activeFilter !== filter) {

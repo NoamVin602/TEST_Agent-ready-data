@@ -32,9 +32,11 @@ export function CategoryHeader({ category, count, isSticky = false }: CategoryHe
       >
         <h3
           style={{
-            fontSize: '14px',
-            fontWeight: 600,
-            color: '#03234D',
+            fontSize: 'var(--slds-g-font-scale-1)', // 14px from Figma
+            fontWeight: 'var(--slds-g-font-weight-6)', // 590 Semibold
+            color: 'var(--slds-g-color-on-surface-2)', // #2E2E2E from Figma
+            fontFamily: 'var(--slds-g-font-family)',
+            lineHeight: 'var(--slds-g-line-height-body)', // 19px from Figma
             margin: 0,
             textTransform: 'capitalize',
           }}
@@ -44,9 +46,11 @@ export function CategoryHeader({ category, count, isSticky = false }: CategoryHe
         {count !== undefined && (
           <span
             style={{
-              fontSize: '12px',
-              color: '#5C5C5C',
-              fontWeight: 590,
+              fontSize: 'var(--slds-g-font-scale-base)', // 13px from Figma
+              fontWeight: 'var(--slds-g-font-weight-6)', // 590
+              color: 'var(--slds-g-color-on-surface-1)', // #5C5C5C from Figma
+              fontFamily: 'var(--slds-g-font-family)',
+              lineHeight: 'var(--slds-g-line-height-body-base)', // 18px from Figma
             }}
           >
             {count} item{count !== 1 ? 's' : ''}
