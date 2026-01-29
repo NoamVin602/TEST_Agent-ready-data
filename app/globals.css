@@ -273,3 +273,168 @@ body {
     transform: translateY(0);
   }
 }
+
+/* ==========================================
+   Global Button Styles - Lightning Web Component
+   State=Default - Applied to ALL buttons
+========================================== */
+button {
+  /* Auto layout */
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 1px var(--slds-g-spacing-4); /* 1px 16px */
+  gap: var(--slds-g-spacing-2); /* 8px */
+  
+  height: 32px;
+  min-height: 32px;
+  
+  background: var(--slds-g-color-accent-container-1); /* #066AFE */
+  border: none;
+  border-radius: 9999px; /* Fully rounded */
+  
+  /* Typography */
+  font-family: var(--slds-g-font-family); /* 'SF Pro' */
+  font-style: normal;
+  font-weight: var(--slds-g-font-weight-6); /* 590 Semibold */
+  font-size: var(--slds-g-font-scale-1); /* 14px */
+  line-height: var(--slds-g-line-height-body); /* 19px */
+  text-align: center;
+  color: var(--slds-g-color-on-accent-1); /* #FFFFFF */
+  
+  /* Cursor */
+  cursor: pointer;
+  
+  /* Transitions */
+  transition: background-color var(--slds-g-transition-fast), 
+              opacity var(--slds-g-transition-fast);
+  
+  /* Flex properties */
+  flex: none;
+  order: 0;
+  flex-grow: 0;
+  
+  /* Reset default button styles */
+  outline: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
+
+/* Button Hover State */
+button:hover:not(:disabled) {
+  background: var(--slds-g-color-accent-2); /* #0250D9 - darker blue */
+}
+
+/* Button Active State */
+button:active:not(:disabled) {
+  background: var(--slds-g-color-accent-3); /* #022AC0 - darkest blue */
+  transform: scale(0.98);
+}
+
+/* Button Disabled State */
+button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+/* Button Focus State */
+button:focus-visible {
+  outline: 2px solid var(--slds-g-color-accent-container-1);
+  outline-offset: 2px;
+}
+
+/* Button Variants */
+
+/* Secondary Button (Outlined) */
+button[data-variant="secondary"],
+button.slds-button-secondary {
+  background: transparent;
+  border: 1px solid var(--slds-g-color-border-1); /* #C9C9C9 */
+  color: var(--slds-g-color-on-surface-1); /* #5C5C5C */
+}
+
+button[data-variant="secondary"]:hover:not(:disabled),
+button.slds-button-secondary:hover:not(:disabled) {
+  background: var(--slds-g-color-neutral-base-95); /* #F3F3F3 */
+  border-color: var(--slds-g-color-border-1);
+}
+
+/* Success Button */
+button[data-variant="success"],
+button.slds-button-success {
+  background: var(--slds-g-color-success-base-50); /* #2E844A */
+  color: var(--slds-g-color-on-accent-1); /* #FFFFFF */
+}
+
+button[data-variant="success"]:hover:not(:disabled),
+button.slds-button-success:hover:not(:disabled) {
+  background: var(--slds-g-color-success-base-40); /* #194E31 */
+}
+
+/* Error/Destructive Button */
+button[data-variant="error"],
+button.slds-button-error {
+  background: var(--slds-g-color-error-base-50); /* #C23934 */
+  color: var(--slds-g-color-on-accent-1); /* #FFFFFF */
+}
+
+button[data-variant="error"]:hover:not(:disabled),
+button.slds-button-error:hover:not(:disabled) {
+  background: #A02E2A; /* Darker red */
+}
+
+/* Error variant with border (for secondary error buttons) */
+button[data-variant="error"][style*="border"] {
+  background: var(--slds-g-color-neutral-base-100); /* #FFFFFF */
+  color: var(--slds-g-color-error-base-50); /* #C23934 */
+}
+
+/* Icon-only Button */
+button[data-icon-only],
+button.slds-button-icon-only {
+  width: 32px;
+  padding: 0;
+  min-width: 32px;
+  border-radius: 9999px; /* Fully rounded for icon buttons */
+}
+
+button[data-icon-only] svg,
+button.slds-button-icon-only svg {
+  width: 16px; /* Icon buttons use 16px icons */
+  height: 16px;
+  flex-shrink: 0;
+}
+
+/* Button with Icon */
+button svg {
+  width: 14px;
+  height: 14px;
+  flex-shrink: 0;
+  display: block;
+}
+
+/* Override for specific button types that shouldn't use default styles */
+button[type="button"][data-no-default] {
+  /* Reset to allow custom styling */
+  all: unset;
+  display: inline-block;
+}
+
+/* Tab buttons - keep their specific styling */
+button[role="tab"],
+button[data-tab] {
+  border-radius: var(--slds-g-radius-border-1); /* 4px for tabs */
+  background: transparent;
+  height: 40px; /* Tab-specific height */
+  color: var(--slds-g-color-on-surface-1);
+}
+
+/* Scoped tab buttons - keep their specific styling */
+button[data-scoped-tab] {
+  border-radius: 0; /* No border radius for scoped tabs */
+  background: transparent;
+  height: 40px;
+}

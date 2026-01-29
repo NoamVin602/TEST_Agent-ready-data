@@ -397,17 +397,11 @@ export function DataChunkCard({
           <button
             onClick={handleEditClick}
             title="Edit"
+            data-icon-only
+            data-variant="secondary"
             style={{
-              width: '32px',
-              height: '32px',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              borderRadius: 'var(--slds-g-radius-border-1)', // 4px
               border: '1px solid var(--slds-g-color-border-1)', // #C9C9C9
               backgroundColor: 'var(--slds-g-color-neutral-base-100)', // #FFFFFF
-              cursor: 'pointer',
-              transition: 'all var(--slds-g-transition-fast)',
             }}
             onMouseEnter={(e) => {
               e.currentTarget.style.backgroundColor = 'var(--slds-g-color-neutral-base-95)'; // #F3F3F3
@@ -423,17 +417,12 @@ export function DataChunkCard({
           <button
             onClick={handleReject}
             title="Exclude"
+            data-icon-only
+            data-variant="error"
             style={{
-              width: '32px',
-              height: '32px',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              borderRadius: '4px',
               border: '1px solid #EF4444',
               backgroundColor: '#FFFFFF',
-              cursor: 'pointer',
-              transition: 'all 0.15s ease-in-out',
+              color: '#EF4444',
             }}
             onMouseEnter={(e) => {
               e.currentTarget.style.backgroundColor = '#FEE2E2';
@@ -447,24 +436,8 @@ export function DataChunkCard({
           <button
             onClick={handleApprove}
             title="Approve"
-            style={{
-              width: '32px',
-              height: '32px',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              borderRadius: '4px',
-              border: 'none',
-              backgroundColor: '#2E844A',
-              cursor: 'pointer',
-              transition: 'all 0.15s ease-in-out',
-            }}
-            onMouseEnter={(e) => {
-              e.currentTarget.style.backgroundColor = '#0C8A5F';
-            }}
-            onMouseLeave={(e) => {
-              e.currentTarget.style.backgroundColor = '#2E844A';
-            }}
+            data-icon-only
+            data-variant="success"
           >
             <CheckCircle2 size={16} color="#FFFFFF" />
           </button>

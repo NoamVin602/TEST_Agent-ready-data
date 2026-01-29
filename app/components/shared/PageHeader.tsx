@@ -89,45 +89,11 @@ export function PageHeader({ onRunScan, isScanning }: PageHeaderProps) {
       >
         <button
           type="button"
+          data-variant="secondary"
           onClick={onRunScan}
           disabled={isScanning}
           style={{
-            display: 'inline-flex',
-            alignItems: 'center',
-            gap: '8px',
-            padding: '6px 16px',
-            height: '32px',
-            borderRadius: '16px',
-            border: '1px solid #C9C9C9',
-            backgroundColor: '#FFFFFF',
             color: '#0176D3',
-            fontFamily: "'SF Pro', -apple-system, BlinkMacSystemFont, sans-serif",
-            fontSize: '13px',
-            fontWeight: 590,
-            lineHeight: '19px',
-            cursor: isScanning ? 'not-allowed' : 'pointer',
-            opacity: isScanning ? 0.7 : 1,
-            transition: 'background-color 0.15s ease-in-out, border-color 0.15s ease-in-out',
-            outline: 'none',
-          }}
-          onMouseEnter={(e) => {
-            if (!isScanning) {
-              e.currentTarget.style.backgroundColor = '#F3F3F3';
-            }
-          }}
-          onMouseLeave={(e) => {
-            if (!isScanning) {
-              e.currentTarget.style.backgroundColor = '#FFFFFF';
-            }
-          }}
-          onFocus={(e) => {
-            if (!isScanning) {
-              e.currentTarget.style.outline = '2px solid #0176D3';
-              e.currentTarget.style.outlineOffset = '2px';
-            }
-          }}
-          onBlur={(e) => {
-            e.currentTarget.style.outline = 'none';
           }}
         >
           {isScanning ? (
