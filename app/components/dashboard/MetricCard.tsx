@@ -1,6 +1,6 @@
 "use client";
 
-import { LucideIcon } from "lucide-react";
+import React from "react";
 
 interface MetricCardProps {
   title: string;
@@ -8,7 +8,7 @@ interface MetricCardProps {
   change: number;
   changeLabel: string;
   trend: "up" | "down";
-  icon: LucideIcon;
+  icon: React.ComponentType<{ size?: number; color?: string; style?: React.CSSProperties }>;
   colorClass: {
     background: string;
     text: string;
@@ -33,109 +33,53 @@ export function MetricCard({
       type="button"
       onClick={onClick}
       disabled={!isClickable}
+      className={`slds-card ${isClickable ? 'slds-card_interactive' : ''}`}
       style={{
         display: 'flex',
         flexDirection: 'column',
-        padding: 'var(--slds-g-spacing-4)',
-        backgroundColor: 'var(--slds-g-color-neutral-base-100)',
-        border: '1px solid var(--slds-g-color-border-1)',
-        borderRadius: 'var(--slds-g-radius-border-2)',
-        boxShadow: 'var(--slds-g-shadow-1)',
-        cursor: isClickable ? 'pointer' : 'default',
-        transition: 'all var(--slds-g-transition-base)',
         textAlign: 'left',
         width: '100%',
         minHeight: '140px'
       }}
-      onMouseEnter={(e) => {
-        if (isClickable) {
-          e.currentTarget.style.boxShadow = 'var(--slds-g-shadow-3)';
-          e.currentTarget.style.transform = 'translateY(-2px)';
-        }
-      }}
-      onMouseLeave={(e) => {
-        if (isClickable) {
-          e.currentTarget.style.boxShadow = 'var(--slds-g-shadow-1)';
-          e.currentTarget.style.transform = 'translateY(0)';
-        }
-      }}
     >
-      {/* Icon */}
-      <div 
-        style={{
-          width: '32px',
-          height: '32px',
-          borderRadius: 'var(--slds-g-radius-border-1)',
-          backgroundColor: colorClass.background,
-          display: 'inline-flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          marginBottom: 'var(--slds-g-spacing-3)',
-          flexShrink: 0
-        }}
-      >
-        <Icon 
+      <div className="slds-card__body">
+        {/* Icon */}
+        <div 
+          className="slds-icon_container slds-icon_container_circle"
           style={{
-            width: '16px',
-            height: '16px',
-            color: colorClass.text,
-            strokeWidth: 2
-          }}
-        />
-      </div>
-
-      {/* Value */}
-      <div 
-        style={{
-          fontSize: '32px',
-          fontWeight: 'var(--slds-g-font-weight-semibold)',
-          color: 'var(--slds-g-color-text-default)',
-          lineHeight: 1.2,
-          marginBottom: 'var(--slds-g-spacing-2)'
-        }}
-      >
-        {value}
-      </div>
-
-      {/* Title */}
-      <div 
-        style={{
-          fontSize: 'var(--slds-g-font-scale-2)',
-          fontWeight: 'var(--slds-g-font-weight-4)',
-          color: 'var(--slds-g-color-text-default)',
-          marginBottom: 'var(--slds-g-spacing-3)',
-          lineHeight: 1.5
-        }}
-      >
-        {title}
-      </div>
-
-      {/* Change Indicator */}
-      <div 
-        style={{
-          display: 'flex',
-          alignItems: 'center',
-          gap: 'var(--slds-g-spacing-1)',
-          marginTop: 'auto'
-        }}
-      >
-        <span
-          style={{
-            fontSize: 'var(--slds-g-font-scale-1)',
-            fontWeight: 'var(--slds-g-font-weight-6)',
-            color: trend === 'down' ? 'var(--slds-g-color-success-base-50)' : 'var(--slds-g-color-text-weak)'
+            width: '32px',
+            height: '32px',
+            borderRadius: 'var(--slds-g-radius-border-1)',
+            backgroundColor: colorClass.background,
+            marginBottom: 'var(--slds-g-spacing-3)',
+            flexShrink: 0
           }}
         >
-          {change > 0 ? '+' : ''}{change}{typeof change === 'number' && change % 1 !== 0 ? '%' : ''}
-        </span>
-        <span
-          style={{
-            fontSize: 'var(--slds-g-font-scale-neg-1)',
-            color: 'var(--slds-g-color-text-weak)'
-          }}
-        >
-          {changeLabel}
-        </span>
+          <Icon 
+            size={16}
+            color={colorClass.text}
+          />
+        </div>
+
+        {/* Value */}
+        <div className="slds-text-heading_large" style={{ marginBottom: 'var(--slds-g-spacing-2)' }}>
+          {value}
+        </div>
+
+        {/* Title */}
+        <div className="slds-text-body" style={{ marginBottom: 'var(--slds-g-spacing-3)' }}>
+          {title}
+        </div>
+
+        {/* Change Indicator */}
+        <div className="slds-grid slds-grid_vertical-align-center" style={{ gap: 'var(--slds-g-spacing-1)', marginTop: 'auto' }}>
+          <span className="slds-text-body_semibold" style={{ color: trend === 'down' ? 'var(--slds-g-color-success-base-50)' : 'var(--slds-g-color-text-weak)' }}>
+            {change > 0 ? '+' : ''}{change}{typeof change === 'number' && change % 1 !== 0 ? '%' : ''}
+          </span>
+          <span className="slds-text-body_small">
+            {changeLabel}
+          </span>
+        </div>
       </div>
     </button>
   );

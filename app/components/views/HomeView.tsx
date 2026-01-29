@@ -1,6 +1,6 @@
 "use client";
 
-import { AlertTriangle, Clock, Copy, FileEdit, Search, Sparkles, Activity } from "lucide-react";
+import { AlertTriangleIcon, ClockIcon, CopyIcon, FileEditIcon, SearchIcon, SparklesIcon, ActivityIcon } from "../../lib/slds-icons";
 import { DataHealthDonut } from "../dashboard/DataHealthDonut";
 import { DataHealthLineChart } from "../dashboard/DataHealthLineChart";
 import { MetricCard } from "../dashboard/MetricCard";
@@ -43,7 +43,7 @@ const metricsData = [
     change: -4,
     changeLabel: "last 30 days",
     trend: "down" as const,
-    icon: AlertTriangle,
+    icon: AlertTriangleIcon,
     colorClass: {
       background: "rgba(194, 57, 52, 0.1)",
       text: "var(--slds-g-color-error-base-50)"
@@ -57,7 +57,7 @@ const metricsData = [
     change: -4,
     changeLabel: "last 30 days",
     trend: "down" as const,
-    icon: Clock,
+    icon: ClockIcon,
     colorClass: {
       background: "rgba(254, 147, 57, 0.1)",
       text: "var(--slds-g-color-warning-base-50)"
@@ -71,7 +71,7 @@ const metricsData = [
     change: 1.3,
     changeLabel: "vs last 30 days",
     trend: "up" as const,
-    icon: Copy,
+    icon: CopyIcon,
     colorClass: {
       background: "rgba(254, 147, 57, 0.1)",
       text: "var(--slds-g-color-warning-base-50)"
@@ -85,7 +85,7 @@ const metricsData = [
     change: 12.3,
     changeLabel: "vs last 30 days",
     trend: "up" as const,
-    icon: FileEdit,
+    icon: FileEditIcon,
     colorClass: {
       background: "rgba(254, 147, 57, 0.1)",
       text: "var(--slds-g-color-warning-base-50)"
@@ -99,7 +99,7 @@ const metricsData = [
     change: 12.3,
     changeLabel: "vs last 30 days",
     trend: "up" as const,
-    icon: Search,
+    icon: SearchIcon,
     colorClass: {
       background: "rgba(254, 147, 57, 0.1)",
       text: "var(--slds-g-color-warning-base-50)"
@@ -113,7 +113,7 @@ const metricsData = [
     change: 3,
     changeLabel: "vs last 30 days",
     trend: "up" as const,
-    icon: Sparkles,
+    icon: SparklesIcon,
     colorClass: {
       background: "rgba(46, 132, 74, 0.1)",
       text: "var(--slds-g-color-success-base-50)"
@@ -181,13 +181,10 @@ export function HomeView({ onMetricClick }: HomeViewProps) {
             gap: 'var(--slds-g-spacing-2)'
           }}
         >
-          <Activity 
-            style={{
-              width: '20px',
-              height: '20px',
-              color: 'var(--slds-g-color-text-default)',
-              flexShrink: 0
-            }}
+          <ActivityIcon 
+            size={20}
+            color="var(--slds-g-color-text-default)"
+            style={{ flexShrink: 0 }}
           />
           <h2 
             style={{

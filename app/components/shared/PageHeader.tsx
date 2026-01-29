@@ -1,6 +1,6 @@
 "use client";
 
-import { Database, Play, Loader2 } from "lucide-react";
+import { DatabaseIcon, PlayIcon, LoaderIcon } from "../../lib/slds-icons";
 
 interface PageHeaderProps {
   onRunScan: () => void;
@@ -48,13 +48,9 @@ export function PageHeader({ onRunScan, isScanning }: PageHeaderProps) {
             flexShrink: 0,
           }}
         >
-          <Database
-            style={{
-              width: '18px',
-              height: '18px',
-              color: '#FFFFFF',
-              strokeWidth: 2,
-            }}
+          <DatabaseIcon
+            size={18}
+            color="#FFFFFF"
           />
         </div>
 
@@ -131,22 +127,15 @@ export function PageHeader({ onRunScan, isScanning }: PageHeaderProps) {
           }}
         >
           {isScanning ? (
-            <Loader2
-              style={{
-                width: '14px',
-                height: '14px',
-                color: 'rgba(2, 80, 217, 1)',
-                animation: 'spin 1s linear infinite',
-              }}
+            <LoaderIcon
+              size={14}
+              color="rgba(2, 80, 217, 1)"
+              style={{ animation: 'spin 1s linear infinite' }}
             />
           ) : (
-            <Play
-              style={{
-                width: '14px',
-                height: '14px',
-                color: 'rgba(2, 80, 217, 1)',
-                fill: 'rgba(2, 80, 217, 1)',
-              }}
+            <PlayIcon
+              size={14}
+              color="rgba(2, 80, 217, 1)"
             />
           )}
           <span>{isScanning ? 'Scanning...' : 'Run Scan'}</span>

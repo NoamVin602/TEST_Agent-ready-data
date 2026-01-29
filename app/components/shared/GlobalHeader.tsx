@@ -1,17 +1,17 @@
 "use client";
 
 import { 
-  Search, 
-  Sparkles, 
-  Star, 
-  ChevronDown, 
-  Plus, 
-  Award, 
-  HelpCircle, 
-  Settings, 
-  Bell, 
-  User 
-} from "lucide-react";
+  SearchIcon, 
+  SparklesIcon, 
+  StarIcon, 
+  ChevronDownIcon, 
+  PlusIcon, 
+  AwardIcon, 
+  HelpCircleIcon, 
+  SettingsIcon, 
+  BellIcon, 
+  UserIcon 
+} from "../../lib/slds-icons";
 
 export function GlobalHeader() {
   return (
@@ -49,15 +49,14 @@ export function GlobalHeader() {
       {/* Center Section - Global Search */}
       <div style={{ flex: 1, maxWidth: '600px', margin: '0 24px' }}>
         <div style={{ position: 'relative' }}>
-          <Search 
+          <SearchIcon 
+            size={16}
+            color="#5C5C5C"
             style={{
               position: 'absolute',
               left: '12px',
               top: '50%',
               transform: 'translateY(-50%)',
-              width: '16px',
-              height: '16px',
-              color: '#5C5C5C',
               pointerEvents: 'none',
             }}
           />
@@ -118,7 +117,7 @@ export function GlobalHeader() {
             e.currentTarget.style.backgroundColor = 'transparent';
           }}
         >
-          <Sparkles style={{ width: '18px', height: '18px', color: '#5C5C5C' }} />
+          <SparklesIcon size={18} color="#5C5C5C" />
         </button>
 
         {/* Favorites Icon */}
@@ -145,7 +144,7 @@ export function GlobalHeader() {
             e.currentTarget.style.backgroundColor = 'transparent';
           }}
         >
-          <Star style={{ width: '18px', height: '18px', color: '#5C5C5C' }} />
+          <StarIcon size={18} color="#5C5C5C" />
         </button>
 
         {/* Dropdown Icon */}
@@ -172,7 +171,7 @@ export function GlobalHeader() {
             e.currentTarget.style.backgroundColor = 'transparent';
           }}
         >
-          <ChevronDown style={{ width: '18px', height: '18px', color: '#5C5C5C' }} />
+          <ChevronDownIcon size={18} color="#5C5C5C" />
         </button>
 
         {/* New/Add Icon */}
@@ -199,7 +198,7 @@ export function GlobalHeader() {
             e.currentTarget.style.backgroundColor = 'transparent';
           }}
         >
-          <Plus style={{ width: '18px', height: '18px', color: '#5C5C5C' }} />
+          <PlusIcon size={18} color="#5C5C5C" />
         </button>
 
         {/* Trailhead Icon */}
@@ -226,7 +225,7 @@ export function GlobalHeader() {
             e.currentTarget.style.backgroundColor = 'transparent';
           }}
         >
-          <Award style={{ width: '18px', height: '18px', color: '#5C5C5C' }} />
+          <AwardIcon size={18} color="#5C5C5C" />
         </button>
 
         {/* Help/Question Icon */}
@@ -253,7 +252,7 @@ export function GlobalHeader() {
             e.currentTarget.style.backgroundColor = 'transparent';
           }}
         >
-          <HelpCircle style={{ width: '18px', height: '18px', color: '#5C5C5C' }} />
+          <HelpCircleIcon size={18} color="#5C5C5C" />
         </button>
 
         {/* Setup/Settings Icon */}
@@ -280,7 +279,7 @@ export function GlobalHeader() {
             e.currentTarget.style.backgroundColor = 'transparent';
           }}
         >
-          <Settings style={{ width: '18px', height: '18px', color: '#5C5C5C' }} />
+          <SettingsIcon size={18} color="#5C5C5C" />
         </button>
 
         {/* Notifications Icon */}
@@ -307,7 +306,7 @@ export function GlobalHeader() {
             e.currentTarget.style.backgroundColor = 'transparent';
           }}
         >
-          <Bell style={{ width: '18px', height: '18px', color: '#5C5C5C' }} />
+          <BellIcon size={18} color="#5C5C5C" />
         </button>
 
         {/* User Avatar */}
@@ -334,7 +333,7 @@ export function GlobalHeader() {
             e.currentTarget.style.backgroundColor = '#B0C4D9';
           }}
         >
-          <User style={{ width: '18px', height: '18px', color: '#FFFFFF' }} />
+          <UserIcon size={18} color="#FFFFFF" />
         </button>
       </div>
     </div>

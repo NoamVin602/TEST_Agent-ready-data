@@ -1,6 +1,6 @@
 "use client";
 
-import { Grid3x3 } from "lucide-react";
+import { Grid3x3Icon } from "../../lib/slds-icons";
 
 interface GlobalNavigationProps {
   activeTab?: string;
@@ -43,13 +43,10 @@ export function GlobalNavigation({ activeTab = "home" }: GlobalNavigationProps) 
           }}
         >
           {/* Waffle Icon */}
-          <Grid3x3
-            style={{
-              width: '20px',
-              height: '20px',
-              color: '#5C5C5C',
-              flexShrink: 0,
-            }}
+          <Grid3x3Icon
+            size={20}
+            color="#5C5C5C"
+            style={{ flexShrink: 0 }}
           />
 
           {/* App Name */}

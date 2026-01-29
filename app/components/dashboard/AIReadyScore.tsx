@@ -1,6 +1,6 @@
 "use client";
 
-import { TrendingUp, CheckCircle2 } from "lucide-react";
+import { TrendingUpIcon, CheckCircleIcon } from "../../lib/slds-icons";
 
 interface AIReadyScoreProps {
   currentScore?: number;
@@ -16,32 +16,11 @@ export function AIReadyScore({
   const percentage = (currentScore / targetScore) * 100;
 
   return (
-    <div
-      style={{
-        backgroundColor: 'var(--slds-g-color-neutral-base-100)',
-        border: '1px solid var(--slds-g-color-border-1)',
-        borderRadius: 'var(--slds-g-radius-border-2)',
-        padding: 'var(--slds-g-spacing-4)',
-        boxShadow: 'var(--slds-g-shadow-1)',
-        marginBottom: 'var(--slds-g-spacing-6)'
-      }}
-    >
-      {/* Header */}
-      <div
-        style={{
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'space-between',
-          marginBottom: 'var(--slds-g-spacing-4)'
-        }}
-      >
-        <div
-          style={{
-            display: 'flex',
-            alignItems: 'center',
-            gap: 'var(--slds-g-spacing-2)'
-          }}
-        >
+    <div className="slds-card slds-m-bottom_large">
+      <div className="slds-card__body">
+        {/* Header */}
+        <div className="slds-grid slds-grid_align-spread slds-grid_vertical-align-center slds-m-bottom_medium">
+          <div className="slds-grid slds-grid_vertical-align-center slds-gap_small">
           <div
             style={{
               width: '24px',
@@ -54,94 +33,40 @@ export function AIReadyScore({
               flexShrink: 0
             }}
           >
-            <CheckCircle2
-              style={{
-                width: '14px',
-                height: '14px',
-                color: 'var(--slds-g-color-success-base-50)'
-              }}
+            <CheckCircleIcon
+              size={14}
+              color="var(--slds-g-color-success-base-50)"
             />
           </div>
-          <span
-            style={{
-              fontFamily: 'var(--slds-g-font-family)',
-              fontSize: 'var(--slds-g-font-scale-base)', // 13px
-              fontWeight: 'var(--slds-g-font-weight-medium)', // 500
-              color: 'var(--slds-g-color-text-default)'
-            }}
-          >
+          <span className="slds-text-body_semibold">
             AI Ready Score
           </span>
-        </div>
-        <div
-          style={{
-            display: 'flex',
-            alignItems: 'center',
-            gap: 'var(--slds-g-spacing-1)',
-            fontSize: 'var(--slds-g-font-scale-neg-1)', // 12px
-            fontWeight: 'var(--slds-g-font-weight-medium)', // 500
-            color: 'var(--slds-g-color-success-base-50)' // Green for positive change
-          }}
-        >
-          <TrendingUp
-            style={{
-              width: '14px',
-              height: '14px',
-              color: 'var(--slds-g-color-success-base-50)'
-            }}
+          </div>
+          <div className="slds-grid slds-grid_vertical-align-center" style={{ gap: 'var(--slds-g-spacing-1)' }}>
+          <TrendingUpIcon
+            size={14}
+            color="var(--slds-g-color-success-base-50)"
           />
-          {change}%
+          <span className="slds-text-body_small" style={{ color: 'var(--slds-g-color-success-base-50)' }}>
+            {change}%
+          </span>
+          </div>
         </div>
-      </div>
 
-      {/* Progress Bar */}
-      <div
-        style={{
-          height: '8px',
-          backgroundColor: '#C9E8E4', // Light teal background
-          borderRadius: '9999px', // Fully rounded (pill shape)
-          overflow: 'visible',
-          marginBottom: 'var(--slds-g-spacing-2)',
-          position: 'relative'
-        }}
-      >
-        <div
-          style={{
-            height: '100%',
-            width: `${percentage}%`,
-            backgroundColor: 'var(--slds-g-color-success-base-50)', // Green fill
-            borderRadius: '9999px',
-            transition: 'width 1s ease'
-          }}
-        />
-      </div>
+        {/* Progress Bar */}
+        <div className="slds-progress-bar" role="progressbar" aria-valuemin={0} aria-valuemax={targetScore} aria-valuenow={currentScore} style={{ height: '8px', backgroundColor: '#C9E8E4', borderRadius: '9999px', marginBottom: 'var(--slds-g-spacing-2)' }}>
+          <div className="slds-progress-bar__value" style={{ width: `${percentage}%`, backgroundColor: 'var(--slds-g-color-success-base-50)', borderRadius: '9999px', transition: 'width 1s ease' }} />
+        </div>
 
-      {/* Labels */}
-      <div
-        style={{
-          display: 'flex',
-          justifyContent: 'space-between',
-          alignItems: 'center'
-        }}
-      >
-        <span
-          style={{
-            fontSize: 'var(--slds-g-font-scale-base)', // 13px
-            fontWeight: 'var(--slds-g-font-weight-4)', // 400
-            color: 'var(--slds-g-color-text-default)'
-          }}
-        >
-          {currentScore}%
-        </span>
-        <span
-          style={{
-            fontSize: 'var(--slds-g-font-scale-base)', // 13px
-            fontWeight: 'var(--slds-g-font-weight-4)', // 400
-            color: 'var(--slds-g-color-text-default)'
-          }}
-        >
-          {targetScore}%
-        </span>
+        {/* Labels */}
+        <div className="slds-grid slds-grid_align-spread">
+          <span className="slds-text-body">
+            {currentScore}%
+          </span>
+          <span className="slds-text-body">
+            {targetScore}%
+          </span>
+        </div>
       </div>
     </div>
   );

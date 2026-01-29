@@ -2,20 +2,23 @@
 
 import { useState } from "react";
 import { 
-  Database, 
-  Link2, 
-  Shield, 
-  Wand2, 
-  Search, 
-  BarChart3, 
-  Users,
-  ChevronRight 
-} from "lucide-react";
+  SearchIcon,
+  ChevronDownIcon,
+  DataMappingIcon,
+  ShieldIcon,
+  ProcessIcon,
+  TableIcon,
+  ChartIcon,
+  SegmentsIcon,
+  DatabaseIcon,
+  LightBulbIcon,
+  ArrowLeftIcon
+} from "../../lib/slds-icons";
 
 interface NavItem {
   id: string;
   label: string;
-  icon: any;
+  icon: React.ComponentType<{ size?: number; color?: string; style?: React.CSSProperties }>;
   children?: { id: string; label: string; }[];
 }
 
@@ -23,7 +26,7 @@ const NAV_ITEMS: NavItem[] = [
   {
     id: "connect-unify",
     label: "Connect & Unify",
-    icon: Link2,
+    icon: DataMappingIcon,
     children: [
       { id: "data-streams", label: "Data Streams" },
       { id: "data-lake", label: "Data Lake Objects" },
@@ -35,27 +38,27 @@ const NAV_ITEMS: NavItem[] = [
   {
     id: "govern-secure",
     label: "Govern & Secure",
-    icon: Shield,
+    icon: ShieldIcon,
   },
   {
     id: "process-enrich",
     label: "Process & Enrich",
-    icon: Wand2,
+    icon: ProcessIcon,
   },
   {
     id: "query-explore",
     label: "Query & Explore",
-    icon: Search,
+    icon: TableIcon,
   },
   {
     id: "analyze-predict",
     label: "Analyze & Predict",
-    icon: BarChart3,
+    icon: ChartIcon,
   },
   {
     id: "segment-act",
     label: "Segment & Act",
-    icon: Users,
+    icon: SegmentsIcon,
   },
 ];
 
@@ -75,10 +78,11 @@ export function LeftNavigation() {
   if (isCollapsed) {
     return (
       <div
+        className="slds-navigation"
         style={{
           width: '60px',
           backgroundColor: 'var(--slds-g-color-neutral-base-100)',
-          borderRight: '1px solid var(--slds-g-color-border-1)',
+          borderRight: '1px solid var(--slds-g-color-border-2)',
           display: 'flex',
           flexDirection: 'column',
           padding: 'var(--slds-g-spacing-2) 0',
@@ -90,6 +94,7 @@ export function LeftNavigation() {
           <button
             key={id}
             type="button"
+            className="slds-button slds-button_icon"
             style={{
               width: '100%',
               height: '44px',
@@ -99,7 +104,7 @@ export function LeftNavigation() {
               border: 'none',
               background: 'transparent',
               cursor: 'pointer',
-              color: 'var(--slds-g-color-text-weak)'
+              color: 'var(--slds-g-color-icon-default)'
             }}
             onMouseEnter={(e) => {
               e.currentTarget.style.backgroundColor = 'var(--slds-g-color-neutral-base-95)';
@@ -108,7 +113,7 @@ export function LeftNavigation() {
               e.currentTarget.style.backgroundColor = 'transparent';
             }}
           >
-            <Icon style={{ width: '20px', height: '20px' }} />
+            <Icon size={20} />
           </button>
         ))}
         
@@ -116,6 +121,7 @@ export function LeftNavigation() {
         <button
           type="button"
           onClick={() => setIsCollapsed(false)}
+          className="slds-button slds-button_neutral"
           style={{
             width: '100%',
             display: 'flex',
@@ -123,11 +129,11 @@ export function LeftNavigation() {
             justifyContent: 'center',
             padding: 'var(--slds-g-spacing-2)',
             border: 'none',
-            borderTop: '1px solid var(--slds-g-color-border-1)',
+            borderTop: '1px solid var(--slds-g-color-border-2)',
             background: 'transparent',
             cursor: 'pointer',
-            fontSize: 'var(--slds-g-font-scale-neg-1)',
-            color: 'var(--slds-g-color-text-weak)',
+            fontSize: 'var(--slds-g-font-scale-base)',
+            color: 'var(--slds-g-color-on-surface-1)',
             marginTop: 'auto'
           }}
           onMouseEnter={(e) => {
@@ -145,10 +151,11 @@ export function LeftNavigation() {
 
   return (
     <div
+      className="slds-navigation"
       style={{
-        width: '240px',
+        width: '220px',
         backgroundColor: 'var(--slds-g-color-neutral-base-100)',
-        borderRight: '1px solid var(--slds-g-color-border-1)',
+        borderRight: '1px solid var(--slds-g-color-border-2)',
         display: 'flex',
         flexDirection: 'column',
         overflowY: 'auto',
@@ -156,56 +163,68 @@ export function LeftNavigation() {
         height: '100%'
       }}
     >
-      {/* Quick Find */}
-      <div style={{ padding: 'var(--slds-g-spacing-3)' }}>
-        <div style={{ position: 'relative' }}>
-          <Search 
-            style={{
-              position: 'absolute',
-              left: 'var(--slds-g-spacing-2)',
-              top: '50%',
-              transform: 'translateY(-50%)',
-              width: '14px',
-              height: '14px',
-              color: 'var(--slds-g-color-text-weak)'
-            }}
-          />
-          <input
-            type="text"
-            placeholder="Quick find"
-            style={{
-              width: '100%',
-              height: '32px',
-              padding: '0 var(--slds-g-spacing-2) 0 32px',
-              border: '1px solid var(--slds-g-color-border-1)',
-              borderRadius: 'var(--slds-g-radius-border-2)',
-              fontSize: 'var(--slds-g-font-scale-neg-1)',
-              outline: 'none'
-            }}
-          />
+      {/* Quick Find Search */}
+      <div style={{ padding: 'var(--slds-g-spacing-4) var(--slds-g-spacing-4) var(--slds-g-spacing-3)' }}>
+        <div className="slds-form-element" style={{ position: 'relative' }}>
+          <div className="slds-form-element__control slds-input-has-icon_left">
+            <SearchIcon 
+              className="slds-input__icon slds-input__icon_left"
+              size={14}
+              color="var(--slds-g-color-icon-default)"
+              style={{
+                position: 'absolute',
+                left: 'var(--slds-g-spacing-2)',
+                top: '50%',
+                transform: 'translateY(-50%)',
+                pointerEvents: 'none'
+              }}
+            />
+            <input
+              type="text"
+              className="slds-input"
+              placeholder="Quick find"
+              style={{
+                width: '100%',
+                height: '32px',
+                paddingLeft: '32px',
+                fontSize: 'var(--slds-g-font-scale-base)',
+                fontFamily: 'var(--slds-g-font-family)',
+                fontWeight: 'var(--slds-g-font-weight-4)',
+                lineHeight: '18px',
+                color: 'var(--slds-g-color-on-surface-2)',
+                border: '1px solid var(--slds-g-color-border-2)',
+                borderRadius: 'var(--slds-g-radius-border-2)',
+              }}
+            />
+          </div>
         </div>
       </div>
 
       {/* Navigation Items */}
-      <nav style={{ flex: 1, padding: 'var(--slds-g-spacing-2) 0' }}>
+      <nav style={{ flex: 1, padding: 0 }}>
         {NAV_ITEMS.map(({ id, label, icon: Icon, children }) => (
           <div key={id}>
             <button
               type="button"
               onClick={() => children && toggleItem(id)}
+              className="slds-navigation__item"
               style={{
                 width: '100%',
                 display: 'flex',
                 alignItems: 'center',
                 gap: 'var(--slds-g-spacing-2)',
-                padding: 'var(--slds-g-spacing-2) var(--slds-g-spacing-3)',
+                padding: 'var(--slds-g-spacing-2) var(--slds-g-spacing-2) var(--slds-g-spacing-2) var(--slds-g-spacing-4)',
                 border: 'none',
                 background: 'transparent',
                 cursor: 'pointer',
-                fontSize: 'var(--slds-g-font-scale-1)',
-                color: 'var(--slds-g-color-text-default)',
+                fontSize: 'var(--slds-g-font-scale-base)',
+                fontFamily: 'var(--slds-g-font-family)',
+                fontWeight: 'var(--slds-g-font-weight-4)',
+                lineHeight: '18px',
+                color: 'var(--slds-g-color-on-surface-2)',
                 textAlign: 'left',
-                transition: 'background-color var(--slds-g-transition-fast)'
+                transition: 'background-color var(--slds-g-transition-fast)',
+                height: '34px'
               }}
               onMouseEnter={(e) => {
                 e.currentTarget.style.backgroundColor = 'var(--slds-g-color-neutral-base-95)';
@@ -214,15 +233,16 @@ export function LeftNavigation() {
                 e.currentTarget.style.backgroundColor = 'transparent';
               }}
             >
-              <Icon style={{ width: '16px', height: '16px', flexShrink: 0 }} />
+              <Icon size={16} color="var(--slds-g-color-icon-default)" style={{ flexShrink: 0 }} />
               <span style={{ flex: 1 }}>{label}</span>
               {children && (
-                <ChevronRight 
+                <ChevronDownIcon 
+                  size={14}
+                  color="var(--slds-g-color-icon-default)"
                   style={{ 
-                    width: '14px', 
-                    height: '14px',
-                    transform: expandedItems.includes(id) ? 'rotate(90deg)' : 'rotate(0deg)',
-                    transition: 'transform var(--slds-g-transition-fast)'
+                    transform: expandedItems.includes(id) ? 'rotate(0deg)' : 'rotate(-90deg)',
+                    transition: 'transform var(--slds-g-transition-fast)',
+                    flexShrink: 0
                   }} 
                 />
               )}
@@ -230,24 +250,29 @@ export function LeftNavigation() {
 
             {/* Children */}
             {children && expandedItems.includes(id) && (
-              <div style={{ paddingLeft: 'var(--slds-g-spacing-8)' }}>
+              <div style={{ paddingLeft: 0 }}>
                 {children.map(({ id: childId, label: childLabel }) => (
                   <button
                     key={childId}
                     type="button"
                     onClick={() => setActiveItem(childId)}
+                    className="slds-navigation__item"
                     style={{
                       width: '100%',
                       display: 'flex',
                       alignItems: 'center',
-                      padding: 'var(--slds-g-spacing-2) var(--slds-g-spacing-3)',
+                      padding: 'var(--slds-g-spacing-2) var(--slds-g-spacing-2) var(--slds-g-spacing-2) var(--slds-g-spacing-4)',
                       border: 'none',
                       background: 'transparent',
                       cursor: 'pointer',
-                      fontSize: 'var(--slds-g-font-scale-1)',
-                      color: 'var(--slds-g-color-text-weak)',
+                      fontSize: 'var(--slds-g-font-scale-base)',
+                      fontFamily: 'var(--slds-g-font-family)',
+                      fontWeight: 'var(--slds-g-font-weight-4)',
+                      lineHeight: '18px',
+                      color: 'var(--slds-g-color-on-surface-2)',
                       textAlign: 'left',
-                      transition: 'all var(--slds-g-transition-fast)'
+                      transition: 'all var(--slds-g-transition-fast)',
+                      height: '34px'
                     }}
                     onMouseEnter={(e) => {
                       e.currentTarget.style.backgroundColor = 'var(--slds-g-color-neutral-base-95)';
@@ -259,58 +284,67 @@ export function LeftNavigation() {
                     {childLabel}
                   </button>
                 ))}
-                {/* Data Curation */}
-                <button
-                  type="button"
-                  style={{
-                    width: '100%',
-                    display: 'flex',
-                    alignItems: 'center',
-                    padding: 'var(--slds-g-spacing-2) var(--slds-g-spacing-3)',
-                    border: 'none',
-                    backgroundColor: activeItem === "data-curation" 
-                      ? 'var(--slds-g-color-brand-base-50)' 
-                      : 'transparent',
-                    cursor: 'pointer',
-                    fontSize: 'var(--slds-g-font-scale-1)',
-                    color: activeItem === "data-curation"
-                      ? 'var(--slds-g-color-neutral-base-100)'
-                      : 'var(--slds-g-color-text-weak)',
-                    textAlign: 'left',
-                    borderRadius: 'var(--slds-g-radius-border-1)',
-                    fontWeight: activeItem === "data-curation"
-                      ? 'var(--slds-g-font-weight-6)'
-                      : 'var(--slds-g-font-weight-4)',
-                    transition: 'all var(--slds-g-transition-fast)'
-                  }}
-                >
-                  <Database style={{ width: '14px', height: '14px', marginRight: 'var(--slds-g-spacing-2)' }} />
-                  Data Curation
-                </button>
               </div>
             )}
           </div>
         ))}
       </nav>
 
-      {/* Collapse Button */}
-      <button
-        type="button"
-        onClick={() => setIsCollapsed(true)}
+      {/* Data Curation - Active State (Above Collapse Button) */}
+      <div
+        className="slds-navigation__item slds-is-active"
         style={{
           width: '100%',
           display: 'flex',
           alignItems: 'center',
-          justifyContent: 'center',
-          padding: 'var(--slds-g-spacing-2)',
+          gap: 'var(--slds-g-spacing-2)',
+          padding: 'var(--slds-g-spacing-2) var(--slds-g-spacing-2) var(--slds-g-spacing-2) var(--slds-g-spacing-4)',
+          borderLeft: '5px solid var(--slds-g-color-accent-2)',
+          borderTop: '1px solid var(--slds-g-color-border-2)',
+          backgroundColor: 'var(--slds-g-color-electric-blue-90)',
+          cursor: 'pointer',
+          fontSize: 'var(--slds-g-font-scale-base)',
+          fontFamily: 'var(--slds-g-font-family)',
+          fontWeight: 'var(--slds-g-font-weight-6)',
+          lineHeight: '18px',
+          color: 'var(--slds-g-color-electric-blue-30)',
+          textAlign: 'left',
+          transition: 'all var(--slds-g-transition-fast)',
+          height: '34px',
+          marginTop: 'auto'
+        }}
+        onClick={() => setActiveItem("data-curation")}
+      >
+        <LightBulbIcon 
+          size={16} 
+          color="var(--slds-g-color-electric-blue-30)" 
+          style={{ flexShrink: 0 }} 
+        />
+        <span style={{ flex: 1 }}>Data Curation</span>
+      </div>
+
+      {/* Collapse Button */}
+      <button
+        type="button"
+        onClick={() => setIsCollapsed(true)}
+        className="slds-button slds-button_neutral"
+        style={{
+          width: '100%',
+          display: 'flex',
+          alignItems: 'center',
+          gap: 'var(--slds-g-spacing-2)',
+          padding: 'var(--slds-g-spacing-2) var(--slds-g-spacing-2) var(--slds-g-spacing-2) var(--slds-g-spacing-4)',
           border: 'none',
-          borderTop: '1px solid var(--slds-g-color-border-1)',
+          borderTop: '1px solid var(--slds-g-color-border-2)',
           background: 'transparent',
           cursor: 'pointer',
-          fontSize: 'var(--slds-g-font-scale-neg-1)',
-          color: 'var(--slds-g-color-text-weak)',
+          fontSize: 'var(--slds-g-font-scale-base)',
+          fontFamily: 'var(--slds-g-font-family)',
+          fontWeight: 'var(--slds-g-font-weight-4)',
+          lineHeight: '18px',
+          color: 'var(--slds-g-color-on-surface-1)',
+          textAlign: 'left',
           transition: 'background-color var(--slds-g-transition-fast)',
-          marginTop: 'auto'
         }}
         onMouseEnter={(e) => {
           e.currentTarget.style.backgroundColor = 'var(--slds-g-color-neutral-base-95)';
@@ -319,7 +353,12 @@ export function LeftNavigation() {
           e.currentTarget.style.backgroundColor = 'transparent';
         }}
       >
-        Collapse
+        <ArrowLeftIcon 
+          size={16}
+          color="var(--slds-g-color-icon-default)"
+          style={{ flexShrink: 0 }}
+        />
+        <span style={{ flex: 1 }}>Collapse</span>
       </button>
     </div>
   );
