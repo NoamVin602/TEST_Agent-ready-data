@@ -6,23 +6,33 @@ export function GlobalHeader() {
   return (
     <div 
       style={{
-        height: '48px',
-        backgroundColor: 'var(--slds-g-color-neutral-base-100)',
-        borderBottom: '1px solid var(--slds-g-color-border-1)',
+        /* SLDS Global Header Blueprint - Exact Specifications */
         display: 'flex',
-        alignItems: 'center',
+        flexDirection: 'row',
         justifyContent: 'space-between',
-        padding: '0 var(--slds-g-spacing-4)',
+        alignItems: 'center',
+        padding: '0px 12px',
+        gap: '12px',
+        
+        width: '100%',
+        height: '64px',
+        minHeight: '64px',
+        maxHeight: '64px',
+        
+        background: '#FFFFFF',
+        borderBottom: '1px solid #E5E5E5',
+        
         position: 'sticky',
         top: 0,
-        zIndex: 1000
+        zIndex: 1000,
       }}
     >
       {/* Left Section */}
-      <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--slds-g-spacing-4)' }}>
+      <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
         {/* App Launcher */}
         <button
           type="button"
+          aria-label="App Launcher"
           style={{
             width: '32px',
             height: '32px',
@@ -32,37 +42,40 @@ export function GlobalHeader() {
             border: 'none',
             background: 'transparent',
             cursor: 'pointer',
-            borderRadius: 'var(--slds-g-radius-border-1)',
-            transition: 'background-color var(--slds-g-transition-fast)'
+            borderRadius: '4px',
+            transition: 'background-color 0.15s ease-in-out',
           }}
           onMouseEnter={(e) => {
-            e.currentTarget.style.backgroundColor = 'var(--slds-g-color-neutral-base-95)';
+            e.currentTarget.style.backgroundColor = '#F3F3F3';
           }}
           onMouseLeave={(e) => {
             e.currentTarget.style.backgroundColor = 'transparent';
           }}
         >
-          <Grid3x3 style={{ width: '20px', height: '20px', color: 'var(--slds-g-color-text-default)' }} />
+          <Grid3x3 style={{ width: '20px', height: '20px', color: '#03234D' }} />
         </button>
 
         {/* Salesforce Logo & App Name */}
-        <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--slds-g-spacing-3)' }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
             <path d="M10.5 3.5C8.8 3.5 7.3 4.4 6.6 5.8C5.9 5.5 5.1 5.3 4.3 5.3C1.9 5.3 0 7.2 0 9.6C0 12 1.9 13.9 4.3 13.9H13.7C16.1 13.9 18 12 18 9.6C18 7.2 16.1 5.3 13.7 5.3C13.5 5.3 13.3 5.3 13.1 5.4C12.4 4.2 11.1 3.5 10.5 3.5Z" fill="#00A1E0"/>
           </svg>
-          <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--slds-g-spacing-2)' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
             <span style={{ 
-              fontSize: 'var(--slds-g-font-scale-3)', 
-              fontWeight: 'var(--slds-g-font-weight-semibold)',
-              color: 'var(--slds-g-color-text-default)'
+              fontFamily: "'SF Pro', -apple-system, BlinkMacSystemFont, sans-serif",
+              fontSize: '16px', 
+              fontWeight: 590,
+              color: '#03234D',
             }}>
               Data 360
             </span>
             <span style={{
-              fontSize: 'var(--slds-g-font-scale-2)',
-              color: 'var(--slds-g-color-text-weak)',
-              padding: '0 var(--slds-g-spacing-2)',
-              borderLeft: '1px solid var(--slds-g-color-border-1)'
+              fontFamily: "'SF Pro', -apple-system, BlinkMacSystemFont, sans-serif",
+              fontSize: '14px',
+              fontWeight: 400,
+              color: '#5C5C5C',
+              padding: '0 8px',
+              borderLeft: '1px solid #C9C9C9',
             }}>
               Home
             </span>
@@ -70,19 +83,19 @@ export function GlobalHeader() {
         </div>
       </div>
 
-      {/* Center Section - Search */}
-      <div style={{ flex: 1, maxWidth: '600px', margin: '0 var(--slds-g-spacing-6)' }}>
+      {/* Center Section - Global Search */}
+      <div style={{ flex: 1, maxWidth: '600px', margin: '0 24px' }}>
         <div style={{ position: 'relative' }}>
           <Search 
             style={{
               position: 'absolute',
-              left: 'var(--slds-g-spacing-3)',
+              left: '12px',
               top: '50%',
               transform: 'translateY(-50%)',
               width: '16px',
               height: '16px',
-              color: 'var(--slds-g-color-text-weak)',
-              pointerEvents: 'none'
+              color: '#5C5C5C',
+              pointerEvents: 'none',
             }}
           />
           <input
@@ -91,39 +104,44 @@ export function GlobalHeader() {
             style={{
               width: '100%',
               height: '32px',
-              padding: '0 var(--slds-g-spacing-3) 0 40px',
-              border: '1px solid var(--slds-g-color-border-1)',
-              borderRadius: 'var(--slds-g-radius-border-2)',
-              fontSize: 'var(--slds-g-font-scale-1)',
-              backgroundColor: 'var(--slds-g-color-neutral-base-95)',
+              padding: '0 12px 0 40px',
+              border: '1px solid #C9C9C9',
+              borderRadius: '4px',
+              fontFamily: "'SF Pro', -apple-system, BlinkMacSystemFont, sans-serif",
+              fontSize: '13px',
+              fontWeight: 400,
+              color: '#03234D',
+              backgroundColor: '#F3F3F3',
               outline: 'none',
-              transition: 'all var(--slds-g-transition-base)'
+              transition: 'all 0.15s ease-in-out',
             }}
             onFocus={(e) => {
-              e.currentTarget.style.backgroundColor = 'var(--slds-g-color-neutral-base-100)';
-              e.currentTarget.style.borderColor = 'var(--slds-g-color-brand-base-50)';
+              e.currentTarget.style.backgroundColor = '#FFFFFF';
+              e.currentTarget.style.borderColor = '#0176D3';
+              e.currentTarget.style.boxShadow = '0 0 0 2px rgba(1, 118, 211, 0.1)';
             }}
             onBlur={(e) => {
-              e.currentTarget.style.backgroundColor = 'var(--slds-g-color-neutral-base-95)';
-              e.currentTarget.style.borderColor = 'var(--slds-g-color-border-1)';
+              e.currentTarget.style.backgroundColor = '#F3F3F3';
+              e.currentTarget.style.borderColor = '#C9C9C9';
+              e.currentTarget.style.boxShadow = 'none';
             }}
           />
         </div>
       </div>
 
-      {/* Right Section - Actions */}
-      <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--slds-g-spacing-2)' }}>
+      {/* Right Section - Action Icons */}
+      <div style={{ display: 'flex', alignItems: 'center', gap: '4px' }}>
         {[
           { icon: Settings, label: 'Settings' },
           { icon: Star, label: 'Favorites' },
           { icon: Bell, label: 'Notifications' },
           { icon: HelpCircle, label: 'Help' },
-          { icon: User, label: 'User' },
         ].map(({ icon: Icon, label }) => (
           <button
             key={label}
             type="button"
             title={label}
+            aria-label={label}
             style={{
               width: '32px',
               height: '32px',
@@ -133,19 +151,46 @@ export function GlobalHeader() {
               border: 'none',
               background: 'transparent',
               cursor: 'pointer',
-              borderRadius: 'var(--slds-g-radius-border-1)',
-              transition: 'background-color var(--slds-g-transition-fast)'
+              borderRadius: '4px',
+              transition: 'background-color 0.15s ease-in-out',
             }}
             onMouseEnter={(e) => {
-              e.currentTarget.style.backgroundColor = 'var(--slds-g-color-neutral-base-95)';
+              e.currentTarget.style.backgroundColor = '#F3F3F3';
             }}
             onMouseLeave={(e) => {
               e.currentTarget.style.backgroundColor = 'transparent';
             }}
           >
-            <Icon style={{ width: '18px', height: '18px', color: 'var(--slds-g-color-text-default)' }} />
+            <Icon style={{ width: '18px', height: '18px', color: '#5C5C5C' }} />
           </button>
         ))}
+        
+        {/* User Avatar */}
+        <button
+          type="button"
+          title="User Profile"
+          aria-label="User Profile"
+          style={{
+            width: '32px',
+            height: '32px',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            border: 'none',
+            background: '#0176D3',
+            borderRadius: '50%',
+            cursor: 'pointer',
+            transition: 'background-color 0.15s ease-in-out',
+          }}
+          onMouseEnter={(e) => {
+            e.currentTarget.style.backgroundColor = '#014486';
+          }}
+          onMouseLeave={(e) => {
+            e.currentTarget.style.backgroundColor = '#0176D3';
+          }}
+        >
+          <User style={{ width: '18px', height: '18px', color: '#FFFFFF' }} />
+        </button>
       </div>
     </div>
   );
