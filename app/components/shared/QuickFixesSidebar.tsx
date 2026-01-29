@@ -46,11 +46,11 @@ export function QuickFixesSidebar() {
   return (
     <div
       style={{
-        width: '320px',
+        width: '100%',
         backgroundColor: 'var(--slds-g-color-neutral-base-100)',
-        borderLeft: '1px solid var(--slds-g-color-border-1)',
         padding: 'var(--slds-g-spacing-5)',
-        overflowY: 'auto'
+        overflowY: 'auto',
+        height: '100%'
       }}
     >
       {/* Header */}

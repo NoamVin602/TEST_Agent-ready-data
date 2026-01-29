@@ -4,7 +4,6 @@ import { useState, useRef, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { PageHeader } from "./components/shared/PageHeader";
 import { TabNavigation, TabId } from "./components/shared/TabNavigation";
-import { QuickFixesSidebar } from "./components/shared/QuickFixesSidebar";
 import { HomeView, IssueCategory } from "./components/views/HomeView";
 import { AnalysisView } from "./components/views/AnalysisView";
 import { ContentGapsView } from "./components/views/ContentGapsView";
@@ -203,12 +202,9 @@ export default function DataCurationPage() {
         onTabChange={setActiveTab} 
       />
 
-      {/* Tab Content with Optional Quick Fixes Sidebar */}
-      <div style={{ display: 'flex', flex: 1, overflow: 'hidden' }}>
-        <div style={{ flex: 1, overflow: activeTab === "curation" ? "hidden" : 'auto', display: 'flex', flexDirection: 'column' }}>
-          {renderTabContent()}
-        </div>
-        {activeTab === "home" && <QuickFixesSidebar />}
+      {/* Tab Content */}
+      <div style={{ flex: 1, overflow: activeTab === "curation" ? "hidden" : 'auto', display: 'flex', flexDirection: 'column' }}>
+        {renderTabContent()}
       </div>
 
       {/* Scan Progress Modal */}

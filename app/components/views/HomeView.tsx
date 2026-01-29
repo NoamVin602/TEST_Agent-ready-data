@@ -6,6 +6,7 @@ import { DataHealthLineChart } from "../dashboard/DataHealthLineChart";
 import { MetricCard } from "../dashboard/MetricCard";
 import { RecentActivityTable } from "../dashboard/RecentActivityTable";
 import { AIReadyScore } from "../dashboard/AIReadyScore";
+import { QuickFixesSidebar } from "../shared/QuickFixesSidebar";
 
 export type IssueCategory = 
   | "all" 
@@ -161,131 +162,142 @@ export function HomeView({ onMetricClick }: HomeViewProps) {
     <div 
       className="slds-container"
       style={{
-        padding: 'var(--slds-g-spacing-4)'
+        padding: 'var(--slds-g-spacing-4)',
+        display: 'flex',
+        gap: 'var(--slds-g-spacing-4)',
+        height: '100%'
       }}
     >
-      {/* Main Card Container */}
-      <div className="slds-card" style={{ borderRadius: 'var(--slds-g-radius-border-4)' }}>
-        {/* Card Header */}
-        <div className="slds-card__header">
-          <div className="slds-grid slds-grid_align-spread slds-grid_vertical-align-center">
-            <div className="slds-grid slds-grid_vertical-align-center slds-gap_small">
-              <ActivityIcon 
-                size={20}
-                color="var(--slds-g-color-on-surface-1)"
-                style={{ flexShrink: 0 }}
-              />
-              <h2 className="slds-text-heading_section" style={{ margin: 0 }}>
-                Current State
-              </h2>
+      {/* Left Column - Current State Dashboard (75%) */}
+      <div style={{ flex: '0 0 75%', display: 'flex', flexDirection: 'column', gap: 'var(--slds-g-spacing-4)', minWidth: 0 }}>
+        {/* Main Card Container */}
+        <div className="slds-card" style={{ borderRadius: 'var(--slds-g-radius-border-4)' }}>
+          {/* Card Header */}
+          <div className="slds-card__header">
+            <div className="slds-grid slds-grid_align-spread slds-grid_vertical-align-center">
+              <div className="slds-grid slds-grid_vertical-align-center slds-gap_small">
+                <ActivityIcon 
+                  size={20}
+                  color="var(--slds-g-color-on-surface-1)"
+                  style={{ flexShrink: 0 }}
+                />
+                <h2 className="slds-text-heading_section" style={{ margin: 0 }}>
+                  Current State
+                </h2>
+              </div>
+              <button
+                type="button"
+                className="slds-button slds-button_icon slds-button_icon-small"
+                aria-label="More options"
+              >
+                <ChevronDownIcon size={12} color="var(--slds-g-color-on-surface-1)" />
+              </button>
             </div>
-            <button
-              type="button"
-              className="slds-button slds-button_icon slds-button_icon-small"
-              aria-label="More options"
+          </div>
+
+          {/* Card Body */}
+          <div className="slds-card__body">
+            {/* Subtitle */}
+            <p 
+              className="slds-text-body"
+              style={{
+                fontSize: 'var(--slds-g-font-scale-1)',
+                lineHeight: '19px',
+                color: 'var(--slds-g-color-on-surface-1)',
+                marginBottom: 'var(--slds-g-spacing-4)',
+                marginTop: 0
+              }}
             >
-              <ChevronDownIcon size={12} color="var(--slds-g-color-on-surface-1)" />
-            </button>
+              Your knowledge base AI-readiness overview
+            </p>
+
+            {/* AI Ready Score - Compact Metric Style */}
+            <div
+              style={{
+                backgroundColor: '#DEF9F3',
+                border: '1px solid var(--slds-g-color-brand-base-90)',
+                borderRadius: 'var(--slds-g-radius-border-3)',
+                padding: 'var(--slds-g-spacing-4)',
+                marginBottom: 'var(--slds-g-spacing-4)',
+                boxShadow: '0px 0px 2px 0px rgba(0, 0, 0, 0.18), 0px 2px 2px 0px rgba(0, 0, 0, 0.18), 0px -1px 2px 0px rgba(0, 0, 0, 0.1)'
+              }}
+            >
+              <div className="slds-grid slds-grid_vertical-align-center slds-gap_small" style={{ marginBottom: 'var(--slds-g-spacing-1)' }}>
+                <AlertTriangleIcon size={16} color="#01C3B3" />
+                <div className="slds-grid slds-grid_vertical-align-center" style={{ flex: 1, gap: 'var(--slds-g-spacing-1)' }}>
+                  <span className="slds-text-body_semibold" style={{ fontSize: 'var(--slds-g-font-scale-neg-1)', lineHeight: '17px', color: 'var(--slds-g-color-on-surface-1)' }}>
+                    AI Ready Score
+                  </span>
+                  <span className="slds-text-body_semibold" style={{ fontSize: 'var(--slds-g-font-scale-neg-1)', lineHeight: '17px', color: '#2E844A' }}>
+                    ▲ 1.3%
+                  </span>
+                </div>
+              </div>
+              <div style={{ marginBottom: 'var(--slds-g-spacing-1)' }}>
+                <div
+                  style={{
+                    height: '8px',
+                    backgroundColor: 'var(--slds-g-color-surface-container-3)',
+                    borderRadius: '9999px',
+                    overflow: 'hidden'
+                  }}
+                >
+                  <div
+                    style={{
+                      height: '100%',
+                      width: '60%',
+                      backgroundColor: '#04E1CB',
+                      borderRadius: '9999px',
+                      transition: 'width 1s ease'
+                    }}
+                  />
+                </div>
+                <div className="slds-grid slds-grid_align-spread" style={{ marginTop: '2px' }}>
+                  <span className="slds-text-body_semibold" style={{ fontSize: 'var(--slds-g-font-scale-neg-2)', lineHeight: '14px', color: 'var(--slds-g-color-on-surface-2)' }}>
+                    60%
+                  </span>
+                  <span className="slds-text-body" style={{ fontSize: 'var(--slds-g-font-scale-neg-2)', lineHeight: '14px', color: 'var(--slds-g-color-on-surface-1)', textAlign: 'right' }}>
+                    100%
+                  </span>
+                </div>
+              </div>
+            </div>
+
+            {/* Metrics Grid - 2 rows of 3 cards */}
+            <div 
+              style={{
+                display: 'grid',
+                gridTemplateColumns: 'repeat(3, 1fr)',
+                gap: 'var(--slds-g-spacing-4)',
+                marginBottom: 'var(--slds-g-spacing-4)'
+              }}
+            >
+              {metricsData.map((metric) => (
+                <MetricCard
+                  key={metric.id}
+                  title={metric.title}
+                  value={metric.value}
+                  change={metric.change}
+                  changeLabel={metric.changeLabel}
+                  trend={metric.trend}
+                  icon={metric.icon}
+                  colorClass={metric.colorClass}
+                  onClick={onMetricClick ? () => onMetricClick(metric.category) : undefined}
+                />
+              ))}
+            </div>
           </div>
         </div>
 
-        {/* Card Body */}
-        <div className="slds-card__body">
-          {/* Subtitle */}
-          <p 
-            className="slds-text-body"
-            style={{
-              fontSize: 'var(--slds-g-font-scale-1)',
-              lineHeight: '19px',
-              color: 'var(--slds-g-color-on-surface-1)',
-              marginBottom: 'var(--slds-g-spacing-4)',
-              marginTop: 0
-            }}
-          >
-            Your knowledge base AI-readiness overview
-          </p>
-
-          {/* AI Ready Score - Compact Metric Style */}
-          <div
-            style={{
-              backgroundColor: '#DEF9F3',
-              border: '1px solid var(--slds-g-color-brand-base-90)',
-              borderRadius: 'var(--slds-g-radius-border-3)',
-              padding: 'var(--slds-g-spacing-4)',
-              marginBottom: 'var(--slds-g-spacing-4)',
-              boxShadow: '0px 0px 2px 0px rgba(0, 0, 0, 0.18), 0px 2px 2px 0px rgba(0, 0, 0, 0.18), 0px -1px 2px 0px rgba(0, 0, 0, 0.1)'
-            }}
-          >
-            <div className="slds-grid slds-grid_vertical-align-center slds-gap_small" style={{ marginBottom: 'var(--slds-g-spacing-1)' }}>
-              <AlertTriangleIcon size={16} color="#01C3B3" />
-              <div className="slds-grid slds-grid_vertical-align-center" style={{ flex: 1, gap: 'var(--slds-g-spacing-1)' }}>
-                <span className="slds-text-body_semibold" style={{ fontSize: 'var(--slds-g-font-scale-neg-1)', lineHeight: '17px', color: 'var(--slds-g-color-on-surface-1)' }}>
-                  AI Ready Score
-                </span>
-                <span className="slds-text-body_semibold" style={{ fontSize: 'var(--slds-g-font-scale-neg-1)', lineHeight: '17px', color: '#2E844A' }}>
-                  ▲ 1.3%
-                </span>
-              </div>
-            </div>
-            <div style={{ marginBottom: 'var(--slds-g-spacing-1)' }}>
-              <div
-                style={{
-                  height: '8px',
-                  backgroundColor: 'var(--slds-g-color-surface-container-3)',
-                  borderRadius: '9999px',
-                  overflow: 'hidden'
-                }}
-              >
-                <div
-                  style={{
-                    height: '100%',
-                    width: '60%',
-                    backgroundColor: '#04E1CB',
-                    borderRadius: '9999px',
-                    transition: 'width 1s ease'
-                  }}
-                />
-              </div>
-              <div className="slds-grid slds-grid_align-spread" style={{ marginTop: '2px' }}>
-                <span className="slds-text-body_semibold" style={{ fontSize: 'var(--slds-g-font-scale-neg-2)', lineHeight: '14px', color: 'var(--slds-g-color-on-surface-2)' }}>
-                  60%
-                </span>
-                <span className="slds-text-body" style={{ fontSize: 'var(--slds-g-font-scale-neg-2)', lineHeight: '14px', color: 'var(--slds-g-color-on-surface-1)', textAlign: 'right' }}>
-                  100%
-                </span>
-              </div>
-            </div>
-          </div>
-
-          {/* Metrics Grid - 2 rows of 3 cards */}
-          <div 
-            style={{
-              display: 'grid',
-              gridTemplateColumns: 'repeat(3, 1fr)',
-              gap: 'var(--slds-g-spacing-4)',
-              marginBottom: 'var(--slds-g-spacing-4)'
-            }}
-          >
-            {metricsData.map((metric) => (
-              <MetricCard
-                key={metric.id}
-                title={metric.title}
-                value={metric.value}
-                change={metric.change}
-                changeLabel={metric.changeLabel}
-                trend={metric.trend}
-                icon={metric.icon}
-                colorClass={metric.colorClass}
-                onClick={onMetricClick ? () => onMetricClick(metric.category) : undefined}
-              />
-            ))}
-          </div>
+        {/* Recent Activity - Nested Card */}
+        <div className="slds-card" style={{ borderRadius: 'var(--slds-g-radius-border-3)' }}>
+          <RecentActivityTable activities={recentActivityData} />
         </div>
       </div>
 
-      {/* Recent Activity - Nested Card */}
-      <div className="slds-card" style={{ borderRadius: 'var(--slds-g-radius-border-3)', marginTop: 'var(--slds-g-spacing-4)' }}>
-        <RecentActivityTable activities={recentActivityData} />
+      {/* Right Column - Quick Fixes Panel (25%) */}
+      <div style={{ flex: '0 0 25%', minWidth: 0 }}>
+        <QuickFixesSidebar />
       </div>
     </div>
   );
