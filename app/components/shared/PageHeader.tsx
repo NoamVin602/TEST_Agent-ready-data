@@ -12,12 +12,16 @@ export function PageHeader({ onRunScan, isScanning }: PageHeaderProps) {
     <div
       style={{
         backgroundColor: '#F3F3F3',
-        padding: '16px',
+        padding: '16px 24px',
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'space-between',
-        minHeight: '51px',
+        minHeight: '64px',
         width: '100%',
+        position: 'sticky',
+        top: '104px', // Sticks below Global Header (64px) + Global Navigation (40px)
+        zIndex: 900,
+        borderBottom: '1px solid #E0E0E0',
       }}
     >
       {/* Icon + Title Section */}
@@ -31,12 +35,12 @@ export function PageHeader({ onRunScan, isScanning }: PageHeaderProps) {
           minWidth: 0,
         }}
       >
-        {/* Database Icon - 32px circle */}
+        {/* Database Icon - 32px rounded square */}
         <div
           style={{
             width: '32px',
             height: '32px',
-            borderRadius: '50%',
+            borderRadius: '8px',
             backgroundColor: '#0176D3',
             display: 'flex',
             alignItems: 'center',
@@ -58,9 +62,9 @@ export function PageHeader({ onRunScan, isScanning }: PageHeaderProps) {
         <h1
           style={{
             fontFamily: "'SF Pro', -apple-system, BlinkMacSystemFont, sans-serif",
-            fontSize: '28px',
-            fontWeight: 400,
-            lineHeight: '35px',
+            fontSize: '20px',
+            fontWeight: 600,
+            lineHeight: '28px',
             color: '#03234D',
             margin: 0,
             padding: 0,
@@ -93,7 +97,7 @@ export function PageHeader({ onRunScan, isScanning }: PageHeaderProps) {
             gap: '8px',
             padding: '6px 16px',
             height: '32px',
-            borderRadius: '4px',
+            borderRadius: '16px',
             border: '1px solid #C9C9C9',
             backgroundColor: '#FFFFFF',
             color: '#0176D3',

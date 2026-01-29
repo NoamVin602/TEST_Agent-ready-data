@@ -25,6 +25,9 @@ export function TabNavigation({ tabs, activeTab, onTabChange }: TabNavigationPro
         display: 'flex',
         alignItems: 'center',
         width: '100%',
+        position: 'sticky',
+        top: '168px', // Sticks below Global Header (64px) + Global Navigation (40px) + PageHeader (64px)
+        zIndex: 899,
       }}
     >
       <div
