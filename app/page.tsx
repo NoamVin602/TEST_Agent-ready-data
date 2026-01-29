@@ -8,6 +8,9 @@ import { HomeView, IssueCategory } from "./components/views/HomeView";
 import { AnalysisView } from "./components/views/AnalysisView";
 import { ContentGapsView } from "./components/views/ContentGapsView";
 import { ArchivedView } from "./components/views/ArchivedView";
+import { ActivityView } from "./components/views/ActivityView";
+import { RunLogView } from "./components/views/RunLogView";
+import { ConfigView } from "./components/views/ConfigView";
 import { DataCurationView } from "./components/data-curation/DataCurationView";
 import "./globals.css";
 
@@ -127,41 +130,11 @@ export default function DataCurationPage() {
             </div>
           );
         case "activity":
-          return (
-            <div style={{ 
-              maxWidth: '1440px', 
-              margin: '0 auto', 
-              padding: 'var(--slds-g-spacing-6)',
-              textAlign: 'center',
-              color: 'var(--slds-g-color-text-weak)'
-            }}>
-              Activity view - Coming soon
-            </div>
-          );
+          return <ActivityView />;
         case "run-log":
-          return (
-            <div style={{ 
-              maxWidth: '1440px', 
-              margin: '0 auto', 
-              padding: 'var(--slds-g-spacing-6)',
-              textAlign: 'center',
-              color: 'var(--slds-g-color-text-weak)'
-            }}>
-              Run Log view - Coming soon
-            </div>
-          );
+          return <RunLogView />;
         case "config":
-          return (
-            <div style={{ 
-              maxWidth: '1440px', 
-              margin: '0 auto', 
-              padding: 'var(--slds-g-spacing-6)',
-              textAlign: 'center',
-              color: 'var(--slds-g-color-text-weak)'
-            }}>
-              Configuration view - Coming soon
-            </div>
-          );
+          return <ConfigView />;
         default:
           return <HomeView onMetricClick={handleMetricClick} />;
       }

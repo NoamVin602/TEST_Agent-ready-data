@@ -365,4 +365,19 @@ export const MetricsIcon: React.FC<IconProps> = (props) => (
   </svg>
 );
 
+// File Text Icon (SLDS: file)
+export const FileTextIcon: React.FC<IconProps> = (props) => (
+  <SLDSIcon {...props}>
+    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" stroke="currentColor" strokeWidth="2" fill="none"/>
+    <path d="M14 2v6h6M16 13H8M16 17H8M10 9H8" stroke="currentColor" strokeWidth="2"/>
+  </SLDSIcon>
+);
+
+// Zap/Lightning Icon (SLDS: lightning)
+export const ZapIcon: React.FC<IconProps> = (props) => (
+  <SLDSIcon {...props}>
+    <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" stroke="currentColor" strokeWidth="2" fill="none" strokeLinejoin="round"/>
+  </SLDSIcon>
+);
+
 // Additional SLDS icons can be added here as needed
