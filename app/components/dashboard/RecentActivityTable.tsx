@@ -60,7 +60,7 @@ export function RecentActivityTable({ activities }: RecentActivityTableProps) {
             <input
               type="text"
               className="slds-input"
-              placeholder="Q Search..."
+              placeholder="Search..."
               style={{
                 height: '32px',
                 paddingLeft: '32px',
@@ -86,94 +86,101 @@ export function RecentActivityTable({ activities }: RecentActivityTableProps) {
           overflowX: 'auto'
         }}
       >
-        <table className="slds-table slds-table_cell-buffer slds-table_bordered">
+        <table className="slds-table slds-table_cell-buffer slds-table_bordered" style={{ borderCollapse: 'separate', borderSpacing: 0 }}>
           <thead>
-            <tr className="slds-line-height_reset">
-              <th scope="col" style={{ width: '60px', backgroundColor: 'var(--slds-g-color-surface-container-2)' }}>
-                <div className="slds-truncate slds-text-body_semibold" title="#" style={{ fontSize: 'var(--slds-g-font-scale-base)', lineHeight: '18px', color: 'var(--slds-g-color-on-surface-1)' }}>#</div>
+            <tr className="slds-line-height_reset" style={{ backgroundColor: '#F3F3F3' }}>
+              <th scope="col" style={{ width: '60px', backgroundColor: '#F3F3F3', padding: 'var(--slds-g-spacing-2)', borderBottom: '1px solid #E5E5E5' }}>
+                <div className="slds-truncate slds-text-body_semibold" title="#" style={{ fontFamily: 'var(--slds-g-font-family)', fontSize: 'var(--slds-g-font-scale-base)', lineHeight: '18px', fontWeight: 'var(--slds-g-font-weight-6)', color: 'var(--slds-g-color-on-surface-1)' }}>#</div>
               </th>
-              <th scope="col" style={{ backgroundColor: 'var(--slds-g-color-surface-container-2)' }}>
-                <div className="slds-grid slds-grid_align-spread slds-grid_vertical-align-center" style={{ padding: '0 var(--slds-g-spacing-2)' }}>
-                  <div className="slds-truncate slds-text-body_semibold" title="Action Type" style={{ fontSize: 'var(--slds-g-font-scale-base)', lineHeight: '18px', color: 'var(--slds-g-color-on-surface-1)' }}>Action Type</div>
-                  <button className="slds-button slds-button_icon slds-button_icon-small" style={{ width: '14px', height: '14px' }} aria-label="Sort">
+              <th scope="col" style={{ backgroundColor: '#F3F3F3', padding: 'var(--slds-g-spacing-2)', borderBottom: '1px solid #E5E5E5' }}>
+                <div className="slds-grid slds-grid_align-spread slds-grid_vertical-align-center" style={{ padding: '0' }}>
+                  <div className="slds-truncate slds-text-body_semibold" title="Action Type" style={{ fontFamily: 'var(--slds-g-font-family)', fontSize: 'var(--slds-g-font-scale-base)', lineHeight: '18px', fontWeight: 'var(--slds-g-font-weight-6)', color: 'var(--slds-g-color-on-surface-1)' }}>Action Type</div>
+                  <button className="slds-button slds-button_icon slds-button_icon-small" style={{ width: '14px', height: '14px', marginLeft: 'var(--slds-g-spacing-1)' }} aria-label="Sort">
                     <ChevronDownIcon size={12} color="var(--slds-g-color-on-surface-3)" />
                   </button>
                 </div>
               </th>
-              <th scope="col" style={{ backgroundColor: 'var(--slds-g-color-surface-container-2)' }}>
-                <div className="slds-grid slds-grid_align-spread slds-grid_vertical-align-center" style={{ padding: '0 var(--slds-g-spacing-2)' }}>
-                  <div className="slds-truncate slds-text-body_semibold" title="Description" style={{ fontSize: 'var(--slds-g-font-scale-base)', lineHeight: '18px', color: 'var(--slds-g-color-on-surface-1)' }}>Description</div>
-                  <button className="slds-button slds-button_icon slds-button_icon-small" style={{ width: '14px', height: '14px' }} aria-label="Sort">
+              <th scope="col" style={{ backgroundColor: '#F3F3F3', padding: 'var(--slds-g-spacing-2)', borderBottom: '1px solid #E5E5E5' }}>
+                <div className="slds-grid slds-grid_align-spread slds-grid_vertical-align-center" style={{ padding: '0' }}>
+                  <div className="slds-truncate slds-text-body_semibold" title="Description" style={{ fontFamily: 'var(--slds-g-font-family)', fontSize: 'var(--slds-g-font-scale-base)', lineHeight: '18px', fontWeight: 'var(--slds-g-font-weight-6)', color: 'var(--slds-g-color-on-surface-1)' }}>Description</div>
+                  <button className="slds-button slds-button_icon slds-button_icon-small" style={{ width: '14px', height: '14px', marginLeft: 'var(--slds-g-spacing-1)' }} aria-label="Sort">
                     <ChevronDownIcon size={12} color="var(--slds-g-color-on-surface-3)" />
                   </button>
                 </div>
               </th>
-              <th scope="col" style={{ backgroundColor: 'var(--slds-g-color-surface-container-2)' }}>
-                <div className="slds-grid slds-grid_align-spread slds-grid_vertical-align-center" style={{ padding: '0 var(--slds-g-spacing-2)' }}>
-                  <div className="slds-truncate slds-text-body_semibold" title="Actor" style={{ fontSize: 'var(--slds-g-font-scale-base)', lineHeight: '18px', color: 'var(--slds-g-color-on-surface-1)' }}>Actor</div>
-                  <button className="slds-button slds-button_icon slds-button_icon-small" style={{ width: '14px', height: '14px' }} aria-label="Sort">
+              <th scope="col" style={{ backgroundColor: '#F3F3F3', padding: 'var(--slds-g-spacing-2)', borderBottom: '1px solid #E5E5E5' }}>
+                <div className="slds-grid slds-grid_align-spread slds-grid_vertical-align-center" style={{ padding: '0' }}>
+                  <div className="slds-truncate slds-text-body_semibold" title="Actor" style={{ fontFamily: 'var(--slds-g-font-family)', fontSize: 'var(--slds-g-font-scale-base)', lineHeight: '18px', fontWeight: 'var(--slds-g-font-weight-6)', color: 'var(--slds-g-color-on-surface-1)' }}>Actor</div>
+                  <button className="slds-button slds-button_icon slds-button_icon-small" style={{ width: '14px', height: '14px', marginLeft: 'var(--slds-g-spacing-1)' }} aria-label="Sort">
                     <ChevronDownIcon size={12} color="var(--slds-g-color-on-surface-3)" />
                   </button>
                 </div>
               </th>
-              <th scope="col" style={{ backgroundColor: 'var(--slds-g-color-surface-container-2)' }}>
-                <div className="slds-grid slds-grid_align-spread slds-grid_vertical-align-center" style={{ padding: '0 var(--slds-g-spacing-2)' }}>
-                  <div className="slds-truncate slds-text-body_semibold" title="Timestamp" style={{ fontSize: 'var(--slds-g-font-scale-base)', lineHeight: '18px', color: 'var(--slds-g-color-on-surface-1)' }}>Timestamp</div>
-                  <button className="slds-button slds-button_icon slds-button_icon-small" style={{ width: '14px', height: '14px' }} aria-label="Sort">
+              <th scope="col" style={{ backgroundColor: '#F3F3F3', padding: 'var(--slds-g-spacing-2)', borderBottom: '1px solid #E5E5E5' }}>
+                <div className="slds-grid slds-grid_align-spread slds-grid_vertical-align-center" style={{ padding: '0' }}>
+                  <div className="slds-truncate slds-text-body_semibold" title="Timestamp" style={{ fontFamily: 'var(--slds-g-font-family)', fontSize: 'var(--slds-g-font-scale-base)', lineHeight: '18px', fontWeight: 'var(--slds-g-font-weight-6)', color: 'var(--slds-g-color-on-surface-1)' }}>Timestamp</div>
+                  <button className="slds-button slds-button_icon slds-button_icon-small" style={{ width: '14px', height: '14px', marginLeft: 'var(--slds-g-spacing-1)' }} aria-label="Sort">
                     <ChevronDownIcon size={12} color="var(--slds-g-color-on-surface-3)" />
                   </button>
                 </div>
               </th>
-              <th scope="col" style={{ width: '120px', backgroundColor: 'var(--slds-g-color-surface-container-2)' }}>
-                <div className="slds-grid slds-grid_align-spread slds-grid_vertical-align-center" style={{ padding: '0 var(--slds-g-spacing-2)' }}>
-                  <div className="slds-truncate slds-text-body_semibold" title="Impact Score" style={{ fontSize: 'var(--slds-g-font-scale-base)', lineHeight: '18px', color: 'var(--slds-g-color-on-surface-1)' }}>Impact Score</div>
-                  <button className="slds-button slds-button_icon slds-button_icon-small" style={{ width: '14px', height: '14px' }} aria-label="Sort">
+              <th scope="col" style={{ width: '120px', backgroundColor: '#F3F3F3', padding: 'var(--slds-g-spacing-2)', borderBottom: '1px solid #E5E5E5' }}>
+                <div className="slds-grid slds-grid_align-spread slds-grid_vertical-align-center" style={{ padding: '0' }}>
+                  <div className="slds-truncate slds-text-body_semibold" title="Impact Score" style={{ fontFamily: 'var(--slds-g-font-family)', fontSize: 'var(--slds-g-font-scale-base)', lineHeight: '18px', fontWeight: 'var(--slds-g-font-weight-6)', color: 'var(--slds-g-color-on-surface-1)' }}>Impact Score</div>
+                  <button className="slds-button slds-button_icon slds-button_icon-small" style={{ width: '14px', height: '14px', marginLeft: 'var(--slds-g-spacing-1)' }} aria-label="Sort">
                     <ChevronDownIcon size={12} color="var(--slds-g-color-on-surface-3)" />
                   </button>
                 </div>
               </th>
-              <th scope="col" style={{ width: '50px', backgroundColor: 'var(--slds-g-color-surface-container-2)' }}></th>
+              <th scope="col" style={{ width: '120px', backgroundColor: '#F3F3F3', padding: 'var(--slds-g-spacing-2)', borderBottom: '1px solid #E5E5E5' }}></th>
             </tr>
           </thead>
           <tbody>
             {activities.map((activity, index) => (
-              <tr key={activity.id} className="slds-hint-parent" style={{ height: '36px', minHeight: '30px' }}>
-                <td style={{ width: '60px', padding: 'var(--slds-g-spacing-2) var(--slds-g-spacing-2) var(--slds-g-spacing-2) var(--slds-g-spacing-0)' }}>
-                  <div className="slds-truncate slds-text-body" title={String(index + 1)} style={{ fontSize: 'var(--slds-g-font-scale-base)', lineHeight: '18px', color: 'var(--slds-g-color-on-surface-1)', textAlign: 'center' }}>{index + 1}</div>
+              <tr key={activity.id} className="slds-hint-parent" style={{ height: 'auto', minHeight: '36px', backgroundColor: '#FFFFFF', borderBottom: '1px solid #E5E5E5' }}>
+                <td style={{ width: '60px', padding: 'var(--slds-g-spacing-2)', textAlign: 'center' }}>
+                  <div className="slds-truncate slds-text-body" title={String(index + 1)} style={{ fontFamily: 'var(--slds-g-font-family)', fontSize: 'var(--slds-g-font-scale-base)', lineHeight: '18px', fontWeight: 'var(--slds-g-font-weight-4)', color: 'var(--slds-g-color-on-surface-1)' }}>{index + 1}</div>
                 </td>
                 <td style={{ padding: 'var(--slds-g-spacing-2)' }}>
-                  <div className="slds-truncate slds-text-body" title={activity.actionType} style={{ fontSize: 'var(--slds-g-font-scale-base)', lineHeight: '18px', color: 'var(--slds-g-color-on-surface-1)' }}>{activity.actionType}</div>
+                  <div className="slds-truncate slds-text-body" title={activity.actionType} style={{ fontFamily: 'var(--slds-g-font-family)', fontSize: 'var(--slds-g-font-scale-base)', lineHeight: '18px', fontWeight: 'var(--slds-g-font-weight-4)', color: 'var(--slds-g-color-on-surface-1)' }}>{activity.actionType}</div>
                 </td>
                 <td style={{ padding: 'var(--slds-g-spacing-2)' }}>
-                  <div className="slds-truncate slds-text-body" title={activity.description} style={{ fontSize: 'var(--slds-g-font-scale-base)', lineHeight: '18px', color: 'var(--slds-g-color-on-surface-1)' }}>{activity.description}</div>
+                  <div className="slds-truncate slds-text-body" title={activity.description} style={{ fontFamily: 'var(--slds-g-font-family)', fontSize: 'var(--slds-g-font-scale-base)', lineHeight: '18px', fontWeight: 'var(--slds-g-font-weight-4)', color: 'var(--slds-g-color-on-surface-1)' }}>{activity.description}</div>
                 </td>
                 <td style={{ padding: 'var(--slds-g-spacing-2)' }}>
-                  <div className="slds-truncate slds-text-body" title={activity.actor} style={{ fontSize: 'var(--slds-g-font-scale-base)', lineHeight: '18px', color: 'var(--slds-g-color-on-surface-1)' }}>{activity.actor}</div>
+                  <div className="slds-truncate slds-text-body" title={activity.actor} style={{ fontFamily: 'var(--slds-g-font-family)', fontSize: 'var(--slds-g-font-scale-base)', lineHeight: '18px', fontWeight: 'var(--slds-g-font-weight-4)', color: 'var(--slds-g-color-on-surface-1)' }}>{activity.actor}</div>
                 </td>
                 <td style={{ padding: 'var(--slds-g-spacing-2)' }}>
-                  <div className="slds-truncate slds-text-body" title={activity.timestamp} style={{ fontSize: 'var(--slds-g-font-scale-base)', lineHeight: '18px', color: 'var(--slds-g-color-on-surface-1)' }}>{activity.timestamp}</div>
+                  <div className="slds-truncate slds-text-body" title={activity.timestamp} style={{ fontFamily: 'var(--slds-g-font-family)', fontSize: 'var(--slds-g-font-scale-base)', lineHeight: '18px', fontWeight: 'var(--slds-g-font-weight-4)', color: 'var(--slds-g-color-on-surface-1)' }}>{activity.timestamp}</div>
                 </td>
                 <td style={{ padding: 'var(--slds-g-spacing-2)', width: '120px' }}>
-                  <div className="slds-truncate slds-text-body" title={activity.impactScore} style={{ fontSize: 'var(--slds-g-font-scale-base)', lineHeight: '18px', color: 'var(--slds-g-color-on-surface-1)' }}>{activity.impactScore}</div>
+                  <div className="slds-truncate slds-text-body" title={activity.impactScore} style={{ fontFamily: 'var(--slds-g-font-family)', fontSize: 'var(--slds-g-font-scale-base)', lineHeight: '18px', fontWeight: 'var(--slds-g-font-weight-4)', color: 'var(--slds-g-color-on-surface-1)' }}>{activity.impactScore}</div>
                 </td>
-                <td style={{ width: '50px', padding: '5px 10px' }}>
-                  <button 
-                    className="slds-button slds-button_icon slds-button_icon-small" 
-                    title="View Details"
+                <td style={{ width: '120px', padding: 'var(--slds-g-spacing-2)', textAlign: 'right' }}>
+                  <a
+                    href="#"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      // Handle view details click
+                    }}
                     style={{
-                      width: '16px',
-                      height: '16px',
-                      border: '1px solid var(--slds-g-color-border-2)',
-                      borderRadius: 'var(--slds-g-radius-border-circle)',
-                      backgroundColor: 'var(--slds-g-color-neutral-base-100)',
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'center'
+                      fontFamily: 'var(--slds-g-font-family)',
+                      fontSize: 'var(--slds-g-font-scale-base)',
+                      lineHeight: '18px',
+                      fontWeight: 'var(--slds-g-font-weight-4)',
+                      color: 'rgba(2, 80, 217, 1)',
+                      textDecoration: 'none',
+                      cursor: 'pointer'
+                    }}
+                    onMouseEnter={(e) => {
+                      e.currentTarget.style.textDecoration = 'underline';
+                    }}
+                    onMouseLeave={(e) => {
+                      e.currentTarget.style.textDecoration = 'none';
                     }}
                   >
-                    <MoreIcon size={8} color="rgba(2, 80, 217, 1)" />
-                    <span className="slds-assistive-text">View Details</span>
-                  </button>
+                    View Details
+                  </a>
                 </td>
               </tr>
             ))}
