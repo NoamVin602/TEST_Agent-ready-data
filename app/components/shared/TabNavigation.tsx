@@ -34,7 +34,7 @@ export function TabNavigation({ tabs, activeTab, onTabChange }: TabNavigationPro
         style={{
           display: 'flex',
           gap: '0',
-          padding: '0 16px',
+          padding: '0',
           maxWidth: '1440px',
           margin: '0 auto',
           width: '100%',
@@ -53,26 +53,29 @@ export function TabNavigation({ tabs, activeTab, onTabChange }: TabNavigationPro
                 alignItems: 'center',
                 gap: '6px',
                 padding: '12px 16px',
-                backgroundColor: 'transparent',
+                backgroundColor: isActive ? 'rgba(2, 80, 217, 1)' : 'transparent',
                 border: 'none',
-                borderBottom: isActive ? '2px solid rgba(2, 80, 217, 1)' : '2px solid transparent',
-                fontFamily: "'SF Pro', -apple-system, BlinkMacSystemFont, sans-serif",
-                fontSize: '13px',
-                fontWeight: isActive ? 590 : 400,
+                borderBottom: isActive ? '3px solid rgba(2, 80, 217, 1)' : '3px solid transparent',
+                fontFamily: 'var(--slds-g-font-family)',
+                fontSize: 'var(--slds-g-font-scale-base)', // 13px
+                fontWeight: isActive ? 'var(--slds-g-font-weight-6)' : 'var(--slds-g-font-weight-4)', // Semibold for active, Regular for inactive
                 lineHeight: '19px',
-                color: isActive ? 'rgba(2, 80, 217, 1)' : '#5C5C5C',
+                color: isActive ? '#FFFFFF' : '#5C5C5C',
                 cursor: 'pointer',
                 transition: 'all 0.15s ease-in-out',
                 outline: 'none',
+                whiteSpace: 'nowrap',
               }}
               onMouseEnter={(e) => {
                 if (!isActive) {
                   e.currentTarget.style.color = '#03234D';
+                  e.currentTarget.style.backgroundColor = '#F3F3F3';
                 }
               }}
               onMouseLeave={(e) => {
                 if (!isActive) {
                   e.currentTarget.style.color = '#5C5C5C';
+                  e.currentTarget.style.backgroundColor = 'transparent';
                 }
               }}
               onFocus={(e) => {
@@ -94,10 +97,10 @@ export function TabNavigation({ tabs, activeTab, onTabChange }: TabNavigationPro
                     height: '18px',
                     padding: '0 6px',
                     borderRadius: '9px',
-                    backgroundColor: isActive ? 'rgba(2, 80, 217, 1)' : '#C9C9C9',
-                    color: '#FFFFFF',
+                    backgroundColor: isActive ? '#FFFFFF' : '#C9C9C9',
+                    color: isActive ? 'rgba(2, 80, 217, 1)' : '#5C5C5C', // Dark gray text for inactive badges
                     fontSize: '11px',
-                    fontWeight: 590,
+                    fontWeight: 'var(--slds-g-font-weight-6)', // Semibold
                     lineHeight: '18px',
                   }}
                 >

@@ -48,13 +48,13 @@ function ScanProgressModal({ isOpen, onClose, onComplete, isScanning }: any) {
   );
 }
 
-// Tab configuration
+// Tab configuration - matching Figma design
 const TABS = [
   { id: "home" as TabId, label: "Home" },
   { id: "analysis" as TabId, label: "Analysis", count: 10 },
   { id: "content-gaps" as TabId, label: "Content Gaps", count: 7 },
   { id: "archived" as TabId, label: "Archived", count: 5 },
-  { id: "curation" as TabId, label: "Curation" },
+  { id: "curation" as TabId, label: "Curation", count: 5 },
   { id: "activity" as TabId, label: "Activity" },
   { id: "run-log" as TabId, label: "Run Log" },
   { id: "config" as TabId, label: "Config" },
@@ -202,8 +202,14 @@ export default function DataCurationPage() {
         onTabChange={setActiveTab} 
       />
 
-      {/* Tab Content */}
-      <div style={{ flex: 1, overflow: activeTab === "curation" ? "hidden" : 'auto', display: 'flex', flexDirection: 'column' }}>
+      {/* Tab Content - White background to match Figma */}
+      <div style={{ 
+        flex: 1, 
+        overflow: activeTab === "curation" ? "hidden" : 'auto', 
+        display: 'flex', 
+        flexDirection: 'column',
+        backgroundColor: '#FFFFFF' // White background to match Figma design
+      }}>
         {renderTabContent()}
       </div>
 
