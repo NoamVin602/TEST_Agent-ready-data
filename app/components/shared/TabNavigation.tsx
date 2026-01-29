@@ -26,7 +26,7 @@ export function TabNavigation({ tabs, activeTab, onTabChange }: TabNavigationPro
         alignItems: 'center',
         width: '100%',
         position: 'sticky',
-        top: '168px', // Sticks below Global Header (64px) + Global Navigation (40px) + PageHeader (64px)
+        top: '64px', // Sticks below PageHeader (64px) within scrollable area
         zIndex: 899,
       }}
     >

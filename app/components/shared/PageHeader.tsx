@@ -19,7 +19,7 @@ export function PageHeader({ onRunScan, isScanning }: PageHeaderProps) {
         minHeight: '64px',
         width: '100%',
         position: 'sticky',
-        top: '104px', // Sticks below Global Header (64px) + Global Navigation (40px)
+        top: '0', // Sticks to top of scrollable content area
         zIndex: 900,
         borderBottom: '1px solid #E0E0E0',
       }}
