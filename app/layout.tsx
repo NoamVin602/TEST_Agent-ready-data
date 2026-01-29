@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import './globals.css'
 import { GlobalHeader } from './components/shared/GlobalHeader'
+import { GlobalNavigation } from './components/shared/GlobalNavigation'
 import { LeftNavigation } from './components/shared/LeftNavigation'
 
 export const metadata: Metadata = {
@@ -19,6 +20,9 @@ export default function RootLayout({
         <div style={{ display: 'flex', flexDirection: 'column', height: '100vh' }}>
           {/* Global Header */}
           <GlobalHeader />
+          
+          {/* Global Navigation */}
+          <GlobalNavigation activeTab="home" />
           
           {/* Main Content Area */}
           <div style={{ display: 'flex', flex: 1, overflow: 'hidden' }}>
