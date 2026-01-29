@@ -1,10 +1,11 @@
 "use client";
 
-import { AlertTriangle, Clock, Copy, FileEdit, Search, Sparkles, HelpCircle } from "lucide-react";
+import { AlertTriangle, Clock, Copy, FileEdit, Search, Sparkles, Activity } from "lucide-react";
 import { DataHealthDonut } from "../dashboard/DataHealthDonut";
 import { DataHealthLineChart } from "../dashboard/DataHealthLineChart";
 import { MetricCard } from "../dashboard/MetricCard";
 import { RecentActivityTable } from "../dashboard/RecentActivityTable";
+import { AIReadyScore } from "../dashboard/AIReadyScore";
 
 export type IssueCategory = 
   | "all" 
@@ -169,38 +170,75 @@ export function HomeView({ onMetricClick }: HomeViewProps) {
         style={{
           display: 'flex',
           alignItems: 'center',
-          gap: 'var(--slds-g-spacing-2)',
-          marginBottom: 'var(--slds-g-spacing-4)'
+          justifyContent: 'space-between',
+          marginBottom: 'var(--slds-g-spacing-2)'
         }}
       >
-        <span 
+        <div
           style={{
-            width: '24px',
-            height: '24px',
-            borderRadius: '50%',
-            backgroundColor: 'var(--slds-g-color-neutral-base-80)',
-            display: 'inline-flex',
+            display: 'flex',
             alignItems: 'center',
-            justifyContent: 'center'
+            gap: 'var(--slds-g-spacing-2)'
           }}
         >
-          <HelpCircle 
+          <Activity 
             style={{
-              width: '14px',
-              height: '14px',
-              color: 'var(--slds-g-color-neutral-base-50)'
+              width: '20px',
+              height: '20px',
+              color: 'var(--slds-g-color-text-default)',
+              flexShrink: 0
             }}
           />
-        </span>
-        <h2 className="slds-text-heading_section">Current State</h2>
+          <h2 
+            style={{
+              fontFamily: 'var(--slds-g-font-family)',
+              fontSize: 'var(--slds-g-font-scale-3)', // 20px
+              fontWeight: 'var(--slds-g-font-weight-4)', // 400
+              lineHeight: 'var(--slds-g-line-height-heading)', // 28px
+              color: 'var(--slds-g-color-text-default)',
+              margin: 0
+            }}
+          >
+            Current State
+          </h2>
+        </div>
+        {/* Dropdown arrow icon */}
+        <button
+          type="button"
+          style={{
+            width: '20px',
+            height: '20px',
+            border: 'none',
+            background: 'transparent',
+            cursor: 'pointer',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            color: 'var(--slds-g-color-text-weak)'
+          }}
+        >
+          <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
+            <path d="M3 4.5L6 7.5L9 4.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+          </svg>
+        </button>
       </div>
 
       <p 
-        className="slds-text-body_small" 
-        style={{ marginBottom: 'var(--slds-g-spacing-6)' }}
+        style={{
+          fontFamily: 'var(--slds-g-font-family)',
+          fontSize: 'var(--slds-g-font-scale-base)', // 13px
+          fontWeight: 'var(--slds-g-font-weight-4)', // 400
+          lineHeight: 'var(--slds-g-line-height-body-base)', // 18px
+          color: 'var(--slds-g-color-text-weak)',
+          marginBottom: 'var(--slds-g-spacing-6)',
+          marginTop: 0
+        }}
       >
-        Your knowledge base AI-readiness overview
+        Your knowledge base AI-readiness overview.
       </p>
+
+      {/* AI Ready Score */}
+      <AIReadyScore currentScore={60} targetScore={100} change={1.3} />
 
       {/* Charts Section */}
       <div 
