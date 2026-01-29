@@ -1,5 +1,7 @@
 import type { Metadata } from 'next'
 import './globals.css'
+import { GlobalHeader } from './components/shared/GlobalHeader'
+import { LeftNavigation } from './components/shared/LeftNavigation'
 
 export const metadata: Metadata = {
   title: 'Agent-Ready Data | Data Cloud',
@@ -13,7 +15,23 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body>{children}</body>
+      <body style={{ margin: 0, padding: 0, fontFamily: 'var(--slds-g-font-family)', backgroundColor: 'var(--slds-g-color-neutral-base-95)' }}>
+        <div style={{ display: 'flex', flexDirection: 'column', height: '100vh' }}>
+          {/* Global Header */}
+          <GlobalHeader />
+          
+          {/* Main Content Area */}
+          <div style={{ display: 'flex', flex: 1, overflow: 'hidden' }}>
+            {/* Left Navigation */}
+            <LeftNavigation />
+            
+            {/* Page Content */}
+            <main style={{ flex: 1, overflow: 'auto' }}>
+              {children}
+            </main>
+          </div>
+        </div>
+      </body>
     </html>
   )
 }
