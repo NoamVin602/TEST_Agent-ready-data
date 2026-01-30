@@ -63,7 +63,7 @@
   
   /* Border Colors */
   --slds-g-color-border-1: #C9C9C9;
-  --slds-g-color-border-2: #E5E5E5;
+  --slds-g-color-border-2: #5c5c5c;
   --slds-g-color-neutral-90: #E5E5E5;
   --slds-g-color-neutral-50: #747474;
   
@@ -646,9 +646,9 @@ body {
    SLDS Page Header (Cosmos Pattern)
 ========================================== */
 .slds-page-header {
-  background-color: #FFFFFF;
+  background-color: var(--slds-g-color-surface-container-2, #f3f3f3);
   border-bottom: 1px solid var(--slds-g-color-border-1, #dddbda);
-  padding: var(--slds-g-spacing-4, 1rem) var(--slds-g-spacing-6, 1.5rem);
+  padding: var(--slds-g-spacing-4, 16px) var(--slds-g-spacing-6, 24px);
   box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.1);
 }
 
@@ -684,10 +684,10 @@ body {
 
 .slds-page-header__title {
   font-family: var(--slds-g-font-family);
-  font-size: var(--slds-g-font-scale-3, 1.25rem);
+  font-size: var(--slds-g-font-scale-5, 28px);
   font-weight: var(--slds-g-font-weight-4, 400);
-  line-height: var(--slds-g-line-height-heading, 1.75rem);
-  color: var(--slds-g-color-on-surface-3, #181818);
+  line-height: 35px;
+  color: var(--slds-g-color-on-surface-3, #03234d);
   margin: 0;
 }
 
@@ -807,20 +807,20 @@ body {
   justify-content: center;
   align-items: center;
   gap: var(--slds-g-spacing-2);
-  border-radius: var(--slds-g-radius-border-circle);
-  border: 1px solid var(--slds-g-color-border-2);
-  background: var(--slds-g-color-surface-container-1);
-  color: inherit;
+  border-radius: var(--slds-g-radius-border-circle, 9999px);
+  border: 1px solid var(--slds-g-color-border-2, #5c5c5c);
+  background: var(--slds-g-color-surface-container-1, #ffffff);
+  color: var(--slds-g-color-accent-2, #0250d9);
 }
 
 .slds-button_brand:hover:not(:disabled) {
-  background-color: #5C5C5C;
-  border-color: #5C5C5C;
+  background-color: var(--slds-g-color-neutral-base-95, #f3f3f3);
+  border-color: var(--slds-g-color-border-2, #5c5c5c);
 }
 
 .slds-button_brand:active:not(:disabled) {
-  background-color: #014486;
-  border-color: #014486;
+  background-color: var(--slds-g-color-neutral-base-95, #f3f3f3);
+  border-color: var(--slds-g-color-border-2, #5c5c5c);
 }
 
 .slds-button_brand:disabled {

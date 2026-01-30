@@ -12,7 +12,7 @@ export function PageHeader({ onRunScan, isScanning }: PageHeaderProps) {
     <div
       className="slds-page-header slds-page-header_record-home"
       style={{
-        backgroundColor: '#FFFFFF',
+        backgroundColor: 'var(--slds-g-color-surface-container-2, #f3f3f3)',
         position: 'sticky',
         top: '0',
         zIndex: 900,
@@ -68,7 +68,7 @@ export function PageHeader({ onRunScan, isScanning }: PageHeaderProps) {
                 <>
                   <LoaderIcon
                     size={14}
-                    color="#FFFFFF"
+                    color="var(--slds-g-color-accent-2, #0250d9)"
                     className="slds-button__icon slds-button__icon_left"
                     style={{ animation: 'spin 1s linear infinite' }}
                   />
@@ -78,7 +78,7 @@ export function PageHeader({ onRunScan, isScanning }: PageHeaderProps) {
                 <>
                   <PlayIcon
                     size={14}
-                    color="#FFFFFF"
+                    color="var(--slds-g-color-accent-2, #0250d9)"
                     className="slds-button__icon slds-button__icon_left"
                   />
                   <span>Run Scan</span>
