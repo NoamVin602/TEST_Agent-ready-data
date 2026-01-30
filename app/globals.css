@@ -280,7 +280,7 @@ body {
    SLDS Cards (Cosmos Pattern)
 ========================================== */
 .slds-card {
-  background-color: #FFFFFF;
+  background-color: rgba(243, 243, 243, 1);
   border: 1px solid #dddbda;
   border-radius: 0.25rem;
   box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.1);
