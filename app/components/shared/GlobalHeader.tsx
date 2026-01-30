@@ -3,8 +3,7 @@
 import { 
   SearchIcon, 
   StarIcon, 
-  ChevronDownIcon, 
-  UserIcon 
+  ChevronDownIcon
 } from "../../lib/slds-icons";
 
 export function GlobalHeader() {
@@ -341,7 +340,7 @@ export function GlobalHeader() {
             e.currentTarget.style.backgroundColor = '#B0C4D9';
           }}
         >
-          <UserIcon size={18} color="#FFFFFF" />
+          <img src="/Avatar.svg" alt="User Avatar" width="18" height="18" style={{ borderRadius: '50%' }} />
         </button>
       </div>
     </div>
