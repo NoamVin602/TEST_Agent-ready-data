@@ -1,9 +1,7 @@
 "use client";
 
 import { 
-  SearchIcon, 
-  StarIcon, 
-  ChevronDownIcon
+  SearchIcon
 } from "../../lib/slds-icons";
 
 export function GlobalHeader() {
@@ -117,14 +115,14 @@ export function GlobalHeader() {
           </svg>
         </button>
 
-        {/* Favorites Icon */}
+        {/* Split Button */}
         <button
           type="button"
-          title="Favorites"
-          aria-label="Favorites"
+          title="Favorites and More"
+          aria-label="Favorites and More options"
           style={{
-            width: '32px',
-            height: '32px',
+            width: '47px',
+            height: '24px',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
@@ -133,6 +131,7 @@ export function GlobalHeader() {
             cursor: 'pointer',
             borderRadius: '4px',
             transition: 'background-color 0.15s ease-in-out',
+            padding: 0,
           }}
           onMouseEnter={(e) => {
             e.currentTarget.style.backgroundColor = '#F3F3F3';
@@ -141,34 +140,7 @@ export function GlobalHeader() {
             e.currentTarget.style.backgroundColor = 'transparent';
           }}
         >
-          <StarIcon size={18} color="#5C5C5C" />
-        </button>
-
-        {/* Dropdown Icon */}
-        <button
-          type="button"
-          title="More"
-          aria-label="More options"
-          style={{
-            width: '32px',
-            height: '32px',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            border: 'none',
-            background: 'transparent',
-            cursor: 'pointer',
-            borderRadius: '4px',
-            transition: 'background-color 0.15s ease-in-out',
-          }}
-          onMouseEnter={(e) => {
-            e.currentTarget.style.backgroundColor = '#F3F3F3';
-          }}
-          onMouseLeave={(e) => {
-            e.currentTarget.style.backgroundColor = 'transparent';
-          }}
-        >
-          <ChevronDownIcon size={18} color="#5C5C5C" />
+          <img src="/Split Button.svg" alt="Split Button" width="47" height="24" />
         </button>
 
         {/* New/Add Icon */}
