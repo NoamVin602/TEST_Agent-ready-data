@@ -13,8 +13,9 @@ export function GlobalNavigation({ activeTab = "home" }: GlobalNavigationProps) 
         justifyContent: 'space-between',
         padding: '4px 24px 4px 0',
         height: '40px',
-        backgroundColor: '#FFFFFF',
-        boxShadow: '0px -1px 1px 0px rgba(0,0,0,0.05), 0px 1.4px 1.5px 0px rgba(0,0,0,0.09), 0px 0px 1.49px 0px rgba(0,0,0,0.09)',
+        backgroundColor: 'rgba(243, 243, 243, 1)',
+        boxShadow: 'none',
+        borderBottom: '1px solid rgba(0, 0, 0, 0.1)',
         position: 'sticky',
         top: '64px', // Position below 64px Global Header
         zIndex: 999,
