@@ -159,7 +159,6 @@ const recentActivityData = [
 export function HomeView({ onMetricClick }: HomeViewProps) {
   return (
     <div 
-      className="slds-container"
       style={{
         padding: 'var(--slds-g-spacing-4)',
         display: 'flex',
@@ -167,15 +166,16 @@ export function HomeView({ onMetricClick }: HomeViewProps) {
         height: '100%',
         maxWidth: '1440px',
         margin: '0 auto',
-        width: '100%'
+        width: '100%',
+        backgroundColor: '#FFFFFF'
       }}
     >
       {/* Left Column - Current State Dashboard (75%) */}
       <div style={{ flex: '0 0 75%', display: 'flex', flexDirection: 'column', gap: 'var(--slds-g-spacing-4)', minWidth: 0 }}>
         {/* Main Card Container */}
-        <div className="slds-card" style={{ borderRadius: 'var(--slds-g-radius-border-4)', backgroundColor: '#FFFFFF' }}>
+        <div className="slds-card" style={{ borderRadius: 'var(--slds-g-radius-border-4)', backgroundColor: '#FFFFFF', border: 'none', boxShadow: 'none' }}>
           {/* Card Header */}
-          <div className="slds-card__header" style={{ padding: 'var(--slds-g-spacing-4)' }}>
+          <div className="slds-card__header" style={{ padding: 'var(--slds-g-spacing-4)', borderBottom: 'none' }}>
             <div className="slds-grid slds-grid_align-spread slds-grid_vertical-align-center">
               <div className="slds-grid slds-grid_vertical-align-center" style={{ gap: 'var(--slds-g-spacing-2)' }}>
                 <ActivityIcon 
@@ -223,7 +223,7 @@ export function HomeView({ onMetricClick }: HomeViewProps) {
           </div>
 
           {/* Card Body */}
-          <div className="slds-card__body" style={{ padding: 'var(--slds-g-spacing-4)' }}>
+          <div className="slds-card__body" style={{ padding: '0 var(--slds-g-spacing-4) var(--slds-g-spacing-4)' }}>
             {/* Charts Section - Two nested cards side by side */}
             <div
               className="slds-grid"
@@ -234,8 +234,8 @@ export function HomeView({ onMetricClick }: HomeViewProps) {
               }}
             >
               {/* Data Health Donut Chart */}
-              <div className="slds-card" style={{ borderRadius: 'var(--slds-g-radius-border-3)', backgroundColor: '#FFFFFF' }}>
-                <div className="slds-card__header" style={{ padding: 'var(--slds-g-spacing-3) var(--slds-g-spacing-4)' }}>
+              <div className="slds-card" style={{ borderRadius: 'var(--slds-g-radius-border-3)', backgroundColor: '#FFFFFF', border: '1px solid var(--slds-g-color-border-1)', boxShadow: '0px 0px 2px 0px rgba(0, 0, 0, 0.18), 0px 2px 2px 0px rgba(0, 0, 0, 0.18), 0px -1px 2px 0px rgba(0, 0, 0, 0.1)' }}>
+                <div className="slds-card__header" style={{ padding: 'var(--slds-g-spacing-3) var(--slds-g-spacing-4)', borderBottom: 'none' }}>
                   <div className="slds-grid slds-grid_align-spread slds-grid_vertical-align-center">
                     <h3
                       style={{
@@ -264,20 +264,29 @@ export function HomeView({ onMetricClick }: HomeViewProps) {
               </div>
 
               {/* Data Health Over Time Line Chart */}
-              <div className="slds-card" style={{ borderRadius: 'var(--slds-g-radius-border-3)', backgroundColor: '#FFFFFF' }}>
-                <div className="slds-card__header" style={{ padding: 'var(--slds-g-spacing-3) var(--slds-g-spacing-4)' }}>
-                  <h3
-                    style={{
-                      fontFamily: 'var(--slds-g-font-family)',
-                      fontSize: 'var(--slds-g-font-scale-2)',
-                      fontWeight: 'var(--slds-g-font-weight-6)',
-                      lineHeight: '24px',
-                      color: 'var(--slds-g-color-on-surface-3)',
-                      margin: 0
-                    }}
-                  >
-                    Data Health Over Time
-                  </h3>
+              <div className="slds-card" style={{ borderRadius: 'var(--slds-g-radius-border-3)', backgroundColor: '#FFFFFF', border: '1px solid var(--slds-g-color-border-1)', boxShadow: '0px 0px 2px 0px rgba(0, 0, 0, 0.18), 0px 2px 2px 0px rgba(0, 0, 0, 0.18), 0px -1px 2px 0px rgba(0, 0, 0, 0.1)' }}>
+                <div className="slds-card__header" style={{ padding: 'var(--slds-g-spacing-3) var(--slds-g-spacing-4)', borderBottom: 'none' }}>
+                  <div className="slds-grid slds-grid_align-spread slds-grid_vertical-align-center">
+                    <h3
+                      style={{
+                        fontFamily: 'var(--slds-g-font-family)',
+                        fontSize: 'var(--slds-g-font-scale-2)',
+                        fontWeight: 'var(--slds-g-font-weight-6)',
+                        lineHeight: '24px',
+                        color: 'var(--slds-g-color-on-surface-3)',
+                        margin: 0
+                      }}
+                    >
+                      Data Health Over Time
+                    </h3>
+                    <button
+                      type="button"
+                      className="slds-button slds-button_icon slds-button_icon-small"
+                      aria-label="More options"
+                    >
+                      <ChevronDownIcon size={12} color="var(--slds-g-color-on-surface-1)" />
+                    </button>
+                  </div>
                 </div>
                 <div className="slds-card__body" style={{ padding: 'var(--slds-g-spacing-4)' }}>
                   <DataHealthLineChart data={chartData} currentValue={70} />
@@ -312,7 +321,7 @@ export function HomeView({ onMetricClick }: HomeViewProps) {
         </div>
 
         {/* Recent Activity - Nested Card */}
-        <div className="slds-card" style={{ borderRadius: 'var(--slds-g-radius-border-3)', backgroundColor: '#FFFFFF' }}>
+        <div className="slds-card" style={{ borderRadius: 'var(--slds-g-radius-border-3)', backgroundColor: '#FFFFFF', border: '1px solid var(--slds-g-color-border-1)', boxShadow: '0px 0px 2px 0px rgba(0, 0, 0, 0.18), 0px 2px 2px 0px rgba(0, 0, 0, 0.18), 0px -1px 2px 0px rgba(0, 0, 0, 0.1)' }}>
           <RecentActivityTable activities={recentActivityData} />
         </div>
       </div>
