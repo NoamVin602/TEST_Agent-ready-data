@@ -464,3 +464,163 @@ body {
 .slds-m-left_x-small {
   margin-left: 0.25rem; /* 4px */
 }
+
+/* ==========================================
+   SLDS Tables (Cosmos Pattern)
+========================================== */
+.slds-table_header-fixed_container {
+  position: relative;
+  overflow: auto;
+  max-height: 100%;
+}
+
+.slds-table {
+  border-collapse: separate;
+  border-spacing: 0;
+  width: 100%;
+  background-color: #FFFFFF;
+}
+
+.slds-table_cell-buffer th,
+.slds-table_cell-buffer td {
+  padding: 0.5rem;
+}
+
+.slds-table_bordered {
+  border: 1px solid #dddbda;
+}
+
+.slds-table_bordered th,
+.slds-table_bordered td {
+  border-bottom: 1px solid #dddbda;
+}
+
+.slds-table_fixed-layout {
+  table-layout: fixed;
+}
+
+.slds-table thead th {
+  background-color: #F3F3F3;
+  border-bottom: 1px solid #dddbda;
+  padding: 0.5rem;
+}
+
+.slds-table tbody tr {
+  border-bottom: 1px solid #dddbda;
+}
+
+.slds-table tbody tr:hover {
+  background-color: #f3f3f2;
+}
+
+.slds-hint-parent {
+  transition: background-color 0.15s ease-in-out;
+}
+
+.slds-text-title_caps {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: #444444;
+  text-transform: uppercase;
+  letter-spacing: 0.0625rem;
+  line-height: 1.25;
+}
+
+.slds-truncate {
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.slds-line-height_reset {
+  line-height: 1;
+}
+
+/* ==========================================
+   SLDS Input (Cosmos Pattern)
+========================================== */
+.slds-input {
+  width: 100%;
+  padding: 0.5rem 0.75rem;
+  font-size: 0.8125rem;
+  font-family: var(--slds-g-font-family);
+  font-weight: 400;
+  line-height: 1.5;
+  color: #181818;
+  background-color: #FFFFFF;
+  border: 1px solid #dddbda;
+  border-radius: 0.25rem;
+  transition: border-color 0.15s ease-in-out;
+}
+
+.slds-input:focus {
+  outline: none;
+  border-color: #0176D3;
+  box-shadow: 0 0 0 2px rgba(1, 118, 211, 0.1);
+}
+
+.slds-input-has-icon_left {
+  position: relative;
+}
+
+.slds-input-has-icon_left .slds-input {
+  padding-left: 2rem;
+}
+
+.slds-input__icon {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none;
+}
+
+.slds-input__icon_left {
+  left: 0.5rem;
+}
+
+.slds-form-element {
+  position: relative;
+}
+
+.slds-form-element__control {
+  position: relative;
+}
+
+/* ==========================================
+   SLDS Buttons (Icon Variants)
+========================================== */
+.slds-button_icon-border-filled {
+  background-color: #FFFFFF;
+  border: 1px solid #dddbda;
+  color: #747474;
+  border-radius: 0.25rem;
+  padding: 0.25rem;
+  width: 1.5rem;
+  height: 1.5rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.15s ease-in-out;
+}
+
+.slds-button_icon-border-filled:hover {
+  background-color: #f3f3f2;
+  border-color: #c9c9c9;
+}
+
+.slds-button_icon-border-filled:focus {
+  outline: 2px solid #0176D3;
+  outline-offset: 2px;
+}
+
+/* Badge variants for table cells */
+.slds-table .slds-badge {
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 0.125rem 0.5rem;
+  border-radius: 0.25rem;
+  display: inline-block;
+  line-height: 1.25;
+}
