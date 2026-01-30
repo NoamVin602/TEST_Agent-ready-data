@@ -1,6 +1,6 @@
 "use client";
 
-import { AlertTriangleIcon, ClockIcon, CopyIcon, FileEditIcon, SearchIcon, SparklesIcon, ActivityIcon, ChevronDownIcon, DatabaseIcon, TrendingUpIcon, MetricsIcon } from "../../lib/slds-icons";
+import { AlertTriangleIcon, ClockIcon, CopyIcon, FileEditIcon, SearchIcon, SparklesIcon, ActivityIcon, ChevronDownIcon, DatabaseIcon, TrendingUpIcon } from "../../lib/slds-icons";
 import { DataHealthDonut } from "../dashboard/DataHealthDonut";
 import { DataHealthLineChart } from "../dashboard/DataHealthLineChart";
 import { MetricCard } from "../dashboard/MetricCard";
@@ -182,16 +182,21 @@ export function HomeView({ onMetricClick }: HomeViewProps) {
                     width: '32px',
                     height: '32px',
                     borderRadius: 'var(--slds-g-radius-border-2, 8px)',
-                    backgroundColor: '#1B96FF',
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'center',
                     flexShrink: 0,
+                    overflow: 'hidden',
                   }}
                 >
-                  <MetricsIcon
-                    size={20}
-                    color="#FFFFFF"
+                  <img
+                    src="/feed.svg"
+                    alt="Feed icon"
+                    style={{
+                      width: '32px',
+                      height: '32px',
+                      display: 'block',
+                    }}
                   />
                 </div>
               </div>
