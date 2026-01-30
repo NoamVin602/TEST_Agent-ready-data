@@ -800,14 +800,14 @@ body {
 
 /* Primary Button (Brand) */
 .slds-button_brand {
-  background-color: #0176D3;
+  background-color: #747474;
   color: #FFFFFF;
-  border-color: #0176D3;
+  border-color: #747474;
 }
 
 .slds-button_brand:hover:not(:disabled) {
-  background-color: #014486;
-  border-color: #014486;
+  background-color: #5C5C5C;
+  border-color: #5C5C5C;
 }
 
 .slds-button_brand:active:not(:disabled) {
