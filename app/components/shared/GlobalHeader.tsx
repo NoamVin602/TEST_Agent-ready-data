@@ -22,7 +22,7 @@ export function GlobalHeader() {
         maxHeight: '64px',
         
         background: '#FFFFFF',
-        borderBottom: '1px solid #5C5C5C',
+        borderBottom: '1px solid var(--slds-g-color-neutral-base-95, #F3F3F3)',
         
         position: 'sticky',
         top: 0,
