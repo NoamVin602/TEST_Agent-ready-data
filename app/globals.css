@@ -800,16 +800,6 @@ body {
 
 /* Primary Button (Brand) */
 .slds-button_brand {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: flex-end;
-  padding: 0px;
-  position: absolute;
-  width: 70px;
-  height: 32px;
-  left: 20px;
-  top: 20px;
   background-color: #747474;
   color: #FFFFFF;
   border-color: #747474;
