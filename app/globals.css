@@ -518,7 +518,7 @@ body {
 
 .slds-table_bordered th,
 .slds-table_bordered td {
-  border-bottom: 1px solid #dddbda;
+  border-bottom: 1px solid var(--slds-g-color-border-1, rgba(201, 201, 201, 1));
 }
 
 .slds-table_fixed-layout {
@@ -527,12 +527,12 @@ body {
 
 .slds-table thead th {
   background-color: #F3F3F3;
-  border-bottom: 1px solid #dddbda;
+  border-bottom: 1px solid var(--slds-g-color-border-1, rgba(201, 201, 201, 1));
   padding: 0.5rem;
 }
 
 .slds-table tbody tr {
-  border-bottom: 1px solid #dddbda;
+  border-bottom: 1px solid var(--slds-g-color-border-1, rgba(201, 201, 201, 1));
 }
 
 .slds-table tbody tr:hover {
