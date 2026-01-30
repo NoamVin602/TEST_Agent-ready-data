@@ -735,11 +735,16 @@ body {
    Scoped to prevent affecting tabs, badges, or icon-only buttons
 ========================================== */
 .slds-button {
-  display: inline-flex;
-  align-items: center;
+  display: flex;
+  flex-direction: row;
   justify-content: center;
-  height: 2rem; /* 32px */
-  padding: 0 1rem; /* 16px horizontal */
+  align-items: flex-end;
+  padding: 0px;
+  position: absolute;
+  width: 70px;
+  height: 32px;
+  left: 20px;
+  top: 20px;
   font-family: var(--slds-g-font-family);
   font-size: 0.8125rem; /* 13px */
   font-weight: 400;
@@ -824,11 +829,24 @@ body {
 /* Ensure icon buttons maintain their specific styling */
 .slds-button_icon,
 .slds-button_icon-small {
+  position: relative !important;
+  left: auto !important;
+  top: auto !important;
   height: auto;
   padding: 0.25rem;
   border-radius: 0.25rem;
   background-color: transparent;
   border: none;
+}
+
+/* Override absolute positioning for buttons in cards, tables, and other containers */
+.slds-card .slds-button,
+.slds-table .slds-button,
+.slds-page-header .slds-button:not(.slds-button_run-scan),
+.slds-tabs_default .slds-button {
+  position: relative !important;
+  left: auto !important;
+  top: auto !important;
 }
 
 .slds-button_icon-border-filled {
