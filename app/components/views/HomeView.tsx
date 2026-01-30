@@ -172,55 +172,50 @@ export function HomeView({ onMetricClick }: HomeViewProps) {
     >
       {/* Left Column - Current State Dashboard (75%) */}
       <div style={{ flex: '0 0 75%', display: 'flex', flexDirection: 'column', gap: 'var(--slds-g-spacing-4)', minWidth: 0 }}>
-        {/* Main Card Container */}
-        <div className="slds-card" style={{ borderRadius: 'var(--slds-g-radius-border-4)', backgroundColor: '#FFFFFF', border: 'none', boxShadow: 'none' }}>
-          {/* Card Header */}
-          <div className="slds-card__header" style={{ padding: 'var(--slds-g-spacing-4)', borderBottom: 'none' }}>
-            <div className="slds-grid slds-grid_align-spread slds-grid_vertical-align-center">
-              <div className="slds-grid slds-grid_vertical-align-center" style={{ gap: 'var(--slds-g-spacing-2)' }}>
-                <ActivityIcon 
-                  size={20}
-                  color="var(--slds-g-color-on-surface-1)"
-                  style={{ flexShrink: 0 }}
-                />
-                <div>
-                  <h2 
-                    className="slds-text-heading_section" 
-                    style={{ 
-                      margin: 0,
-                      fontFamily: 'var(--slds-g-font-family)',
-                      fontSize: 'var(--slds-g-font-scale-3)',
-                      fontWeight: 'var(--slds-g-font-weight-6)',
-                      lineHeight: '28px',
-                      color: 'var(--slds-g-color-on-surface-3)'
-                    }}
-                  >
+        {/* SLDS Page Header */}
+        <div className="slds-page-header">
+          <div className="slds-page-header__row">
+            {/* Title Section */}
+            <div className="slds-page-header__col-title">
+              <div className="slds-media">
+                <div className="slds-media__figure">
+                  <div className="slds-icon-standard-record">
+                    <ActivityIcon 
+                      size={20}
+                      color="#FFFFFF"
+                    />
+                  </div>
+                </div>
+                <div className="slds-media__body">
+                  <h1 className="slds-page-header__title slds-truncate" title="Current State">
                     Current State
-                  </h2>
-                  <p 
-                    style={{
-                      margin: 0,
-                      marginTop: '2px',
-                      fontFamily: 'var(--slds-g-font-family)',
-                      fontSize: 'var(--slds-g-font-scale-1)',
-                      fontWeight: 'var(--slds-g-font-weight-4)',
-                      lineHeight: '19px',
-                      color: 'var(--slds-g-color-on-surface-1)'
-                    }}
-                  >
-                    Your knowledge base AI-readiness overview
-                  </p>
+                  </h1>
+                  <div className="slds-page-header__col-meta">
+                    <p className="slds-page-header__name-meta">
+                      Your knowledge base AI-readiness overview
+                    </p>
+                  </div>
                 </div>
               </div>
-              <button
-                type="button"
-                className="slds-button slds-button_icon slds-button_icon-small"
-                aria-label="More options"
-              >
-                <ChevronDownIcon size={12} color="var(--slds-g-color-on-surface-1)" />
-              </button>
+            </div>
+
+            {/* Actions Section */}
+            <div className="slds-page-header__col-actions">
+              <div className="slds-page-header__controls">
+                <button
+                  type="button"
+                  className="slds-button slds-button_neutral"
+                  aria-label="Refresh"
+                >
+                  Refresh
+                </button>
+              </div>
             </div>
           </div>
+        </div>
+
+        {/* Main Card Container */}
+        <div className="slds-card" style={{ borderRadius: 'var(--slds-g-radius-border-4)', backgroundColor: '#FFFFFF', border: 'none', boxShadow: 'none' }}>
 
           {/* Card Body */}
           <div className="slds-card__body" style={{ padding: '0 var(--slds-g-spacing-4) var(--slds-g-spacing-4)' }}>

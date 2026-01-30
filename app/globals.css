@@ -641,6 +641,89 @@ body {
   outline-offset: 2px;
 }
 
+/* ==========================================
+   SLDS Page Header (Cosmos Pattern)
+========================================== */
+.slds-page-header {
+  background-color: #f3f3f2;
+  border-bottom: 1px solid #dddbda;
+  padding: 1rem 1.5rem;
+  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.1);
+}
+
+.slds-page-header__row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.slds-page-header__col-title {
+  display: flex;
+  align-items: center;
+  flex: 1 1 0%;
+  min-width: 0;
+}
+
+.slds-page-header__col-actions {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.slds-page-header__controls {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.slds-page-header__title {
+  font-size: 1.25rem;
+  font-weight: 400;
+  line-height: 1.75rem;
+  color: #181818;
+  margin: 0;
+}
+
+.slds-page-header__name-meta {
+  font-size: 0.875rem;
+  font-weight: 400;
+  line-height: 1.25rem;
+  color: #747474;
+  margin-top: 0.25rem;
+}
+
+.slds-page-header__col-meta {
+  margin-top: 0.5rem;
+}
+
+/* Standard Salesforce Icon Container */
+.slds-icon-standard-record {
+  width: 2rem;
+  height: 2rem;
+  border-radius: 0.25rem;
+  background-color: #0176D3;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.slds-media {
+  display: flex;
+  align-items: flex-start;
+}
+
+.slds-media__figure {
+  flex-shrink: 0;
+  margin-right: 0.75rem;
+}
+
+.slds-media__body {
+  flex: 1;
+  min-width: 0;
+}
+
 /* Badge in table cells - center aligned */
 .slds-table .slds-badge {
   display: inline-flex;
