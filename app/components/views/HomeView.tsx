@@ -312,7 +312,7 @@ export function HomeView({ onMetricClick }: HomeViewProps) {
               ))}
             </div>
           </div>
-        </div>
+        </article>
 
         {/* Recent Activity - Nested Card */}
         <div className="slds-card" style={{ borderRadius: 'var(--slds-g-radius-border-3)', backgroundColor: '#FFFFFF', border: '1px solid var(--slds-g-color-border-1)', boxShadow: '0px 0px 2px 0px rgba(0, 0, 0, 0.18), 0px 2px 2px 0px rgba(0, 0, 0, 0.18), 0px -1px 2px 0px rgba(0, 0, 0, 0.1)' }}>
