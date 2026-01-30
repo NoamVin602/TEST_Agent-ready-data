@@ -1,6 +1,6 @@
 "use client";
 
-import { AlertTriangleIcon, ClockIcon, CopyIcon, FileEditIcon, SearchIcon, SparklesIcon, ActivityIcon, ChevronDownIcon } from "../../lib/slds-icons";
+import { AlertTriangleIcon, ClockIcon, CopyIcon, FileEditIcon, SearchIcon, SparklesIcon, ActivityIcon, ChevronDownIcon, DatabaseIcon, TrendingUpIcon } from "../../lib/slds-icons";
 import { DataHealthDonut } from "../dashboard/DataHealthDonut";
 import { DataHealthLineChart } from "../dashboard/DataHealthLineChart";
 import { MetricCard } from "../dashboard/MetricCard";
@@ -234,87 +234,73 @@ export function HomeView({ onMetricClick }: HomeViewProps) {
               }}
             >
               {/* Data Health Donut Chart */}
-              <div className="slds-card" style={{ borderRadius: 'var(--slds-g-radius-border-3)', backgroundColor: '#FFFFFF', border: '1px solid var(--slds-g-color-border-1)', boxShadow: '0px 0px 2px 0px rgba(0, 0, 0, 0.18), 0px 2px 2px 0px rgba(0, 0, 0, 0.18), 0px -1px 2px 0px rgba(0, 0, 0, 0.1)' }}>
-                <div className="slds-card__header" style={{ padding: 'var(--slds-g-spacing-3) var(--slds-g-spacing-4)', borderBottom: 'none' }}>
-                  <div className="slds-grid slds-grid_align-spread slds-grid_vertical-align-center">
-                    <h3
-                      style={{
-                        fontFamily: 'var(--slds-g-font-family)',
-                        fontSize: 'var(--slds-g-font-scale-2)',
-                        fontWeight: 'var(--slds-g-font-weight-6)',
-                        lineHeight: '24px',
-                        color: 'var(--slds-g-color-on-surface-3)',
-                        margin: 0
-                      }}
-                    >
-                      Data Health
-                    </h3>
+              <article className="slds-card">
+                <div className="slds-card__header slds-grid">
+                  <header className="slds-media slds-media_center slds-has-flexi-truncate">
+                    <div className="slds-media__figure">
+                      <DatabaseIcon size={16} color="#181818" />
+                    </div>
+                    <div className="slds-media__body">
+                      <h2 className="slds-card__header-title">Data Health</h2>
+                    </div>
+                  </header>
+                  <div className="slds-no-flex">
                     <button
                       type="button"
                       className="slds-button slds-button_icon slds-button_icon-small"
                       aria-label="More options"
                     >
-                      <ChevronDownIcon size={12} color="var(--slds-g-color-on-surface-1)" />
+                      <ChevronDownIcon size={12} color="#747474" />
                     </button>
                   </div>
                 </div>
-                <div className="slds-card__body" style={{ padding: 'var(--slds-g-spacing-4)' }}>
+                <div className="slds-card__body slds-card__body_inner">
                   <DataHealthDonut percentage={70} />
                 </div>
-              </div>
+              </article>
 
               {/* Data Health Over Time Line Chart */}
-              <div className="slds-card" style={{ borderRadius: 'var(--slds-g-radius-border-3)', backgroundColor: '#FFFFFF', border: '1px solid var(--slds-g-color-border-1)', boxShadow: '0px 0px 2px 0px rgba(0, 0, 0, 0.18), 0px 2px 2px 0px rgba(0, 0, 0, 0.18), 0px -1px 2px 0px rgba(0, 0, 0, 0.1)' }}>
-                <div className="slds-card__header" style={{ padding: 'var(--slds-g-spacing-3) var(--slds-g-spacing-4)', borderBottom: 'none' }}>
-                  <div className="slds-grid slds-grid_align-spread slds-grid_vertical-align-center">
-                    <h3
-                      style={{
-                        fontFamily: 'var(--slds-g-font-family)',
-                        fontSize: 'var(--slds-g-font-scale-2)',
-                        fontWeight: 'var(--slds-g-font-weight-6)',
-                        lineHeight: '24px',
-                        color: 'var(--slds-g-color-on-surface-3)',
-                        margin: 0
-                      }}
-                    >
-                      Data Health Over Time
-                    </h3>
+              <article className="slds-card">
+                <div className="slds-card__header slds-grid">
+                  <header className="slds-media slds-media_center slds-has-flexi-truncate">
+                    <div className="slds-media__figure">
+                      <TrendingUpIcon size={16} color="#181818" />
+                    </div>
+                    <div className="slds-media__body">
+                      <h2 className="slds-card__header-title">Data Health Over Time</h2>
+                    </div>
+                  </header>
+                  <div className="slds-no-flex">
                     <button
                       type="button"
                       className="slds-button slds-button_icon slds-button_icon-small"
                       aria-label="More options"
                     >
-                      <ChevronDownIcon size={12} color="var(--slds-g-color-on-surface-1)" />
+                      <ChevronDownIcon size={12} color="#747474" />
                     </button>
                   </div>
                 </div>
-                <div className="slds-card__body" style={{ padding: 'var(--slds-g-spacing-4)' }}>
+                <div className="slds-card__body slds-card__body_inner">
                   <DataHealthLineChart data={chartData} currentValue={70} />
                 </div>
-              </div>
+              </article>
             </div>
 
             {/* Metrics Grid - 2 rows of 3 cards */}
-            <div 
-              style={{
-                display: 'grid',
-                gridTemplateColumns: 'repeat(3, 1fr)',
-                gap: 'var(--slds-g-spacing-4)',
-                marginBottom: 'var(--slds-g-spacing-4)'
-              }}
-            >
+            <div className="slds-grid slds-grid_wrap" style={{ gap: 'var(--slds-g-spacing-4)', marginBottom: 'var(--slds-g-spacing-4)' }}>
               {metricsData.map((metric) => (
-                <MetricCard
-                  key={metric.id}
-                  title={metric.title}
-                  value={metric.value}
-                  change={metric.change}
-                  changeLabel={metric.changeLabel}
-                  trend={metric.trend}
-                  icon={metric.icon}
-                  colorClass={metric.colorClass}
-                  onClick={onMetricClick ? () => onMetricClick(metric.category) : undefined}
-                />
+                <div key={metric.id} style={{ flex: '1 1 calc(33.333% - var(--slds-g-spacing-4))', minWidth: '200px' }}>
+                  <MetricCard
+                    title={metric.title}
+                    value={metric.value}
+                    change={metric.change}
+                    changeLabel={metric.changeLabel}
+                    trend={metric.trend}
+                    icon={metric.icon}
+                    colorClass={metric.colorClass}
+                    onClick={onMetricClick ? () => onMetricClick(metric.category) : undefined}
+                  />
+                </div>
               ))}
             </div>
           </div>

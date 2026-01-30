@@ -276,6 +276,101 @@ body {
 }
 
 /* ==========================================
+   SLDS Cards (Cosmos Pattern)
+========================================== */
+.slds-card {
+  background-color: #FFFFFF;
+  border: 1px solid #dddbda;
+  border-radius: 0.25rem;
+  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.1);
+  transition: box-shadow 0.15s ease-in-out;
+}
+
+.slds-card:hover {
+  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.1);
+}
+
+.slds-card[role="button"]:hover {
+  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.1);
+}
+
+.slds-card[role="button"]:focus {
+  outline: 2px solid #0176D3;
+  outline-offset: 2px;
+}
+
+.slds-card__header {
+  padding: 0.75rem 1rem;
+  border-bottom: 1px solid #dddbda;
+}
+
+.slds-card__header.slds-grid {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.slds-card__body {
+  padding: 0.75rem 1rem;
+}
+
+.slds-card__body_inner {
+  padding: 0.75rem 1rem;
+}
+
+.slds-media {
+  display: flex;
+  align-items: flex-start;
+}
+
+.slds-media_center {
+  align-items: center;
+}
+
+.slds-media__figure {
+  flex-shrink: 0;
+  margin-right: 0.75rem;
+}
+
+.slds-media__body {
+  flex: 1;
+  min-width: 0;
+}
+
+.slds-has-flexi-truncate {
+  min-width: 0;
+}
+
+.slds-card__header-title {
+  font-size: 1rem;
+  font-weight: 700;
+  color: #181818;
+  line-height: 1.25;
+  margin: 0;
+}
+
+.slds-no-flex {
+  flex: none;
+}
+
+/* Grid utilities for metric cards */
+.slds-grid {
+  display: flex;
+}
+
+.slds-grid_wrap {
+  flex-wrap: wrap;
+}
+
+.slds-grid_vertical-align-center {
+  align-items: center;
+}
+
+.slds-grid_align-spread {
+  justify-content: space-between;
+}
+
+/* ==========================================
    SLDS Tabs (Cosmos Pattern)
 ========================================== */
 .slds-tabs_default {
