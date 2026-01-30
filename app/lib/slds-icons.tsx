@@ -93,6 +93,13 @@ export const SparklesIcon: React.FC<IconProps> = (props) => (
   </SLDSIcon>
 );
 
+// Check Icon (SLDS: check)
+export const CheckIcon: React.FC<IconProps> = (props) => (
+  <SLDSIcon {...props}>
+    <path d="M20 6L9 17l-5-5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" fill="none"/>
+  </SLDSIcon>
+);
+
 // CheckCircle Icon (SLDS: success)
 export const CheckCircleIcon: React.FC<IconProps> = (props) => (
   <SLDSIcon {...props}>

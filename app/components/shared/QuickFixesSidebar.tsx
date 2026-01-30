@@ -1,52 +1,84 @@
 "use client";
 
-import { AlertTriangleIcon, ArchiveIcon, FileEditIcon } from "../../lib/slds-icons";
+import { useState } from "react";
+import { AlertTriangleIcon, ArchiveIcon, ChevronDownIcon, CheckIcon } from "../../lib/slds-icons";
 
 interface QuickFix {
   id: string;
   title: string;
   description: string;
   scoreImpact: string;
-  icon: React.ComponentType<{ size?: number; color?: string; style?: React.CSSProperties }>;
-  iconBg: string;
-  iconColor: string;
+  stepTitle: string;
+  stepDescription: string;
+  badgeType: "warning" | "error" | "info";
 }
 
 const QUICK_FIXES: QuickFix[] = [
   {
     id: "contradicting-refund",
-    title: "Contradicting refund policies",
+    title: "Contradicting content",
     description: "2 documents have conflicting information",
     scoreImpact: "+3% score",
-    icon: AlertTriangleIcon,
-    iconBg: "rgba(194, 57, 52, 0.1)",
-    iconColor: "var(--slds-g-color-error-base-50)"
+    stepTitle: "Create Unstructured Data Model Object(s)",
+    stepDescription: "Create an Unstructured Data Lake Object from your external source, which will automatically map to an Unstructured Data Model Object you can use for agent grounding.",
+    badgeType: "warning"
   },
   {
     id: "archive-stale",
     title: "Archive stale pricing guide",
     description: "Product Guide v2.1 is 8 months outdated",
     scoreImpact: "+2% score",
-    icon: ArchiveIcon,
-    iconBg: "rgba(254, 147, 57, 0.1)",
-    iconColor: "var(--slds-g-color-warning-base-50)"
+    stepTitle: "Archive Outdated Content",
+    stepDescription: "Archive the outdated pricing guide to improve data quality and prevent confusion.",
+    badgeType: "warning"
   }
 ];
 
 export function QuickFixesSidebar() {
+  const [expandedItems, setExpandedItems] = useState<string[]>([]);
+
+  const toggleItem = (id: string) => {
+    setExpandedItems(prev =>
+      prev.includes(id) ? prev.filter(item => item !== id) : [...prev, id]
+    );
+  };
+
+  const getBadgeStyle = (badgeType: string) => {
+    switch (badgeType) {
+      case "warning":
+        return {
+          backgroundColor: 'var(--slds-g-color-warning-tint)',
+          color: 'var(--slds-g-color-warning-base-50)',
+          border: '1px solid var(--slds-g-color-warning-base-50)'
+        };
+      case "error":
+        return {
+          backgroundColor: 'var(--slds-g-color-error-tint)',
+          color: 'var(--slds-g-color-error-base-50)',
+          border: '1px solid var(--slds-g-color-error-base-50)'
+        };
+      default:
+        return {
+          backgroundColor: 'var(--slds-g-color-neutral-base-95)',
+          color: 'var(--slds-g-color-on-surface-1)',
+          border: '1px solid var(--slds-g-color-border-2)'
+        };
+    }
+  };
+
   return (
     <div
       style={{
         width: '100%',
         backgroundColor: 'var(--slds-g-color-neutral-base-100)',
-        padding: 'var(--slds-g-spacing-5)',
+        padding: 'var(--slds-g-spacing-4)',
         overflowY: 'auto',
         height: '100%'
       }}
     >
       {/* Header */}
       <div style={{ marginBottom: 'var(--slds-g-spacing-4)' }}>
-        <h3 
+        <h3
           style={{
             fontFamily: 'var(--slds-g-font-family)',
             fontSize: 'var(--slds-g-font-scale-3)',
@@ -59,7 +91,7 @@ export function QuickFixesSidebar() {
         >
           Quick Fixes
         </h3>
-        <p 
+        <p
           style={{
             fontFamily: 'var(--slds-g-font-family)',
             fontSize: 'var(--slds-g-font-scale-1)',
@@ -73,113 +105,226 @@ export function QuickFixesSidebar() {
         </p>
       </div>
 
-      {/* Quick Fix Cards */}
-      <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--slds-g-spacing-4)' }}>
-        {QUICK_FIXES.map(({ id, title, description, scoreImpact, icon: Icon, iconBg, iconColor }) => (
-          <div
-            key={id}
-            className="slds-card"
-            style={{
-              padding: 'var(--slds-g-spacing-4)',
-              backgroundColor: '#FFFFFF',
-              border: '1px solid var(--slds-g-color-border-1)',
-              borderRadius: 'var(--slds-g-radius-border-2)',
-              transition: 'all var(--slds-g-transition-base)',
-              cursor: 'pointer',
-              boxShadow: '0px 0px 2px 0px rgba(0, 0, 0, 0.18), 0px 2px 2px 0px rgba(0, 0, 0, 0.18), 0px -1px 2px 0px rgba(0, 0, 0, 0.1)'
-            }}
-            onMouseEnter={(e) => {
-              e.currentTarget.style.boxShadow = '0px 0px 4px 0px rgba(0, 0, 0, 0.2), 0px 4px 4px 0px rgba(0, 0, 0, 0.2), 0px -1px 2px 0px rgba(0, 0, 0, 0.15)';
-              e.currentTarget.style.transform = 'translateY(-2px)';
-            }}
-            onMouseLeave={(e) => {
-              e.currentTarget.style.boxShadow = '0px 0px 2px 0px rgba(0, 0, 0, 0.18), 0px 2px 2px 0px rgba(0, 0, 0, 0.18), 0px -1px 2px 0px rgba(0, 0, 0, 0.1)';
-              e.currentTarget.style.transform = 'translateY(0)';
-            }}
-          >
-            {/* Icon and Score */}
-            <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', marginBottom: 'var(--slds-g-spacing-3)' }}>
+      {/* Quick Fix Cards with PUDA Steps */}
+      <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--slds-g-spacing-3)' }}>
+        {QUICK_FIXES.map(({ id, title, description, scoreImpact, stepTitle, stepDescription, badgeType }) => {
+          const isExpanded = expandedItems.includes(id);
+          const badgeStyle = getBadgeStyle(badgeType);
+
+          return (
+            <div
+              key={id}
+              className="slds-card"
+              style={{
+                backgroundColor: '#FFFFFF',
+                borderRadius: 'var(--slds-g-radius-border-4)',
+                padding: 'var(--slds-g-spacing-4)',
+                border: '1px solid var(--slds-g-color-border-1)',
+                boxShadow: '0px 0px 2px 0px rgba(0, 0, 0, 0.18), 0px 2px 2px 0px rgba(0, 0, 0, 0.18), 0px -1px 2px 0px rgba(0, 0, 0, 0.1)'
+              }}
+            >
+              {/* Header - Chevron + Title + Badge */}
               <div
+                className="slds-grid slds-grid_vertical-align-center"
                 style={{
-                  width: '32px',
-                  height: '32px',
-                  borderRadius: 'var(--slds-g-radius-border-1)',
-                  backgroundColor: iconBg,
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  flexShrink: 0
+                  gap: 'var(--slds-g-spacing-2)',
+                  marginBottom: isExpanded ? 'var(--slds-g-spacing-3)' : 0,
+                  cursor: 'pointer'
                 }}
+                onClick={() => toggleItem(id)}
               >
-                <Icon size={16} color={iconColor} />
+                {/* Chevron */}
+                <div
+                  style={{
+                    padding: 'var(--slds-g-spacing-1) 6px',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center'
+                  }}
+                >
+                  <ChevronDownIcon
+                    size={16}
+                    color="var(--slds-g-color-on-surface-1)"
+                    style={{
+                      transform: isExpanded ? 'rotate(0deg)' : 'rotate(-90deg)',
+                      transition: 'transform var(--slds-g-transition-base)'
+                    }}
+                  />
+                </div>
+
+                {/* Title */}
+                <div style={{ flex: 1, minWidth: 0 }}>
+                  <p
+                    style={{
+                      fontFamily: 'var(--slds-g-font-family)',
+                      fontSize: 'var(--slds-g-font-scale-1)',
+                      fontWeight: 'var(--slds-g-font-weight-4)',
+                      lineHeight: '19px',
+                      color: 'var(--slds-g-color-on-surface-1)',
+                      margin: 0
+                    }}
+                  >
+                    {title}
+                  </p>
+                </div>
+
+                {/* Badge */}
+                <span
+                  className="slds-badge"
+                  style={{
+                    display: 'inline-flex',
+                    alignItems: 'center',
+                    gap: 'var(--slds-g-spacing-1)',
+                    padding: 'var(--slds-g-spacing-1) var(--slds-g-spacing-2)',
+                    borderRadius: 'var(--slds-g-radius-border-2)',
+                    fontFamily: 'var(--slds-g-font-family)',
+                    fontSize: 'var(--slds-g-font-scale-neg-1)',
+                    fontWeight: 'var(--slds-g-font-weight-6)',
+                    lineHeight: '17px',
+                    ...badgeStyle
+                  }}
+                >
+                  <AlertTriangleIcon size={12} color={badgeStyle.color} />
+                  <span>Warning</span>
+                </span>
               </div>
-              <span
-                style={{
-                  fontFamily: 'var(--slds-g-font-family)',
-                  fontSize: 'var(--slds-g-font-scale-neg-1)',
-                  fontWeight: 'var(--slds-g-font-weight-6)',
-                  lineHeight: '17px',
-                  color: '#2E844A',
-                  padding: '2px var(--slds-g-spacing-2)',
-                  backgroundColor: 'transparent',
-                  borderRadius: 'var(--slds-g-radius-border-1)'
-                }}
-              >
-                {scoreImpact}
-              </span>
+
+              {/* PUDA Steps Content - Expanded */}
+              {isExpanded && (
+                <div
+                  className="slds-card"
+                  style={{
+                    backgroundColor: '#FFFFFF',
+                    borderRadius: 'var(--slds-g-radius-border-3)',
+                    padding: 0,
+                    marginTop: 'var(--slds-g-spacing-3)'
+                  }}
+                >
+                  <div style={{ padding: 'var(--slds-g-spacing-2)' }}>
+                    {/* Step with Checkbox */}
+                    <div className="slds-grid" style={{ gap: 'var(--slds-g-spacing-2)' }}>
+                      {/* Status Column - Checkbox with Line */}
+                      <div
+                        style={{
+                          display: 'flex',
+                          flexDirection: 'column',
+                          alignItems: 'center',
+                          width: '26px',
+                          flexShrink: 0
+                        }}
+                      >
+                        {/* Top Line (hidden for first step) */}
+                        <div
+                          style={{
+                            width: '2px',
+                            height: '4px',
+                            backgroundColor: 'var(--slds-g-color-border-1)',
+                            opacity: 0
+                          }}
+                        />
+                        {/* Checkbox Button */}
+                        <div
+                          style={{
+                            width: '24px',
+                            height: '24px',
+                            borderRadius: 'var(--slds-g-radius-border-1)',
+                            backgroundColor: '#056764',
+                            border: '1px solid #056764',
+                            display: 'flex',
+                            alignItems: 'center',
+                            justifyContent: 'center',
+                            flexShrink: 0
+                          }}
+                        >
+                          <CheckIcon size={16} color="#FFFFFF" />
+                        </div>
+                        {/* Bottom Line */}
+                        <div
+                          style={{
+                            width: '2px',
+                            flex: 1,
+                            minHeight: '4px',
+                            backgroundColor: 'var(--slds-g-color-border-1)',
+                            opacity: 0
+                          }}
+                        />
+                      </div>
+
+                      {/* Step Detail */}
+                      <div style={{ flex: 1, minWidth: 0, paddingBottom: 'var(--slds-g-spacing-2)' }}>
+                        <div
+                          className="slds-grid slds-grid_align-spread slds-grid_vertical-align-start"
+                          style={{
+                            gap: 'var(--slds-g-spacing-6)',
+                            alignItems: 'flex-start'
+                          }}
+                        >
+                          {/* Title and Description */}
+                          <div style={{ flex: 1, minWidth: 0, paddingTop: 'var(--slds-g-spacing-1)' }}>
+                            <h4
+                              style={{
+                                fontFamily: 'var(--slds-g-font-family)',
+                                fontSize: 'var(--slds-g-font-scale-2)',
+                                fontWeight: 'var(--slds-g-font-weight-6)',
+                                lineHeight: '22px',
+                                color: '#444444',
+                                marginBottom: 'var(--slds-g-spacing-1)',
+                                marginTop: 0
+                              }}
+                            >
+                              {stepTitle}
+                            </h4>
+                            <p
+                              style={{
+                                fontFamily: 'var(--slds-g-font-family)',
+                                fontSize: 'var(--slds-g-font-scale-1)',
+                                fontWeight: 'var(--slds-g-font-weight-4)',
+                                lineHeight: '19px',
+                                color: '#444444',
+                                margin: 0
+                              }}
+                            >
+                              {stepDescription}
+                            </p>
+                          </div>
+
+                          {/* Quick Fix Button */}
+                          <div style={{ flexShrink: 0 }}>
+                            <button
+                              type="button"
+                              className="slds-button slds-button_neutral"
+                              style={{
+                                padding: 'var(--slds-g-spacing-2) var(--slds-g-spacing-3)',
+                                fontFamily: 'var(--slds-g-font-family)',
+                                fontSize: 'var(--slds-g-font-scale-base)',
+                                fontWeight: 'var(--slds-g-font-weight-4)',
+                                lineHeight: '18px',
+                                borderRadius: 'var(--slds-g-radius-border-2)',
+                                border: '1px solid var(--slds-g-color-border-2)',
+                                color: 'rgba(2, 80, 217, 1)',
+                                backgroundColor: '#FFFFFF',
+                                transition: 'all var(--slds-g-transition-base)'
+                              }}
+                              onMouseEnter={(e) => {
+                                e.currentTarget.style.backgroundColor = 'var(--slds-g-color-neutral-base-95)';
+                              }}
+                              onMouseLeave={(e) => {
+                                e.currentTarget.style.backgroundColor = '#FFFFFF';
+                              }}
+                            >
+                              Quick Fix
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              )}
             </div>
-
-            {/* Title */}
-            <h4
-              style={{
-                fontFamily: 'var(--slds-g-font-family)',
-                fontSize: 'var(--slds-g-font-scale-1)',
-                fontWeight: 'var(--slds-g-font-weight-6)',
-                lineHeight: '19px',
-                color: 'var(--slds-g-color-on-surface-1)',
-                marginBottom: 'var(--slds-g-spacing-1)',
-                marginTop: 0
-              }}
-            >
-              {title}
-            </h4>
-
-            {/* Description */}
-            <p
-              style={{
-                fontFamily: 'var(--slds-g-font-family)',
-                fontSize: 'var(--slds-g-font-scale-neg-1)',
-                fontWeight: 'var(--slds-g-font-weight-4)',
-                lineHeight: '17px',
-                color: 'var(--slds-g-color-on-surface-1)',
-                marginBottom: 'var(--slds-g-spacing-3)',
-                marginTop: 0
-              }}
-            >
-              {description}
-            </p>
-
-            {/* Action Button - SLDS Cosmos Button */}
-            <button
-              type="button"
-              className="slds-button slds-button_brand"
-              style={{
-                width: '100%',
-                padding: 'var(--slds-g-spacing-2) var(--slds-g-spacing-3)',
-                fontSize: 'var(--slds-g-font-scale-neg-1)',
-                fontWeight: 'var(--slds-g-font-weight-6)',
-                fontFamily: 'var(--slds-g-font-family)',
-                lineHeight: '18px',
-                borderRadius: 'var(--slds-g-radius-border-2)',
-                transition: 'all var(--slds-g-transition-base)'
-              }}
-            >
-              Resolve
-            </button>
-          </div>
-        ))}
+          );
+        })}
       </div>
-
     </div>
   );
 }
