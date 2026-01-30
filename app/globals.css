@@ -274,3 +274,98 @@ body {
     transform: translateY(0);
   }
 }
+
+/* ==========================================
+   SLDS Tabs (Cosmos Pattern)
+========================================== */
+.slds-tabs_default {
+  background-color: var(--slds-g-color-neutral-base-100);
+  border-bottom: 1px solid var(--slds-g-color-border-2);
+}
+
+.slds-tabs_default__nav {
+  display: flex;
+  align-items: flex-end;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  border-bottom: 1px solid var(--slds-g-color-border-2);
+}
+
+.slds-tabs_default__item {
+  position: relative;
+  margin-bottom: -1px;
+}
+
+.slds-tabs_default__item.slds-is-active {
+  border-bottom: 2px solid #0176D3;
+}
+
+.slds-tabs_default__link {
+  display: flex;
+  align-items: center;
+  padding: 0 1rem;
+  height: 2.5rem;
+  color: #444444;
+  font-family: var(--slds-g-font-family);
+  font-size: 0.8125rem; /* 13px */
+  font-weight: 400;
+  line-height: 1.5;
+  text-decoration: none;
+  border: 0;
+  border-bottom: 2px solid transparent;
+  background-color: transparent;
+  cursor: pointer;
+  transition: background-color 0.15s ease-in-out, border-color 0.15s ease-in-out;
+  white-space: nowrap;
+}
+
+.slds-tabs_default__item.slds-is-active .slds-tabs_default__link {
+  color: #0176D3;
+  font-weight: 600;
+  border-bottom-color: #0176D3;
+}
+
+.slds-tabs_default__link:hover {
+  background-color: #f3f3f2;
+  border-bottom-color: rgba(1, 118, 211, 0.3);
+}
+
+.slds-tabs_default__item.slds-is-active .slds-tabs_default__link:hover {
+  background-color: transparent;
+  border-bottom-color: #0176D3;
+}
+
+.slds-tabs_default__link:focus {
+  outline: 2px solid #0176D3;
+  outline-offset: -2px;
+}
+
+.slds-tabs_default__link:focus:not(:focus-visible) {
+  outline: none;
+}
+
+/* Badge styling for tabs */
+.slds-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 0.5rem;
+  min-width: 1.25rem;
+  height: 1.125rem;
+  border-radius: 0.5rem;
+  font-size: 0.6875rem; /* 11px */
+  font-weight: 600;
+  line-height: 1;
+  background-color: #C9C9C9;
+  color: #5C5C5C;
+}
+
+.slds-tabs_default__item.slds-is-active .slds-badge {
+  background-color: #0176D3;
+  color: #FFFFFF;
+}
+
+.slds-m-left_x-small {
+  margin-left: 0.25rem; /* 4px */
+}
