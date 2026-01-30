@@ -96,6 +96,15 @@ export function PageHeader({ onRunScan, isScanning }: PageHeaderProps) {
           className="slds-button slds-button_neutral"
           onClick={onRunScan}
           disabled={isScanning}
+          style={{
+            display: 'flex',
+            flexDirection: 'row',
+            justifyContent: 'center',
+            alignItems: 'center',
+            padding: '0px',
+            width: '70px',
+            height: '32px',
+          }}
         >
           {isScanning ? (
             <LoaderIcon
