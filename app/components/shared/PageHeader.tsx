@@ -12,7 +12,7 @@ export function PageHeader({ onRunScan, isScanning }: PageHeaderProps) {
     <div
       className="slds-page-header slds-page-header_record-home slds-page-header_sticky"
       style={{
-        backgroundColor: 'var(--slds-g-color-surface-container-2, #F3F3F3)',
+        backgroundColor: 'rgba(243, 243, 243, 1)',
         padding: 'var(--slds-g-spacing-4, 16px) var(--slds-g-spacing-6, 24px)',
         display: 'flex',
         alignItems: 'center',
