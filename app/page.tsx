@@ -160,7 +160,7 @@ export default function DataCurationPage() {
     <div 
       style={{
         minHeight: '100vh',
-        backgroundColor: 'rgba(243, 243, 243, 1)',
+        backgroundColor: '#FFFFFF',
         display: 'flex',
         flexDirection: 'column'
       }}
@@ -174,7 +174,7 @@ export default function DataCurationPage() {
         overflow: activeTab === "curation" ? "hidden" : 'auto', 
         display: 'flex', 
         flexDirection: 'column',
-        backgroundColor: 'rgba(243, 243, 243, 1)',
+        backgroundColor: '#FFFFFF',
         padding: 'var(--slds-g-spacing-4, 16px)',
       }}>
         <article className="slds-card" style={{ maxWidth: '1440px', margin: '0 auto', width: '100%', display: 'flex', flexDirection: 'column', flex: 1 }}>
