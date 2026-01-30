@@ -876,7 +876,15 @@ body {
   top: auto !important;
 }
 
-/* Note: slds-button_brand keeps absolute positioning for specific use cases */
+/* Override absolute positioning for buttons in cards, tables, and other containers */
+.slds-card .slds-button,
+.slds-table .slds-button,
+.slds-page-header .slds-button,
+.slds-tabs_default .slds-button {
+  position: relative !important;
+  left: auto !important;
+  top: auto !important;
+}
 
 .slds-button_icon-border-filled {
   height: auto;
