@@ -319,42 +319,22 @@ export function DataChunkCard({
             }}
           >
             <button
+              type="button"
+              className="slds-button slds-button_neutral"
               onClick={(e) => {
                 e.stopPropagation();
                 handleCancel();
               }}
-            style={{
-              padding: '6px var(--slds-g-spacing-3)', // 6px 12px
-              borderRadius: 'var(--slds-g-radius-border-1)', // 4px
-              border: '1px solid var(--slds-g-color-border-1)', // #C9C9C9
-              backgroundColor: 'var(--slds-g-color-neutral-base-100)', // #FFFFFF
-              color: 'var(--slds-g-color-on-surface-2)', // #2E2E2E
-              fontSize: 'var(--slds-g-font-scale-base)', // 13px
-              fontWeight: 'var(--slds-g-font-weight-6)', // 590
-              fontFamily: 'var(--slds-g-font-family)',
-              lineHeight: 'var(--slds-g-line-height-body-base)', // 18px
-              cursor: 'pointer',
-            }}
             >
               Cancel
             </button>
             <button
+              type="button"
+              className="slds-button slds-button_brand"
               onClick={(e) => {
                 e.stopPropagation();
                 handleSave();
               }}
-            style={{
-              padding: '6px var(--slds-g-spacing-3)', // 6px 12px
-              borderRadius: 'var(--slds-g-radius-border-1)', // 4px
-              border: 'none',
-              backgroundColor: 'var(--slds-g-color-brand-base-50)', // #0176D3
-              color: 'var(--slds-g-color-icon-white)', // #FFFFFF
-              fontSize: 'var(--slds-g-font-scale-base)', // 13px
-              fontWeight: 'var(--slds-g-font-weight-6)', // 590
-              fontFamily: 'var(--slds-g-font-family)',
-              lineHeight: 'var(--slds-g-line-height-body-base)', // 18px
-              cursor: 'pointer',
-            }}
             >
               Save
             </button>

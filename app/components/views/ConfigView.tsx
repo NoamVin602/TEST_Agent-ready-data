@@ -52,13 +52,7 @@ export function ConfigView() {
             className="slds-button slds-button_brand"
             onClick={handleSave}
             style={{
-              display: 'inline-flex',
-              alignItems: 'center',
-              gap: 'var(--slds-g-spacing-2)',
-              fontFamily: 'var(--slds-g-font-family)',
-              fontSize: 'var(--slds-g-font-scale-base)',
-              fontWeight: 'var(--slds-g-font-weight-6)',
-              lineHeight: '18px'
+              gap: '0.5rem'
             }}
           >
             <SaveIcon size={16} color="#FFFFFF" />

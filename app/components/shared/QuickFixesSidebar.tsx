@@ -293,24 +293,6 @@ export function QuickFixesSidebar() {
                             <button
                               type="button"
                               className="slds-button slds-button_neutral"
-                              style={{
-                                padding: 'var(--slds-g-spacing-2) var(--slds-g-spacing-3)',
-                                fontFamily: 'var(--slds-g-font-family)',
-                                fontSize: 'var(--slds-g-font-scale-base)',
-                                fontWeight: 'var(--slds-g-font-weight-4)',
-                                lineHeight: '18px',
-                                borderRadius: 'var(--slds-g-radius-border-2)',
-                                border: '1px solid var(--slds-g-color-border-2)',
-                                color: 'rgba(2, 80, 217, 1)',
-                                backgroundColor: '#FFFFFF',
-                                transition: 'all var(--slds-g-transition-base)'
-                              }}
-                              onMouseEnter={(e) => {
-                                e.currentTarget.style.backgroundColor = 'var(--slds-g-color-neutral-base-95)';
-                              }}
-                              onMouseLeave={(e) => {
-                                e.currentTarget.style.backgroundColor = '#FFFFFF';
-                              }}
                             >
                               Quick Fix
                             </button>

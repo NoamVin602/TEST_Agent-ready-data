@@ -624,3 +624,109 @@ body {
   display: inline-block;
   line-height: 1.25;
 }
+
+/* ==========================================
+   SLDS Buttons (Cosmos Pattern)
+   Scoped to prevent affecting tabs, badges, or icon-only buttons
+========================================== */
+.slds-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 2rem; /* 32px */
+  padding: 0 1rem; /* 16px horizontal */
+  font-family: var(--slds-g-font-family);
+  font-size: 0.8125rem; /* 13px */
+  font-weight: 400;
+  line-height: 1.5;
+  border-radius: 0.25rem; /* 4px */
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, color 0.15s ease-in-out;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.slds-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.slds-button:focus {
+  outline: 2px solid #0176D3;
+  outline-offset: 2px;
+}
+
+.slds-button:focus:not(:focus-visible) {
+  outline: none;
+}
+
+/* Primary Button (Brand) */
+.slds-button_brand {
+  background-color: #0176D3;
+  color: #FFFFFF;
+  border-color: #0176D3;
+}
+
+.slds-button_brand:hover:not(:disabled) {
+  background-color: #014486;
+  border-color: #014486;
+}
+
+.slds-button_brand:active:not(:disabled) {
+  background-color: #014486;
+  border-color: #014486;
+}
+
+.slds-button_brand:disabled {
+  background-color: #C9C9C9;
+  border-color: #C9C9C9;
+  color: #FFFFFF;
+}
+
+/* Secondary Button (Neutral) */
+.slds-button_neutral {
+  background-color: #FFFFFF;
+  color: #0176D3;
+  border-color: #747474;
+}
+
+.slds-button_neutral:hover:not(:disabled) {
+  background-color: #f3f3f2;
+  border-color: #747474;
+}
+
+.slds-button_neutral:active:not(:disabled) {
+  background-color: #f3f3f2;
+  border-color: #747474;
+}
+
+.slds-button_neutral:disabled {
+  background-color: #FFFFFF;
+  border-color: #C9C9C9;
+  color: #747474;
+}
+
+/* Protection: Do NOT apply button styles to tab links or badges */
+.slds-tabs_default__link,
+.slds-badge,
+.slds-button_icon,
+.slds-button_icon-small,
+.slds-button_icon-border-filled {
+  /* These elements should not inherit .slds-button styles */
+}
+
+/* Ensure icon buttons maintain their specific styling */
+.slds-button_icon,
+.slds-button_icon-small {
+  height: auto;
+  padding: 0.25rem;
+  border-radius: 0.25rem;
+  background-color: transparent;
+  border: none;
+}
+
+.slds-button_icon-border-filled {
+  height: auto;
+  padding: 0.25rem;
+}

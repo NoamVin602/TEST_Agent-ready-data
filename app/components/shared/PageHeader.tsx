@@ -93,57 +93,23 @@ export function PageHeader({ onRunScan, isScanning }: PageHeaderProps) {
       >
         <button
           type="button"
+          className="slds-button slds-button_brand"
           onClick={onRunScan}
           disabled={isScanning}
           style={{
-            display: 'inline-flex',
-            alignItems: 'center',
-            gap: '8px',
-            padding: '6px 16px',
-            height: '32px',
-            borderRadius: '16px',
-            border: '1px solid #C9C9C9',
-            backgroundColor: '#FFFFFF',
-            color: 'rgba(2, 80, 217, 1)',
-            fontFamily: "'SF Pro', -apple-system, BlinkMacSystemFont, sans-serif",
-            fontSize: '13px',
-            fontWeight: 590,
-            lineHeight: '19px',
-            cursor: isScanning ? 'not-allowed' : 'pointer',
-            opacity: isScanning ? 0.7 : 1,
-            transition: 'background-color 0.15s ease-in-out, border-color 0.15s ease-in-out',
-            outline: 'none',
-          }}
-          onMouseEnter={(e) => {
-            if (!isScanning) {
-              e.currentTarget.style.backgroundColor = '#F3F3F3';
-            }
-          }}
-          onMouseLeave={(e) => {
-            if (!isScanning) {
-              e.currentTarget.style.backgroundColor = '#FFFFFF';
-            }
-          }}
-          onFocus={(e) => {
-            if (!isScanning) {
-              e.currentTarget.style.outline = '2px solid rgba(2, 80, 217, 1)';
-              e.currentTarget.style.outlineOffset = '2px';
-            }
-          }}
-          onBlur={(e) => {
-            e.currentTarget.style.outline = 'none';
+            gap: '0.5rem'
           }}
         >
           {isScanning ? (
             <LoaderIcon
               size={14}
-              color="rgba(2, 80, 217, 1)"
+              color="#FFFFFF"
               style={{ animation: 'spin 1s linear infinite' }}
             />
           ) : (
             <PlayIcon
               size={14}
-              color="rgba(2, 80, 217, 1)"
+              color="#FFFFFF"
             />
           )}
           <span>{isScanning ? 'Scanning...' : 'Run Scan'}</span>
