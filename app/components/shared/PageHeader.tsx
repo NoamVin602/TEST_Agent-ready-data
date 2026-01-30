@@ -1,7 +1,6 @@
 "use client";
 
-import { MetricsIcon, PlayIcon } from "../../lib/slds-icons";
-import { Spinner } from "./Spinner";
+import { MetricsIcon, PlayIcon, LoaderIcon } from "../../lib/slds-icons";
 
 interface PageHeaderProps {
   onRunScan: () => void;
@@ -67,9 +66,12 @@ export function PageHeader({ onRunScan, isScanning }: PageHeaderProps) {
             >
               {isScanning ? (
                 <>
-                  <span className="slds-button__icon slds-button__icon_left" style={{ display: 'inline-flex', alignItems: 'center' }}>
-                    <Spinner size="x-small" variant="brand" inline aria-label="Scanning" />
-                  </span>
+                  <LoaderIcon
+                    size={14}
+                    color="var(--slds-g-color-accent-2, #0250d9)"
+                    className="slds-button__icon slds-button__icon_left"
+                    style={{ animation: 'spin 1s linear infinite' }}
+                  />
                   <span>Scanning...</span>
                 </>
               ) : (
