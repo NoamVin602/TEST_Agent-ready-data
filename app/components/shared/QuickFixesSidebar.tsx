@@ -97,7 +97,7 @@ export function QuickFixesSidebar() {
       <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--slds-g-spacing-3)' }}>
         {QUICK_FIXES.map(({ id, title, description, scoreImpact, stepTitle, stepDescription, badgeType }) => {
           const isExpanded = expandedItems.includes(id);
-          const badgeStyle = getBadgeStyle(badgeType);
+          // Badge className is now handled directly in the JSX
 
           return (
             <div
