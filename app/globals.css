@@ -645,17 +645,21 @@ body {
    SLDS Page Header (Cosmos Pattern)
 ========================================== */
 .slds-page-header {
-  background-color: #f3f3f2;
-  border-bottom: 1px solid #dddbda;
-  padding: 1rem 1.5rem;
+  background-color: #FFFFFF;
+  border-bottom: 1px solid var(--slds-g-color-border-1, #dddbda);
+  padding: var(--slds-g-spacing-4, 1rem) var(--slds-g-spacing-6, 1.5rem);
   box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.1);
+}
+
+.slds-page-header_record-home {
+  /* Record Home variant styling */
 }
 
 .slds-page-header__row {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 1rem;
+  gap: var(--slds-g-spacing-4, 1rem);
 }
 
 .slds-page-header__col-title {
@@ -674,27 +678,55 @@ body {
 .slds-page-header__controls {
   display: flex;
   align-items: center;
-  gap: 0.5rem;
+  gap: var(--slds-g-spacing-2, 0.5rem);
 }
 
 .slds-page-header__title {
-  font-size: 1.25rem;
-  font-weight: 400;
-  line-height: 1.75rem;
-  color: #181818;
+  font-family: var(--slds-g-font-family);
+  font-size: var(--slds-g-font-scale-3, 1.25rem);
+  font-weight: var(--slds-g-font-weight-4, 400);
+  line-height: var(--slds-g-line-height-heading, 1.75rem);
+  color: var(--slds-g-color-on-surface-3, #181818);
   margin: 0;
 }
 
 .slds-page-header__name-meta {
-  font-size: 0.875rem;
-  font-weight: 400;
-  line-height: 1.25rem;
-  color: #747474;
-  margin-top: 0.25rem;
+  font-family: var(--slds-g-font-family);
+  font-size: var(--slds-g-font-scale-1, 0.875rem);
+  font-weight: var(--slds-g-font-weight-4, 400);
+  line-height: var(--slds-g-line-height-body, 1.25rem);
+  color: var(--slds-g-color-on-surface-2, #747474);
+  margin-top: var(--slds-g-spacing-1, 0.25rem);
 }
 
 .slds-page-header__col-meta {
-  margin-top: 0.5rem;
+  margin-top: var(--slds-g-spacing-2, 0.5rem);
+}
+
+/* Media Object for Page Header */
+.slds-page-header .slds-media {
+  align-items: center;
+}
+
+.slds-page-header .slds-media__figure {
+  margin-right: var(--slds-g-spacing-3, 0.75rem);
+  flex-shrink: 0;
+}
+
+.slds-page-header .slds-media__body {
+  flex: 1 1 0%;
+  min-width: 0;
+}
+
+/* Icon Container for Page Header */
+.slds-icon_container {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.slds-icon-standard-record {
+  /* Standard record icon styling */
 }
 
 /* Standard Salesforce Icon Container */
@@ -735,16 +767,11 @@ body {
    Scoped to prevent affecting tabs, badges, or icon-only buttons
 ========================================== */
 .slds-button {
-  display: flex;
-  flex-direction: row;
+  display: inline-flex;
+  align-items: center;
   justify-content: center;
-  align-items: flex-end;
-  padding: 0px;
-  position: absolute;
-  width: 70px;
-  height: 32px;
-  left: 20px;
-  top: 20px;
+  height: 2rem; /* 32px */
+  padding: 0 1rem; /* 16px horizontal */
   font-family: var(--slds-g-font-family);
   font-size: 0.8125rem; /* 13px */
   font-weight: 400;
@@ -842,7 +869,7 @@ body {
 /* Override absolute positioning for buttons in cards, tables, and other containers */
 .slds-card .slds-button,
 .slds-table .slds-button,
-.slds-page-header .slds-button:not(.slds-button_run-scan),
+.slds-page-header .slds-button,
 .slds-tabs_default .slds-button {
   position: relative !important;
   left: auto !important;
