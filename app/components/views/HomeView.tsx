@@ -1,6 +1,6 @@
 "use client";
 
-import { AlertTriangleIcon, ClockIcon, CopyIcon, FileEditIcon, SearchIcon, SparklesIcon, ActivityIcon, ChevronDownIcon, DatabaseIcon, TrendingUpIcon } from "../../lib/slds-icons";
+import { AlertTriangleIcon, ClockIcon, CopyIcon, FileEditIcon, SearchIcon, SparklesIcon, ActivityIcon, ChevronDownIcon, DatabaseIcon, TrendingUpIcon, MetricsIcon } from "../../lib/slds-icons";
 import { DataHealthDonut } from "../dashboard/DataHealthDonut";
 import { DataHealthLineChart } from "../dashboard/DataHealthLineChart";
 import { MetricCard } from "../dashboard/MetricCard";
@@ -230,11 +230,8 @@ export function HomeView({ onMetricClick }: HomeViewProps) {
             </header>
           </div>
 
-        {/* Main Card Container */}
-        <div className="slds-card" style={{ borderRadius: 'var(--slds-g-radius-border-4)', backgroundColor: '#FFFFFF', border: 'none', boxShadow: 'none' }}>
-
           {/* Card Body */}
-          <div className="slds-card__body" style={{ padding: '0 var(--slds-g-spacing-4) var(--slds-g-spacing-4)' }}>
+          <div className="slds-card__body slds-card__body_inner">
             {/* Charts Section - Two nested cards side by side */}
             <div
               className="slds-grid"
