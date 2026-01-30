@@ -374,8 +374,8 @@ body {
    SLDS Tabs (Cosmos Pattern)
 ========================================== */
 .slds-tabs_default {
-  background-color: var(--slds-g-color-neutral-base-100);
-  border-bottom: 1px solid var(--slds-g-color-border-2);
+  background-color: transparent;
+  border-bottom: 1px solid var(--slds-g-color-border-2, #dddbda);
 }
 
 .slds-tabs_default__nav {

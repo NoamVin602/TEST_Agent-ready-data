@@ -160,7 +160,7 @@ export default function DataCurationPage() {
     <div 
       style={{
         minHeight: '100vh',
-        backgroundColor: 'var(--slds-g-color-surface-container-2)',
+        backgroundColor: 'rgba(229, 229, 229, 1)',
         display: 'flex',
         flexDirection: 'column'
       }}
@@ -168,22 +168,30 @@ export default function DataCurationPage() {
       {/* Page Header */}
       <PageHeader onRunScan={handleRunScan} isScanning={isScanning} />
       
-      {/* Tab Navigation */}
-      <TabNavigation 
-        tabs={TABS} 
-        activeTab={activeTab} 
-        onTabChange={setActiveTab} 
-      />
-
-      {/* Tab Content - SLDS Surface Container Background */}
+      {/* Main Card Container with Tabs Inside */}
       <div style={{ 
         flex: 1, 
         overflow: activeTab === "curation" ? "hidden" : 'auto', 
         display: 'flex', 
         flexDirection: 'column',
-        backgroundColor: 'var(--slds-g-color-surface-container-1, #FFFFFF)'
+        backgroundColor: 'rgba(229, 229, 229, 1)',
+        padding: 'var(--slds-g-spacing-4, 16px)',
       }}>
-        {renderTabContent()}
+        <article className="slds-card" style={{ maxWidth: '1440px', margin: '0 auto', width: '100%', display: 'flex', flexDirection: 'column', flex: 1 }}>
+          {/* Tabs in Card Header */}
+          <div className="slds-card__header" style={{ padding: 0, borderBottom: 'none' }}>
+            <TabNavigation 
+              tabs={TABS} 
+              activeTab={activeTab} 
+              onTabChange={setActiveTab} 
+            />
+          </div>
+
+          {/* Tab Content in Card Body */}
+          <div className="slds-card__body slds-card__body_inner" style={{ flex: 1, padding: 'var(--slds-g-spacing-4, 16px)', overflow: activeTab === "curation" ? "hidden" : 'auto' }}>
+            {renderTabContent()}
+          </div>
+        </article>
       </div>
 
       {/* Scan Progress Modal */}

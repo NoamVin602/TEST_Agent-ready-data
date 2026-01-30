@@ -21,51 +21,35 @@ export function TabNavigation({ tabs, activeTab, onTabChange }: TabNavigationPro
   };
 
   return (
-    <div
-      className="slds-tabs_default"
-      style={{
-        position: 'sticky',
-        top: '64px', // Sticks below PageHeader (64px) within scrollable area
-        zIndex: 899,
-        width: '100%',
-      }}
-    >
-      <div
-        style={{
-          maxWidth: '1440px',
-          margin: '0 auto',
-          width: '100%',
-        }}
-      >
-        <ul className="slds-tabs_default__nav" role="tablist">
-          {tabs.map((tab) => {
-            const isActive = activeTab === tab.id;
-            return (
-              <li
-                key={tab.id}
-                className={`slds-tabs_default__item ${isActive ? 'slds-is-active' : ''}`}
-                role="presentation"
+    <div className="slds-tabs_default" style={{ width: '100%' }}>
+      <ul className="slds-tabs_default__nav" role="tablist">
+        {tabs.map((tab) => {
+          const isActive = activeTab === tab.id;
+          return (
+            <li
+              key={tab.id}
+              className={`slds-tabs_default__item ${isActive ? 'slds-is-active' : ''}`}
+              role="presentation"
+            >
+              <a
+                className="slds-tabs_default__link"
+                role="tab"
+                href={`#${tab.id}`}
+                aria-selected={isActive}
+                aria-controls={`tab-${tab.id}`}
+                onClick={(e) => handleTabClick(e, tab.id)}
               >
-                <a
-                  className="slds-tabs_default__link"
-                  role="tab"
-                  href={`#${tab.id}`}
-                  aria-selected={isActive}
-                  aria-controls={`tab-${tab.id}`}
-                  onClick={(e) => handleTabClick(e, tab.id)}
-                >
-                  <span>{tab.label}</span>
-                  {tab.count !== undefined && (
-                    <span className="slds-badge slds-m-left_x-small">
-                      {tab.count}
-                    </span>
-                  )}
-                </a>
-              </li>
-            );
-          })}
-        </ul>
-      </div>
+                <span>{tab.label}</span>
+                {tab.count !== undefined && (
+                  <span className="slds-badge slds-m-left_x-small">
+                    {tab.count}
+                  </span>
+                )}
+              </a>
+            </li>
+          );
+        })}
+      </ul>
     </div>
   );
 }

@@ -161,14 +161,12 @@ export function HomeView({ onMetricClick }: HomeViewProps) {
     <div 
       className="slds-grid"
       style={{
-        padding: 'var(--slds-g-spacing-4)',
+        padding: 0,
         display: 'flex',
         gap: 'var(--slds-g-spacing-4)',
         height: '100%',
-        maxWidth: '1440px',
-        margin: '0 auto',
         width: '100%',
-        backgroundColor: 'var(--slds-g-color-surface-container-1, #FFFFFF)'
+        backgroundColor: 'transparent'
       }}
     >
       {/* Left Column - Current State Dashboard (75%) */}
