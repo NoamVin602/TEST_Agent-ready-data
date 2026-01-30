@@ -25,19 +25,13 @@ function formatTimestamp(timestamp: string): string {
   return timestamp.replace(/(\d{1,2})\s+(\d{4})/, '$1, $2');
 }
 
-// Parse impact score to determine badge color
-function getImpactScoreBadgeStyle(score: string) {
+// Parse impact score to determine badge theme
+function getImpactScoreBadgeTheme(score: string): string {
   const numScore = parseInt(score.replace(/[^0-9-]/g, ''));
   if (numScore > 0) {
-    return {
-      backgroundColor: '#E8F5EC',
-      color: '#2E844A'
-    };
+    return "slds-badge slds-theme_success";
   }
-  return {
-    backgroundColor: '#F3F3F3',
-    color: '#444444'
-  };
+  return "slds-badge";
 }
 
 export function RecentActivityTable({ activities }: RecentActivityTableProps) {
@@ -190,17 +184,7 @@ export function RecentActivityTable({ activities }: RecentActivityTableProps) {
                     </div>
                   </td>
                   <td style={{ textAlign: 'right' }}>
-                    <span 
-                      className="slds-badge"
-                      style={{
-                        ...getImpactScoreBadgeStyle(activity.impactScore),
-                        fontSize: '0.75rem',
-                        fontWeight: 600,
-                        padding: '0.125rem 0.5rem',
-                        borderRadius: '0.25rem',
-                        display: 'inline-block'
-                      }}
-                    >
+                    <span className={getImpactScoreBadgeTheme(activity.impactScore)}>
                       {activity.impactScore}
                     </span>
                   </td>

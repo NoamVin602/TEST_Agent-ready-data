@@ -93,26 +93,10 @@ export function ActivityView() {
         >
           Activity Log
         </h2>
-        <div
-          className="slds-badge"
-          style={{
-            display: 'inline-flex',
-            alignItems: 'center',
-            gap: 'var(--slds-g-spacing-1)',
-            padding: 'var(--slds-g-spacing-1) var(--slds-g-spacing-2)',
-            border: '1px solid var(--slds-g-color-border-2)',
-            borderRadius: 'var(--slds-g-radius-border-2)',
-            backgroundColor: 'var(--slds-g-color-neutral-base-100)',
-            fontFamily: 'var(--slds-g-font-family)',
-            fontSize: 'var(--slds-g-font-scale-neg-1)',
-            fontWeight: 'var(--slds-g-font-weight-4)',
-            lineHeight: '17px',
-            color: 'var(--slds-g-color-on-surface-1)'
-          }}
-        >
-          <ClockIcon size={12} color="var(--slds-g-color-on-surface-1)" />
+        <span className="slds-badge" style={{ display: 'inline-flex', alignItems: 'center', gap: '0.25rem' }}>
+          <ClockIcon size={12} color="currentColor" />
           <span>Last 24 hours</span>
-        </div>
+        </span>
       </div>
 
       {/* Activity List */}

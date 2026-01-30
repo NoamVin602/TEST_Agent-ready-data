@@ -43,26 +43,14 @@ export function QuickFixesSidebar() {
     );
   };
 
-  const getBadgeStyle = (badgeType: string) => {
+  const getBadgeClassName = (badgeType: string) => {
     switch (badgeType) {
       case "warning":
-        return {
-          backgroundColor: 'var(--slds-g-color-warning-tint)',
-          color: 'var(--slds-g-color-warning-base-50)',
-          border: '1px solid var(--slds-g-color-warning-base-50)'
-        };
+        return "slds-badge slds-theme_warning";
       case "error":
-        return {
-          backgroundColor: 'var(--slds-g-color-error-tint)',
-          color: 'var(--slds-g-color-error-base-50)',
-          border: '1px solid var(--slds-g-color-error-base-50)'
-        };
+        return "slds-badge slds-theme_error";
       default:
-        return {
-          backgroundColor: 'var(--slds-g-color-neutral-base-95)',
-          color: 'var(--slds-g-color-on-surface-1)',
-          border: '1px solid var(--slds-g-color-border-2)'
-        };
+        return "slds-badge";
     }
   };
 
@@ -169,22 +157,8 @@ export function QuickFixesSidebar() {
                 </div>
 
                 {/* Badge */}
-                <span
-                  className="slds-badge"
-                  style={{
-                    display: 'inline-flex',
-                    alignItems: 'center',
-                    gap: 'var(--slds-g-spacing-1)',
-                    padding: 'var(--slds-g-spacing-1) var(--slds-g-spacing-2)',
-                    borderRadius: 'var(--slds-g-radius-border-2)',
-                    fontFamily: 'var(--slds-g-font-family)',
-                    fontSize: 'var(--slds-g-font-scale-neg-1)',
-                    fontWeight: 'var(--slds-g-font-weight-6)',
-                    lineHeight: '17px',
-                    ...badgeStyle
-                  }}
-                >
-                  <AlertTriangleIcon size={12} color={badgeStyle.color} />
+                <span className={getBadgeClassName(badgeType)} style={{ display: 'inline-flex', alignItems: 'center', gap: '0.25rem' }}>
+                  <AlertTriangleIcon size={12} color="currentColor" />
                   <span>Warning</span>
                 </span>
               </div>
