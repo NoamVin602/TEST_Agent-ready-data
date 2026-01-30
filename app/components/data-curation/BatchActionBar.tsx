@@ -2,7 +2,8 @@
 
 import React from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { CheckCircle2, X, Loader2 } from 'lucide-react';
+import { CheckCircle2, X } from 'lucide-react';
+import { Spinner } from '../shared/Spinner';
 
 interface BatchActionBarProps {
   selectedCount: number;
@@ -87,7 +88,9 @@ export function BatchActionBar({
           }}
         >
           {isProcessing ? (
-            <Loader2 size={14} style={{ animation: 'spin 1s linear infinite' }} />
+            <span style={{ display: 'inline-flex', alignItems: 'center', marginRight: '4px' }}>
+              <Spinner size="x-small" variant="base" inline aria-label="Processing" />
+            </span>
           ) : (
             <X size={14} />
           )}
@@ -126,7 +129,9 @@ export function BatchActionBar({
           }}
         >
           {isProcessing ? (
-            <Loader2 size={14} style={{ animation: 'spin 1s linear infinite' }} />
+            <span style={{ display: 'inline-flex', alignItems: 'center', marginRight: '4px' }}>
+              <Spinner size="x-small" variant="inverse" inline aria-label="Processing" />
+            </span>
           ) : (
             <CheckCircle2 size={14} />
           )}

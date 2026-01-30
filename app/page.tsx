@@ -12,6 +12,7 @@ import { ActivityView } from "./components/views/ActivityView";
 import { RunLogView } from "./components/views/RunLogView";
 import { ConfigView } from "./components/views/ConfigView";
 import { DataCurationView } from "./components/data-curation/DataCurationView";
+import { Spinner } from "./components/shared/Spinner";
 import "./globals.css";
 
 // Placeholder for ScanProgressModal
@@ -31,8 +32,13 @@ function ScanProgressModal({ isOpen, onClose, onComplete, isScanning }: any) {
         backgroundColor: 'white',
         padding: '32px',
         borderRadius: '8px',
-        maxWidth: '500px'
+        maxWidth: '500px',
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        gap: '16px'
       }}>
+        {isScanning && <Spinner size="medium" variant="brand" aria-label="Scanning in progress" />}
         <h2>Scanning...</h2>
         <p>{isScanning ? 'Scan in progress...' : 'Scan complete!'}</p>
         <button onClick={onClose} style={{
