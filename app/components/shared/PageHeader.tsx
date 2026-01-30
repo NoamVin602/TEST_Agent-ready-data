@@ -93,23 +93,22 @@ export function PageHeader({ onRunScan, isScanning }: PageHeaderProps) {
       >
         <button
           type="button"
-          className="slds-button slds-button_brand"
+          className="slds-button slds-button_neutral"
           onClick={onRunScan}
           disabled={isScanning}
-          style={{
-            gap: '0.5rem'
-          }}
         >
           {isScanning ? (
             <LoaderIcon
               size={14}
-              color="#FFFFFF"
+              color="rgba(2, 80, 217, 1)"
+              className="slds-button__icon slds-button__icon_left"
               style={{ animation: 'spin 1s linear infinite' }}
             />
           ) : (
             <PlayIcon
               size={14}
-              color="#FFFFFF"
+              color="rgba(2, 80, 217, 1)"
+              className="slds-button__icon slds-button__icon_left"
             />
           )}
           <span>{isScanning ? 'Scanning...' : 'Run Scan'}</span>
