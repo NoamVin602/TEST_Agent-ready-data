@@ -175,13 +175,13 @@ export default function DataCurationPage() {
         onTabChange={setActiveTab} 
       />
 
-      {/* Tab Content - White background to match Figma */}
+      {/* Tab Content - SLDS Surface Container Background */}
       <div style={{ 
         flex: 1, 
         overflow: activeTab === "curation" ? "hidden" : 'auto', 
         display: 'flex', 
         flexDirection: 'column',
-        backgroundColor: '#FFFFFF' // White background to match Figma design
+        backgroundColor: 'var(--slds-g-color-surface-container-1, #FFFFFF)'
       }}>
         {renderTabContent()}
       </div>

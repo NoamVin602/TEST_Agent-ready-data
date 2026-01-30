@@ -55,43 +55,33 @@ export function QuickFixesSidebar() {
   };
 
   return (
-    <div
-      style={{
-        width: '100%',
-        backgroundColor: 'var(--slds-g-color-neutral-base-100)',
-        padding: 'var(--slds-g-spacing-4)',
-        overflowY: 'auto',
-        height: '100%'
-      }}
-    >
-      {/* Header */}
-      <div style={{ marginBottom: 'var(--slds-g-spacing-4)' }}>
-        <h3
-          style={{
-            fontFamily: 'var(--slds-g-font-family)',
-            fontSize: 'var(--slds-g-font-scale-3)',
-            fontWeight: 'var(--slds-g-font-weight-6)',
-            lineHeight: '28px',
-            color: 'var(--slds-g-color-on-surface-3)',
-            marginBottom: '2px',
-            marginTop: 0
-          }}
-        >
-          Quick Fixes
-        </h3>
-        <p
-          style={{
-            fontFamily: 'var(--slds-g-font-family)',
-            fontSize: 'var(--slds-g-font-scale-1)',
-            fontWeight: 'var(--slds-g-font-weight-4)',
-            lineHeight: '19px',
-            color: 'var(--slds-g-color-on-surface-1)',
-            margin: 0
-          }}
-        >
-          3 issues affecting your AI readiness score
-        </p>
+    <article className="slds-card" style={{ height: '100%', display: 'flex', flexDirection: 'column' }}>
+      {/* Card Header */}
+      <div className="slds-card__header">
+        <header className="slds-media slds-media_center slds-has-flexi-truncate">
+          <div className="slds-media__body">
+            <h2 className="slds-card__header-title">
+              Quick Fixes
+            </h2>
+            <p
+              style={{
+                fontFamily: 'var(--slds-g-font-family)',
+                fontSize: 'var(--slds-g-font-scale-1, 14px)',
+                fontWeight: 'var(--slds-g-font-weight-4, 400)',
+                lineHeight: 'var(--slds-g-line-height-body, 19px)',
+                color: 'var(--slds-g-color-on-surface-1, #5C5C5C)',
+                marginTop: 'var(--slds-g-spacing-1, 4px)',
+                marginBottom: 0,
+              }}
+            >
+              3 issues affecting your AI readiness score
+            </p>
+          </div>
+        </header>
       </div>
+
+      {/* Card Body */}
+      <div className="slds-card__body slds-card__body_inner" style={{ flex: 1, overflowY: 'auto' }}>
 
       {/* Quick Fix Cards with PUDA Steps */}
       <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--slds-g-spacing-3)' }}>
@@ -281,6 +271,7 @@ export function QuickFixesSidebar() {
           );
         })}
       </div>
-    </div>
+      </div>
+    </article>
   );
 }

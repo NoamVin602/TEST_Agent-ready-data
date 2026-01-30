@@ -159,6 +159,7 @@ const recentActivityData = [
 export function HomeView({ onMetricClick }: HomeViewProps) {
   return (
     <div 
+      className="slds-grid"
       style={{
         padding: 'var(--slds-g-spacing-4)',
         display: 'flex',
@@ -167,7 +168,7 @@ export function HomeView({ onMetricClick }: HomeViewProps) {
         maxWidth: '1440px',
         margin: '0 auto',
         width: '100%',
-        backgroundColor: '#FFFFFF'
+        backgroundColor: 'var(--slds-g-color-surface-container-1, #FFFFFF)'
       }}
     >
       {/* Left Column - Current State Dashboard (75%) */}
@@ -314,10 +315,8 @@ export function HomeView({ onMetricClick }: HomeViewProps) {
           </div>
         </article>
 
-        {/* Recent Activity - Nested Card */}
-        <div className="slds-card" style={{ borderRadius: 'var(--slds-g-radius-border-3)', backgroundColor: '#FFFFFF', border: '1px solid var(--slds-g-color-border-1)', boxShadow: '0px 0px 2px 0px rgba(0, 0, 0, 0.18), 0px 2px 2px 0px rgba(0, 0, 0, 0.18), 0px -1px 2px 0px rgba(0, 0, 0, 0.1)' }}>
-          <RecentActivityTable activities={recentActivityData} />
-        </div>
+        {/* Recent Activity - Already wrapped in SLDS Card by RecentActivityTable */}
+        <RecentActivityTable activities={recentActivityData} />
       </div>
 
       {/* Right Column - Quick Fixes Panel (25%) */}
