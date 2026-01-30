@@ -11,6 +11,7 @@
   --slds-g-color-brand-base-60: #014486;
   
   /* Surface Colors */
+  --slds-g-color-surface-container-1: #FFFFFF;
   --slds-g-color-surface-container-2: #F3F3F3;
   --slds-g-color-neutral-base-100: #FFFFFF;
   --slds-g-color-neutral-base-95: #F3F3F3;
@@ -800,9 +801,16 @@ body {
 
 /* Primary Button (Brand) */
 .slds-button_brand {
-  background-color: #747474;
-  color: #FFFFFF;
-  border-color: #747474;
+  display: flex;
+  height: 32px;
+  padding: 1px var(--slds-g-spacing-4);
+  justify-content: center;
+  align-items: center;
+  gap: var(--slds-g-spacing-2);
+  border-radius: var(--slds-g-radius-border-circle);
+  border: 1px solid var(--slds-g-color-border-2);
+  background: var(--slds-g-color-surface-container-1);
+  color: inherit;
 }
 
 .slds-button_brand:hover:not(:disabled) {
