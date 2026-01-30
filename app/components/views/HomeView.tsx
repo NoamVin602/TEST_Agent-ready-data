@@ -172,36 +172,53 @@ export function HomeView({ onMetricClick }: HomeViewProps) {
     >
       {/* Left Column - Current State Dashboard (75%) */}
       <div style={{ flex: '0 0 75%', display: 'flex', flexDirection: 'column', gap: 'var(--slds-g-spacing-4)', minWidth: 0 }}>
-        {/* SLDS Page Header */}
-        <div className="slds-page-header">
-          <div className="slds-page-header__row">
-            {/* Title Section */}
-            <div className="slds-page-header__col-title">
-              <div className="slds-media">
-                <div className="slds-media__figure">
-                  <div className="slds-icon-standard-record">
-                    <ActivityIcon 
-                      size={20}
-                      color="#FFFFFF"
-                    />
-                  </div>
-                </div>
-                <div className="slds-media__body">
-                  <h1 className="slds-page-header__title slds-truncate" title="Current State">
-                    Current State
-                  </h1>
-                  <div className="slds-page-header__col-meta">
-                    <p className="slds-page-header__name-meta">
-                      Your knowledge base AI-readiness overview
-                    </p>
-                  </div>
+        {/* Current State Card Header - SLDS Cosmos Pattern */}
+        <article className="slds-card">
+          <div className="slds-card__header">
+            <header className="slds-media slds-media_center slds-has-flexi-truncate">
+              {/* Icon */}
+              <div className="slds-media__figure">
+                <div
+                  style={{
+                    width: '32px',
+                    height: '32px',
+                    borderRadius: 'var(--slds-g-radius-border-2, 8px)',
+                    backgroundColor: '#1B96FF',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    flexShrink: 0,
+                  }}
+                >
+                  <MetricsIcon
+                    size={20}
+                    color="#FFFFFF"
+                  />
                 </div>
               </div>
-            </div>
-
-            {/* Actions Section */}
-            <div className="slds-page-header__col-actions">
-              <div className="slds-page-header__controls">
+              
+              {/* Title and Subtitle */}
+              <div className="slds-media__body">
+                <h2 className="slds-card__header-title">
+                  Current State
+                </h2>
+                <p
+                  style={{
+                    fontFamily: 'var(--slds-g-font-family)',
+                    fontSize: 'var(--slds-g-font-scale-1, 14px)',
+                    fontWeight: 'var(--slds-g-font-weight-4, 400)',
+                    lineHeight: 'var(--slds-g-line-height-body, 19px)',
+                    color: 'var(--slds-g-color-on-surface-1, #5C5C5C)',
+                    marginTop: 'var(--slds-g-spacing-1, 4px)',
+                    marginBottom: 0,
+                  }}
+                >
+                  Your knowledge base AI-readiness overview
+                </p>
+              </div>
+              
+              {/* Refresh Button */}
+              <div className="slds-no-flex">
                 <button
                   type="button"
                   className="slds-button slds-button_neutral"
@@ -210,9 +227,8 @@ export function HomeView({ onMetricClick }: HomeViewProps) {
                   Refresh
                 </button>
               </div>
-            </div>
+            </header>
           </div>
-        </div>
 
         {/* Main Card Container */}
         <div className="slds-card" style={{ borderRadius: 'var(--slds-g-radius-border-4)', backgroundColor: '#FFFFFF', border: 'none', boxShadow: 'none' }}>
