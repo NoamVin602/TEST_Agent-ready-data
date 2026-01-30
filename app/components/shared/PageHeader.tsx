@@ -16,7 +16,7 @@ export function PageHeader({ onRunScan, isScanning }: PageHeaderProps) {
         position: 'sticky',
         top: '0',
         zIndex: 900,
-        borderBottom: '1px solid var(--slds-g-color-border-1, #C9C9C9)',
+        borderBottom: '1px solid var(--slds-g-color-border-1, rgba(201, 201, 201, 1))',
       }}
     >
       {/* Page Header Row */}

@@ -62,7 +62,7 @@
   --slds-g-color-chart-blue-2: #0176D3;
   
   /* Border Colors */
-  --slds-g-color-border-1: #C9C9C9;
+  --slds-g-color-border-1: rgba(201, 201, 201, 1);
   --slds-g-color-border-2: #5c5c5c;
   --slds-g-color-neutral-90: #E5E5E5;
   --slds-g-color-neutral-50: #747474;
@@ -646,7 +646,7 @@ body {
 ========================================== */
 .slds-page-header {
   background-color: var(--slds-g-color-surface-container-2, #f3f3f3);
-  border-bottom: 1px solid var(--slds-g-color-border-1, #dddbda);
+  border-bottom: 1px solid var(--slds-g-color-border-1, rgba(201, 201, 201, 1));
   padding: var(--slds-g-spacing-4, 16px) var(--slds-g-spacing-6, 24px);
   box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.1);
 }
