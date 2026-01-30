@@ -5,7 +5,6 @@ import { DataHealthDonut } from "../dashboard/DataHealthDonut";
 import { DataHealthLineChart } from "../dashboard/DataHealthLineChart";
 import { MetricCard } from "../dashboard/MetricCard";
 import { RecentActivityTable } from "../dashboard/RecentActivityTable";
-import { AIReadyScore } from "../dashboard/AIReadyScore";
 import { QuickFixesSidebar } from "../shared/QuickFixesSidebar";
 
 export type IssueCategory = 
@@ -225,88 +224,63 @@ export function HomeView({ onMetricClick }: HomeViewProps) {
 
           {/* Card Body */}
           <div className="slds-card__body" style={{ padding: 'var(--slds-g-spacing-4)' }}>
-
-            {/* AI Ready Score - Teal Background Card */}
+            {/* Charts Section - Two nested cards side by side */}
             <div
+              className="slds-grid"
               style={{
-                backgroundColor: '#DEF9F3',
-                border: '1px solid var(--slds-g-color-brand-base-90)',
-                borderRadius: 'var(--slds-g-radius-border-3)',
-                padding: 'var(--slds-g-spacing-4)',
-                marginBottom: 'var(--slds-g-spacing-4)',
-                boxShadow: '0px 0px 2px 0px rgba(0, 0, 0, 0.18), 0px 2px 2px 0px rgba(0, 0, 0, 0.18), 0px -1px 2px 0px rgba(0, 0, 0, 0.1)'
+                gridTemplateColumns: 'repeat(2, 1fr)',
+                gap: 'var(--slds-g-spacing-4)',
+                marginBottom: 'var(--slds-g-spacing-4)'
               }}
             >
-              <div className="slds-grid slds-grid_vertical-align-center" style={{ gap: 'var(--slds-g-spacing-2)', marginBottom: 'var(--slds-g-spacing-2)' }}>
-                <AlertTriangleIcon size={16} color="#01C3B3" style={{ flexShrink: 0 }} />
-                <div className="slds-grid slds-grid_vertical-align-center" style={{ flex: 1, gap: 'var(--slds-g-spacing-1)' }}>
-                  <span 
-                    style={{ 
-                      fontFamily: 'var(--slds-g-font-family)',
-                      fontSize: 'var(--slds-g-font-scale-neg-1)', 
-                      lineHeight: '17px', 
-                      fontWeight: 'var(--slds-g-font-weight-6)',
-                      color: 'var(--slds-g-color-on-surface-1)' 
-                    }}
-                  >
-                    AI Ready Score
-                  </span>
-                  <span 
-                    style={{ 
-                      fontFamily: 'var(--slds-g-font-family)',
-                      fontSize: 'var(--slds-g-font-scale-neg-1)', 
-                      lineHeight: '17px', 
-                      fontWeight: 'var(--slds-g-font-weight-6)',
-                      color: '#2E844A' 
-                    }}
-                  >
-                    ▲ 1.3%
-                  </span>
+              {/* Data Health Donut Chart */}
+              <div className="slds-card" style={{ borderRadius: 'var(--slds-g-radius-border-3)', backgroundColor: '#FFFFFF' }}>
+                <div className="slds-card__header" style={{ padding: 'var(--slds-g-spacing-3) var(--slds-g-spacing-4)' }}>
+                  <div className="slds-grid slds-grid_align-spread slds-grid_vertical-align-center">
+                    <h3
+                      style={{
+                        fontFamily: 'var(--slds-g-font-family)',
+                        fontSize: 'var(--slds-g-font-scale-2)',
+                        fontWeight: 'var(--slds-g-font-weight-6)',
+                        lineHeight: '24px',
+                        color: 'var(--slds-g-color-on-surface-3)',
+                        margin: 0
+                      }}
+                    >
+                      Data Health
+                    </h3>
+                    <button
+                      type="button"
+                      className="slds-button slds-button_icon slds-button_icon-small"
+                      aria-label="More options"
+                    >
+                      <ChevronDownIcon size={12} color="var(--slds-g-color-on-surface-1)" />
+                    </button>
+                  </div>
+                </div>
+                <div className="slds-card__body" style={{ padding: 'var(--slds-g-spacing-4)' }}>
+                  <DataHealthDonut percentage={70} />
                 </div>
               </div>
-              <div>
-                <div
-                  style={{
-                    height: '8px',
-                    backgroundColor: 'var(--slds-g-color-surface-container-3)',
-                    borderRadius: '9999px',
-                    overflow: 'hidden',
-                    marginBottom: '2px'
-                  }}
-                >
-                  <div
+
+              {/* Data Health Over Time Line Chart */}
+              <div className="slds-card" style={{ borderRadius: 'var(--slds-g-radius-border-3)', backgroundColor: '#FFFFFF' }}>
+                <div className="slds-card__header" style={{ padding: 'var(--slds-g-spacing-3) var(--slds-g-spacing-4)' }}>
+                  <h3
                     style={{
-                      height: '100%',
-                      width: '60%',
-                      backgroundColor: '#04E1CB',
-                      borderRadius: '9999px',
-                      transition: 'width 1s ease'
-                    }}
-                  />
-                </div>
-                <div className="slds-grid slds-grid_align-spread">
-                  <span 
-                    style={{ 
                       fontFamily: 'var(--slds-g-font-family)',
-                      fontSize: 'var(--slds-g-font-scale-neg-2)', 
-                      lineHeight: '14px', 
+                      fontSize: 'var(--slds-g-font-scale-2)',
                       fontWeight: 'var(--slds-g-font-weight-6)',
-                      color: 'var(--slds-g-color-on-surface-2)' 
+                      lineHeight: '24px',
+                      color: 'var(--slds-g-color-on-surface-3)',
+                      margin: 0
                     }}
                   >
-                    60%
-                  </span>
-                  <span 
-                    style={{ 
-                      fontFamily: 'var(--slds-g-font-family)',
-                      fontSize: 'var(--slds-g-font-scale-neg-2)', 
-                      lineHeight: '14px', 
-                      fontWeight: 'var(--slds-g-font-weight-4)',
-                      color: 'var(--slds-g-color-on-surface-1)' 
-                    }}
-                  >
-                    100%
-                  </span>
+                    Data Health Over Time
+                  </h3>
+                </div>
+                <div className="slds-card__body" style={{ padding: 'var(--slds-g-spacing-4)' }}>
+                  <DataHealthLineChart data={chartData} currentValue={70} />
                 </div>
               </div>
             </div>
