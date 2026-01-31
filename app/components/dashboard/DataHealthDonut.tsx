@@ -1,14 +1,38 @@
 "use client";
 
+import { Spinner, SpinnerContainer } from "../shared/Spinner";
+
 interface DataHealthDonutProps {
   percentage: number;
+  isLoading?: boolean;
 }
 
-export function DataHealthDonut({ percentage }: DataHealthDonutProps) {
+export function DataHealthDonut({ percentage, isLoading = false }: DataHealthDonutProps) {
   // Calculate the stroke dash array for the donut
   const radius = 80;
   const circumference = 2 * Math.PI * radius;
   const strokeDashoffset = circumference - (percentage / 100) * circumference;
+
+  if (isLoading) {
+    return (
+      <div 
+        style={{
+          position: 'relative',
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+          justifyContent: 'center',
+          width: '100%',
+          height: '100%',
+          minHeight: '300px'
+        }}
+      >
+        <SpinnerContainer>
+          <Spinner size="medium" variant="brand" aria-label="Loading chart data" />
+        </SpinnerContainer>
+      </div>
+    );
+  }
 
   return (
     <div 

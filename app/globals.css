@@ -897,3 +897,437 @@ body {
   height: auto;
   padding: 0.25rem;
 }
+
+/* ==========================================
+   SLDS Spinners (Cosmos Pattern)
+   Based on: https://www.lightningdesignsystem.com/2e1ef8501/p/959d6d-spinners
+========================================== */
+.slds-spinner {
+  display: inline-block;
+  position: relative;
+  vertical-align: middle;
+  width: 2rem;
+  height: 2rem;
+}
+
+.slds-spinner_container {
+  position: relative;
+  display: inline-block;
+}
+
+.slds-spinner__dot-a,
+.slds-spinner__dot-b,
+.slds-spinner__dot-c,
+.slds-spinner__dot-d,
+.slds-spinner__dot-e,
+.slds-spinner__dot-f {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.slds-spinner__dot-a {
+  transform: rotate(0deg);
+  animation: slds-spinner-dot-a 1.2s linear infinite;
+}
+
+.slds-spinner__dot-b {
+  transform: rotate(60deg);
+  animation: slds-spinner-dot-b 1.2s linear infinite;
+}
+
+.slds-spinner__dot-c {
+  transform: rotate(120deg);
+  animation: slds-spinner-dot-c 1.2s linear infinite;
+}
+
+.slds-spinner__dot-d {
+  transform: rotate(180deg);
+  animation: slds-spinner-dot-d 1.2s linear infinite;
+}
+
+.slds-spinner__dot-e {
+  transform: rotate(240deg);
+  animation: slds-spinner-dot-e 1.2s linear infinite;
+}
+
+.slds-spinner__dot-f {
+  transform: rotate(300deg);
+  animation: slds-spinner-dot-f 1.2s linear infinite;
+}
+
+.slds-spinner__dot-a::before,
+.slds-spinner__dot-b::before,
+.slds-spinner__dot-c::before,
+.slds-spinner__dot-d::before,
+.slds-spinner__dot-e::before,
+.slds-spinner__dot-f::before {
+  content: '';
+  position: absolute;
+  width: 0.375rem;
+  height: 0.375rem;
+  border-radius: 50%;
+  background-color: currentColor;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+/* Size variants */
+.slds-spinner_x-small {
+  width: 0.75rem;
+  height: 0.75rem;
+}
+
+.slds-spinner_x-small .slds-spinner__dot-a::before,
+.slds-spinner_x-small .slds-spinner__dot-b::before,
+.slds-spinner_x-small .slds-spinner__dot-c::before,
+.slds-spinner_x-small .slds-spinner__dot-d::before,
+.slds-spinner_x-small .slds-spinner__dot-e::before,
+.slds-spinner_x-small .slds-spinner__dot-f::before {
+  width: 0.125rem;
+  height: 0.125rem;
+}
+
+.slds-spinner_small {
+  width: 1rem;
+  height: 1rem;
+}
+
+.slds-spinner_small .slds-spinner__dot-a::before,
+.slds-spinner_small .slds-spinner__dot-b::before,
+.slds-spinner_small .slds-spinner__dot-c::before,
+.slds-spinner_small .slds-spinner__dot-d::before,
+.slds-spinner_small .slds-spinner__dot-e::before,
+.slds-spinner_small .slds-spinner__dot-f::before {
+  width: 0.1875rem;
+  height: 0.1875rem;
+}
+
+.slds-spinner_medium {
+  width: 2rem;
+  height: 2rem;
+}
+
+.slds-spinner_medium .slds-spinner__dot-a::before,
+.slds-spinner_medium .slds-spinner__dot-b::before,
+.slds-spinner_medium .slds-spinner__dot-c::before,
+.slds-spinner_medium .slds-spinner__dot-d::before,
+.slds-spinner_medium .slds-spinner__dot-e::before,
+.slds-spinner_medium .slds-spinner__dot-f::before {
+  width: 0.375rem;
+  height: 0.375rem;
+}
+
+.slds-spinner_large {
+  width: 3rem;
+  height: 3rem;
+}
+
+.slds-spinner_large .slds-spinner__dot-a::before,
+.slds-spinner_large .slds-spinner__dot-b::before,
+.slds-spinner_large .slds-spinner__dot-c::before,
+.slds-spinner_large .slds-spinner__dot-d::before,
+.slds-spinner_large .slds-spinner__dot-e::before,
+.slds-spinner_large .slds-spinner__dot-f::before {
+  width: 0.5rem;
+  height: 0.5rem;
+}
+
+/* Brand variant (primary color) */
+.slds-spinner_brand .slds-spinner__dot-a::before,
+.slds-spinner_brand .slds-spinner__dot-b::before,
+.slds-spinner_brand .slds-spinner__dot-c::before,
+.slds-spinner_brand .slds-spinner__dot-d::before,
+.slds-spinner_brand .slds-spinner__dot-e::before,
+.slds-spinner_brand .slds-spinner__dot-f::before {
+  background-color: var(--slds-g-color-brand-base-50, #0176D3);
+}
+
+/* Inverse variant (white) */
+.slds-spinner_inverse .slds-spinner__dot-a::before,
+.slds-spinner_inverse .slds-spinner__dot-b::before,
+.slds-spinner_inverse .slds-spinner__dot-c::before,
+.slds-spinner_inverse .slds-spinner__dot-d::before,
+.slds-spinner_inverse .slds-spinner__dot-e::before,
+.slds-spinner_inverse .slds-spinner__dot-f::before {
+  background-color: var(--slds-g-color-neutral-base-100, #FFFFFF);
+}
+
+/* Spinner animations - Sequential pulse for 6 dots */
+@keyframes slds-spinner-dot-a {
+  0% {
+    opacity: 1;
+  }
+  16.666% {
+    opacity: 0.3;
+  }
+  33.333% {
+    opacity: 0.3;
+  }
+  50% {
+    opacity: 0.3;
+  }
+  66.666% {
+    opacity: 0.3;
+  }
+  83.333% {
+    opacity: 0.3;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes slds-spinner-dot-b {
+  0% {
+    opacity: 0.3;
+  }
+  16.666% {
+    opacity: 1;
+  }
+  33.333% {
+    opacity: 0.3;
+  }
+  50% {
+    opacity: 0.3;
+  }
+  66.666% {
+    opacity: 0.3;
+  }
+  83.333% {
+    opacity: 0.3;
+  }
+  100% {
+    opacity: 0.3;
+  }
+}
+
+@keyframes slds-spinner-dot-c {
+  0% {
+    opacity: 0.3;
+  }
+  16.666% {
+    opacity: 0.3;
+  }
+  33.333% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.3;
+  }
+  66.666% {
+    opacity: 0.3;
+  }
+  83.333% {
+    opacity: 0.3;
+  }
+  100% {
+    opacity: 0.3;
+  }
+}
+
+@keyframes slds-spinner-dot-d {
+  0% {
+    opacity: 0.3;
+  }
+  16.666% {
+    opacity: 0.3;
+  }
+  33.333% {
+    opacity: 0.3;
+  }
+  50% {
+    opacity: 1;
+  }
+  66.666% {
+    opacity: 0.3;
+  }
+  83.333% {
+    opacity: 0.3;
+  }
+  100% {
+    opacity: 0.3;
+  }
+}
+
+@keyframes slds-spinner-dot-e {
+  0% {
+    opacity: 0.3;
+  }
+  16.666% {
+    opacity: 0.3;
+  }
+  33.333% {
+    opacity: 0.3;
+  }
+  50% {
+    opacity: 0.3;
+  }
+  66.666% {
+    opacity: 1;
+  }
+  83.333% {
+    opacity: 0.3;
+  }
+  100% {
+    opacity: 0.3;
+  }
+}
+
+@keyframes slds-spinner-dot-f {
+  0% {
+    opacity: 0.3;
+  }
+  16.666% {
+    opacity: 0.3;
+  }
+  33.333% {
+    opacity: 0.3;
+  }
+  50% {
+    opacity: 0.3;
+  }
+  66.666% {
+    opacity: 0.3;
+  }
+  83.333% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0.3;
+  }
+}
+
+/* Spinner in button */
+.slds-button .slds-spinner {
+  margin-right: 0.5rem;
+}
+
+.slds-button__icon .slds-spinner {
+  margin: 0;
+}
+
+/* Assistive text */
+.slds-assistive-text {
+  position: absolute !important;
+  margin: -1px !important;
+  border: 0 !important;
+  padding: 0 !important;
+  width: 1px !important;
+  height: 1px !important;
+  overflow: hidden !important;
+  clip: rect(0 0 0 0) !important;
+  text-transform: none !important;
+  white-space: nowrap !important;
+}
+
+/* ==========================================
+   SLDS Docked Composer (Cosmos Pattern)
+   Based on: https://sds-site-docs-1fea39e7763a.herokuapp.com/index.html?path=/docs/components-docked-composer--documentation
+========================================== */
+.slds-docked-composer {
+  background-color: var(--slds-g-color-surface-container-1, #FFFFFF);
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  overflow: hidden;
+  position: relative;
+  border-radius: var(--slds-g-radius-border-4, 20px) var(--slds-g-radius-border-4, 20px) 0 0;
+  box-shadow: 
+    0px 0px 7px 0px rgba(0, 0, 0, 0.14),
+    0px -5px 5px 0px rgba(0, 0, 0, 0.14),
+    0px 1px 2px 0px rgba(0, 0, 0, 0.08);
+  width: 100%;
+  height: 100%;
+}
+
+.slds-docked-composer__body {
+  background-color: var(--slds-g-color-surface-container-1, #FFFFFF);
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  overflow: hidden;
+  padding: var(--slds-g-spacing-4, 16px);
+  position: relative;
+  flex-shrink: 0;
+  width: 100%;
+}
+
+.slds-docked-composer__footer {
+  background-color: var(--slds-g-color-surface-container-1, #FFFFFF);
+  border-top: 1px solid var(--slds-g-color-border-1, #C9C9C9);
+  display: flex;
+  gap: 10px;
+  height: 56px;
+  align-items: center;
+  justify-content: flex-end;
+  overflow: hidden;
+  padding: var(--slds-g-spacing-3, 12px) var(--slds-g-spacing-2, 8px);
+  position: relative;
+  flex-shrink: 0;
+  width: 100%;
+}
+
+.slds-docked-composer__item {
+  background-color: var(--slds-g-color-surface-container-2, #F3F3F3);
+  display: flex;
+  gap: var(--slds-g-spacing-2, 8px);
+  height: 40px;
+  isolation: isolate;
+  align-items: center;
+  padding: 0 var(--slds-g-spacing-3, 12px);
+  position: relative;
+  border-radius: var(--slds-g-radius-border-2, 8px);
+  flex-shrink: 0;
+  width: 100%;
+}
+
+.slds-docked-composer__item-icon {
+  width: 24px;
+  height: 24px;
+  border-radius: var(--slds-g-radius-border-1, 4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.slds-docked-composer__item-content {
+  display: flex;
+  flex: 1 0 0;
+  font-family: var(--slds-g-font-family);
+  font-weight: var(--slds-g-font-weight-4, 400);
+  height: 100%;
+  align-items: center;
+  line-height: 0;
+  min-height: 1px;
+  min-width: 0;
+  position: relative;
+  font-size: var(--slds-g-font-size-base, 13px);
+  color: var(--slds-g-color-on-surface-2, #2E2E2E);
+  z-index: 2;
+}
+
+.slds-docked-composer__item-text {
+  display: flex;
+  flex: 1 0 0;
+  flex-direction: column;
+  height: 100%;
+  justify-content: center;
+  min-height: 1px;
+  min-width: 0;
+  position: relative;
+}
+
+.slds-docked-composer__item-metadata {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  position: relative;
+  flex-shrink: 0;
+  text-align: right;
+  white-space: nowrap;
+}

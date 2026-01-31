@@ -1,5 +1,7 @@
 "use client";
 
+import { Spinner, SpinnerContainer } from "../shared/Spinner";
+
 interface DataPoint {
   date: string;
   value: number;
@@ -8,9 +10,30 @@ interface DataPoint {
 interface DataHealthLineChartProps {
   data: DataPoint[];
   currentValue: number;
+  isLoading?: boolean;
 }
 
-export function DataHealthLineChart({ data, currentValue }: DataHealthLineChartProps) {
+export function DataHealthLineChart({ data, currentValue, isLoading = false }: DataHealthLineChartProps) {
+  if (isLoading) {
+    return (
+      <div 
+        style={{
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+          justifyContent: 'center',
+          width: '100%',
+          height: '100%',
+          minHeight: '300px'
+        }}
+      >
+        <SpinnerContainer>
+          <Spinner size="medium" variant="brand" aria-label="Loading chart data" />
+        </SpinnerContainer>
+      </div>
+    );
+  }
+
   const width = 600;
   const height = 200;
   const padding = { top: 20, right: 40, bottom: 40, left: 40 };

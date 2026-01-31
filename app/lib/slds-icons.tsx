@@ -387,4 +387,28 @@ export const ZapIcon: React.FC<IconProps> = (props) => (
   </SLDSIcon>
 );
 
+// Email Icon (SLDS: email)
+export const EmailIcon: React.FC<IconProps> = (props) => (
+  <SLDSIcon {...props}>
+    <rect x="2" y="4" width="20" height="16" rx="2" stroke="currentColor" strokeWidth="2" fill="none"/>
+    <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
+  </SLDSIcon>
+);
+
+// Task/New Task Icon (SLDS: new_task)
+export const TaskIcon: React.FC<IconProps> = (props) => (
+  <SLDSIcon {...props}>
+    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" stroke="currentColor" strokeWidth="2" fill="none"/>
+    <path d="M14 2v6h6M12 18v-6M9 15h6" stroke="currentColor" strokeWidth="2"/>
+  </SLDSIcon>
+);
+
+// Note/New Note Icon (SLDS: new_note)
+export const NoteIcon: React.FC<IconProps> = (props) => (
+  <SLDSIcon {...props}>
+    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" stroke="currentColor" strokeWidth="2" fill="none"/>
+    <path d="M14 2v6h6M12 13v-3M9 11h6" stroke="currentColor" strokeWidth="2"/>
+  </SLDSIcon>
+);
+
 // Additional SLDS icons can be added here as needed

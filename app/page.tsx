@@ -14,7 +14,9 @@ import { ConfigView } from "./components/views/ConfigView";
 import { DataCurationView } from "./components/data-curation/DataCurationView";
 import "./globals.css";
 
-// Placeholder for ScanProgressModal
+import { Spinner } from "./components/shared/Spinner";
+
+// Scan Progress Modal with SLDS Spinner
 function ScanProgressModal({ isOpen, onClose, onComplete, isScanning }: any) {
   if (!isOpen) return null;
   return (
@@ -31,19 +33,48 @@ function ScanProgressModal({ isOpen, onClose, onComplete, isScanning }: any) {
         backgroundColor: 'white',
         padding: '32px',
         borderRadius: '8px',
-        maxWidth: '500px'
+        maxWidth: '500px',
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        gap: 'var(--slds-g-spacing-4)',
       }}>
-        <h2>Scanning...</h2>
-        <p>{isScanning ? 'Scan in progress...' : 'Scan complete!'}</p>
-        <button onClick={onClose} style={{
-          marginTop: '16px',
-          padding: '8px 16px',
-          backgroundColor: '#0176D3',
-          color: 'white',
-          border: 'none',
-          borderRadius: '4px',
-          cursor: 'pointer'
-        }}>
+        {isScanning ? (
+          <>
+            <Spinner size="large" variant="brand" aria-label="Scan in progress" />
+            <h2 className="slds-text-heading_section" style={{ margin: 0 }}>Scanning...</h2>
+            <p className="slds-text-body" style={{ margin: 0, color: 'var(--slds-g-color-text-weak)' }}>
+              Scan in progress. Please wait...
+            </p>
+          </>
+        ) : (
+          <>
+            <div style={{
+              width: '48px',
+              height: '48px',
+              borderRadius: '50%',
+              backgroundColor: 'var(--slds-g-color-success-tint)',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+            }}>
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M20 6L9 17l-5-5" stroke="var(--slds-g-color-success-base-50)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" fill="none"/>
+              </svg>
+            </div>
+            <h2 className="slds-text-heading_section" style={{ margin: 0 }}>Scan Complete!</h2>
+            <p className="slds-text-body" style={{ margin: 0, color: 'var(--slds-g-color-text-weak)' }}>
+              Your scan has completed successfully.
+            </p>
+          </>
+        )}
+        <button 
+          onClick={onClose} 
+          className="slds-button slds-button_brand"
+          style={{
+            marginTop: 'var(--slds-g-spacing-2)',
+          }}
+        >
           Close
         </button>
       </div>

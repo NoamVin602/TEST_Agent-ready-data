@@ -1,11 +1,13 @@
 "use client";
 
+import React from 'react';
 import { AlertTriangleIcon, ClockIcon, CopyIcon, FileEditIcon, SearchIcon, SparklesIcon, ActivityIcon, ChevronDownIcon, DatabaseIcon, TrendingUpIcon } from "../../lib/slds-icons";
 import { DataHealthDonut } from "../dashboard/DataHealthDonut";
 import { DataHealthLineChart } from "../dashboard/DataHealthLineChart";
 import { MetricCard } from "../dashboard/MetricCard";
 import { RecentActivityTable } from "../dashboard/RecentActivityTable";
 import { QuickFixesSidebar } from "../shared/QuickFixesSidebar";
+import { Spinner } from "../shared/Spinner";
 
 export type IssueCategory = 
   | "all" 
@@ -157,6 +159,15 @@ const recentActivityData = [
 ];
 
 export function HomeView({ onMetricClick }: HomeViewProps) {
+  const [isRefreshing, setIsRefreshing] = React.useState(false);
+
+  const handleRefresh = async () => {
+    setIsRefreshing(true);
+    // Simulate refresh operation
+    await new Promise((resolve) => setTimeout(resolve, 1500));
+    setIsRefreshing(false);
+  };
+
   return (
     <div 
       className="slds-grid"
@@ -227,8 +238,22 @@ export function HomeView({ onMetricClick }: HomeViewProps) {
                   type="button"
                   className="slds-button slds-button_neutral"
                   aria-label="Refresh"
+                  onClick={handleRefresh}
+                  disabled={isRefreshing}
+                  style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: 'var(--slds-g-spacing-2)',
+                  }}
                 >
-                  Refresh
+                  {isRefreshing ? (
+                    <>
+                      <Spinner size="x-small" variant="default" aria-label="Refreshing" />
+                      <span>Refreshing...</span>
+                    </>
+                  ) : (
+                    <span>Refresh</span>
+                  )}
                 </button>
               </div>
             </header>
