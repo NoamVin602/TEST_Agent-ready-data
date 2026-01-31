@@ -73,7 +73,7 @@ export function LeftNavigation() {
         style={{
           width: '60px',
           backgroundColor: 'var(--slds-g-color-neutral-base-100)',
-          borderRight: '1px solid var(--slds-g-color-border-2)',
+          borderRight: '1px solid var(--slds-g-color-border-1, rgba(201, 201, 201, 1))',
           display: 'flex',
           flexDirection: 'column',
           padding: 'var(--slds-g-spacing-2) 0',
@@ -120,7 +120,7 @@ export function LeftNavigation() {
             justifyContent: 'center',
             padding: 'var(--slds-g-spacing-2)',
             border: 'none',
-            borderTop: '1px solid var(--slds-g-color-border-2)',
+            borderTop: '1px solid var(--slds-g-color-border-1, rgba(201, 201, 201, 1))',
             background: 'transparent',
             cursor: 'pointer',
             fontSize: 'var(--slds-g-font-scale-base)',
@@ -146,7 +146,7 @@ export function LeftNavigation() {
       style={{
         width: '220px',
         backgroundColor: 'var(--slds-g-color-neutral-base-100)',
-        borderRight: '1px solid var(--slds-g-color-border-2)',
+        borderRight: '1px solid var(--slds-g-color-border-1, rgba(201, 201, 201, 1))',
         display: 'flex',
         flexDirection: 'column',
         overflowY: 'auto',
@@ -183,7 +183,7 @@ export function LeftNavigation() {
                 fontWeight: 'var(--slds-g-font-weight-4)',
                 lineHeight: '18px',
                 color: 'var(--slds-g-color-on-surface-2)',
-                border: '1px solid var(--slds-g-color-border-2)',
+                border: '1px solid var(--slds-g-color-border-1, rgba(201, 201, 201, 1))',
                 borderRadius: 'var(--slds-g-radius-border-2)',
               }}
             />
@@ -291,7 +291,7 @@ export function LeftNavigation() {
           gap: 'var(--slds-g-spacing-2)',
           padding: 'var(--slds-g-spacing-2) var(--slds-g-spacing-2) var(--slds-g-spacing-2) var(--slds-g-spacing-4)',
           borderLeft: '5px solid var(--slds-g-color-accent-2)',
-          borderTop: '1px solid var(--slds-g-color-border-2)',
+          borderTop: '1px solid var(--slds-g-color-border-1, rgba(201, 201, 201, 1))',
           backgroundColor: 'var(--slds-g-color-electric-blue-90)',
           cursor: 'pointer',
           fontSize: 'var(--slds-g-font-scale-base)',
@@ -324,7 +324,7 @@ export function LeftNavigation() {
           gap: 'var(--slds-g-spacing-2)',
           padding: 'var(--slds-g-spacing-2) var(--slds-g-spacing-2) var(--slds-g-spacing-2) var(--slds-g-spacing-4)',
           border: 'none',
-          borderTop: '1px solid var(--slds-g-color-border-2)',
+          borderTop: '1px solid var(--slds-g-color-border-1, rgba(201, 201, 201, 1))',
           background: 'transparent',
           cursor: 'pointer',
           fontSize: 'var(--slds-g-font-scale-base)',

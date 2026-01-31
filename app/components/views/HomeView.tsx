@@ -181,7 +181,7 @@ export function HomeView({ onMetricClick }: HomeViewProps) {
       }}
     >
       {/* Left Column - Current State Dashboard (75%) */}
-      <div style={{ flex: '0 0 75%', display: 'flex', flexDirection: 'column', gap: 'var(--slds-g-spacing-4)', minWidth: 0 }}>
+      <div className="slds-grid slds-grid_vertical" style={{ flex: '0 0 75%', minWidth: 0, gap: 'var(--slds-g-spacing-4)' }}>
         {/* Current State Card Header - SLDS Cosmos Pattern */}
         <article className="slds-card">
           <div className="slds-card__header">
@@ -262,65 +262,62 @@ export function HomeView({ onMetricClick }: HomeViewProps) {
           {/* Card Body */}
           <div className="slds-card__body slds-card__body_inner">
             {/* Charts Section - Two nested cards side by side */}
-            <div
-              className="slds-grid"
-              style={{
-                gridTemplateColumns: 'repeat(2, 1fr)',
-                gap: 'var(--slds-g-spacing-4)',
-                marginBottom: 'var(--slds-g-spacing-4)'
-              }}
-            >
+            <div className="slds-grid slds-grid_1-of-2 slds-gutters slds-m-bottom_medium" style={{ minHeight: '400px', alignItems: 'stretch' }}>
               {/* Data Health Donut Chart */}
-              <article className="slds-card">
-                <div className="slds-card__header slds-grid">
-                  <header className="slds-media slds-media_center slds-has-flexi-truncate">
-                    <div className="slds-media__figure">
-                      <DatabaseIcon size={16} color="#181818" />
+              <div className="slds-col slds-size_1-of-2">
+                <article className="slds-card slds-card_full-height">
+                  <div className="slds-card__header slds-grid">
+                    <header className="slds-media slds-media_center slds-has-flexi-truncate">
+                      <div className="slds-media__figure">
+                        <DatabaseIcon size={16} color="#181818" />
+                      </div>
+                      <div className="slds-media__body">
+                        <h2 className="slds-card__header-title">Data Health</h2>
+                      </div>
+                    </header>
+                    <div className="slds-no-flex">
+                      <button
+                        type="button"
+                        className="slds-button slds-button_icon slds-button_icon-small"
+                        aria-label="More options"
+                      >
+                        <ChevronDownIcon size={12} color="#747474" />
+                      </button>
                     </div>
-                    <div className="slds-media__body">
-                      <h2 className="slds-card__header-title">Data Health</h2>
-                    </div>
-                  </header>
-                  <div className="slds-no-flex">
-                    <button
-                      type="button"
-                      className="slds-button slds-button_icon slds-button_icon-small"
-                      aria-label="More options"
-                    >
-                      <ChevronDownIcon size={12} color="#747474" />
-                    </button>
                   </div>
-                </div>
-                <div className="slds-card__body slds-card__body_inner">
-                  <DataHealthDonut percentage={70} />
-                </div>
-              </article>
+                  <div className="slds-card__body slds-card__body_inner slds-card__body_full-height">
+                    <DataHealthDonut percentage={70} />
+                  </div>
+                </article>
+              </div>
 
               {/* Data Health Over Time Line Chart */}
-              <article className="slds-card">
-                <div className="slds-card__header slds-grid">
-                  <header className="slds-media slds-media_center slds-has-flexi-truncate">
-                    <div className="slds-media__figure">
-                      <TrendingUpIcon size={16} color="#181818" />
+              <div className="slds-col slds-size_1-of-2">
+                <article className="slds-card slds-card_full-height">
+                  <div className="slds-card__header slds-grid">
+                    <header className="slds-media slds-media_center slds-has-flexi-truncate">
+                      <div className="slds-media__figure">
+                        <TrendingUpIcon size={16} color="#181818" />
+                      </div>
+                      <div className="slds-media__body">
+                        <h2 className="slds-card__header-title">Data Health Over Time</h2>
+                      </div>
+                    </header>
+                    <div className="slds-no-flex">
+                      <button
+                        type="button"
+                        className="slds-button slds-button_icon slds-button_icon-small"
+                        aria-label="More options"
+                      >
+                        <ChevronDownIcon size={12} color="#747474" />
+                      </button>
                     </div>
-                    <div className="slds-media__body">
-                      <h2 className="slds-card__header-title">Data Health Over Time</h2>
-                    </div>
-                  </header>
-                  <div className="slds-no-flex">
-                    <button
-                      type="button"
-                      className="slds-button slds-button_icon slds-button_icon-small"
-                      aria-label="More options"
-                    >
-                      <ChevronDownIcon size={12} color="#747474" />
-                    </button>
                   </div>
-                </div>
-                <div className="slds-card__body slds-card__body_inner">
-                  <DataHealthLineChart data={chartData} currentValue={70} />
-                </div>
-              </article>
+                  <div className="slds-card__body slds-card__body_inner slds-card__body_full-height">
+                    <DataHealthLineChart data={chartData} currentValue={70} />
+                  </div>
+                </article>
+              </div>
             </div>
 
             {/* Metrics Grid - 2 rows of 3 cards */}

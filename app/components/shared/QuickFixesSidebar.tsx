@@ -41,12 +41,24 @@ const QUICK_FIXES: QuickFixItem[] = [
     iconColor: "#5C4033", // Dark brown
     iconType: "archive",
   },
+  {
+    id: "duplicate-content",
+    title: "Remove duplicate content entries.",
+    description: "3 duplicate entries found in knowledge base.",
+    scoreImpact: "+1% score",
+    scoreColor: "yellow",
+    actionButton: "Resolve",
+    borderColor: "#C23934", // Red
+    iconBgColor: "#C23934",
+    iconColor: "#FFFFFF",
+    iconType: "check",
+  },
 ];
 
 export function QuickFixesSidebar() {
   const [resolvedCount, setResolvedCount] = useState(1);
-  const totalIssues = QUICK_FIXES.length + 1; // 3 total issues (1 already resolved)
-  const totalScorePotential = 5; // +5% health potential
+  const totalIssues = QUICK_FIXES.length + 1; // 4 total issues (1 already resolved)
+  const totalScorePotential = 6; // +6% health potential (3% + 2% + 1%)
 
   const handleResolve = (id: string) => {
     // Handle resolve action
@@ -66,7 +78,7 @@ export function QuickFixesSidebar() {
         ...fix,
         onResolve: () => handleResolve(fix.id),
       }))}
-      alertMessage="3 issues affecting your AI readiness score"
+      alertMessage="4 issues affecting your AI readiness score"
       resolvedCount={resolvedCount}
       totalIssues={totalIssues}
       totalScorePotential={totalScorePotential}

@@ -16,17 +16,7 @@ interface DataHealthLineChartProps {
 export function DataHealthLineChart({ data, currentValue, isLoading = false }: DataHealthLineChartProps) {
   if (isLoading) {
     return (
-      <div 
-        style={{
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
-          justifyContent: 'center',
-          width: '100%',
-          height: '100%',
-          minHeight: '300px'
-        }}
-      >
+      <div className="slds-grid slds-grid_vertical slds-grid_align-center slds-grid_vertical-align-center" style={{ width: '100%', height: '100%', flex: 1, minHeight: 0 }}>
         <SpinnerContainer>
           <Spinner size="medium" variant="brand" aria-label="Loading chart data" />
         </SpinnerContainer>
@@ -35,8 +25,8 @@ export function DataHealthLineChart({ data, currentValue, isLoading = false }: D
   }
 
   const width = 600;
-  const height = 200;
-  const padding = { top: 20, right: 40, bottom: 40, left: 40 };
+  const height = 300; // Increased height for better visibility
+  const padding = { top: 20, right: 40, bottom: 50, left: 40 };
   const chartWidth = width - padding.left - padding.right;
   const chartHeight = height - padding.top - padding.bottom;
 
@@ -57,17 +47,10 @@ export function DataHealthLineChart({ data, currentValue, isLoading = false }: D
   ).join(' ');
 
   return (
-    <div 
-      style={{
-        display: 'flex',
-        flexDirection: 'column',
-        width: '100%',
-        height: '100%',
-        minHeight: '300px'
-      }}
-    >
+    <div className="slds-grid slds-grid_vertical" style={{ width: '100%', height: '100%', flex: 1, minHeight: 0 }}>
       {/* Chart */}
-      <svg width="100%" height="100%" viewBox={`0 0 ${width} ${height}`} preserveAspectRatio="xMidYMid meet">
+      <div style={{ flex: 1, minHeight: 0, width: '100%', display: 'flex', flexDirection: 'column' }}>
+        <svg width="100%" style={{ flex: 1, minHeight: 0, display: 'block' }} viewBox={`0 0 ${width} ${height}`} preserveAspectRatio="xMidYMid meet">
         {/* Grid Lines */}
         {[0, 25, 50, 75, 100].map((value) => {
           const y = padding.top + chartHeight - ((value - minValue) / valueRange) * chartHeight;
@@ -146,7 +129,8 @@ export function DataHealthLineChart({ data, currentValue, isLoading = false }: D
             </text>
           </>
         )}
-      </svg>
+        </svg>
+      </div>
 
       {/* Legend */}
       <div 
