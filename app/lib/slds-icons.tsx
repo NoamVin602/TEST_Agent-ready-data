@@ -46,12 +46,15 @@ export const ActivityIcon: React.FC<IconProps> = (props) => (
 );
 
 // Alert Triangle Icon (SLDS: warning)
-export const AlertTriangleIcon: React.FC<IconProps> = (props) => (
-  <SLDSIcon {...props}>
-    <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z" fill="currentColor"/>
-    <path d="M12 9v4M12 17h.01" stroke="white" strokeWidth="2" strokeLinecap="round"/>
-  </SLDSIcon>
-);
+export const AlertTriangleIcon: React.FC<IconProps> = (props) => {
+  const { color = 'currentColor', ...rest } = props;
+  return (
+    <SLDSIcon {...rest} color={color}>
+      <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z" fill="currentColor"/>
+      <path d="M12 9v4M12 17h.01" stroke="currentColor" strokeWidth="2" strokeLinecap="round" fill="none"/>
+    </SLDSIcon>
+  );
+};
 
 // Clock Icon (SLDS: clock)
 export const ClockIcon: React.FC<IconProps> = (props) => (

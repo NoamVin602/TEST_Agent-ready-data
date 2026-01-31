@@ -19,8 +19,8 @@ interface QuickFixItem {
 const QUICK_FIXES: QuickFixItem[] = [
   {
     id: "contradicting-refund",
-    title: "Contradicting refund policies.",
-    description: "2 documents have conflicting information.",
+    title: "Contradicting refund policies",
+    description: "2 documents have conflicting information",
     scoreImpact: "+3% score",
     scoreColor: "yellow",
     actionButton: "Resolve",
@@ -31,8 +31,8 @@ const QUICK_FIXES: QuickFixItem[] = [
   },
   {
     id: "archive-stale",
-    title: "Archive stale pricing guide.",
-    description: "Product Guide v2.1 is 8 months outdated.",
+    title: "Archive stale pricing guide",
+    description: "Product Guide v2.1 is 8 months outdated",
     scoreImpact: "+2% score",
     scoreColor: "green",
     actionButton: "Archive",
@@ -43,8 +43,8 @@ const QUICK_FIXES: QuickFixItem[] = [
   },
   {
     id: "duplicate-content",
-    title: "Remove duplicate content entries.",
-    description: "3 duplicate entries found in knowledge base.",
+    title: "Remove duplicate entries",
+    description: "3 duplicates found",
     scoreImpact: "+1% score",
     scoreColor: "yellow",
     actionButton: "Resolve",
@@ -53,12 +53,24 @@ const QUICK_FIXES: QuickFixItem[] = [
     iconColor: "#FFFFFF",
     iconType: "check",
   },
+  {
+    id: "outdated-content",
+    title: "Update outdated documentation",
+    description: "5 articles need revision",
+    scoreImpact: "+2% score",
+    scoreColor: "yellow",
+    actionButton: "Update",
+    borderColor: "#FE9339", // Orange
+    iconBgColor: "#FE9339",
+    iconColor: "#5C4033",
+    iconType: "check",
+  },
 ];
 
 export function QuickFixesSidebar() {
   const [resolvedCount, setResolvedCount] = useState(1);
-  const totalIssues = QUICK_FIXES.length + 1; // 4 total issues (1 already resolved)
-  const totalScorePotential = 6; // +6% health potential (3% + 2% + 1%)
+  const totalIssues = QUICK_FIXES.length; // 4 total issues
+  const totalScorePotential = 8; // +8% health potential (3% + 2% + 1% + 2%)
 
   const handleResolve = (id: string) => {
     // Handle resolve action
@@ -78,7 +90,7 @@ export function QuickFixesSidebar() {
         ...fix,
         onResolve: () => handleResolve(fix.id),
       }))}
-      alertMessage="4 issues affecting your AI readiness score"
+      alertMessage={undefined}
       resolvedCount={resolvedCount}
       totalIssues={totalIssues}
       totalScorePotential={totalScorePotential}

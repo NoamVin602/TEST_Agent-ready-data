@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-import { CheckIcon, AlertTriangleIcon, ChevronDownIcon } from "../../lib/slds-icons";
+import { CheckIcon, ChevronDownIcon } from "../../lib/slds-icons";
 
 interface QuickFixItem {
   id: string;
@@ -73,25 +73,10 @@ export function DockedComposer({
       {/* Body */}
       <div className="slds-docked-composer__body">
         {/* Title Section */}
-        <div className="slds-grid slds-grid_vertical slds-gutters">
-          <h2 className="slds-text-heading_section slds-m-bottom_none">
+        <div className="slds-grid slds-grid_vertical">
+          <h2 className="slds-text-heading_section slds-m-bottom_medium">
             {title}
           </h2>
-
-          {/* Alert Banner */}
-          {alertMessage && (
-            <div className="slds-alert slds-alert_warning" role="alert">
-              <span className="slds-assistive-text">Warning</span>
-              <div className="slds-media">
-                <div className="slds-media__figure">
-                  <AlertTriangleIcon size={20} color="var(--slds-g-color-warning-base-40, #5C4033)" />
-                </div>
-                <div className="slds-media__body">
-                  <p className="slds-text-body_small">{alertMessage}</p>
-                </div>
-              </div>
-            </div>
-          )}
         </div>
 
         {/* Quick Fix Items */}
@@ -99,31 +84,25 @@ export function DockedComposer({
           {visibleItemsList.map((item) => (
             <article key={item.id} className="slds-card slds-card_boundary" style={{ borderLeft: `4px solid ${item.borderColor}` }}>
               <div className="slds-card__body slds-card__body_inner">
-                {/* Card Content Row */}
-                <div className="slds-grid slds-grid_align-start slds-gutters_small">
-                  {/* Icon */}
-                  <div className="slds-docked-composer__item-icon" style={{ backgroundColor: item.iconBgColor }}>
-                    {renderIcon(item.iconType, item.iconColor)}
-                  </div>
-
-                  {/* Title and Description */}
-                  <div className="slds-grid slds-grid_vertical slds-col slds-grow">
-                    <h3 className="slds-text-heading_small slds-m-bottom_x-small">
-                      {item.title}
-                    </h3>
-                    <p className="slds-text-body_small slds-text-color_weak">
-                      {item.description}
-                    </p>
-                  </div>
-
-                  {/* Score Badge */}
+                {/* Top: Badge */}
+                <div className="slds-grid slds-grid_align-end slds-m-bottom_small" style={{ width: '100%' }}>
                   <span className={`slds-badge ${item.scoreColor === "yellow" ? "slds-badge_warning-light" : "slds-badge_success-light"}`}>
                     {item.scoreImpact}
                   </span>
                 </div>
 
-                {/* Action Button */}
-                <div className="slds-grid slds-grid_align-end slds-m-top_small">
+                {/* Middle: Title and Description */}
+                <div className="slds-grid slds-grid_vertical slds-m-bottom_small" style={{ width: '100%' }}>
+                  <h3 className="slds-text-heading_small slds-m-bottom_x-small" style={{ marginTop: 0 }}>
+                    {item.title}
+                  </h3>
+                  <p className="slds-text-body_small slds-text-color_weak" style={{ marginBottom: 0 }}>
+                    {item.description}
+                  </p>
+                </div>
+
+                {/* Bottom: Action Button */}
+                <div className="slds-grid slds-grid_align-end" style={{ width: '100%' }}>
                   <button
                     type="button"
                     className="slds-button slds-button_neutral"
@@ -140,22 +119,51 @@ export function DockedComposer({
         {/* Resolution Summary */}
         {totalIssues > 0 && (
           <div className="slds-docked-composer__summary">
-            <div className="slds-grid slds-grid_align-spread slds-grid_vertical-align-center">
-              {/* Left: Resolved Count */}
-              <div className="slds-grid slds-grid_vertical-align-center slds-gutters_small">
-                <span className="slds-text-body_small slds-text-color_success">
+            <div className="slds-grid slds-grid_align-spread slds-grid_vertical-align-center" style={{ width: '100%', gap: 'var(--slds-g-spacing-4)' }}>
+              {/* Left: Resolved Count and Progress Bar */}
+              <div className="slds-grid slds-grid_vertical" style={{ flex: 1, minWidth: 0, gap: 'var(--slds-g-spacing-2)' }}>
+                <span 
+                  className="slds-text-body_small" 
+                  style={{ 
+                    whiteSpace: 'nowrap',
+                    color: 'var(--slds-g-color-success-base-50, #2E844A)',
+                    fontFamily: 'var(--slds-g-font-family)',
+                    fontSize: 'var(--slds-g-font-scale-neg-1, 12px)',
+                    fontWeight: 'var(--slds-g-font-weight-4, 400)',
+                    lineHeight: 'var(--slds-g-line-height-base, 1.5)'
+                  }}
+                >
                   {resolvedCount} of {totalIssues} resolved
                 </span>
-                {/* Progress Bar */}
-                <div className="slds-progress">
-                  <div className="slds-progress__bar" role="progressbar" aria-valuemin={0} aria-valuemax={100} aria-valuenow={(resolvedCount / totalIssues) * 100} aria-label={`${resolvedCount} of ${totalIssues} resolved`}>
-                    <span className="slds-progress__value" style={{ width: `${(resolvedCount / totalIssues) * 100}%` }}></span>
-                  </div>
+                {/* SLDS Progress Bar */}
+                <div 
+                  className="slds-progress-bar" 
+                  role="progressbar" 
+                  aria-valuemin={0} 
+                  aria-valuemax={totalIssues} 
+                  aria-valuenow={resolvedCount} 
+                  aria-label={`${resolvedCount} of ${totalIssues} resolved`}
+                >
+                  <span 
+                    className="slds-progress-bar__value" 
+                    style={{ width: `${(resolvedCount / totalIssues) * 100}%` }}
+                  ></span>
                 </div>
               </div>
 
               {/* Right: Health Potential */}
-              <span className="slds-text-body_small slds-text-heading_small">
+              <span 
+                className="slds-text-body_small" 
+                style={{ 
+                  whiteSpace: 'nowrap', 
+                  flexShrink: 0,
+                  color: 'var(--slds-g-color-text-weak, #747474)',
+                  fontFamily: 'var(--slds-g-font-family)',
+                  fontSize: 'var(--slds-g-font-scale-neg-1, 12px)',
+                  fontWeight: 'var(--slds-g-font-weight-semibold, 600)',
+                  lineHeight: 'var(--slds-g-line-height-base, 1.5)'
+                }}
+              >
                 +{totalScorePotential}% health potential
               </span>
             </div>
@@ -169,9 +177,10 @@ export function DockedComposer({
           type="button"
           className="slds-button slds-button_neutral slds-button_full-width"
           onClick={onFooterButtonClick}
+          style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 'var(--slds-g-spacing-1)' }}
         >
           <CheckIcon size={16} color="var(--slds-g-color-text-default, #181818)" />
-          <span className="slds-m-left_x-small">{footerButtonLabel}</span>
+          <span>{footerButtonLabel}</span>
         </button>
       </div>
     </div>

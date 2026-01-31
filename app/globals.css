@@ -1529,6 +1529,50 @@ body {
   color: var(--slds-g-color-text-default, #181818);
 }
 
+/* SLDS Scoped Notification */
+.slds-scoped-notification {
+  display: flex;
+  align-items: center;
+  gap: var(--slds-g-spacing-1, 4px);
+  padding: var(--slds-g-spacing-3, 12px);
+  border-radius: var(--slds-g-radius-border-2, 8px);
+}
+
+.slds-scoped-notification_warning {
+  background-color: var(--slds-g-color-warning-container-1, #f9e3b6);
+  color: var(--slds-g-color-on-warning-1, #8c4b02);
+}
+
+.slds-scoped-notification__icon {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 0;
+}
+
+.slds-scoped-notification__icon .slds-icon {
+  width: 12px;
+  height: 12px;
+}
+
+.slds-scoped-notification__content {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  align-items: center;
+}
+
+.slds-scoped-notification__text {
+  font-family: var(--slds-g-font-family-base, 'SF Pro', -apple-system, BlinkMacSystemFont, sans-serif);
+  font-weight: var(--slds-g-font-weight-6, 590);
+  font-size: var(--slds-g-font-size-base, 13px);
+  line-height: 18px;
+  letter-spacing: 0;
+  color: var(--slds-g-color-on-warning-1, #8c4b02);
+  margin: 0;
+}
+
 .slds-media {
   display: flex;
   align-items: flex-start;
@@ -1544,28 +1588,91 @@ body {
   min-width: 0;
 }
 
-/* SLDS Progress Bar */
-.slds-progress {
+/* SLDS Toast Notification */
+.slds-notify_toast {
+  display: flex;
+  align-items: center;
+  gap: var(--slds-g-spacing-3, 12px);
+  padding: var(--slds-g-spacing-3, 12px) var(--slds-g-spacing-4, 16px);
+  background-color: var(--slds-g-color-neutral-base-100, #FFFFFF);
+  border-radius: var(--slds-g-radius-border-2, 8px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  border-left: 4px solid;
+  margin-bottom: var(--slds-g-spacing-3, 12px);
+  font-family: var(--slds-g-font-family);
+}
+
+.slds-notify_toast.slds-theme_warning {
+  border-left-color: var(--slds-g-color-warning-base-50, #FE9339);
+}
+
+.slds-notify__icon {
+  flex-shrink: 0;
+  width: 20px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.slds-notify__icon--warning {
+  color: var(--slds-g-color-warning-base-50, #FE9339);
+}
+
+.slds-notify__content {
+  flex: 1;
+  min-width: 0;
+}
+
+.slds-notify__message {
+  font-size: var(--slds-g-font-scale-1, 14px);
+  font-weight: var(--slds-g-font-weight-semibold, 600);
+  color: var(--slds-g-color-text-default, #181818);
+  margin: 0;
+  line-height: var(--slds-g-line-height-body, 19px);
+}
+
+.slds-notify__close {
+  background: none;
+  border: none;
+  padding: var(--slds-g-spacing-1, 4px);
+  cursor: pointer;
+  color: var(--slds-g-color-neutral-base-50, #747474);
+  border-radius: var(--slds-g-radius-border-1, 4px);
+  transition: background 0.15s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.slds-notify__close:hover {
+  color: var(--slds-g-color-neutral-base-30, #444444);
+  background-color: var(--slds-g-color-neutral-base-95, #F3F3F3);
+}
+
+.slds-notify__close:focus {
+  outline: 2px solid var(--slds-g-color-brand-base-50, #0176D3);
+  outline-offset: 2px;
+}
+
+/* SLDS Progress Bar - Matching Storybook Variant */
+.slds-progress-bar {
   position: relative;
-  width: 120px;
+  width: 100%;
   height: 8px;
-  background-color: var(--slds-g-color-neutral-90, #E5E5E5);
-  border-radius: 4px;
+  background-color: var(--slds-g-color-neutral-base-95, #F3F3F3);
+  border-radius: 9999px;
   overflow: hidden;
 }
 
-.slds-progress__bar {
-  position: relative;
-  width: 100%;
-  height: 100%;
-}
-
-.slds-progress__value {
+.slds-progress-bar__value {
   position: absolute;
   top: 0;
   left: 0;
   height: 100%;
-  background-color: var(--slds-g-color-success-base-50, #2E844A);
+  background-color: #0250D9;
+  border-radius: 9999px;
   transition: width 0.3s ease;
 }
 

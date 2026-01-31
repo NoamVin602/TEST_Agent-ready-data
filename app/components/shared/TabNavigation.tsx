@@ -21,7 +21,7 @@ export function TabNavigation({ tabs, activeTab, onTabChange }: TabNavigationPro
   };
 
   return (
-    <div className="slds-tabs_default" style={{ width: '100%' }}>
+    <div className="slds-tabs_default" style={{ width: '100%', borderBottom: '1px solid var(--slds-g-color-border-1, rgba(201, 201, 201, 1))' }}>
       <ul className="slds-tabs_default__nav" role="tablist">
         {tabs.map((tab) => {
           const isActive = activeTab === tab.id;
