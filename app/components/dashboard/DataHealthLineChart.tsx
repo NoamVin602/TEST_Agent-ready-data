@@ -1,5 +1,6 @@
 "use client";
 
+import React, { useState } from "react";
 import { Spinner, SpinnerContainer } from "../shared/Spinner";
 
 interface DataPoint {
@@ -14,6 +15,7 @@ interface DataHealthLineChartProps {
 }
 
 export function DataHealthLineChart({ data, currentValue, isLoading = false }: DataHealthLineChartProps) {
+  const [isHovered, setIsHovered] = useState(false);
   if (isLoading) {
     return (
       <div className="slds-grid slds-grid_vertical slds-grid_align-center slds-grid_vertical-align-center" style={{ width: '100%', height: '100%', flex: 1, minHeight: 0 }}>
@@ -46,8 +48,22 @@ export function DataHealthLineChart({ data, currentValue, isLoading = false }: D
     `${index === 0 ? 'M' : 'L'} ${point.x} ${point.y}`
   ).join(' ');
 
+  // Calculate trend information
+  const firstValue = data[0]?.value || 0;
+  const lastValue = data[data.length - 1]?.value || 0;
+  const trendChange = lastValue - firstValue;
+  const trendPercentage = firstValue > 0 ? ((trendChange / firstValue) * 100).toFixed(1) : '0';
+  const trendDirection = trendChange > 0 ? 'increasing' : trendChange < 0 ? 'decreasing' : 'stable';
+  const dateRange = data.length > 0 ? `${data[0].date} - ${data[data.length - 1].date}` : 'N/A';
+
   return (
-    <div className="slds-grid slds-grid_vertical" style={{ width: '100%', height: '100%', flex: 1, minHeight: 0 }}>
+    <div 
+      className="slds-tooltip-trigger"
+      style={{ width: '100%', height: '100%', flex: 1, minHeight: 0, position: 'relative' }}
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+    >
+      <div className="slds-grid slds-grid_vertical" style={{ width: '100%', height: '100%', flex: 1, minHeight: 0 }}>
       {/* Chart */}
       <div style={{ flex: 1, minHeight: 0, width: '100%', display: 'flex', flexDirection: 'column' }}>
         <svg width="100%" style={{ flex: 1, minHeight: 0, display: 'block' }} viewBox={`0 0 ${width} ${height}`} preserveAspectRatio="xMidYMid meet">
@@ -178,6 +194,35 @@ export function DataHealthLineChart({ data, currentValue, isLoading = false }: D
           </div>
         </div>
       </div>
+      </div>
+      
+      {/* SLDS Tooltip */}
+      {isHovered && (
+        <div 
+          className="slds-popover slds-popover_tooltip slds-popover_bottom"
+          role="tooltip"
+          style={{
+            position: 'absolute',
+            bottom: 'calc(100% + 12px)',
+            left: '50%',
+            transform: 'translateX(-50%)',
+            whiteSpace: 'normal',
+            maxWidth: '200px'
+          }}
+        >
+          <div className="slds-popover__body">
+            <div className="slds-text-body_small">
+              <strong>{currentValue}%</strong> {trendDirection === 'increasing' ? '↗' : trendDirection === 'decreasing' ? '↘' : '→'} {trendChange > 0 ? '+' : ''}{trendChange.toFixed(1)}%
+            </div>
+            <div className="slds-text-body_small" style={{ marginTop: 'var(--slds-g-spacing-1)' }}>
+              {dateRange}
+            </div>
+            <div className="slds-text-body_small" style={{ marginTop: 'var(--slds-g-spacing-1)', opacity: 0.8 }}>
+              Health trend over time
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

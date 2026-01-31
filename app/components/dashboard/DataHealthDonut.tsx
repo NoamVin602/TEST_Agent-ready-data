@@ -1,5 +1,6 @@
 "use client";
 
+import React, { useState } from "react";
 import { Spinner, SpinnerContainer } from "../shared/Spinner";
 
 interface DataHealthDonutProps {
@@ -8,6 +9,7 @@ interface DataHealthDonutProps {
 }
 
 export function DataHealthDonut({ percentage, isLoading = false }: DataHealthDonutProps) {
+  const [isHovered, setIsHovered] = useState(false);
   // Calculate the stroke dash array for the donut
   const radius = 80;
   const circumference = 2 * Math.PI * radius;
@@ -23,8 +25,16 @@ export function DataHealthDonut({ percentage, isLoading = false }: DataHealthDon
     );
   }
 
+  const healthStatus = percentage >= 80 ? 'Excellent' : percentage >= 60 ? 'Good' : percentage >= 40 ? 'Fair' : 'Needs Improvement';
+  const healthColor = percentage >= 80 ? '#2E844A' : percentage >= 60 ? '#0176D3' : percentage >= 40 ? '#FE9339' : '#C23934';
+
   return (
-    <div className="slds-grid slds-grid_vertical slds-grid_align-center slds-grid_vertical-align-center" style={{ width: '100%', height: '100%', flex: 1, minHeight: 0, padding: 'var(--slds-g-spacing-4)' }}>
+    <div 
+      className="slds-tooltip-trigger"
+      style={{ width: '100%', height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 'var(--slds-g-spacing-4)' }}
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+    >
       <div style={{ position: 'relative', width: '200px', height: '200px', flexShrink: 0 }}>
         <svg
           width="200"
@@ -95,6 +105,31 @@ export function DataHealthDonut({ percentage, isLoading = false }: DataHealthDon
             Overall Health
           </div>
         </div>
+        
+        {/* SLDS Tooltip */}
+        {isHovered && (
+          <div 
+            className="slds-popover slds-popover_tooltip slds-popover_bottom"
+            role="tooltip"
+            style={{
+              position: 'absolute',
+              bottom: 'calc(100% + 12px)',
+              left: '50%',
+              transform: 'translateX(-50%)',
+              whiteSpace: 'normal',
+              maxWidth: '200px'
+            }}
+          >
+            <div className="slds-popover__body">
+              <div className="slds-text-body_small">
+                <strong>{percentage}%</strong> - {healthStatus}
+              </div>
+              <div className="slds-text-body_small" style={{ marginTop: 'var(--slds-g-spacing-1)', opacity: 0.8 }}>
+                Overall knowledge base health
+              </div>
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );

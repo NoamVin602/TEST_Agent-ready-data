@@ -220,6 +220,7 @@ body {
 
 .slds-grid_align-center {
   align-items: center;
+  justify-content: center;
 }
 
 .slds-grid_align-start {
@@ -328,6 +329,8 @@ body {
   flex-direction: column;
   flex: 1;
   min-height: 0;
+  align-items: center;
+  justify-content: center;
 }
 
 .slds-card_full-height {
@@ -335,6 +338,87 @@ body {
   flex-direction: column;
   height: 100%;
   min-height: 400px;
+}
+
+/* SLDS Tooltip/Popover Styles */
+.slds-popover {
+  position: absolute;
+  z-index: 6000;
+  background: var(--slds-g-color-surface-container-inverse-1, #032D60);
+  border-radius: var(--slds-g-radius-border-2, 8px);
+  padding: var(--slds-g-spacing-2, 8px) var(--slds-g-spacing-3, 12px);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  max-width: 300px;
+  pointer-events: none;
+}
+
+.slds-popover_tooltip {
+  background: var(--slds-g-color-surface-container-inverse-1, #032D60);
+  color: var(--slds-g-color-on-surface-inverse-1, #FFFFFF);
+  font-size: var(--slds-g-font-scale-1, 14px);
+  line-height: var(--slds-g-line-height-body, 19px);
+}
+
+.slds-popover_tooltip .slds-popover__body {
+  padding: 0;
+}
+
+.slds-popover__body {
+  padding: var(--slds-g-spacing-2, 8px) var(--slds-g-spacing-3, 12px);
+}
+
+.slds-popover_tooltip .slds-text-heading_small {
+  color: var(--slds-g-color-on-surface-inverse-1, #FFFFFF);
+  font-weight: var(--slds-g-font-weight-semibold);
+  margin-bottom: var(--slds-g-spacing-1, 4px);
+}
+
+.slds-popover_tooltip .slds-text-body_small {
+  color: var(--slds-g-color-on-surface-inverse-1, #FFFFFF);
+  opacity: 0.9;
+}
+
+.slds-popover_tooltip::before {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 0;
+  border: 6px solid transparent;
+}
+
+/* Bottom nubbin - nubbin at bottom of tooltip pointing down */
+.slds-popover_tooltip.slds-popover_bottom::before {
+  bottom: -12px;
+  left: 50%;
+  transform: translateX(-50%);
+  border-top-color: var(--slds-g-color-surface-container-inverse-1, #032D60);
+  border-bottom: none;
+  border-left: 6px solid transparent;
+  border-right: 6px solid transparent;
+}
+
+.slds-popover_tooltip.slds-popover_top::before {
+  top: -12px;
+  left: 50%;
+  transform: translateX(-50%);
+  border-bottom-color: var(--slds-g-color-surface-container-inverse-1, #032D60);
+  border-top: none;
+}
+
+.slds-tooltip-trigger {
+  position: relative;
+  cursor: help;
+}
+
+.slds-tooltip-trigger .slds-popover {
+  opacity: 0;
+  visibility: hidden;
+}
+
+.slds-tooltip-trigger:hover .slds-popover,
+.slds-popover[style*="opacity: 1"] {
+  opacity: 1 !important;
+  visibility: visible !important;
 }
 
 .slds-card__header {
@@ -361,6 +445,8 @@ body {
   flex-direction: column;
   flex: 1;
   min-height: 0;
+  align-items: center;
+  justify-content: center;
 }
 
 .slds-card_full-height {
