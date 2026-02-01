@@ -5,6 +5,7 @@ import { motion } from "framer-motion";
 import { IssueCategory } from "./HomeView";
 import { SeverityBadge } from "../analysis/SeverityBadge";
 import { DocumentPreviewModal } from "../shared/DocumentPreviewModal";
+import { PIIBulkActionModal } from "../shared/PIIBulkActionModal";
 import { AIIcon, ChevronDownIcon, FilterIcon } from "../../lib/slds-icons";
 import { getStageConfig } from "../../lib/stage-config";
 
@@ -43,17 +44,18 @@ function generateIssuesFromConfig() {
 
   // Day Zero: Show critical issues - Prioritized by score impact
   if (config.stage === 'day0') {
-    // PII Issues (Critical - 15 articles) - TOP PRIORITY (+20 points)
+    // PII Issues (Critical - 5 articles for drill-down scenario) - TOP PRIORITY (+20 points)
     if (config.issues.pii > 0) {
       issues.push({
         id: "pii-1",
-        title: "PII Detected in 15 Articles",
+        title: "PII Detected in 5 Articles",
         type: "Sensitive Data",
         severity: "high",
-        docs: config.issues.pii,
+        docs: 5, // Show 5 articles for the scenario
         owner: "Privacy Team",
-        action: "Apply redaction policy to all similar instances?",
-        scoreImpact: 20
+        action: "Archive documents or Mask",
+        scoreImpact: 20,
+        piiDetails: "Customer names and emails found in old Knowledge articles"
       });
     }
 
@@ -150,6 +152,8 @@ export const AnalysisView = forwardRef<HTMLDivElement, AnalysisViewProps>(
     const allIssues = useMemo(() => generateIssuesFromConfig(), []);
     const [expandedIssues, setExpandedIssues] = useState<string[]>([allIssues[0]?.id || ""]);
     const [isModalOpen, setIsModalOpen] = useState(false);
+    const [isPIIModalOpen, setIsPIIModalOpen] = useState(false);
+    const [selectedPIIIssue, setSelectedPIIIssue] = useState<typeof allIssues[0] | null>(null);
     const [selectedDocument, setSelectedDocument] = useState<{
       title: string;
       content: string;
@@ -187,6 +191,25 @@ export const AnalysisView = forwardRef<HTMLDivElement, AnalysisViewProps>(
         authoritativeText: issue.authoritative,
       });
       setIsModalOpen(true);
+    };
+
+    const handlePIIBulkAction = (issue: typeof allIssues[0]) => {
+      setSelectedPIIIssue(issue);
+      setIsPIIModalOpen(true);
+    };
+
+    const handleMaskPII = async () => {
+      // Simulate masking process
+      await new Promise(resolve => setTimeout(resolve, 1000));
+      // In a real app, this would update the backend and refresh the score
+      console.log('PII masked successfully');
+    };
+
+    const handleArchivePII = async () => {
+      // Simulate archiving process
+      await new Promise(resolve => setTimeout(resolve, 1000));
+      // In a real app, this would update the backend
+      console.log('Documents archived successfully');
     };
 
     return (
@@ -571,6 +594,24 @@ export const AnalysisView = forwardRef<HTMLDivElement, AnalysisViewProps>(
                         </div>
                       )}
 
+                      {/* PII Details - Show when drilling down */}
+                      {(issue.type === "Sensitive Data" && (issue as any).piiDetails) && (
+                        <div style={{ marginBottom: 'var(--slds-g-spacing-3)', padding: 'var(--slds-g-spacing-3)', backgroundColor: 'rgba(194, 57, 52, 0.05)', borderRadius: 'var(--slds-g-radius-border-2)' }}>
+                          <p
+                            style={{
+                              fontFamily: 'var(--slds-g-font-family)',
+                              fontSize: 'var(--slds-g-font-scale-base)',
+                              fontWeight: 'var(--slds-g-font-weight-4)',
+                              lineHeight: 'var(--slds-g-line-height-body-base)',
+                              color: 'var(--slds-g-color-on-surface-2)',
+                              margin: 0,
+                            }}
+                          >
+                            {(issue as any).piiDetails}
+                          </p>
+                        </div>
+                      )}
+
                       {/* Action Text */}
                       {issue.action && (
                         <div style={{ marginBottom: 'var(--slds-g-spacing-3)' }}>
@@ -595,31 +636,66 @@ export const AnalysisView = forwardRef<HTMLDivElement, AnalysisViewProps>(
 
                       {/* Action Buttons */}
                       <div style={{ display: 'flex', gap: 'var(--slds-g-spacing-2)', justifyContent: 'flex-end', marginTop: 'var(--slds-g-spacing-3)' }}>
-                        <button
-                          type="button"
-                          className="slds-button slds-button_neutral"
-                          onClick={(e) => {
-                            e.stopPropagation();
-                            handleViewDocumentPreview(issue);
-                          }}
-                          style={{
-                            display: 'inline-flex',
-                            alignItems: 'center',
-                          }}
-                        >
-                          View Document Preview
-                        </button>
-                        <button
-                          type="button"
-                          className="slds-button slds-button_brand"
-                          onClick={(e) => e.stopPropagation()}
-                          style={{
-                            display: 'flex',
-                            alignItems: 'center',
-                          }}
-                        >
-                          Mark Resolved
-                        </button>
+                        {issue.type === "Sensitive Data" ? (
+                          <>
+                            <button
+                              type="button"
+                              className="slds-button slds-button_neutral"
+                              onClick={(e) => {
+                                e.stopPropagation();
+                                handleViewDocumentPreview(issue);
+                              }}
+                              style={{
+                                display: 'inline-flex',
+                                alignItems: 'center',
+                              }}
+                            >
+                              View Document Preview
+                            </button>
+                            <button
+                              type="button"
+                              className="slds-button slds-button_brand"
+                              onClick={(e) => {
+                                e.stopPropagation();
+                                handlePIIBulkAction(issue);
+                              }}
+                              style={{
+                                display: 'flex',
+                                alignItems: 'center',
+                              }}
+                            >
+                              Archive documents or Mask
+                            </button>
+                          </>
+                        ) : (
+                          <>
+                            <button
+                              type="button"
+                              className="slds-button slds-button_neutral"
+                              onClick={(e) => {
+                                e.stopPropagation();
+                                handleViewDocumentPreview(issue);
+                              }}
+                              style={{
+                                display: 'inline-flex',
+                                alignItems: 'center',
+                              }}
+                            >
+                              View Document Preview
+                            </button>
+                            <button
+                              type="button"
+                              className="slds-button slds-button_brand"
+                              onClick={(e) => e.stopPropagation()}
+                              style={{
+                                display: 'flex',
+                                alignItems: 'center',
+                              }}
+                            >
+                              Mark Resolved
+                            </button>
+                          </>
+                        )}
                       </div>
                     </motion.div>
                   )}
@@ -638,6 +714,20 @@ export const AnalysisView = forwardRef<HTMLDivElement, AnalysisViewProps>(
               setSelectedDocument(null);
             }}
             document={selectedDocument}
+          />
+        )}
+
+        {/* PII Bulk Action Modal */}
+        {selectedPIIIssue && (
+          <PIIBulkActionModal
+            isOpen={isPIIModalOpen}
+            onClose={() => {
+              setIsPIIModalOpen(false);
+              setSelectedPIIIssue(null);
+            }}
+            issueCount={selectedPIIIssue.docs}
+            onMask={handleMaskPII}
+            onArchive={handleArchivePII}
           />
         )}
       </div>
