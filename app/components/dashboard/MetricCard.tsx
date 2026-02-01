@@ -7,7 +7,7 @@ interface MetricCardProps {
   value: number | string;
   change: number;
   changeLabel: string;
-  trend: "up" | "down";
+  trend: "up" | "down" | "neutral";
   icon?: React.ComponentType<{ size?: number; color?: string; style?: React.CSSProperties }>;
   colorClass?: {
     background: string;
@@ -27,9 +27,9 @@ export function MetricCard({
   onClick 
 }: MetricCardProps) {
   const isClickable = !!onClick;
-  const changeDisplay = change > 0 ? `+${change}${typeof change === 'number' && change % 1 !== 0 ? '' : '%'}` : `${change}${typeof change === 'number' && change % 1 !== 0 ? '' : '%'}`;
-  // Use SLDS semantic colors: green for positive, red for negative
-  const changeColor = trend === 'up' || change > 0 ? '#06A59A' : '#C23934';
+  const changeDisplay = change > 0 ? `+${change}${typeof change === 'number' && change % 1 !== 0 ? '' : '%'}` : change < 0 ? `${change}${typeof change === 'number' && change % 1 !== 0 ? '' : '%'}` : `${change}`;
+  // Use SLDS semantic colors: green for positive, red for negative, gray for neutral
+  const changeColor = trend === 'neutral' || change === 0 ? '#5C5C5C' : (trend === 'up' || change > 0 ? '#06A59A' : '#C23934');
 
   const cardContent = (
     <div className="slds-card__body slds-card__body_inner" style={{ padding: '12px', height: '84px', display: 'flex', flexDirection: 'column', justifyContent: 'center', boxSizing: 'border-box' }}>
