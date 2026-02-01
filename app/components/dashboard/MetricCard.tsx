@@ -29,7 +29,7 @@ export function MetricCard({
   const isClickable = !!onClick;
   const changeDisplay = change > 0 ? `+${change}${typeof change === 'number' && change % 1 !== 0 ? '' : '%'}` : `${change}${typeof change === 'number' && change % 1 !== 0 ? '' : '%'}`;
   // Use SLDS semantic colors: green for positive, red for negative
-  const changeColor = trend === 'up' || change > 0 ? '#2E844A' : '#C23934';
+  const changeColor = trend === 'up' || change > 0 ? '#066AFE' : '#C23934';
 
   const cardContent = (
     <div className="slds-card__body slds-card__body_inner" style={{ padding: '12px', height: '84px', display: 'flex', flexDirection: 'column', justifyContent: 'center', boxSizing: 'border-box' }}>

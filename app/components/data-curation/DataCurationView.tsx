@@ -395,13 +395,13 @@ export function DataCurationView() {
         <motion.span
           animate={showSuccessPulse ? {
             scale: [1, 1.2, 1],
-            color: ['#2E844A', '#10B981', '#2E844A'],
+            color: ['#066AFE', '#10B981', '#066AFE'],
           } : {}}
           transition={{ duration: 0.6, ease: 'easeInOut' }}
           style={{
             fontSize: 'var(--slds-g-font-scale-2)',
             fontWeight: 'var(--slds-g-font-weight-6)',
-            color: '#2E844A',
+            color: '#066AFE',
             fontFamily: 'var(--slds-g-font-family)',
           }}
         >

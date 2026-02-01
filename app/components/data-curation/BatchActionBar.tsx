@@ -185,7 +185,7 @@ export function BatchActionBar({
             padding: 'var(--slds-g-spacing-2) var(--slds-g-spacing-4)', // 8px 16px
             borderRadius: 'var(--slds-g-radius-border-1)', // 4px
             border: 'none',
-            backgroundColor: '#2E844A',
+            backgroundColor: '#066AFE',
             color: 'var(--slds-g-color-icon-white)', // #FFFFFF
             fontSize: 'var(--slds-g-font-scale-base)', // 13px from Figma
             fontWeight: 'var(--slds-g-font-weight-6)', // 590
@@ -202,7 +202,7 @@ export function BatchActionBar({
           }}
           onMouseLeave={(e) => {
             if (!isProcessing) {
-              e.currentTarget.style.backgroundColor = '#2E844A';
+              e.currentTarget.style.backgroundColor = '#066AFE';
             }
           }}
         >

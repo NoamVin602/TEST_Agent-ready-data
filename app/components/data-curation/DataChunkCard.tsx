@@ -139,9 +139,9 @@ export function DataChunkCard({
         };
       case 'curated':
         return {
-          border: '1px solid #2E844A',
+          border: '1px solid #066AFE',
           backgroundColor: '#E8F5EC',
-          borderColor: '#2E844A',
+          borderColor: '#066AFE',
         };
       case 'excluded':
         return {
@@ -292,12 +292,12 @@ export function DataChunkCard({
             zIndex: 1,
           }}
         >
-          <CheckCircle2 size={16} color="#2E844A" />
+          <CheckCircle2 size={16} color="#066AFE" />
           <span
             style={{
               fontSize: 'var(--slds-g-font-scale-neg-1)', // 11px
               fontWeight: 'var(--slds-g-font-weight-6)', // 590
-              color: '#2E844A',
+              color: '#066AFE',
               fontFamily: 'var(--slds-g-font-family)',
               lineHeight: 'var(--slds-g-line-height-body-base)', // 18px
             }}
@@ -542,7 +542,7 @@ export function DataChunkCard({
               justifyContent: 'center',
               borderRadius: '4px',
               border: 'none',
-              backgroundColor: '#2E844A',
+              backgroundColor: '#066AFE',
               cursor: 'pointer',
               transition: 'all 0.15s ease-in-out',
             }}
@@ -550,7 +550,7 @@ export function DataChunkCard({
               e.currentTarget.style.backgroundColor = '#0C8A5F';
             }}
             onMouseLeave={(e) => {
-              e.currentTarget.style.backgroundColor = '#2E844A';
+              e.currentTarget.style.backgroundColor = '#066AFE';
             }}
           >
             <CheckCircle2 size={16} color="#FFFFFF" />

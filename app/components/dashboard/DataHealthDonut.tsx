@@ -26,7 +26,7 @@ export function DataHealthDonut({ percentage, isLoading = false }: DataHealthDon
   }
 
   const healthStatus = percentage >= 80 ? 'Excellent' : percentage >= 60 ? 'Good' : percentage >= 40 ? 'Fair' : 'Needs Improvement';
-  const healthColor = percentage >= 80 ? '#2E844A' : percentage >= 60 ? '#0176D3' : percentage >= 40 ? '#FE9339' : '#C23934';
+  const healthColor = percentage >= 80 ? '#066AFE' : percentage >= 60 ? '#0176D3' : percentage >= 40 ? '#FE9339' : '#C23934';
 
   return (
     <div 
