@@ -1,7 +1,8 @@
 "use client";
 
 import { 
-  SearchIcon
+  SearchIcon,
+  UserIcon
 } from "../../lib/slds-icons";
 
 export function GlobalHeader() {
@@ -140,7 +141,16 @@ export function GlobalHeader() {
             e.currentTarget.style.backgroundColor = 'transparent';
           }}
         >
-          <img src="/Split Button.svg" alt="Split Button" width="47" height="24" />
+          <svg width="47" height="24" viewBox="0 0 47 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect x="0.5" y="0.5" width="46" height="23" rx="3.5" stroke="#5C5C5C" strokeWidth="1"/>
+            <circle cx="12" cy="12" r="1.5" fill="#5C5C5C"/>
+            <circle cx="12" cy="12" r="1.5" fill="#5C5C5C"/>
+            <circle cx="18" cy="12" r="1.5" fill="#5C5C5C"/>
+            <circle cx="18" cy="12" r="1.5" fill="#5C5C5C"/>
+            <circle cx="24" cy="12" r="1.5" fill="#5C5C5C"/>
+            <circle cx="24" cy="12" r="1.5" fill="#5C5C5C"/>
+            <path d="M30 12L35 7M35 17L30 12M30 12L35 17M30 12L35 7" stroke="#5C5C5C" strokeWidth="1.5" strokeLinecap="round"/>
+          </svg>
         </button>
 
         {/* New/Add Icon */}
@@ -312,7 +322,7 @@ export function GlobalHeader() {
             e.currentTarget.style.backgroundColor = '#B0C4D9';
           }}
         >
-          <img src="/Avatar.svg" alt="User Avatar" width="18" height="18" style={{ borderRadius: '50%' }} />
+          <UserIcon size={18} color="#0176D3" />
         </button>
       </div>
     </div>

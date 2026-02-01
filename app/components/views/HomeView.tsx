@@ -200,15 +200,14 @@ export function HomeView({ onMetricClick }: HomeViewProps) {
                     overflow: 'hidden',
                   }}
                 >
-                  <img
-                    src="/feed.svg"
-                    alt="Feed icon"
-                    style={{
-                      width: '32px',
-                      height: '32px',
-                      display: 'block',
-                    }}
-                  />
+                  <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <rect width="32" height="32" rx="4" fill="#1B96FF"/>
+                    <path d="M8 12C8 10.8954 8.89543 10 10 10C11.1046 10 12 10.8954 12 12C12 13.1046 11.1046 14 10 14C8.89543 14 8 13.1046 8 12Z" fill="white"/>
+                    <path d="M8 20C8 18.8954 8.89543 18 10 18C11.1046 18 12 18.8954 12 20C12 21.1046 11.1046 22 10 22C8.89543 22 8 21.1046 8 20Z" fill="white"/>
+                    <path d="M10 16H24" stroke="white" strokeWidth="2" strokeLinecap="round"/>
+                    <path d="M10 8H24" stroke="white" strokeWidth="2" strokeLinecap="round"/>
+                    <path d="M10 24H24" stroke="white" strokeWidth="2" strokeLinecap="round"/>
+                  </svg>
                 </div>
               </div>
               
