@@ -21,12 +21,13 @@ export function DocumentPreview({
   const highlightRef = useRef<HTMLDivElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
 
-  // Scroll to highlighted chunk when it changes
+  // Scroll to highlighted chunk when it changes - Preview drives List
   useEffect(() => {
     if (highlightedChunk && highlightRef.current && containerRef.current) {
       const highlightElement = highlightRef.current;
       const container = containerRef.current;
       
+      // Smooth scroll to center the highlighted text
       const scrollTop = highlightElement.offsetTop - container.offsetTop - container.offsetHeight / 2 + highlightElement.offsetHeight / 2;
       
       container.scrollTo({
@@ -76,12 +77,18 @@ export function DocumentPreview({
             display: 'inline-block',
             border: '2px solid #0176D3',
           }}
-          onClick={() => onChunkClick?.(highlightedChunk)}
+          onClick={() => {
+            // Preview drives List - clicking highlighted section syncs back to list
+            onChunkClick?.(highlightedChunk);
+          }}
           onMouseEnter={(e) => {
             e.currentTarget.style.backgroundColor = 'rgba(1, 118, 211, 0.4)';
+            e.currentTarget.style.transform = 'scale(1.01)';
+            e.currentTarget.style.transition = 'all 0.15s ease';
           }}
           onMouseLeave={(e) => {
             e.currentTarget.style.backgroundColor = 'rgba(1, 118, 211, 0.3)';
+            e.currentTarget.style.transform = 'scale(1)';
           }}
         >
           {chunkText}

@@ -31,7 +31,7 @@ function ScanProgressModal({ isOpen, onClose, onComplete, isScanning }: any) {
     }}>
       <div style={{
         backgroundColor: 'white',
-        padding: '32px',
+        padding: 'var(--slds-g-spacing-8, 32px)', // 32px - 8pt grid
         borderRadius: '8px',
         maxWidth: '500px',
         display: 'flex',
@@ -208,9 +208,9 @@ export default function DataCurationPage() {
         backgroundColor: 'rgba(243, 243, 243, 1)',
         padding: 'var(--slds-g-spacing-4, 16px)',
       }}>
-        <article className="slds-card" style={{ maxWidth: '1440px', margin: '0 auto', width: '100%', display: 'flex', flexDirection: 'column', flex: 1 }}>
+        <article className="slds-card" style={{ maxWidth: '1440px', margin: '1px auto 1px 16px', width: '100%', display: 'flex', flexDirection: 'column', flex: 1, boxSizing: 'border-box' }}>
           {/* Tabs in Card Header */}
-          <div className="slds-card__header" style={{ padding: 0, borderBottom: 'none' }}>
+          <div className="slds-card__header" style={{ padding: '12px', borderBottom: 'none', boxSizing: 'border-box' }}>
             <TabNavigation 
               tabs={TABS} 
               activeTab={activeTab} 
@@ -219,7 +219,7 @@ export default function DataCurationPage() {
           </div>
 
           {/* Tab Content in Card Body */}
-          <div className="slds-card__body slds-card__body_inner" style={{ flex: 1, padding: 'var(--slds-g-spacing-4, 16px)', overflow: activeTab === "curation" ? "hidden" : 'auto' }}>
+          <div className="slds-card__body slds-card__body_inner" style={{ flex: 1, padding: '12px', overflow: activeTab === "curation" ? "hidden" : 'auto', boxSizing: 'border-box' }}>
             {renderTabContent()}
           </div>
         </article>

@@ -167,6 +167,7 @@ export function IssueCard({
             {onViewDocument && (
               <button
                 type="button"
+                className="slds-button slds-button_neutral"
                 onClick={(e) => {
                   e.stopPropagation();
                   onViewDocument();
@@ -175,23 +176,6 @@ export function IssueCard({
                   display: 'inline-flex',
                   alignItems: 'center',
                   gap: 'var(--slds-g-spacing-1)',
-                  padding: '6px var(--slds-g-spacing-3)',
-                  backgroundColor: 'transparent',
-                  border: '1px solid var(--slds-g-color-brand-base-50)',
-                  borderRadius: 'var(--slds-g-radius-border-2)',
-                  color: 'var(--slds-g-color-brand-base-50)',
-                  fontSize: 'var(--slds-g-font-scale-1)',
-                  fontWeight: 'var(--slds-g-font-weight-6)',
-                  cursor: 'pointer',
-                  transition: 'all var(--slds-g-transition-base)'
-                }}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.backgroundColor = 'var(--slds-g-color-brand-base-50)';
-                  e.currentTarget.style.color = 'var(--slds-g-color-neutral-base-100)';
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.backgroundColor = 'transparent';
-                  e.currentTarget.style.color = 'var(--slds-g-color-brand-base-50)';
                 }}
               >
                 <Eye style={{ width: '14px', height: '14px' }} />
@@ -201,33 +185,17 @@ export function IssueCard({
             {onMarkResolved && (
               <button
                 type="button"
+                className="slds-button slds-button_brand"
                 onClick={(e) => {
                   e.stopPropagation();
                   onMarkResolved();
                 }}
                 style={{
-                  display: 'inline-flex',
+                  display: 'flex',
                   alignItems: 'center',
-                  padding: '6px var(--slds-g-spacing-4)', // 6px 16px
-                  backgroundColor: 'var(--slds-g-color-accent-container-1)', // #066AFE from Figma
-                  border: 'none',
-                  borderRadius: 'var(--slds-g-radius-border-1)', // 4px from Figma
-                  color: 'var(--slds-g-color-on-accent-1)', // #FFFFFF from Figma
-                  fontFamily: 'var(--slds-g-font-family)',
-                  fontSize: 'var(--slds-g-font-scale-1)', // 14px from Figma
-                  fontWeight: 'var(--slds-g-font-weight-6)', // 590 Semibold
-                  lineHeight: 'var(--slds-g-line-height-body)', // 19px from Figma
-                  cursor: 'pointer',
-                  transition: 'background-color var(--slds-g-transition-fast)',
-                }}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.backgroundColor = 'var(--slds-g-color-accent-2)'; // #0250D9 darker blue
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.backgroundColor = 'var(--slds-g-color-accent-container-1)'; // #066AFE
                 }}
               >
-                Mark Resolved(?)
+                Mark Resolved
               </button>
             )}
           </div>

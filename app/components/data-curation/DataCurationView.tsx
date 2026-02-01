@@ -103,8 +103,9 @@ export function DataCurationView() {
     return acc;
   }, {} as Record<string, DataChunk[]>);
 
-  // Handle individual chunk approval
+  // Handle individual chunk approval - Immediate transition with animation
   const handleApprove = useCallback((id: string) => {
+    // Immediate state change - System state superseded by user action
     setChunks((prev) =>
       prev.map((chunk) =>
         chunk.id === id ? { ...chunk, status: 'curated' as ChunkStatus } : chunk
@@ -115,10 +116,13 @@ export function DataCurationView() {
       next.delete(id);
       return next;
     });
+    // Clear highlight if this was the highlighted chunk
+    setHighlightedChunk((prev) => (prev?.id === id ? null : prev));
   }, []);
 
-  // Handle individual chunk rejection
+  // Handle individual chunk rejection - Immediate transition with animation
   const handleReject = useCallback((id: string) => {
+    // Immediate state change - System state superseded by user action
     setChunks((prev) =>
       prev.map((chunk) =>
         chunk.id === id ? { ...chunk, status: 'excluded' as ChunkStatus } : chunk
@@ -129,6 +133,8 @@ export function DataCurationView() {
       next.delete(id);
       return next;
     });
+    // Clear highlight if this was the highlighted chunk
+    setHighlightedChunk((prev) => (prev?.id === id ? null : prev));
   }, []);
 
   // Handle chunk edit
@@ -140,14 +146,20 @@ export function DataCurationView() {
     );
   }, []);
 
-  // Handle chunk click (navigate to preview)
+  // Handle chunk click (navigate to preview) - List drives Preview
   const handleChunkClick = useCallback((chunk: DataChunk) => {
     setHighlightedChunk(chunk);
-    // Scroll chunk into view in list
+    // Scroll chunk into view in list with smooth animation
     setTimeout(() => {
       const element = document.getElementById(`chunk-${chunk.id}`);
       if (element && listRef.current) {
         element.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        // Add temporary focus highlight
+        element.style.transition = 'box-shadow 0.3s ease';
+        element.style.boxShadow = '0 0 0 3px rgba(1, 118, 211, 0.3)';
+        setTimeout(() => {
+          element.style.boxShadow = '';
+        }, 2000);
       }
     }, 100);
   }, []);
@@ -260,7 +272,7 @@ export function DataCurationView() {
               key={filter}
               onClick={() => setActiveFilter(filter)}
               style={{
-                padding: '6px var(--slds-g-spacing-3)', // 6px 12px
+                padding: 'var(--slds-g-spacing-1, 4px) var(--slds-g-spacing-2, 8px)', // 4px 8px - 8pt grid
                 borderRadius: 'var(--slds-g-radius-border-1)', // 4px
                 border: 'none',
                 backgroundColor: activeFilter === filter ? 'var(--slds-g-color-brand-base-50)' : 'var(--slds-g-color-neutral-base-95)', // #0176D3 or #F3F3F3
@@ -286,7 +298,7 @@ export function DataCurationView() {
             >
               {filter === 'all' ? 'All' : filter}
               {filter !== 'all' && (
-                <span style={{ marginLeft: '6px', opacity: 0.8 }}>
+                <span style={{ marginLeft: 'var(--slds-g-spacing-1, 4px)', opacity: 0.8 }}>
                   ({chunks.filter((c) => c.status === filter).length})
                 </span>
               )}
@@ -303,42 +315,45 @@ export function DataCurationView() {
             padding: '16px 24px',
           }}
         >
-          <AnimatePresence mode="popLayout">
-            {Object.entries(chunksByCategory).map(([category, categoryChunks]) => (
-              <div key={category}>
-                {/* Regular Category Header */}
+          {Object.entries(chunksByCategory).map(([category, categoryChunks]) => (
+            <div key={category}>
+              {/* Regular Category Header */}
+              <div
+                ref={(el) => {
+                  if (el) categoryRefs.current.set(category, el);
+                }}
+              >
+                <CategoryHeader
+                  category={category}
+                  count={categoryChunks.length}
+                  isSticky={false}
+                />
+              </div>
+
+              {/* Sticky Category Header (when scrolling) */}
+              {stickyCategory === category && (
                 <div
-                  ref={(el) => {
-                    if (el) categoryRefs.current.set(category, el);
+                  style={{
+                    position: 'sticky',
+                    top: 0,
+                    zIndex: 100,
                   }}
                 >
                   <CategoryHeader
                     category={category}
                     count={categoryChunks.length}
-                    isSticky={false}
+                    isSticky={true}
                   />
                 </div>
+              )}
 
-                {/* Sticky Category Header (when scrolling) */}
-                {stickyCategory === category && (
-                  <div
-                    style={{
-                      position: 'sticky',
-                      top: 0,
-                      zIndex: 100,
-                    }}
-                  >
-                    <CategoryHeader
-                      category={category}
-                      count={categoryChunks.length}
-                      isSticky={true}
-                    />
-                  </div>
-                )}
-
-                {/* Chunks in Category */}
+              {/* Chunks in Category */}
+              <AnimatePresence mode="popLayout">
                 {categoryChunks.map((chunk) => (
-                  <div key={chunk.id} id={`chunk-${chunk.id}`}>
+                  <div 
+                    key={chunk.id} 
+                    id={`chunk-${chunk.id}`}
+                  >
                     <DataChunkCard
                       chunk={chunk}
                       isSelected={selectedChunks.has(chunk.id)}
@@ -352,9 +367,9 @@ export function DataCurationView() {
                     />
                   </div>
                 ))}
-              </div>
-            ))}
-          </AnimatePresence>
+              </AnimatePresence>
+            </div>
+          ))}
 
           {filteredChunks.length === 0 && (
             <div

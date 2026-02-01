@@ -69,6 +69,7 @@ export function DataChunkCard({
 
   const handleApprove = () => {
     setIsAnimating(true);
+    // Slide out animation - item fades and slides up, then subsequent items smoothly slide up
     setTimeout(() => {
       onApprove(chunk.id);
     }, 300);
@@ -76,6 +77,7 @@ export function DataChunkCard({
 
   const handleReject = () => {
     setIsAnimating(true);
+    // Slide out animation - item fades and slides out, then subsequent items smoothly slide up
     setTimeout(() => {
       onReject(chunk.id);
     }, 300);
@@ -83,8 +85,16 @@ export function DataChunkCard({
 
   const handleEditClick = (e: React.MouseEvent) => {
     e.stopPropagation();
+    // Prevent accidental edits - require explicit click, not hover
     setIsEditing(true);
     setEditedContent(chunk.content);
+  };
+
+  const handleTextClick = (e: React.MouseEvent) => {
+    // Only trigger edit on double-click to prevent accidental edits
+    if (e.detail === 2 && chunk.status === 'pending') {
+      handleEditClick(e);
+    }
   };
 
   const handleSave = () => {
@@ -139,14 +149,26 @@ export function DataChunkCard({
         opacity: isAnimating ? 0 : 1, 
         y: isAnimating ? -20 : 0,
         scale: isEditing ? 1.02 : 1,
+        height: isAnimating ? 0 : 'auto',
+        marginBottom: isAnimating ? 0 : 'var(--slds-g-spacing-3)',
       }}
-      exit={{ opacity: 0, x: -100, height: 0 }}
-      transition={{ duration: 0.3, ease: 'easeInOut' }}
+      exit={{ 
+        opacity: 0, 
+        x: -100, 
+        height: 0,
+        marginBottom: 0,
+        transition: { duration: 0.3, ease: 'easeInOut' }
+      }}
+      transition={{ 
+        duration: 0.3, 
+        ease: 'easeInOut',
+        layout: { duration: 0.3, ease: 'easeInOut' }
+      }}
       style={{
         position: 'relative',
         borderRadius: 'var(--slds-g-radius-border-2)', // 8px from Figma
         padding: 'var(--slds-g-spacing-4)', // 16px from Figma
-        marginBottom: 'var(--slds-g-spacing-3)', // 12px from Figma
+        marginBottom: 'var(--slds-g-spacing-2, 8px)', // 8px - 8pt grid
         cursor: isEditing ? 'default' : 'pointer',
         ...getStatusStyles(),
         boxShadow: isHighlighted 
@@ -167,11 +189,11 @@ export function DataChunkCard({
       {showConfidencePulse && (
         <motion.div
           animate={{
-            opacity: [0.3, 0.6, 0.3],
-            scale: [1, 1.02, 1],
+            opacity: [0.2, 0.4, 0.2],
+            scale: [1, 1.01, 1],
           }}
           transition={{
-            duration: 2,
+            duration: 2.5,
             repeat: Infinity,
             ease: 'easeInOut',
           }}
@@ -179,9 +201,10 @@ export function DataChunkCard({
             position: 'absolute',
             inset: 0,
             borderRadius: '8px',
-            backgroundColor: 'rgba(16, 185, 129, 0.1)',
+            backgroundColor: 'rgba(46, 132, 74, 0.08)',
             pointerEvents: 'none',
             zIndex: 0,
+            border: '1px solid rgba(46, 132, 74, 0.2)',
           }}
         />
       )}
@@ -191,8 +214,8 @@ export function DataChunkCard({
         <div
           style={{
             position: 'absolute',
-            top: '12px',
-            right: '12px',
+            top: 'var(--slds-g-spacing-2, 8px)',
+            right: 'var(--slds-g-spacing-2, 8px)',
             display: 'flex',
             alignItems: 'center',
             gap: '4px',
@@ -219,8 +242,8 @@ export function DataChunkCard({
         <div
           style={{
             position: 'absolute',
-            top: '12px',
-            left: '12px',
+            top: 'var(--slds-g-spacing-2, 8px)',
+            left: 'var(--slds-g-spacing-2, 8px)',
             zIndex: 2,
           }}
           onClick={(e) => e.stopPropagation()}
@@ -243,8 +266,8 @@ export function DataChunkCard({
         <div
           style={{
             position: 'absolute',
-            top: '12px',
-            right: showCheckbox ? '40px' : '12px',
+            top: 'var(--slds-g-spacing-2, 8px)',
+            right: showCheckbox ? 'var(--slds-g-spacing-10, 48px)' : 'var(--slds-g-spacing-2, 8px)',
             display: 'flex',
             alignItems: 'center',
             gap: '4px',
@@ -277,7 +300,7 @@ export function DataChunkCard({
             fontFamily: 'var(--slds-g-font-family)',
             lineHeight: 'var(--slds-g-line-height-body-base)', // 18px from Figma
             display: 'flex',
-            gap: 'var(--slds-g-spacing-3)', // 12px from Figma
+            gap: 'var(--slds-g-spacing-2, 8px)', // 8px - 8pt grid
           }}
         >
           {chunk.category && (
@@ -291,7 +314,12 @@ export function DataChunkCard({
 
       {/* Content - Editable or Read-only */}
       {isEditing ? (
-        <div style={{ position: 'relative', zIndex: 1 }}>
+        <motion.div 
+          initial={{ height: 'auto', opacity: 0 }}
+          animate={{ height: 'auto', opacity: 1 }}
+          transition={{ duration: 0.2, ease: 'easeOut' }}
+          style={{ position: 'relative', zIndex: 1 }}
+        >
           <textarea
             ref={textRef}
             value={editedContent}
@@ -299,23 +327,30 @@ export function DataChunkCard({
             style={{
               width: '100%',
               minHeight: '120px',
-              padding: '12px',
-              border: '1px solid #0176D3',
+              padding: 'var(--slds-g-spacing-2, 8px)',
+              border: '2px solid #0176D3',
               borderRadius: '4px',
               fontFamily: 'inherit',
               fontSize: '14px',
               lineHeight: '1.5',
               resize: 'vertical',
               outline: 'none',
+              transition: 'border-color 0.15s ease',
             }}
             onClick={(e) => e.stopPropagation()}
+            onFocus={(e) => {
+              e.currentTarget.style.borderColor = '#014486';
+            }}
+            onBlur={(e) => {
+              e.currentTarget.style.borderColor = '#0176D3';
+            }}
           />
           <div
             style={{
               display: 'flex',
               justifyContent: 'flex-end',
               gap: '8px',
-              marginTop: '12px',
+              marginTop: 'var(--slds-g-spacing-2, 8px)',
             }}
           >
             <button
@@ -339,7 +374,7 @@ export function DataChunkCard({
               Save
             </button>
           </div>
-        </div>
+        </motion.div>
       ) : (
         <div
           style={{
@@ -352,10 +387,7 @@ export function DataChunkCard({
             fontFamily: 'var(--slds-g-font-family)',
             paddingRight: chunk.status === 'pending' ? '80px' : '0',
           }}
-          onClick={(e) => {
-            // Only trigger edit on double-click or explicit edit button
-            e.stopPropagation();
-          }}
+          onClick={handleTextClick}
         >
           {chunk.content}
         </div>
@@ -366,8 +398,8 @@ export function DataChunkCard({
         <div
           style={{
             position: 'absolute',
-            bottom: '12px',
-            right: '12px',
+            bottom: 'var(--slds-g-spacing-2, 8px)',
+            right: 'var(--slds-g-spacing-2, 8px)',
             display: 'flex',
             gap: '8px',
             zIndex: 2,

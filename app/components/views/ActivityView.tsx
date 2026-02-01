@@ -100,8 +100,8 @@ export function ActivityView() {
       </div>
 
       {/* Activity List */}
-      <div className="slds-card" style={{ borderRadius: 'var(--slds-g-radius-border-4)', backgroundColor: '#FFFFFF' }}>
-        <div className="slds-card__body" style={{ padding: 0 }}>
+      <div className="slds-card" style={{ borderRadius: 'var(--slds-g-radius-border-4)', backgroundColor: '#FFFFFF', margin: '1px 1px 1px 16px', boxSizing: 'border-box' }}>
+        <div className="slds-card__body" style={{ padding: '12px', boxSizing: 'border-box' }}>
           <div style={{ display: 'flex', flexDirection: 'column' }}>
             {ACTIVITY_LOG.map((activity, index) => {
               const Icon = activity.icon;
@@ -109,6 +109,7 @@ export function ActivityView() {
                 <div
                   key={activity.id}
                   className="slds-card"
+                  style={{ margin: '1px 1px 1px 16px', boxSizing: 'border-box' }}
                   style={{
                     display: 'flex',
                     alignItems: 'flex-start',
@@ -130,8 +131,8 @@ export function ActivityView() {
                   {/* Icon */}
                   <div
                     style={{
-                      width: '40px',
-                      height: '40px',
+                      width: 'var(--slds-g-spacing-10, 48px)',
+                      height: 'var(--slds-g-spacing-10, 48px)',
                       borderRadius: 'var(--slds-g-radius-border-circle)',
                       backgroundColor: 'var(--slds-g-color-neutral-base-95)',
                       display: 'flex',

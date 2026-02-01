@@ -16,7 +16,7 @@ export function AIReadyScore({
   const percentage = (currentScore / targetScore) * 100;
 
   return (
-    <div className="slds-card slds-m-bottom_large">
+    <div className="slds-card slds-m-bottom_large" style={{ margin: '1px 1px 1px 16px', boxSizing: 'border-box' }}>
       <div className="slds-card__body">
         {/* Header */}
         <div className="slds-grid slds-grid_align-spread slds-grid_vertical-align-center slds-m-bottom_medium">

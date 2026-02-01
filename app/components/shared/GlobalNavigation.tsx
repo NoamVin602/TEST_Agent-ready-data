@@ -11,8 +11,8 @@ export function GlobalNavigation({ activeTab = "home" }: GlobalNavigationProps) 
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'space-between',
-        padding: '4px 24px 4px 0',
-        height: '40px',
+        padding: 'var(--slds-g-spacing-1, 4px) var(--slds-g-spacing-6, 24px) var(--slds-g-spacing-1, 4px) 0',
+        height: 'var(--slds-g-spacing-10, 48px)', // 48px - 8pt grid (was 40px)
         backgroundColor: '#FFFFFF',
         boxShadow: '0px -1px 1px 0px rgba(0,0,0,0.05), 0px 1.4px 1.5px 0px rgba(0,0,0,0.09), 0px 0px 1.49px 0px rgba(0,0,0,0.09)',
         position: 'sticky',
@@ -77,7 +77,7 @@ export function GlobalNavigation({ activeTab = "home" }: GlobalNavigationProps) 
           style={{
             display: 'flex',
             alignItems: 'center',
-            height: '40px',
+            height: 'var(--slds-g-spacing-10, 48px)', // 48px - 8pt grid (was 40px)
           }}
         >
           {/* Home Tab */}

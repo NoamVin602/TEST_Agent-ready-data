@@ -35,8 +35,8 @@ export function BatchActionBar({
           zIndex: 1000,
           display: 'flex',
           alignItems: 'center',
-          gap: '12px',
-          padding: '12px 24px',
+          gap: 'var(--slds-g-spacing-2, 8px)',
+          padding: 'var(--slds-g-spacing-2, 8px) var(--slds-g-spacing-6, 24px)',
           backgroundColor: '#FFFFFF',
           borderRadius: '8px',
           boxShadow: '0 4px 16px rgba(0,0,0,0.2)',
@@ -62,7 +62,7 @@ export function BatchActionBar({
           style={{
             display: 'flex',
             alignItems: 'center',
-            gap: '6px',
+            gap: 'var(--slds-g-spacing-1, 4px)',
             padding: 'var(--slds-g-spacing-2) var(--slds-g-spacing-4)', // 8px 16px
             borderRadius: 'var(--slds-g-radius-border-1)', // 4px
             border: '1px solid #EF4444',
@@ -101,7 +101,7 @@ export function BatchActionBar({
           style={{
             display: 'flex',
             alignItems: 'center',
-            gap: '6px',
+            gap: 'var(--slds-g-spacing-1, 4px)',
             padding: 'var(--slds-g-spacing-2) var(--slds-g-spacing-4)', // 8px 16px
             borderRadius: 'var(--slds-g-radius-border-1)', // 4px
             border: 'none',

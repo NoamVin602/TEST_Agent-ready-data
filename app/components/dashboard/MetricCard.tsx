@@ -32,7 +32,7 @@ export function MetricCard({
   const changeColor = trend === 'up' || change > 0 ? '#2E844A' : '#C23934';
 
   const cardContent = (
-    <div className="slds-card__body slds-card__body_inner" style={{ padding: '0.75rem 1rem', height: '84px', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
+    <div className="slds-card__body slds-card__body_inner" style={{ padding: '12px', height: '84px', display: 'flex', flexDirection: 'column', justifyContent: 'center', boxSizing: 'border-box' }}>
       <div className="slds-grid" style={{ gap: '1rem', alignItems: 'flex-start' }}>
         {/* Left: Title and Value */}
         <div style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: '0.25rem', minWidth: 0 }}>
@@ -98,7 +98,7 @@ export function MetricCard({
       <article 
         className="slds-card" 
         onClick={onClick}
-        style={{ cursor: 'pointer' }}
+        style={{ cursor: 'pointer', margin: '1px 1px 1px 16px', boxSizing: 'border-box' }}
         role="button"
         tabIndex={0}
         onKeyDown={(e) => {
@@ -114,7 +114,7 @@ export function MetricCard({
   }
 
   return (
-    <article className="slds-card">
+    <article className="slds-card" style={{ margin: '1px 1px 1px 16px', boxSizing: 'border-box' }}>
       {cardContent}
     </article>
   );

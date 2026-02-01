@@ -148,7 +148,7 @@ export const AnalysisView = forwardRef<HTMLDivElement, AnalysisViewProps>(
                   type="button"
                   onClick={() => setActiveFilter(tab.id)}
                   style={{
-                    height: '40px', // Exact Figma height
+                    height: 'var(--slds-g-spacing-10, 48px)', // 48px - 8pt grid (was 40px)
                     maxWidth: '160px', // Exact Figma max-width
                     padding: `0 var(--slds-g-spacing-4)`, // 0 16px from Figma
                     display: 'flex',
@@ -235,12 +235,12 @@ export const AnalysisView = forwardRef<HTMLDivElement, AnalysisViewProps>(
                       display: 'flex',
                       alignItems: 'center',
                       justifyContent: 'space-between',
-                      padding: 'var(--slds-g-spacing-3) var(--slds-g-spacing-4)', // 12px 16px
+                      padding: 'var(--slds-g-spacing-2, 8px) var(--slds-g-spacing-4, 16px)', // 8px 16px - 8pt grid
                       backgroundColor: 'transparent',
                       border: 'none',
                       cursor: 'pointer',
                       textAlign: 'left',
-                      gap: 'var(--slds-g-spacing-3)', // 12px
+                      gap: 'var(--slds-g-spacing-2, 8px)', // 8px - 8pt grid
                     }}
                   >
                     {/* Chevron Icon */}
@@ -418,53 +418,25 @@ export const AnalysisView = forwardRef<HTMLDivElement, AnalysisViewProps>(
                       <div style={{ display: 'flex', gap: 'var(--slds-g-spacing-2)', justifyContent: 'flex-end', marginTop: 'var(--slds-g-spacing-3)' }}>
                         <button
                           type="button"
+                          className="slds-button slds-button_neutral"
                           onClick={(e) => e.stopPropagation()}
                           style={{
-                            padding: '6px var(--slds-g-spacing-4)', // 6px 16px
-                            borderRadius: 'var(--slds-g-radius-border-1)', // 4px
-                            border: '1px solid var(--slds-g-color-border-1)', // #C9C9C9
-                            backgroundColor: 'var(--slds-g-color-neutral-base-100)', // #FFFFFF
-                            color: 'var(--slds-g-color-on-surface-1)', // #5C5C5C
-                            fontFamily: 'var(--slds-g-font-family)',
-                            fontSize: 'var(--slds-g-font-scale-base)', // 13px
-                            fontWeight: 'var(--slds-g-font-weight-6)', // 590
-                            lineHeight: 'var(--slds-g-line-height-body-base)', // 18px
-                            cursor: 'pointer',
-                            transition: 'background-color var(--slds-g-transition-fast)',
-                          }}
-                          onMouseEnter={(e) => {
-                            e.currentTarget.style.backgroundColor = 'var(--slds-g-color-neutral-base-95)'; // #F3F3F3
-                          }}
-                          onMouseLeave={(e) => {
-                            e.currentTarget.style.backgroundColor = 'var(--slds-g-color-neutral-base-100)'; // #FFFFFF
+                            display: 'inline-flex',
+                            alignItems: 'center',
                           }}
                         >
                           View Document Preview
                         </button>
                         <button
                           type="button"
+                          className="slds-button slds-button_brand"
                           onClick={(e) => e.stopPropagation()}
                           style={{
-                            padding: '6px var(--slds-g-spacing-4)', // 6px 16px
-                            borderRadius: 'var(--slds-g-radius-border-1)', // 4px
-                            border: 'none',
-                            backgroundColor: 'var(--slds-g-color-accent-container-1)', // #066AFE from Figma
-                            color: 'var(--slds-g-color-on-accent-1)', // #FFFFFF
-                            fontFamily: 'var(--slds-g-font-family)',
-                            fontSize: 'var(--slds-g-font-scale-1)', // 14px
-                            fontWeight: 'var(--slds-g-font-weight-6)', // 590
-                            lineHeight: 'var(--slds-g-line-height-body)', // 19px
-                            cursor: 'pointer',
-                            transition: 'background-color var(--slds-g-transition-fast)',
-                          }}
-                          onMouseEnter={(e) => {
-                            e.currentTarget.style.backgroundColor = 'var(--slds-g-color-accent-2)'; // #0250D9
-                          }}
-                          onMouseLeave={(e) => {
-                            e.currentTarget.style.backgroundColor = 'var(--slds-g-color-accent-container-1)'; // #066AFE
+                            display: 'flex',
+                            alignItems: 'center',
                           }}
                         >
-                          Mark Resolved(?)
+                          Mark Resolved
                         </button>
                       </div>
                     </motion.div>

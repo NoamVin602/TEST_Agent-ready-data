@@ -61,7 +61,7 @@ export function RecentActivityTable({ activities }: RecentActivityTableProps) {
       </div>
 
       {/* Card Body */}
-      <div className="slds-card__body slds-card__body_inner" style={{ padding: 0 }}>
+      <div className="slds-card__body slds-card__body_inner">
         <div className="slds-table_header-fixed_container">
           <table 
             className="slds-table slds-table_cell-buffer slds-table_bordered slds-table_fixed-layout" 

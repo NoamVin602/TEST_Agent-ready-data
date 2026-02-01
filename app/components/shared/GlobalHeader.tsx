@@ -13,8 +13,8 @@ export function GlobalHeader() {
         flexDirection: 'row',
         justifyContent: 'space-between',
         alignItems: 'center',
-        padding: '0px 12px',
-        gap: '12px',
+        padding: '0 var(--slds-g-spacing-2, 8px)',
+        gap: 'var(--slds-g-spacing-2, 8px)',
         
         width: '100%',
         height: '64px',
@@ -57,9 +57,9 @@ export function GlobalHeader() {
             style={{
               width: '100%',
               height: '32px',
-              padding: '0 12px 0 40px',
+              padding: '0 var(--slds-g-spacing-2, 8px) 0 var(--slds-g-spacing-10, 48px)',
               border: '1px solid #C9C9C9',
-              borderRadius: '20px',
+              borderRadius: 'var(--slds-g-radius-border-4, 16px)', // 16px - 8pt grid (was 20px)
               fontFamily: "'SF Pro', -apple-system, BlinkMacSystemFont, sans-serif",
               fontSize: '14px',
               fontWeight: 400,

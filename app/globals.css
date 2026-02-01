@@ -79,16 +79,17 @@
   --slds-g-color-badge-action: #E8F4FF;
   --slds-g-color-badge-action-text: #014486;
   
-  /* ========== Spacing ========== */
-  --slds-g-spacing-1: 4px;
-  --slds-g-spacing-2: 8px;
-  --slds-g-spacing-3: 12px;
-  --slds-g-spacing-4: 16px;
-  --slds-g-spacing-5: 20px;
-  --slds-g-spacing-6: 24px;
-  --slds-g-spacing-8: 32px;
-  --slds-g-spacing-10: 40px;
-  --slds-g-spacing-12: 48px;
+  /* ========== Spacing - Strict 8pt Grid System ========== */
+  --slds-g-spacing-1: 4px;   /* Tight clusters only (labels next to inputs) */
+  --slds-g-spacing-2: 8px;   /* Base unit - smallest standard spacing */
+  --slds-g-spacing-3: 16px;  /* Standard spacing (was 12px - rounded to 16px) */
+  --slds-g-spacing-4: 16px;  /* Standard spacing */
+  --slds-g-spacing-5: 24px;  /* Medium spacing (was 20px - rounded to 24px) */
+  --slds-g-spacing-6: 24px;  /* Medium spacing */
+  --slds-g-spacing-8: 32px;  /* Large spacing - section separation */
+  --slds-g-spacing-10: 48px; /* Extra large spacing (was 40px - rounded to 48px) */
+  --slds-g-spacing-12: 48px; /* Extra large spacing */
+  --slds-g-spacing-16: 64px; /* Maximum spacing - major section separation */
   
   /* ========== Typography ========== */
   
@@ -301,10 +302,13 @@ body {
 ========================================== */
 .slds-card {
   background-color: #FFFFFF;
-  border: 1px solid #dddbda;
+  border: 1px solid var(--slds-g-color-border-1, #C9C9C9); /* 1px border as shown in diagram */
   border-radius: 0.25rem;
   box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.1);
   transition: box-shadow 0.15s ease-in-out;
+  margin: 1px 1px 1px 16px !important; /* Top: 1px, Right: 1px, Bottom: 1px, Left: 16px - matching diagram */
+  box-sizing: border-box !important; /* Ensure border-box model */
+  padding: 0; /* No padding on card itself, only on header/body */
 }
 
 .slds-card:hover {
@@ -322,6 +326,9 @@ body {
 
 .slds-card_boundary {
   border-radius: var(--slds-g-radius-border-2, 8px);
+  margin: 1px 1px 1px 16px !important; /* Top: 1px, Right: 1px, Bottom: 1px, Left: 16px - matching diagram */
+  box-sizing: border-box !important;
+  border: 1px solid var(--slds-g-color-border-1, #C9C9C9) !important; /* 1px border as shown in diagram */
 }
 
 .slds-card__body_full-height {
@@ -346,7 +353,7 @@ body {
   z-index: 6000;
   background: var(--slds-g-color-surface-container-inverse-1, #032D60);
   border-radius: var(--slds-g-radius-border-2, 8px);
-  padding: var(--slds-g-spacing-2, 8px) var(--slds-g-spacing-3, 12px);
+  padding: var(--slds-g-spacing-2, 8px) var(--slds-g-spacing-2, 8px);
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
   max-width: 300px;
   pointer-events: none;
@@ -364,7 +371,7 @@ body {
 }
 
 .slds-popover__body {
-  padding: var(--slds-g-spacing-2, 8px) var(--slds-g-spacing-3, 12px);
+  padding: var(--slds-g-spacing-2, 8px) var(--slds-g-spacing-2, 8px);
 }
 
 .slds-popover_tooltip .slds-text-heading_small {
@@ -386,9 +393,9 @@ body {
   border: 6px solid transparent;
 }
 
-/* Bottom nubbin - nubbin at bottom of tooltip pointing down */
+/* Bottom nubbin - nubbin at bottom of tooltip pointing down - 0px gap */
 .slds-popover_tooltip.slds-popover_bottom::before {
-  bottom: -12px;
+  bottom: -6px;
   left: 50%;
   transform: translateX(-50%);
   border-top-color: var(--slds-g-color-surface-container-inverse-1, #032D60);
@@ -407,7 +414,7 @@ body {
 
 .slds-tooltip-trigger {
   position: relative;
-  cursor: help;
+  cursor: default;
 }
 
 .slds-tooltip-trigger .slds-popover {
@@ -422,8 +429,9 @@ body {
 }
 
 .slds-card__header {
-  padding: 0.75rem 1rem;
-  border-bottom: 1px solid #dddbda;
+  padding: 12px !important; /* 12px padding - original value */
+  border-bottom: 1px solid var(--slds-g-color-border-1, #C9C9C9);
+  box-sizing: border-box !important;
 }
 
 .slds-card__header.slds-grid {
@@ -433,11 +441,13 @@ body {
 }
 
 .slds-card__body {
-  padding: 0.75rem 1rem;
+  padding: 12px !important; /* 12px padding - original value */
+  box-sizing: border-box !important;
 }
 
 .slds-card__body_inner {
-  padding: 0.75rem 1rem;
+  padding: 12px !important; /* 12px padding - original value */
+  box-sizing: border-box !important;
 }
 
 .slds-card__body_full-height {
@@ -622,7 +632,7 @@ body {
   color: #5C4033 !important; /* Dark brown text on light yellow background */
   border: none !important;
   font-weight: var(--slds-g-font-weight-6, 590) !important;
-  padding: var(--slds-g-spacing-1, 4px) var(--slds-g-spacing-3, 12px) !important;
+  padding: var(--slds-g-spacing-1, 4px) var(--slds-g-spacing-2, 8px) !important;
 }
 
 /* Light success variant (Green tint background) - for score badges */
@@ -631,7 +641,7 @@ body {
   color: #0B5D1E !important; /* Dark green text on light green background */
   border: none !important;
   font-weight: var(--slds-g-font-weight-6, 590) !important;
-  padding: var(--slds-g-spacing-1, 4px) var(--slds-g-spacing-3, 12px) !important;
+  padding: var(--slds-g-spacing-1, 4px) var(--slds-g-spacing-2, 8px) !important;
 }
 
 /* Active tab badge override */
@@ -921,17 +931,22 @@ body {
    Scoped to prevent affecting tabs, badges, or icon-only buttons
 ========================================== */
 .slds-button {
-  display: inline-flex;
-  align-items: center;
+  display: flex;
+  height: 32px;
+  padding: 1px var(--slds-g-spacing-4, 16px);
   justify-content: center;
-  height: 2rem; /* 32px */
-  padding: 0 1rem; /* 16px horizontal */
+  align-items: center;
+  gap: var(--slds-g-spacing-2, 8px);
+  box-sizing: border-box;
+  /* Border: 1px on all sides */
+  border: 1px solid transparent;
+  /* Margin: 9px on all sides */
+  margin: 9px;
   font-family: var(--slds-g-font-family);
   font-size: 0.8125rem; /* 13px */
   font-weight: 400;
   line-height: 1.5;
-  border-radius: 0.25rem; /* 4px */
-  border: 1px solid transparent;
+  border-radius: 9999px; /* Circular border radius as per Figma */
   cursor: pointer;
   transition: background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, color 0.15s ease-in-out;
   text-decoration: none;
@@ -952,28 +967,34 @@ body {
   outline: none;
 }
 
-/* Primary Button (Brand) */
+/* Primary Button (Brand) - SLDS 2.0 Specification */
 .slds-button_brand {
   display: flex;
   height: 32px;
-  padding: 1px var(--slds-g-spacing-4);
+  padding: 1px var(--slds-g-spacing-4, 16px);
   justify-content: center;
   align-items: center;
-  gap: var(--slds-g-spacing-2);
-  border-radius: var(--slds-g-radius-border-circle, 9999px);
+  gap: var(--slds-g-spacing-2, 8px);
+  box-sizing: border-box;
+  /* Border: 1px on all sides */
   border: 1px solid var(--slds-g-color-border-2, #5c5c5c);
-  background: var(--slds-g-color-surface-container-1, #ffffff);
-  color: var(--slds-g-color-accent-2, #0250d9);
+  /* Margin: 9px on all sides */
+  margin: 9px;
+  border-radius: var(--slds-g-radius-border-circle, 9999px); /* Circular border radius as per Figma */
+  background: var(--slds-g-color-accent-container-1, #066AFE);
+  color: var(--slds-g-color-on-accent-1, #FFFFFF);
 }
 
 .slds-button_brand:hover:not(:disabled) {
-  background-color: var(--slds-g-color-neutral-base-95, #f3f3f3);
-  border-color: var(--slds-g-color-border-2, #5c5c5c);
+  background-color: var(--slds-g-color-accent-2, #0250D9);
+  border-color: var(--slds-g-color-accent-2, #0250D9);
+  color: var(--slds-g-color-on-accent-1, #FFFFFF);
 }
 
 .slds-button_brand:active:not(:disabled) {
-  background-color: var(--slds-g-color-neutral-base-95, #f3f3f3);
-  border-color: var(--slds-g-color-border-2, #5c5c5c);
+  background-color: var(--slds-g-color-accent-2, #0250D9);
+  border-color: var(--slds-g-color-accent-2, #0250D9);
+  color: var(--slds-g-color-on-accent-1, #FFFFFF);
 }
 
 .slds-button_brand:disabled {
@@ -982,27 +1003,64 @@ body {
   color: #FFFFFF;
 }
 
-/* Secondary Button (Neutral) */
-.slds-button_neutral {
-  background-color: #FFFFFF;
-  color: #0176D3;
-  border-color: #747474;
+/* Secondary Button (Neutral) - SLDS 2.0 Specification */
+.slds-button.slds-button_neutral,
+button.slds-button.slds-button_neutral {
+  display: flex !important;
+  height: 32px !important;
+  padding: 1px var(--slds-g-spacing-4, 16px) !important;
+  justify-content: center !important;
+  align-items: center !important;
+  gap: var(--slds-g-spacing-2, 8px) !important;
+  box-sizing: border-box !important;
+  /* Border: 1px on all sides */
+  border: 1px solid #5C5C5C !important;
+  /* Margin: 9px on all sides */
+  margin: 9px !important;
+  font-family: var(--slds-g-font-family) !important;
+  font-size: var(--slds-g-font-scale-base, 13px) !important;
+  font-weight: 400 !important;
+  line-height: 1.5 !important;
+  border-radius: 9999px !important; /* Circular border radius as per Figma */
+  background-color: #FFFFFF !important;
+  color: #0250D9 !important;
+  cursor: pointer !important;
+  transition: background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, color 0.15s ease-in-out !important;
+  white-space: nowrap !important;
 }
 
-.slds-button_neutral:hover:not(:disabled) {
-  background-color: #f3f3f2;
-  border-color: #747474;
+.slds-button.slds-button_neutral:hover:not(:disabled),
+button.slds-button.slds-button_neutral:hover:not(:disabled) {
+  background-color: #F3F3F3 !important;
+  border-color: #0250D9 !important;
+  color: #0250D9 !important;
 }
 
-.slds-button_neutral:active:not(:disabled) {
-  background-color: #f3f3f2;
-  border-color: #747474;
+.slds-button.slds-button_neutral:active:not(:disabled),
+button.slds-button.slds-button_neutral:active:not(:disabled) {
+  background-color: #F3F3F3 !important;
+  border-color: #0250D9 !important;
+  color: #0250D9 !important;
 }
 
-.slds-button_neutral:disabled {
-  background-color: #FFFFFF;
-  border-color: #C9C9C9;
-  color: #747474;
+.slds-button.slds-button_neutral:focus,
+button.slds-button.slds-button_neutral:focus {
+  outline: 2px solid #0250D9 !important;
+  outline-offset: 2px !important;
+}
+
+.slds-button.slds-button_neutral:focus:not(:focus-visible),
+button.slds-button.slds-button_neutral:focus:not(:focus-visible) {
+  outline: none !important;
+}
+
+.slds-button.slds-button_neutral:disabled,
+button.slds-button.slds-button_neutral:disabled {
+  background-color: #FFFFFF !important;
+  border-color: #5C5C5C !important;
+  color: #747474 !important;
+  opacity: 0.5 !important;
+  cursor: not-allowed !important;
 }
 
 /* Protection: Do NOT apply button styles to tab links or badges */
@@ -1025,6 +1083,10 @@ body {
   border-radius: 0.25rem;
   background-color: transparent;
   border: none;
+  /* Icon buttons should not have the standard button box model */
+  margin: 0 !important;
+  min-width: auto !important;
+  min-height: auto !important;
 }
 
 /* Override absolute positioning for buttons in cards, tables, and other containers */
@@ -1050,6 +1112,10 @@ body {
 .slds-button_icon-border-filled {
   height: auto;
   padding: 0.25rem;
+  /* Icon buttons should not have the standard button box model */
+  margin: 0 !important;
+  min-width: auto !important;
+  min-height: auto !important;
 }
 
 /* ==========================================
@@ -1429,10 +1495,10 @@ body {
   background-color: var(--slds-g-color-surface-container-2, #F3F3F3);
   display: flex;
   gap: var(--slds-g-spacing-2, 8px);
-  height: 40px;
+  height: var(--slds-g-spacing-10, 48px); /* 48px - 8pt grid (was 40px) */
   isolation: isolate;
   align-items: center;
-  padding: 0 var(--slds-g-spacing-3, 12px);
+  padding: 0 var(--slds-g-spacing-2, 8px);
   position: relative;
   border-radius: var(--slds-g-radius-border-2, 8px);
   flex-shrink: 0;
@@ -1489,7 +1555,7 @@ body {
 .slds-docked-composer__items {
   display: flex;
   flex-direction: column;
-  gap: var(--slds-g-spacing-3, 12px);
+  gap: var(--slds-g-spacing-2, 8px);
   flex: 1;
   overflow-y: auto;
   min-height: 0;
@@ -1500,7 +1566,7 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: var(--slds-g-spacing-3, 12px);
+  padding: var(--slds-g-spacing-2, 8px);
   background-color: var(--slds-g-color-surface-container-2, #F3F3F3);
   border-radius: var(--slds-g-radius-border-2, 8px);
   margin-top: var(--slds-g-spacing-4, 16px);
@@ -1520,7 +1586,7 @@ body {
 /* SLDS Alert Component */
 .slds-alert {
   position: relative;
-  padding: var(--slds-g-spacing-3, 12px);
+  padding: var(--slds-g-spacing-2, 8px);
   border-radius: var(--slds-g-radius-border-2, 8px);
 }
 
@@ -1534,7 +1600,7 @@ body {
   display: flex;
   align-items: center;
   gap: var(--slds-g-spacing-1, 4px);
-  padding: var(--slds-g-spacing-3, 12px);
+  padding: var(--slds-g-spacing-2, 8px);
   border-radius: var(--slds-g-radius-border-2, 8px);
 }
 
@@ -1592,13 +1658,13 @@ body {
 .slds-notify_toast {
   display: flex;
   align-items: center;
-  gap: var(--slds-g-spacing-3, 12px);
-  padding: var(--slds-g-spacing-3, 12px) var(--slds-g-spacing-4, 16px);
+  gap: var(--slds-g-spacing-2, 8px);
+  padding: var(--slds-g-spacing-2, 8px) var(--slds-g-spacing-4, 16px);
   background-color: var(--slds-g-color-neutral-base-100, #FFFFFF);
   border-radius: var(--slds-g-radius-border-2, 8px);
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
   border-left: 4px solid;
-  margin-bottom: var(--slds-g-spacing-3, 12px);
+  margin-bottom: var(--slds-g-spacing-2, 8px);
   font-family: var(--slds-g-font-family);
 }
 
@@ -1657,13 +1723,21 @@ body {
 }
 
 /* SLDS Progress Bar - Matching Storybook Variant */
+/* SLDS Progress Bar - Circular Variant (Rounded Ends) - Matching Storybook */
 .slds-progress-bar {
   position: relative;
   width: 100%;
   height: 8px;
-  background-color: var(--slds-g-color-neutral-base-95, #F3F3F3);
-  border-radius: 9999px;
+  background-color: #F3F3F3;
+  border-radius: 9999px; /* Fully rounded for circular variant */
   overflow: hidden;
+  display: block;
+  min-width: 0;
+}
+
+/* Large size variant - matching Storybook size="large" */
+.slds-progress-bar_large {
+  height: 12px;
 }
 
 .slds-progress-bar__value {
@@ -1672,8 +1746,31 @@ body {
   left: 0;
   height: 100%;
   background-color: #0250D9;
-  border-radius: 9999px;
+  border-radius: 9999px; /* Fully rounded to match container */
   transition: width 0.3s ease;
+  display: block;
+  min-width: 0;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .slds-progress-bar {
+    height: 6px;
+  }
+  
+  .slds-progress-bar_large {
+    height: 10px;
+  }
+}
+
+@media (max-width: 480px) {
+  .slds-progress-bar {
+    height: 4px;
+  }
+  
+  .slds-progress-bar_large {
+    height: 8px;
+  }
 }
 
 /* SLDS Text Color Utilities */
@@ -1735,4 +1832,8 @@ body {
 /* SLDS Button Full Width */
 .slds-button_full-width {
   width: 100%;
+  /* Full-width buttons should still respect box model but width overrides min-width */
+  min-width: auto;
+  /* Margin should be maintained */
+  margin: 9px;
 }

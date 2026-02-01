@@ -105,7 +105,7 @@ export function ContentGapsView() {
         <button
           type="button"
           style={{
-            padding: '6px var(--slds-g-spacing-4)',
+            padding: 'var(--slds-g-spacing-1, 4px) var(--slds-g-spacing-4, 16px)',
             backgroundColor: 'var(--slds-g-color-brand-base-50)',
             border: 'none',
             borderRadius: 'var(--slds-g-radius-border-2)',
@@ -135,7 +135,7 @@ export function ContentGapsView() {
             type="button"
             onClick={() => setActiveFilter(tab.id)}
             style={{
-              padding: '6px var(--slds-g-spacing-3)',
+              padding: 'var(--slds-g-spacing-1, 4px) var(--slds-g-spacing-2, 8px)',
               backgroundColor: activeFilter === tab.id 
                 ? 'var(--slds-g-color-brand-base-50)' 
                 : 'var(--slds-g-color-neutral-base-100)',
@@ -261,7 +261,7 @@ export function ContentGapsView() {
                   <div style={{ display: 'flex', gap: 'var(--slds-g-spacing-2)', marginTop: 'var(--slds-g-spacing-3)' }}>
                     <button
                       style={{
-                        padding: '6px var(--slds-g-spacing-4)',
+                        padding: 'var(--slds-g-spacing-1, 4px) var(--slds-g-spacing-4, 16px)',
                         backgroundColor: 'var(--slds-g-color-brand-base-50)',
                         border: 'none',
                         borderRadius: 'var(--slds-g-radius-border-2)',
@@ -276,7 +276,7 @@ export function ContentGapsView() {
                     </button>
                     <button
                       style={{
-                        padding: '6px var(--slds-g-spacing-4)',
+                        padding: 'var(--slds-g-spacing-1, 4px) var(--slds-g-spacing-4, 16px)',
                         backgroundColor: 'transparent',
                         border: '1px solid var(--slds-g-color-border-1)',
                         borderRadius: 'var(--slds-g-radius-border-2)',

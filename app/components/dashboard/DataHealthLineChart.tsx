@@ -203,7 +203,7 @@ export function DataHealthLineChart({ data, currentValue, isLoading = false }: D
           role="tooltip"
           style={{
             position: 'absolute',
-            bottom: 'calc(100% + 12px)',
+            bottom: '100%',
             left: '50%',
             transform: 'translateX(-50%)',
             whiteSpace: 'normal',

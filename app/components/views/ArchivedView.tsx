@@ -100,7 +100,7 @@ export function ArchivedView() {
       style={{
         backgroundColor: '#FFFFFF',
         padding: '16px',
-        borderRadius: '20px',
+        borderRadius: 'var(--slds-g-radius-border-4, 16px)', // 16px - 8pt grid (was 20px)
         margin: '16px',
         maxWidth: '1440px',
         marginLeft: 'auto',
@@ -161,7 +161,7 @@ export function ArchivedView() {
             value={sortBy}
             onChange={(e) => setSortBy(e.target.value as SortOption)}
             style={{
-              padding: '6px 12px',
+              padding: 'var(--slds-g-spacing-1, 4px) var(--slds-g-spacing-2, 8px)',
               borderRadius: '4px',
               border: '1px solid #C9C9C9',
               backgroundColor: '#FFFFFF',
@@ -198,7 +198,7 @@ export function ArchivedView() {
               key={filter}
               type="button"
               style={{
-                padding: '6px 12px',
+                padding: 'var(--slds-g-spacing-1, 4px) var(--slds-g-spacing-2, 8px)',
                 borderRadius: '4px',
                 border: isActive ? '1px solid #0176D3' : '1px solid #C9C9C9',
                 backgroundColor: isActive ? '#E8F4FF' : '#FFFFFF',
@@ -267,14 +267,14 @@ export function ArchivedView() {
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'space-between',
-                  padding: '12px 16px',
+                  padding: 'var(--slds-g-spacing-2, 8px) var(--slds-g-spacing-4, 16px)',
                   backgroundColor: 'transparent',
                   border: 'none',
                   cursor: 'pointer',
                   textAlign: 'left',
                 }}
               >
-                <div style={{ display: 'flex', alignItems: 'center', gap: '12px', flex: 1 }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--slds-g-spacing-2, 8px)', flex: 1 }}>
                   <ChevronRight
                     style={{
                       width: '16px',
@@ -315,7 +315,7 @@ export function ArchivedView() {
                     </p>
                   </div>
                 </div>
-                <div style={{ display: 'flex', gap: '8px', alignItems: 'center', flexShrink: 0, marginLeft: '12px' }}>
+                <div style={{ display: 'flex', gap: 'var(--slds-g-spacing-2, 8px)', alignItems: 'center', flexShrink: 0, marginLeft: 'var(--slds-g-spacing-2, 8px)' }}>
                   <span
                     style={{
                       display: 'inline-block',
@@ -358,7 +358,7 @@ export function ArchivedView() {
               {isExpanded && (
                 <div style={{ padding: '0 16px 16px 44px' }}>
                   {item.resolution && (
-                    <div style={{ marginBottom: '12px' }}>
+                    <div style={{ marginBottom: 'var(--slds-g-spacing-2, 8px)' }}>
                       <p
                         style={{
                           fontFamily: "'SF Pro', -apple-system, BlinkMacSystemFont, sans-serif",
@@ -377,27 +377,11 @@ export function ArchivedView() {
                   <div style={{ display: 'flex', gap: '8px' }}>
                     <button
                       type="button"
+                      className="slds-button slds-button_neutral"
                       style={{
                         display: 'inline-flex',
                         alignItems: 'center',
-                        gap: '6px',
-                        padding: '6px 16px',
-                        borderRadius: '4px',
-                        border: '1px solid #C9C9C9',
-                        backgroundColor: '#FFFFFF',
-                        color: 'rgba(2, 80, 217, 1)',
-                        fontFamily: "'SF Pro', -apple-system, BlinkMacSystemFont, sans-serif",
-                        fontSize: '13px',
-                        fontWeight: 590,
-                        lineHeight: '19px',
-                        cursor: 'pointer',
-                        transition: 'background-color 0.15s ease-in-out',
-                      }}
-                      onMouseEnter={(e) => {
-                        e.currentTarget.style.backgroundColor = '#F3F3F3';
-                      }}
-                      onMouseLeave={(e) => {
-                        e.currentTarget.style.backgroundColor = '#FFFFFF';
+                        gap: 'var(--slds-g-spacing-1, 4px)',
                       }}
                     >
                       <RotateCcw style={{ width: '14px', height: '14px' }} />
@@ -405,25 +389,7 @@ export function ArchivedView() {
                     </button>
                     <button
                       type="button"
-                      style={{
-                        padding: '6px 16px',
-                        borderRadius: '4px',
-                        border: '1px solid #C9C9C9',
-                        backgroundColor: '#FFFFFF',
-                        color: '#5C5C5C',
-                        fontFamily: "'SF Pro', -apple-system, BlinkMacSystemFont, sans-serif",
-                        fontSize: '13px',
-                        fontWeight: 590,
-                        lineHeight: '19px',
-                        cursor: 'pointer',
-                        transition: 'background-color 0.15s ease-in-out',
-                      }}
-                      onMouseEnter={(e) => {
-                        e.currentTarget.style.backgroundColor = '#F3F3F3';
-                      }}
-                      onMouseLeave={(e) => {
-                        e.currentTarget.style.backgroundColor = '#FFFFFF';
-                      }}
+                      className="slds-button slds-button_neutral"
                     >
                       View Details
                     </button>

@@ -61,8 +61,8 @@ export function ConfigView() {
         </div>
 
         {/* Scan Settings */}
-        <div className="slds-card" style={{ borderRadius: 'var(--slds-g-radius-border-4)', backgroundColor: '#FFFFFF' }}>
-          <div className="slds-card__header" style={{ padding: 'var(--slds-g-spacing-4)' }}>
+        <div className="slds-card" style={{ borderRadius: 'var(--slds-g-radius-border-4)', backgroundColor: '#FFFFFF', margin: '1px 1px 1px 16px', boxSizing: 'border-box' }}>
+          <div className="slds-card__header" style={{ padding: '12px', boxSizing: 'border-box' }}>
             <div className="slds-grid slds-grid_vertical-align-center" style={{ gap: 'var(--slds-g-spacing-2)' }}>
               <ClockIcon size={20} color="rgba(2, 80, 217, 1)" />
               <h3
@@ -79,7 +79,7 @@ export function ConfigView() {
               </h3>
             </div>
           </div>
-          <div className="slds-card__body" style={{ padding: 'var(--slds-g-spacing-4)' }}>
+          <div className="slds-card__body" style={{ padding: '12px', boxSizing: 'border-box' }}>
             <div className="slds-grid slds-grid_vertical" style={{ gap: 'var(--slds-g-spacing-4)' }}>
               {/* Auto Scan Toggle */}
               <div className="slds-grid slds-grid_align-spread slds-grid_vertical-align-center">
@@ -163,8 +163,8 @@ export function ConfigView() {
         </div>
 
         {/* Auto-Fix Settings */}
-        <div className="slds-card" style={{ borderRadius: 'var(--slds-g-radius-border-4)', backgroundColor: '#FFFFFF' }}>
-          <div className="slds-card__header" style={{ padding: 'var(--slds-g-spacing-4)' }}>
+        <div className="slds-card" style={{ borderRadius: 'var(--slds-g-radius-border-4)', backgroundColor: '#FFFFFF', margin: '1px 1px 1px 16px', boxSizing: 'border-box' }}>
+          <div className="slds-card__header" style={{ padding: '12px', boxSizing: 'border-box' }}>
             <div className="slds-grid slds-grid_vertical-align-center" style={{ gap: 'var(--slds-g-spacing-2)' }}>
               <ZapIcon size={20} color="var(--slds-g-color-warning-base-50)" />
               <h3
@@ -181,7 +181,7 @@ export function ConfigView() {
               </h3>
             </div>
           </div>
-          <div className="slds-card__body" style={{ padding: 'var(--slds-g-spacing-4)' }}>
+          <div className="slds-card__body" style={{ padding: '12px', boxSizing: 'border-box' }}>
             <div className="slds-grid slds-grid_vertical" style={{ gap: 'var(--slds-g-spacing-4)' }}>
               {/* Auto-Fix Toggle */}
               <div className="slds-grid slds-grid_align-spread slds-grid_vertical-align-center">
@@ -278,8 +278,8 @@ export function ConfigView() {
         </div>
 
         {/* Notification Settings */}
-        <div className="slds-card" style={{ borderRadius: 'var(--slds-g-radius-border-4)', backgroundColor: '#FFFFFF' }}>
-          <div className="slds-card__header" style={{ padding: 'var(--slds-g-spacing-4)' }}>
+        <div className="slds-card" style={{ borderRadius: 'var(--slds-g-radius-border-4)', backgroundColor: '#FFFFFF', margin: '1px 1px 1px 16px', boxSizing: 'border-box' }}>
+          <div className="slds-card__header" style={{ padding: '12px', boxSizing: 'border-box' }}>
             <div className="slds-grid slds-grid_vertical-align-center" style={{ gap: 'var(--slds-g-spacing-2)' }}>
               <BellIcon size={20} color="rgba(2, 80, 217, 1)" />
               <h3
@@ -296,7 +296,7 @@ export function ConfigView() {
               </h3>
             </div>
           </div>
-          <div className="slds-card__body" style={{ padding: 'var(--slds-g-spacing-4)' }}>
+          <div className="slds-card__body" style={{ padding: '12px', boxSizing: 'border-box' }}>
             <div className="slds-grid slds-grid_vertical" style={{ gap: 'var(--slds-g-spacing-4)' }}>
               {/* Notifications Toggle */}
               <div className="slds-grid slds-grid_align-spread slds-grid_vertical-align-center">
@@ -410,8 +410,8 @@ export function ConfigView() {
         </div>
 
         {/* Security Settings */}
-        <div className="slds-card" style={{ borderRadius: 'var(--slds-g-radius-border-4)', backgroundColor: '#FFFFFF' }}>
-          <div className="slds-card__header" style={{ padding: 'var(--slds-g-spacing-4)' }}>
+        <div className="slds-card" style={{ borderRadius: 'var(--slds-g-radius-border-4)', backgroundColor: '#FFFFFF', margin: '1px 1px 1px 16px', boxSizing: 'border-box' }}>
+          <div className="slds-card__header" style={{ padding: '12px', boxSizing: 'border-box' }}>
             <div className="slds-grid slds-grid_vertical-align-center" style={{ gap: 'var(--slds-g-spacing-2)' }}>
               <ShieldIcon size={20} color="var(--slds-g-color-success-base-50)" />
               <h3
@@ -428,7 +428,7 @@ export function ConfigView() {
               </h3>
             </div>
           </div>
-          <div className="slds-card__body" style={{ padding: 'var(--slds-g-spacing-4)' }}>
+          <div className="slds-card__body" style={{ padding: '12px', boxSizing: 'border-box' }}>
             <div className="slds-grid slds-grid_align-spread slds-grid_vertical-align-center">
               <div>
                 <label

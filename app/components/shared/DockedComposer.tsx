@@ -116,17 +116,32 @@ export function DockedComposer({
           ))}
         </div>
 
-        {/* Resolution Summary */}
+        {/* Resolution Summary - Responsive */}
         {totalIssues > 0 && (
           <div className="slds-docked-composer__summary">
-            <div className="slds-grid slds-grid_align-spread slds-grid_vertical-align-center" style={{ width: '100%', gap: 'var(--slds-g-spacing-4)' }}>
+            <div 
+              className="slds-grid slds-grid_align-spread slds-grid_vertical-align-center" 
+              style={{ 
+                width: '100%', 
+                gap: 'var(--slds-g-spacing-4)',
+                flexWrap: 'wrap'
+              }}
+            >
               {/* Left: Resolved Count and Progress Bar */}
-              <div className="slds-grid slds-grid_vertical" style={{ flex: 1, minWidth: 0, gap: 'var(--slds-g-spacing-2)' }}>
+              <div 
+                className="slds-grid slds-grid_vertical" 
+                style={{ 
+                  flex: '1 1 auto', 
+                  minWidth: 0, 
+                  gap: 'var(--slds-g-spacing-2)',
+                  maxWidth: '100%'
+                }}
+              >
                 <span 
                   className="slds-text-body_small" 
                   style={{ 
                     whiteSpace: 'nowrap',
-                    color: 'var(--slds-g-color-success-base-50, #2E844A)',
+                    color: 'var(--slds-g-color-electric-blue-30)',
                     fontFamily: 'var(--slds-g-font-family)',
                     fontSize: 'var(--slds-g-font-scale-neg-1, 12px)',
                     fontWeight: 'var(--slds-g-font-weight-4, 400)',
@@ -135,14 +150,15 @@ export function DockedComposer({
                 >
                   {resolvedCount} of {totalIssues} resolved
                 </span>
-                {/* SLDS Progress Bar */}
+                {/* SLDS Progress Bar - Circular Variant, Large Size, Responsive */}
                 <div 
-                  className="slds-progress-bar" 
+                  className="slds-progress-bar slds-progress-bar_large" 
                   role="progressbar" 
                   aria-valuemin={0} 
                   aria-valuemax={totalIssues} 
                   aria-valuenow={resolvedCount} 
                   aria-label={`${resolvedCount} of ${totalIssues} resolved`}
+                  style={{ width: '100%', maxWidth: '100%' }}
                 >
                   <span 
                     className="slds-progress-bar__value" 
@@ -179,7 +195,7 @@ export function DockedComposer({
           onClick={onFooterButtonClick}
           style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 'var(--slds-g-spacing-1)' }}
         >
-          <CheckIcon size={16} color="var(--slds-g-color-text-default, #181818)" />
+          <CheckIcon size={16} color="var(--slds-g-color-brand-base-50, #0176D3)" />
           <span>{footerButtonLabel}</span>
         </button>
       </div>

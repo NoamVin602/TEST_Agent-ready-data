@@ -183,7 +183,7 @@ export function HomeView({ onMetricClick }: HomeViewProps) {
       {/* Left Column - Current State Dashboard (75%) */}
       <div className="slds-grid slds-grid_vertical" style={{ flex: '0 0 75%', minWidth: 0, gap: 'var(--slds-g-spacing-4)' }}>
         {/* Current State Card Header - SLDS Cosmos Pattern */}
-        <article className="slds-card">
+        <article className="slds-card" style={{ margin: '1px 1px 1px 16px', boxSizing: 'border-box' }}>
           <div className="slds-card__header">
             <header className="slds-media slds-media_center slds-has-flexi-truncate">
               {/* Icon */}
@@ -260,12 +260,12 @@ export function HomeView({ onMetricClick }: HomeViewProps) {
           </div>
 
           {/* Card Body */}
-          <div className="slds-card__body slds-card__body_inner">
+          <div className="slds-card__body slds-card__body_inner" style={{ padding: '12px', boxSizing: 'border-box' }}>
             {/* Charts Section - Two nested cards side by side */}
             <div className="slds-grid slds-grid_1-of-2 slds-gutters slds-m-bottom_medium" style={{ minHeight: '400px', alignItems: 'stretch' }}>
               {/* Data Health Donut Chart */}
               <div className="slds-col slds-size_1-of-2">
-                <article className="slds-card slds-card_full-height">
+                <article className="slds-card slds-card_full-height" style={{ margin: '1px 1px 1px 16px', boxSizing: 'border-box' }}>
                   <div className="slds-card__header slds-grid">
                     <header className="slds-media slds-media_center slds-has-flexi-truncate">
                       <div className="slds-media__figure">
@@ -293,7 +293,7 @@ export function HomeView({ onMetricClick }: HomeViewProps) {
 
               {/* Data Health Over Time Line Chart */}
               <div className="slds-col slds-size_1-of-2">
-                <article className="slds-card slds-card_full-height">
+                <article className="slds-card slds-card_full-height" style={{ margin: '1px 1px 1px 16px', boxSizing: 'border-box' }}>
                   <div className="slds-card__header slds-grid">
                     <header className="slds-media slds-media_center slds-has-flexi-truncate">
                       <div className="slds-media__figure">

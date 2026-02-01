@@ -15,7 +15,7 @@ export function CategoryHeader({ category, count, isSticky = false }: CategoryHe
         position: isSticky ? 'sticky' : 'relative',
         top: isSticky ? '0' : 'auto',
         zIndex: isSticky ? 100 : 1,
-        padding: '12px 16px',
+        padding: 'var(--slds-g-spacing-2, 8px) var(--slds-g-spacing-4, 16px)',
         backgroundColor: isSticky ? '#FFFFFF' : '#F3F3F3',
         borderBottom: '2px solid #E0E0E0',
         borderTop: isSticky ? '1px solid #E0E0E0' : 'none',

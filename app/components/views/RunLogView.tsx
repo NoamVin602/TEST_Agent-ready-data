@@ -206,8 +206,8 @@ export function RunLogView() {
       {/* Run Log List */}
       <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--slds-g-spacing-3)' }}>
         {RUN_LOG.map((run) => (
-          <div key={run.id} className="slds-card" style={{ borderRadius: 'var(--slds-g-radius-border-4)', backgroundColor: '#FFFFFF' }}>
-            <div className="slds-card__body" style={{ padding: 'var(--slds-g-spacing-4)' }}>
+          <div key={run.id} className="slds-card" style={{ borderRadius: 'var(--slds-g-radius-border-4)', backgroundColor: '#FFFFFF', margin: '1px 1px 1px 16px', boxSizing: 'border-box' }}>
+            <div className="slds-card__body" style={{ padding: '12px', boxSizing: 'border-box' }}>
               {/* Header Row */}
               <div
                 className="slds-grid slds-grid_align-spread slds-grid_vertical-align-start"
