@@ -40,6 +40,7 @@ function generateIssuesFromConfig() {
     authoritative?: string;
     action?: string;
     scoreImpact?: number;
+    piiDetails?: string;
   }> = [];
 
   // Day Zero: Show critical issues - Prioritized by score impact
