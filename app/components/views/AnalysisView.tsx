@@ -5,6 +5,7 @@ import { motion } from "framer-motion";
 import { IssueCategory } from "./HomeView";
 import { SeverityBadge } from "../analysis/SeverityBadge";
 import { DocumentPreviewModal } from "../shared/DocumentPreviewModal";
+import { AIIcon, ChevronDownIcon, FilterIcon } from "../../lib/slds-icons";
 
 interface AnalysisViewProps {
   initialCategory?: IssueCategory;
@@ -138,6 +139,121 @@ export const AnalysisView = forwardRef<HTMLDivElement, AnalysisViewProps>(
           width: '100%',
         }}
       >
+        {/* Top Bar - Header above Analysis Section */}
+        <div
+          style={{
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'space-between',
+            gap: 'var(--slds-g-spacing-1, 4px)',
+            height: '32px',
+            marginTop: 'var(--slds-g-spacing-4)',
+            marginBottom: 'var(--slds-g-spacing-2, 8px)',
+            width: '100%',
+          }}
+        >
+          {/* Left Section - Info Text */}
+          <p
+            style={{
+              flex: '1 0 0',
+              fontFamily: 'var(--slds-g-font-family)',
+              fontSize: 'var(--slds-g-font-scale-base)', // 13px
+              fontWeight: 'var(--slds-g-font-weight-4)', // 400 Regular
+              lineHeight: '18px',
+              color: 'var(--slds-g-color-on-surface-1, #5c5c5c)',
+              margin: 0,
+              overflow: 'hidden',
+              textOverflow: 'ellipsis',
+              whiteSpace: 'nowrap',
+            }}
+          >
+            50+ items • Sorted by Severity • Updated a few seconds ago
+          </p>
+
+          {/* Right Section - Action Buttons */}
+          <div
+            style={{
+              display: 'flex',
+              gap: 'var(--slds-g-spacing-2, 8px)',
+              alignItems: 'center',
+              justifyContent: 'flex-end',
+              flexShrink: 0,
+            }}
+          >
+            {/* Auto-Fix All Button */}
+            <button
+              type="button"
+              className="slds-button slds-button_neutral"
+              onClick={() => {
+                // TODO: Implement auto-fix all functionality
+                console.log('Auto-Fix All clicked');
+              }}
+              style={{
+                display: 'flex',
+                height: '32px',
+                padding: '1px var(--slds-g-spacing-4, 16px)',
+                justifyContent: 'center',
+                alignItems: 'center',
+                gap: 'var(--slds-g-spacing-2, 8px)',
+                borderRadius: 'var(--slds-g-radius-border-circle, 9999px)',
+                border: '1px solid var(--slds-g-color-border-2)',
+                background: 'var(--slds-g-color-surface-container-1, #FFFFFF)',
+                color: 'var(--slds-g-color-on-surface-1, #5c5c5c)',
+                fontFamily: 'var(--slds-g-font-family)',
+                fontSize: 'var(--slds-g-font-scale-1)', // 14px
+                fontWeight: 'var(--slds-g-font-weight-6)', // 590 Semibold
+                lineHeight: 'var(--slds-g-line-height-body)', // 19px
+                cursor: 'pointer',
+                transition: 'all var(--slds-g-transition-fast)',
+                boxSizing: 'border-box',
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.backgroundColor = 'var(--slds-g-color-neutral-base-95, #F3F3F3)';
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.backgroundColor = 'var(--slds-g-color-surface-container-1, #FFFFFF)';
+              }}
+            >
+              <AIIcon size={14} color="var(--slds-g-color-accent-2, #0250D9)" />
+              <span>Auto-Fix All</span>
+              <ChevronDownIcon size={14} color="var(--slds-g-color-accent-2, #0250D9)" />
+            </button>
+
+            {/* Filter Button */}
+            <button
+              type="button"
+              className="slds-button slds-button_icon-border"
+              onClick={() => {
+                // TODO: Implement filter functionality
+                console.log('Filter clicked');
+              }}
+              style={{
+                display: 'inline-flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                width: '32px',
+                height: '32px',
+                borderRadius: 'var(--slds-g-radius-border-3, 12px)',
+                border: '1px solid var(--slds-g-color-border-1, #C9C9C9)',
+                backgroundColor: 'var(--slds-g-color-neutral-base-100, #FFFFFF)',
+                color: 'var(--slds-g-color-accent-2, #0250D9)',
+                cursor: 'pointer',
+                transition: 'all var(--slds-g-transition-fast)',
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.backgroundColor = 'var(--slds-g-color-neutral-base-95, #F3F3F3)';
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.backgroundColor = 'var(--slds-g-color-neutral-base-100, #FFFFFF)';
+              }}
+              aria-label="Filter"
+              title="Filter"
+            >
+              <FilterIcon size={16} color="var(--slds-g-color-accent-2, #0250D9)" />
+            </button>
+          </div>
+        </div>
+
         {/* Scoped Tabs Container - Exact Figma Design */}
         <div
           style={{
@@ -145,7 +261,6 @@ export const AnalysisView = forwardRef<HTMLDivElement, AnalysisViewProps>(
             borderRadius: 'var(--slds-g-radius-border-3)', // 12px from Figma
             backgroundColor: 'var(--slds-g-color-neutral-base-100)', // #FFFFFF
             overflow: 'hidden',
-            marginTop: 'var(--slds-g-spacing-4)',
           }}
         >
           {/* Tabset - Scoped Tabs */}
