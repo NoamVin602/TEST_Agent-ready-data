@@ -49,8 +49,8 @@ export function PageHeader({ onRunScan, isScanning }: PageHeaderProps) {
 
             {/* Title */}
             <div className="slds-media__body">
-              <h1 className="slds-page-header__title slds-truncate" title="Data Curation">
-                Data Curation
+              <h1 className="slds-page-header__title slds-truncate" title="Data Health">
+                Data Health
               </h1>
             </div>
           </div>

@@ -293,7 +293,7 @@ export function LeftNavigation({ onCollapseChange }: LeftNavigationProps = {}) {
         ))}
       </nav>
 
-      {/* Data Curation - Active State (Above Collapse Button) */}
+      {/* Data Health - Active State (Above Collapse Button) */}
       <div
         className="slds-navigation__item slds-is-active"
         style={{
@@ -321,7 +321,7 @@ export function LeftNavigation({ onCollapseChange }: LeftNavigationProps = {}) {
         <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" style={{ flexShrink: 0 }}>
           <path fillRule="evenodd" clipRule="evenodd" d="M7.42748 0.816512C5.08812 1.05079 3.23332 2.88855 2.98222 5.22095C2.85251 6.82601 3.52192 8.39212 4.77267 9.40978C5.14486 9.69732 5.36167 10.1413 5.3592 10.611C5.3591 10.9431 5.49342 11.2613 5.73171 11.4932C5.97 11.7252 6.29206 11.8513 6.62487 11.843H9.40316C9.73065 11.843 10.0447 11.7132 10.2763 11.4822C10.5079 11.2511 10.638 10.9377 10.638 10.611C10.6355 10.1413 10.8523 9.69732 11.2245 9.40978C12.363 8.491 13.0309 7.11305 13.0458 5.65215C13.0767 2.78773 10.4836 0.508509 7.42748 0.816512ZM10.1748 13.2902H5.85305C5.59188 13.2897 5.37545 13.4921 5.35913 13.7522C5.35913 14.5517 6.00871 15.1998 6.81002 15.1998H9.21787C9.60267 15.1998 9.97171 15.0473 10.2438 14.7758C10.5159 14.5043 10.6688 14.1361 10.6688 13.7522C10.6524 13.4921 10.436 13.2897 10.1748 13.2902Z" fill="var(--slds-g-color-electric-blue-30)"/>
         </svg>
-        <span style={{ flex: 1 }}>Data Curation</span>
+        <span style={{ flex: 1 }}>Data Health</span>
       </div>
 
       {/* Collapse Button */}
