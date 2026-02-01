@@ -109,8 +109,9 @@ export function ActivityView() {
                 <div
                   key={activity.id}
                   className="slds-card"
-                  style={{ margin: '1px 1px 1px 16px', boxSizing: 'border-box' }}
                   style={{
+                    margin: '1px 1px 1px 16px',
+                    boxSizing: 'border-box',
                     display: 'flex',
                     alignItems: 'flex-start',
                     gap: 'var(--slds-g-spacing-4)',
