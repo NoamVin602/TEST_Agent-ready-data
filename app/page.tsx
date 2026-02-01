@@ -157,11 +157,7 @@ export default function DataCurationPage() {
         case "archived":
           return <ArchivedView />;
         case "curation":
-          return (
-            <div style={{ height: '100%', display: 'flex', flexDirection: 'column' }}>
-              <DataCurationView />
-            </div>
-          );
+          return <DataCurationView />;
         case "activity":
           return <ActivityView />;
         case "run-log":
@@ -234,7 +230,7 @@ export default function DataCurationPage() {
           </div>
 
           {/* Tab Content in Card Body */}
-          <div className="slds-card__body slds-card__body_inner" style={{ flex: 1, padding: '12px', overflow: activeTab === "curation" ? "hidden" : 'auto', boxSizing: 'border-box' }}>
+          <div className="slds-card__body slds-card__body_inner" style={{ flex: 1, padding: activeTab === "curation" ? '0' : '12px', overflow: activeTab === "curation" ? "hidden" : 'auto', boxSizing: 'border-box' }}>
             {renderTabContent()}
           </div>
         </article>

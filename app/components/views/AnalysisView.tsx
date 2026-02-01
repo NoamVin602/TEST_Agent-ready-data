@@ -4,6 +4,7 @@ import { forwardRef, useState } from "react";
 import { motion } from "framer-motion";
 import { IssueCategory } from "./HomeView";
 import { SeverityBadge } from "../analysis/SeverityBadge";
+import { DocumentPreviewModal } from "../shared/DocumentPreviewModal";
 
 interface AnalysisViewProps {
   initialCategory?: IssueCategory;
@@ -87,6 +88,14 @@ export const AnalysisView = forwardRef<HTMLDivElement, AnalysisViewProps>(
   ({ initialCategory }, ref) => {
     const [activeFilter, setActiveFilter] = useState<FilterType>("all");
     const [expandedIssues, setExpandedIssues] = useState<string[]>(["1"]);
+    const [isModalOpen, setIsModalOpen] = useState(false);
+    const [selectedDocument, setSelectedDocument] = useState<{
+      title: string;
+      content: string;
+      type?: string;
+      detectedText?: string;
+      authoritativeText?: string;
+    } | null>(null);
 
     const toggleIssue = (id: string) => {
       setExpandedIssues((prev) =>
@@ -107,6 +116,17 @@ export const AnalysisView = forwardRef<HTMLDivElement, AnalysisViewProps>(
       };
       return typeMap[issue.type] === activeFilter;
     });
+
+    const handleViewDocumentPreview = (issue: typeof MOCK_ISSUES[0]) => {
+      setSelectedDocument({
+        title: issue.title,
+        content: `This is a preview of the document related to "${issue.title}".\n\n${issue.action || "No additional action details available."}\n\nDocument Type: ${issue.type}\nOwner: ${issue.owner || "Unassigned"}\nNumber of Documents: ${issue.docs}`,
+        type: issue.type,
+        detectedText: issue.detected,
+        authoritativeText: issue.authoritative,
+      });
+      setIsModalOpen(true);
+    };
 
     return (
       <div
@@ -419,7 +439,10 @@ export const AnalysisView = forwardRef<HTMLDivElement, AnalysisViewProps>(
                         <button
                           type="button"
                           className="slds-button slds-button_neutral"
-                          onClick={(e) => e.stopPropagation()}
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            handleViewDocumentPreview(issue);
+                          }}
                           style={{
                             display: 'inline-flex',
                             alignItems: 'center',
@@ -446,6 +469,18 @@ export const AnalysisView = forwardRef<HTMLDivElement, AnalysisViewProps>(
             })}
           </div>
         </div>
+
+        {/* Document Preview Modal */}
+        {selectedDocument && (
+          <DocumentPreviewModal
+            isOpen={isModalOpen}
+            onClose={() => {
+              setIsModalOpen(false);
+              setSelectedDocument(null);
+            }}
+            document={selectedDocument}
+          />
+        )}
       </div>
     );
   }

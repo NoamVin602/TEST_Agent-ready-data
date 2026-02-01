@@ -1,11 +1,12 @@
 "use client";
 
-import React, { useState, useRef, useEffect, useCallback } from 'react';
+import React, { useState, useRef, useEffect, useCallback, useMemo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { DataChunkCard, DataChunk, ChunkStatus } from './DataChunkCard';
 import { BatchActionBar } from './BatchActionBar';
 import { DocumentPreview } from './DocumentPreview';
 import { CategoryHeader } from './CategoryHeader';
+import { ValidationOverlay } from './ValidationOverlay';
 
 // Mock data - in real app, this would come from API
 const MOCK_CHUNKS: DataChunk[] = [
@@ -39,7 +40,7 @@ const MOCK_CHUNKS: DataChunk[] = [
     id: '3',
     content: 'Data Transformations allow you to cleanse, enrich, and standardize your data before it enters the unified profile.',
     status: 'pending',
-    confidence: 75,
+    confidence: 55, // Low confidence - will trigger anomaly highlighting
     category: 'Features',
     source: 'Product Documentation',
     sourceLocation: {
@@ -47,6 +48,8 @@ const MOCK_CHUNKS: DataChunk[] = [
       startIndex: 250,
       endIndex: 380,
     },
+    qualityIssues: ['Inconsistent format', 'Missing context'],
+    agentReadinessScore: 55,
   },
   {
     id: '4',
@@ -76,6 +79,14 @@ const MOCK_DOCUMENT = {
   content: 'Salesforce Data Cloud enables organizations to unify customer data from multiple sources into a single, actionable customer profile. Identity Resolution uses advanced algorithms to match and merge customer records across different systems, ensuring data accuracy. Data Transformations allow you to cleanse, enrich, and standardize your data before it enters the unified profile. Segmentation in Data Cloud enables real-time audience creation based on unified customer profiles.',
 };
 
+// Calculate Agent-Readiness Score based on curated chunks
+function calculateAgentReadinessScore(chunksList: DataChunk[]): number {
+  const curatedCount = chunksList.filter(c => c.status === 'curated').length;
+  const totalCount = chunksList.length;
+  if (totalCount === 0) return 0;
+  return Math.round((curatedCount / totalCount) * 100);
+}
+
 export function DataCurationView() {
   const [chunks, setChunks] = useState<DataChunk[]>(MOCK_CHUNKS);
   const [selectedChunks, setSelectedChunks] = useState<Set<string>>(new Set());
@@ -83,6 +94,17 @@ export function DataCurationView() {
   const [isBatchProcessing, setIsBatchProcessing] = useState(false);
   const [activeFilter, setActiveFilter] = useState<ChunkStatus | 'all'>('all');
   const [stickyCategory, setStickyCategory] = useState<string | null>(null);
+  const [showSuccessPulse, setShowSuccessPulse] = useState(false);
+  const [agentReadinessScore, setAgentReadinessScore] = useState(() => {
+    try {
+      return calculateAgentReadinessScore(MOCK_CHUNKS);
+    } catch (e) {
+      console.error('Error calculating initial score:', e);
+      return 0;
+    }
+  });
+  const [showValidationOverlay, setShowValidationOverlay] = useState(false);
+  const [editingChunkId, setEditingChunkId] = useState<string | null>(null);
   
   const listRef = useRef<HTMLDivElement>(null);
   const categoryRefs = useRef<Map<string, HTMLDivElement>>(new Map());
@@ -94,23 +116,34 @@ export function DataCurationView() {
   });
 
   // Group chunks by category
-  const chunksByCategory = filteredChunks.reduce((acc, chunk) => {
-    const category = chunk.category || 'Uncategorized';
-    if (!acc[category]) {
-      acc[category] = [];
-    }
-    acc[category].push(chunk);
-    return acc;
-  }, {} as Record<string, DataChunk[]>);
+  const chunksByCategory = useMemo(() => {
+    return filteredChunks.reduce((acc, chunk) => {
+      const category = chunk.category || 'Uncategorized';
+      if (!acc[category]) {
+        acc[category] = [];
+      }
+      acc[category].push(chunk);
+      return acc;
+    }, {} as Record<string, DataChunk[]>);
+  }, [filteredChunks]);
 
   // Handle individual chunk approval - Immediate transition with animation
   const handleApprove = useCallback((id: string) => {
     // Immediate state change - System state superseded by user action
-    setChunks((prev) =>
-      prev.map((chunk) =>
+    setChunks((prev) => {
+      const updated = prev.map((chunk) =>
         chunk.id === id ? { ...chunk, status: 'curated' as ChunkStatus } : chunk
-      )
-    );
+      );
+      // Update Agent-Readiness Score
+      const newScore = calculateAgentReadinessScore(updated);
+      setAgentReadinessScore(newScore);
+      // Trigger success pulse if score increased
+      if (newScore > agentReadinessScore) {
+        setShowSuccessPulse(true);
+        setTimeout(() => setShowSuccessPulse(false), 2000);
+      }
+      return updated;
+    });
     setSelectedChunks((prev) => {
       const next = new Set(prev);
       next.delete(id);
@@ -118,7 +151,7 @@ export function DataCurationView() {
     });
     // Clear highlight if this was the highlighted chunk
     setHighlightedChunk((prev) => (prev?.id === id ? null : prev));
-  }, []);
+  }, [agentReadinessScore]);
 
   // Handle individual chunk rejection - Immediate transition with animation
   const handleReject = useCallback((id: string) => {
@@ -137,14 +170,52 @@ export function DataCurationView() {
     setHighlightedChunk((prev) => (prev?.id === id ? null : prev));
   }, []);
 
-  // Handle chunk edit
+  // Handle chunk edit with validation overlay
   const handleEdit = useCallback((id: string, newContent: string) => {
-    setChunks((prev) =>
-      prev.map((chunk) =>
+    setChunks((prev) => {
+      const updated = prev.map((chunk) =>
         chunk.id === id ? { ...chunk, content: newContent, status: 'curated' as ChunkStatus } : chunk
-      )
-    );
+      );
+      // Update Agent-Readiness Score
+      const newScore = calculateAgentReadinessScore(updated);
+      setAgentReadinessScore(newScore);
+      setShowValidationOverlay(false);
+      setEditingChunkId(null);
+      // Trigger success pulse if score increased
+      if (newScore > agentReadinessScore) {
+        setShowSuccessPulse(true);
+        setTimeout(() => setShowSuccessPulse(false), 2000);
+      }
+      return updated;
+    });
+  }, [agentReadinessScore]);
+
+  // Handle edit start - show validation overlay
+  const handleEditStart = useCallback((id: string) => {
+    setEditingChunkId(id);
+    setShowValidationOverlay(true);
   }, []);
+
+  // Handle edit cancel - hide validation overlay
+  const handleEditCancel = useCallback(() => {
+    setShowValidationOverlay(false);
+    setEditingChunkId(null);
+  }, []);
+
+  // Calculate projected score when editing
+  const projectedScore = useMemo(() => {
+    if (!editingChunkId || !chunks || chunks.length === 0) return agentReadinessScore;
+    try {
+      // Simulate: if current editing chunk becomes curated, what would score be?
+      const wouldBeCurated = chunks.map(chunk =>
+        chunk.id === editingChunkId ? { ...chunk, status: 'curated' as ChunkStatus } : chunk
+      );
+      return calculateAgentReadinessScore(wouldBeCurated);
+    } catch (error) {
+      console.error('Error calculating projected score:', error);
+      return agentReadinessScore;
+    }
+  }, [editingChunkId, chunks, agentReadinessScore]);
 
   // Handle chunk click (navigate to preview) - List drives Preview
   const handleChunkClick = useCallback((chunk: DataChunk) => {
@@ -164,18 +235,53 @@ export function DataCurationView() {
     }, 100);
   }, []);
 
-  // Handle batch selection
-  const handleSelect = useCallback((id: string, selected: boolean) => {
+  // Handle batch selection with multi-select support (Shift+Click, Cmd/Ctrl+A)
+  const lastSelectedRef = useRef<string | null>(null);
+  
+  const handleSelect = useCallback((id: string, selected: boolean, event?: React.MouseEvent | React.KeyboardEvent) => {
     setSelectedChunks((prev) => {
       const next = new Set(prev);
-      if (selected) {
-        next.add(id);
+      
+      // Handle Shift+Click for range selection
+      if (event && (event.shiftKey || event.getModifierState?.('Shift')) && lastSelectedRef.current) {
+        const chunksArray = filteredChunks;
+        const lastIndex = chunksArray.findIndex(c => c.id === lastSelectedRef.current);
+        const currentIndex = chunksArray.findIndex(c => c.id === id);
+        
+        if (lastIndex !== -1 && currentIndex !== -1) {
+          const start = Math.min(lastIndex, currentIndex);
+          const end = Math.max(lastIndex, currentIndex);
+          
+          for (let i = start; i <= end; i++) {
+            next.add(chunksArray[i].id);
+          }
+        }
       } else {
-        next.delete(id);
+        if (selected) {
+          next.add(id);
+        } else {
+          next.delete(id);
+        }
       }
+      
+      lastSelectedRef.current = id;
       return next;
     });
-  }, []);
+  }, [filteredChunks]);
+
+  // Handle Cmd/Ctrl+A for select all
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if ((e.metaKey || e.ctrlKey) && e.key === 'a' && listRef.current?.contains(document.activeElement)) {
+        e.preventDefault();
+        const allIds = new Set(filteredChunks.map(chunk => chunk.id));
+        setSelectedChunks(allIds);
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [filteredChunks]);
 
   // Handle batch approve all
   const handleApproveAll = useCallback(async () => {
@@ -183,13 +289,20 @@ export function DataCurationView() {
     // Simulate API call
     await new Promise((resolve) => setTimeout(resolve, 1500));
     
-    setChunks((prev) =>
-      prev.map((chunk) =>
+    setChunks((prev) => {
+      const updated = prev.map((chunk) =>
         selectedChunks.has(chunk.id)
           ? { ...chunk, status: 'curated' as ChunkStatus }
           : chunk
-      )
-    );
+      );
+      // Update Agent-Readiness Score
+      const newScore = calculateAgentReadinessScore(updated);
+      setAgentReadinessScore(newScore);
+      // Trigger success pulse
+      setShowSuccessPulse(true);
+      setTimeout(() => setShowSuccessPulse(false), 2000);
+      return updated;
+    });
     setSelectedChunks(new Set());
     setIsBatchProcessing(false);
   }, [selectedChunks]);
@@ -244,9 +357,58 @@ export function DataCurationView() {
       style={{
         display: 'flex',
         height: '100%',
+        minHeight: '600px',
         backgroundColor: '#F3F3F3',
+        position: 'relative',
+        width: '100%',
+        overflow: 'hidden',
       }}
+      data-testid="data-curation-view"
     >
+      {/* Agent-Readiness Score Indicator with Success Pulse */}
+      <div
+        style={{
+          position: 'absolute',
+          top: 'var(--slds-g-spacing-4, 16px)',
+          right: 'var(--slds-g-spacing-4, 16px)',
+          zIndex: 1000,
+          display: 'flex',
+          alignItems: 'center',
+          gap: 'var(--slds-g-spacing-2, 8px)',
+          padding: 'var(--slds-g-spacing-2, 8px) var(--slds-g-spacing-4, 16px)',
+          backgroundColor: '#FFFFFF',
+          borderRadius: 'var(--slds-g-radius-border-2, 8px)',
+          border: '1px solid var(--slds-g-color-border-1)',
+          boxShadow: '0 2px 8px rgba(0,0,0,0.1)',
+        }}
+      >
+        <span
+          style={{
+            fontSize: 'var(--slds-g-font-scale-base)',
+            fontWeight: 'var(--slds-g-font-weight-4)',
+            color: 'var(--slds-g-color-on-surface-1)',
+            fontFamily: 'var(--slds-g-font-family)',
+          }}
+        >
+          Agent-Readiness Score:
+        </span>
+        <motion.span
+          animate={showSuccessPulse ? {
+            scale: [1, 1.2, 1],
+            color: ['#2E844A', '#10B981', '#2E844A'],
+          } : {}}
+          transition={{ duration: 0.6, ease: 'easeInOut' }}
+          style={{
+            fontSize: 'var(--slds-g-font-scale-2)',
+            fontWeight: 'var(--slds-g-font-weight-6)',
+            color: '#2E844A',
+            fontFamily: 'var(--slds-g-font-family)',
+          }}
+        >
+          {agentReadinessScore}%
+        </motion.span>
+      </div>
+
       {/* Left Panel - Curation List */}
       <div
         style={{
@@ -309,14 +471,33 @@ export function DataCurationView() {
         {/* Chunks List */}
         <div
           ref={listRef}
+          tabIndex={0}
+          role="listbox"
+          aria-label="Data chunks list"
+          aria-multiselectable="true"
           style={{
             flex: 1,
             overflow: 'auto',
             padding: '16px 24px',
+            outline: 'none',
+            minHeight: 0, // Important for flex scrolling
           }}
         >
-          {Object.entries(chunksByCategory).map(([category, categoryChunks]) => (
-            <div key={category}>
+          {Object.keys(chunksByCategory).length === 0 ? (
+            <div
+              style={{
+                textAlign: 'center',
+                padding: '48px 24px',
+                color: '#5C5C5C',
+                fontSize: '14px',
+              }}
+            >
+              No {activeFilter === 'all' ? '' : activeFilter} chunks found.
+            </div>
+          ) : (
+            <>
+              {Object.entries(chunksByCategory).map(([category, categoryChunks]) => (
+                <div key={category}>
               {/* Regular Category Header */}
               <div
                 ref={(el) => {
@@ -357,10 +538,12 @@ export function DataCurationView() {
                     <DataChunkCard
                       chunk={chunk}
                       isSelected={selectedChunks.has(chunk.id)}
-                      onSelect={handleSelect}
+                      onSelect={(id, selected, event) => handleSelect(id, selected, event)}
                       onApprove={handleApprove}
                       onReject={handleReject}
                       onEdit={handleEdit}
+                      onEditStart={handleEditStart}
+                      onEditCancel={handleEditCancel}
                       onChunkClick={handleChunkClick}
                       isHighlighted={highlightedChunk?.id === chunk.id}
                       showCheckbox={selectedChunks.size > 0 || activeFilter === 'pending'}
@@ -368,20 +551,9 @@ export function DataCurationView() {
                   </div>
                 ))}
               </AnimatePresence>
-            </div>
-          ))}
-
-          {filteredChunks.length === 0 && (
-            <div
-              style={{
-                textAlign: 'center',
-                padding: '48px 24px',
-                color: '#5C5C5C',
-                fontSize: '14px',
-              }}
-            >
-              No {activeFilter === 'all' ? '' : activeFilter} chunks found.
-            </div>
+                </div>
+              ))}
+            </>
           )}
         </div>
       </div>
@@ -395,12 +567,33 @@ export function DataCurationView() {
         />
       </div>
 
+      {/* Validation Overlay - Shows real-time Agent-Readiness Score feedback */}
+      <ValidationOverlay
+        isVisible={showValidationOverlay}
+        currentScore={agentReadinessScore}
+        projectedScore={projectedScore}
+        chunkCount={chunks.length}
+        curatedCount={chunks.filter(c => c.status === 'curated').length}
+      />
+
       {/* Batch Action Bar */}
       <BatchActionBar
         selectedCount={selectedChunks.size}
         onApproveAll={handleApproveAll}
         onExcludeAll={handleExcludeAll}
         isProcessing={isBatchProcessing}
+        onMassRedact={() => {
+          // Context-aware action: Mass Redact
+          console.log('Mass Redact action triggered');
+        }}
+        onFormatNormalize={() => {
+          // Context-aware action: Format Normalize
+          console.log('Format Normalize action triggered');
+        }}
+        onLabelOutlier={() => {
+          // Context-aware action: Label as Outlier
+          console.log('Label as Outlier action triggered');
+        }}
       />
     </div>
   );

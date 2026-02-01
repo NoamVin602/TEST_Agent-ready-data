@@ -10,6 +10,9 @@ interface BatchActionBarProps {
   onApproveAll: () => void;
   onExcludeAll: () => void;
   isProcessing?: boolean;
+  onMassRedact?: () => void;
+  onFormatNormalize?: () => void;
+  onLabelOutlier?: () => void;
 }
 
 export function BatchActionBar({
@@ -17,8 +20,13 @@ export function BatchActionBar({
   onApproveAll,
   onExcludeAll,
   isProcessing = false,
+  onMassRedact,
+  onFormatNormalize,
+  onLabelOutlier,
 }: BatchActionBarProps) {
   if (selectedCount === 0) return null;
+  
+  const hasContextualActions = onMassRedact || onFormatNormalize || onLabelOutlier;
 
   return (
     <AnimatePresence>
@@ -55,6 +63,78 @@ export function BatchActionBar({
         >
           {selectedCount} item{selectedCount !== 1 ? 's' : ''} selected
         </span>
+
+        {/* Contextual Actions - Only show when relevant */}
+        {hasContextualActions && (
+          <>
+            {onMassRedact && (
+              <button
+                type="button"
+                className="slds-button slds-button_neutral"
+                onClick={onMassRedact}
+                disabled={isProcessing}
+                style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: 'var(--slds-g-spacing-1, 4px)',
+                  padding: 'var(--slds-g-spacing-2) var(--slds-g-spacing-4)',
+                  borderRadius: 'var(--slds-g-radius-border-1)',
+                  fontSize: 'var(--slds-g-font-scale-base)',
+                  fontWeight: 'var(--slds-g-font-weight-6)',
+                  fontFamily: 'var(--slds-g-font-family)',
+                  cursor: isProcessing ? 'not-allowed' : 'pointer',
+                  opacity: isProcessing ? 0.5 : 1,
+                }}
+              >
+                Mass Redact
+              </button>
+            )}
+            {onFormatNormalize && (
+              <button
+                type="button"
+                className="slds-button slds-button_neutral"
+                onClick={onFormatNormalize}
+                disabled={isProcessing}
+                style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: 'var(--slds-g-spacing-1, 4px)',
+                  padding: 'var(--slds-g-spacing-2) var(--slds-g-spacing-4)',
+                  borderRadius: 'var(--slds-g-radius-border-1)',
+                  fontSize: 'var(--slds-g-font-scale-base)',
+                  fontWeight: 'var(--slds-g-font-weight-6)',
+                  fontFamily: 'var(--slds-g-font-family)',
+                  cursor: isProcessing ? 'not-allowed' : 'pointer',
+                  opacity: isProcessing ? 0.5 : 1,
+                }}
+              >
+                Format Normalize
+              </button>
+            )}
+            {onLabelOutlier && (
+              <button
+                type="button"
+                className="slds-button slds-button_neutral"
+                onClick={onLabelOutlier}
+                disabled={isProcessing}
+                style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: 'var(--slds-g-spacing-1, 4px)',
+                  padding: 'var(--slds-g-spacing-2) var(--slds-g-spacing-4)',
+                  borderRadius: 'var(--slds-g-radius-border-1)',
+                  fontSize: 'var(--slds-g-font-scale-base)',
+                  fontWeight: 'var(--slds-g-font-weight-6)',
+                  fontFamily: 'var(--slds-g-font-family)',
+                  cursor: isProcessing ? 'not-allowed' : 'pointer',
+                  opacity: isProcessing ? 0.5 : 1,
+                }}
+              >
+                Label as Outlier
+              </button>
+            )}
+          </>
+        )}
 
         <button
           onClick={onExcludeAll}

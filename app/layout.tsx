@@ -1,35 +1,6 @@
-'use client'
-
 import './globals.css'
-import { GlobalHeader } from './components/shared/GlobalHeader'
-import { GlobalNavigation } from './components/shared/GlobalNavigation'
-import { LeftNavigation } from './components/shared/LeftNavigation'
-import { NavProvider, useNav } from './contexts/NavContext'
-
-function LayoutContent({ children }: { children: React.ReactNode }) {
-  const { setIsCollapsed } = useNav();
-
-  return (
-    <div style={{ display: 'flex', flexDirection: 'column', height: '100vh' }}>
-      {/* Global Header */}
-      <GlobalHeader />
-      
-      {/* Global Navigation */}
-      <GlobalNavigation activeTab="home" />
-      
-      {/* Main Content Area */}
-      <div style={{ display: 'flex', flex: 1, overflow: 'hidden' }}>
-        {/* Left Navigation */}
-        <LeftNavigation onCollapseChange={setIsCollapsed} />
-        
-        {/* Page Content */}
-        <main style={{ flex: 1, overflow: 'auto' }}>
-          {children}
-        </main>
-      </div>
-    </div>
-  );
-}
+import { NavProvider } from './contexts/NavContext'
+import { LayoutContent } from './components/shared/LayoutContent'
 
 export default function RootLayout({
   children,

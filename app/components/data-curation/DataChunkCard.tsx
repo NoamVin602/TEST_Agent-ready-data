@@ -2,7 +2,7 @@
 
 import React, { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { CheckCircle2, X, Edit2, Save, XCircle, Sparkles } from 'lucide-react';
+import { CheckCircle2, X, Edit2, Save, XCircle, Sparkles, AlertTriangle } from 'lucide-react';
 
 export type ChunkStatus = 'pending' | 'curated' | 'excluded';
 
@@ -18,15 +18,19 @@ export interface DataChunk {
     startIndex: number;
     endIndex: number;
   };
+  qualityIssues?: string[]; // Array of quality issue descriptions (e.g., "Out of range", "Inconsistent format")
+  agentReadinessScore?: number; // 0-100, calculated Agent-Readiness Score
 }
 
 interface DataChunkCardProps {
   chunk: DataChunk;
   isSelected?: boolean;
-  onSelect?: (id: string, selected: boolean) => void;
+  onSelect?: (id: string, selected: boolean, event?: React.MouseEvent | React.KeyboardEvent) => void;
   onApprove: (id: string) => void;
   onReject: (id: string) => void;
   onEdit?: (id: string, newContent: string) => void;
+  onEditStart?: (id: string) => void;
+  onEditCancel?: () => void;
   onChunkClick?: (chunk: DataChunk) => void;
   isHighlighted?: boolean;
   showCheckbox?: boolean;
@@ -39,6 +43,8 @@ export function DataChunkCard({
   onApprove,
   onReject,
   onEdit,
+  onEditStart,
+  onEditCancel,
   onChunkClick,
   isHighlighted = false,
   showCheckbox = false,
@@ -51,6 +57,10 @@ export function DataChunkCard({
   // Agent-Ready confidence highlighting (green pulse for high confidence)
   const isHighConfidence = chunk.confidence >= 80;
   const [showConfidencePulse, setShowConfidencePulse] = useState(isHighConfidence && chunk.status === 'pending');
+  
+  // Anomaly detection - low quality data (confidence < 60 or has quality issues)
+  const hasAnomaly = chunk.confidence < 60 || (chunk.qualityIssues && chunk.qualityIssues.length > 0);
+  const [showAnomalyTooltip, setShowAnomalyTooltip] = useState(false);
 
   // Auto-focus textarea when entering edit mode
   useEffect(() => {
@@ -88,6 +98,8 @@ export function DataChunkCard({
     // Prevent accidental edits - require explicit click, not hover
     setIsEditing(true);
     setEditedContent(chunk.content);
+    // Notify parent to show validation overlay
+    onEditStart?.(chunk.id);
   };
 
   const handleTextClick = (e: React.MouseEvent) => {
@@ -107,6 +119,8 @@ export function DataChunkCard({
   const handleCancel = () => {
     setEditedContent(chunk.content);
     setIsEditing(false);
+    // Notify parent to hide validation overlay
+    onEditCancel?.();
   };
 
   const handleCardClick = () => {
@@ -251,7 +265,11 @@ export function DataChunkCard({
           <input
             type="checkbox"
             checked={isSelected}
-            onChange={(e) => onSelect?.(chunk.id, e.target.checked)}
+            onChange={(e) => onSelect?.(chunk.id, e.target.checked, e as unknown as React.MouseEvent)}
+            onClick={(e) => {
+              e.stopPropagation();
+              onSelect?.(chunk.id, !isSelected, e as unknown as React.MouseEvent);
+            }}
             style={{
               width: '18px',
               height: '18px',
@@ -386,10 +404,67 @@ export function DataChunkCard({
             color: chunk.status === 'excluded' ? 'var(--slds-g-color-on-surface-1)' : 'var(--slds-g-color-on-surface-2)', // #5C5C5C or #2E2E2E
             fontFamily: 'var(--slds-g-font-family)',
             paddingRight: chunk.status === 'pending' ? '80px' : '0',
+            textDecoration: hasAnomaly ? 'underline' : 'none',
+            textDecorationColor: hasAnomaly ? '#F59E0B' : 'transparent',
+            textDecorationThickness: hasAnomaly ? '2px' : '0',
+            textUnderlineOffset: hasAnomaly ? '2px' : '0',
+            cursor: 'pointer',
           }}
           onClick={handleTextClick}
+          onMouseEnter={() => {
+            if (hasAnomaly) {
+              setShowAnomalyTooltip(true);
+            }
+          }}
+          onMouseLeave={() => {
+            setShowAnomalyTooltip(false);
+          }}
         >
           {chunk.content}
+          
+          {/* Anomaly Tooltip */}
+          {hasAnomaly && showAnomalyTooltip && (
+            <div
+              className="slds-popover slds-popover_tooltip slds-nubbin_bottom"
+              role="tooltip"
+              style={{
+                position: 'absolute',
+                bottom: '100%',
+                left: '50%',
+                transform: 'translateX(-50%)',
+                marginBottom: '8px',
+                zIndex: 1000,
+                backgroundColor: 'var(--slds-g-color-surface-container-inverse-1, #032D60)',
+                color: 'var(--slds-g-color-text-inverse, #FFFFFF)',
+                padding: 'var(--slds-g-spacing-2, 8px) var(--slds-g-spacing-3, 12px)',
+                borderRadius: 'var(--slds-g-radius-border-2, 8px)',
+                fontSize: 'var(--slds-g-font-scale-base)',
+                fontWeight: 'var(--slds-g-font-weight-4)',
+                lineHeight: 'var(--slds-g-line-height-body-base)',
+                boxShadow: '0 2px 8px rgba(0,0,0,0.2)',
+                maxWidth: '300px',
+                whiteSpace: 'normal',
+              }}
+            >
+              <div style={{ display: 'flex', alignItems: 'flex-start', gap: 'var(--slds-g-spacing-1)', marginBottom: 'var(--slds-g-spacing-1)' }}>
+                <AlertTriangle size={14} style={{ flexShrink: 0, marginTop: '2px' }} />
+                <div>
+                  <div style={{ fontWeight: 'var(--slds-g-font-weight-6)', marginBottom: 'var(--slds-g-spacing-1)' }}>
+                    Quality Issues Detected:
+                  </div>
+                  <ul style={{ margin: 0, paddingLeft: 'var(--slds-g-spacing-4)', listStyle: 'disc' }}>
+                    {chunk.qualityIssues && chunk.qualityIssues.length > 0 ? (
+                      chunk.qualityIssues.map((issue, idx) => (
+                        <li key={idx} style={{ marginBottom: 'var(--slds-g-spacing-1)' }}>{issue}</li>
+                      ))
+                    ) : (
+                      <li>Low confidence score ({chunk.confidence}%)</li>
+                    )}
+                  </ul>
+                </div>
+              </div>
+            </div>
+          )}
         </div>
       )}
 
