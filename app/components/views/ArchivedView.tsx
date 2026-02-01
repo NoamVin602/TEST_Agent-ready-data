@@ -244,7 +244,7 @@ export function ArchivedView() {
               : item.originalSeverity === 'Medium'
               ? '#FEF4E6'
               : '#E8F4FF';
-          const typeColor = item.type === 'Auto-Fixed' ? '#066AFE' : 'rgba(2, 80, 217, 1)';
+          const typeColor = item.type === 'Auto-Fixed' ? '#06A59A' : 'rgba(2, 80, 217, 1)';
           const typeBg = item.type === 'Auto-Fixed' ? '#E8F5EC' : '#E8F4FF';
 
           return (

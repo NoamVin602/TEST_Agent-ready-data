@@ -42,7 +42,7 @@
   --slds-g-color-on-surface-inverse-1: #FFFFFF;
   
   /* Status Colors */
-  --slds-g-color-success-base-50: #066AFE;
+  --slds-g-color-success-base-50: #06A59A;
   --slds-g-color-success-base-40: #194E31;
   --slds-g-color-success-tint: #E8F5EC;
   
@@ -618,9 +618,9 @@ article.slds-card.slds-card_main-content {
 
 /* Success variant (Green) */
 .slds-badge.slds-theme_success {
-  background-color: #066AFE;
+  background-color: #06A59A;
   color: #FFFFFF;
-  border-color: #066AFE;
+  border-color: #06A59A;
 }
 
 /* Error variant (Red) */
@@ -1792,7 +1792,7 @@ button.slds-button.slds-button_neutral:disabled {
 }
 
 .slds-text-color_success {
-  color: var(--slds-g-color-success-base-50, #066AFE);
+  color: var(--slds-g-color-success-base-50, #06A59A);
 }
 
 /* SLDS Grid Utilities */

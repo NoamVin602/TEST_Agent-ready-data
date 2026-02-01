@@ -94,7 +94,7 @@ export function ValidationOverlay({
               </div>
 
               <div style={{ flex: 1, display: 'flex', justifyContent: 'center' }}>
-                {isPositive && <TrendingUpIcon size={20} color="#066AFE" />}
+                       {isPositive && <TrendingUpIcon size={20} color="#06A59A" />}
                 {isNegative && <TrendingDownIcon size={20} color="#EF4444" />}
                 {isNeutral && <MinusIcon size={20} color="#5C5C5C" />}
               </div>
@@ -114,7 +114,7 @@ export function ValidationOverlay({
                   style={{
                     fontSize: 'var(--slds-g-font-scale-2)',
                     fontWeight: 'var(--slds-g-font-weight-6)',
-                    color: isPositive ? '#066AFE' : isNegative ? '#EF4444' : 'var(--slds-g-color-on-surface-2)',
+                           color: isPositive ? '#06A59A' : isNegative ? '#EF4444' : 'var(--slds-g-color-on-surface-2)',
                     fontFamily: 'var(--slds-g-font-family)',
                   }}
                 >
@@ -132,7 +132,7 @@ export function ValidationOverlay({
                   borderRadius: 'var(--slds-g-radius-border-1)',
                   fontSize: 'var(--slds-g-font-scale-base)',
                   fontWeight: 'var(--slds-g-font-weight-6)',
-                  color: isPositive ? '#066AFE' : '#EF4444',
+                         color: isPositive ? '#06A59A' : '#EF4444',
                   fontFamily: 'var(--slds-g-font-family)',
                   textAlign: 'center',
                 }}
