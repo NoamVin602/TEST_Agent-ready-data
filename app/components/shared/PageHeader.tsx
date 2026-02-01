@@ -2,6 +2,7 @@
 
 import { MetricsIcon, PlayIcon } from "../../lib/slds-icons";
 import { Spinner } from "./Spinner";
+import { getStageConfig } from "../../lib/stage-config";
 
 interface PageHeaderProps {
   onRunScan: () => void;
@@ -9,6 +10,9 @@ interface PageHeaderProps {
 }
 
 export function PageHeader({ onRunScan, isScanning }: PageHeaderProps) {
+  const config = getStageConfig();
+  const isDayZero = config.stage === 'day0';
+  
   return (
     <div
       className="slds-page-header slds-page-header_record-home"
@@ -82,7 +86,16 @@ export function PageHeader({ onRunScan, isScanning }: PageHeaderProps) {
                     color="var(--slds-g-color-accent-2, #0250d9)"
                     className="slds-button__icon slds-button__icon_left"
                   />
-                  <span>Run Scan</span>
+                  <span>{isDayZero ? 'Run Deep Scan' : 'Run Scan'}</span>
+                  {isDayZero && (
+                    <span style={{ 
+                      fontSize: 'var(--slds-g-font-scale-neg-1, 12px)', 
+                      color: 'var(--slds-g-color-on-surface-1, #5c5c5c)',
+                      marginLeft: 'var(--slds-g-spacing-2, 8px)'
+                    }}>
+                      Last scanned {config.lastScanTime}
+                    </span>
+                  )}
                 </>
               )}
             </button>

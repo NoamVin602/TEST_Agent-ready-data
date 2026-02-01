@@ -1,11 +1,12 @@
 "use client";
 
-import { forwardRef, useState } from "react";
+import { forwardRef, useState, useMemo } from "react";
 import { motion } from "framer-motion";
 import { IssueCategory } from "./HomeView";
 import { SeverityBadge } from "../analysis/SeverityBadge";
 import { DocumentPreviewModal } from "../shared/DocumentPreviewModal";
 import { AIIcon, ChevronDownIcon, FilterIcon } from "../../lib/slds-icons";
+import { getStageConfig } from "../../lib/stage-config";
 
 interface AnalysisViewProps {
   initialCategory?: IssueCategory;
@@ -24,71 +25,124 @@ const FILTER_TABS: { id: FilterType; label: string }[] = [
   { id: "sensitive-data", label: "Sensitive Data" },
 ];
 
-const MOCK_ISSUES = [
-  {
-    id: "1",
-    title: "Conflicting refund policy",
-    type: "Contradiction",
-    severity: "high" as const,
-    docs: 2,
-    owner: "Sarah Chen",
-    detected: "14-day window",
-    authoritative: "30-day guarantee",
-    action: "Update Customer Support FAQ and Q3 Sales Playbook to 30 days.",
-  },
-  {
-    id: "2",
-    title: "Deprecated API references",
-    type: "Outdated",
-    severity: "high" as const,
-    docs: 1,
-    owner: "Mike Wilson",
-  },
-  {
-    id: "3",
-    title: "[WIP] New Feature Documentation",
-    type: "Draft/Incomplete",
-    severity: "high" as const,
-    docs: 1,
-    owner: "Dev Team",
-  },
-  {
-    id: "4",
-    title: "PII detected: Customer email addresses",
-    type: "Sensitive Data",
-    severity: "high" as const,
-    docs: 1,
-    owner: "Privacy Team",
-  },
-  {
-    id: "5",
-    title: "Employee salary data in shared doc",
-    type: "Sensitive Data",
-    severity: "high" as const,
-    docs: 1,
-    owner: "HR Team",
-  },
-  {
-    id: "6",
-    title: "API credentials exposed in documentation",
-    type: "Sensitive Data",
-    severity: "high" as const,
-    docs: 1,
-    owner: "Security",
-  },
-  {
-    id: "7",
-    title: "Platform Guide needs splitting",
-    type: "Draft/Incomplete",
-    severity: "medium" as const,
-    docs: 1,
-  },
-];
+// Generate issues based on stage configuration
+function generateIssuesFromConfig() {
+  const config = getStageConfig();
+  const issues: Array<{
+    id: string;
+    title: string;
+    type: string;
+    severity: "high" | "medium" | "low";
+    docs: number;
+    owner?: string;
+    detected?: string;
+    authoritative?: string;
+    action?: string;
+    scoreImpact?: number;
+  }> = [];
+
+  // Day Zero: Show critical issues
+  if (config.stage === 'day0') {
+    // PII Issues (Critical - 15 articles)
+    if (config.issues.pii > 0) {
+      issues.push({
+        id: "pii-1",
+        title: "PII Detected in 15 Articles",
+        type: "Sensitive Data",
+        severity: "high",
+        docs: config.issues.pii,
+        owner: "Privacy Team",
+        action: "Apply redaction policy to all similar instances?",
+        scoreImpact: 20
+      });
+    }
+
+    // Contradictions
+    if (config.issues.contradictions > 0) {
+      issues.push({
+        id: "contradiction-1",
+        title: "Conflicting Specifications: Compact Solar Panel Output",
+        type: "Contradiction",
+        severity: "high",
+        docs: config.issues.contradictions,
+        owner: "Engineering",
+        detected: "Web Manual: 200W",
+        authoritative: "Engineering PDF Spec: 150W",
+        action: "Use 'Ask an Expert' to confirm correct specification.",
+        scoreImpact: 10
+      });
+    }
+
+    // Outdated
+    if (config.issues.outdated > 0) {
+      issues.push({
+        id: "outdated-1",
+        title: "Deprecated API references",
+        type: "Outdated",
+        severity: "high",
+        docs: config.issues.outdated,
+        owner: "Mike Wilson",
+      });
+    }
+
+    // Duplicates
+    if (config.issues.duplicates > 0) {
+      issues.push({
+        id: "duplicate-1",
+        title: "Duplicate pricing information",
+        type: "Duplicate",
+        severity: "medium",
+        docs: config.issues.duplicates,
+      });
+    }
+
+    // Drafts
+    if (config.issues.drafts > 0) {
+      issues.push({
+        id: "draft-1",
+        title: "[WIP] New Feature Documentation",
+        type: "Draft/Incomplete",
+        severity: "high",
+        docs: config.issues.drafts,
+        owner: "Dev Team",
+      });
+    }
+  } else if (config.stage === 'goal') {
+    // Goal: Show resolved/minor issues
+    if (config.issues.outdated > 0) {
+      issues.push({
+        id: "outdated-minor",
+        title: "Minor: One outdated reference found",
+        type: "Outdated",
+        severity: "low",
+        docs: config.issues.outdated,
+        owner: "System",
+      });
+    }
+  } else if (config.stage === 'continuous') {
+    // Continuous: Show content gaps
+    if (config.issues.contentGaps > 0) {
+      issues.push({
+        id: "gap-1",
+        title: "Content Gap: Inverter Maintenance",
+        type: "Content Gap",
+        severity: "high",
+        docs: 120, // Unanswered queries
+        owner: "System",
+        action: "Generate draft content based on 120 unanswered queries.",
+      });
+    }
+  }
+
+  return issues;
+}
 
 export const AnalysisView = forwardRef<HTMLDivElement, AnalysisViewProps>(
   ({ initialCategory }, ref) => {
     const [activeFilter, setActiveFilter] = useState<FilterType>("all");
-    const [expandedIssues, setExpandedIssues] = useState<string[]>(["1"]);
+    const config = getStageConfig();
+    const allIssues = useMemo(() => generateIssuesFromConfig(), []);
+    const [expandedIssues, setExpandedIssues] = useState<string[]>([allIssues[0]?.id || ""]);
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [selectedDocument, setSelectedDocument] = useState<{
       title: string;
@@ -104,7 +158,7 @@ export const AnalysisView = forwardRef<HTMLDivElement, AnalysisViewProps>(
       );
     };
 
-    const filteredIssues = MOCK_ISSUES.filter((issue) => {
+    const filteredIssues = allIssues.filter((issue) => {
       if (activeFilter === "all") return true;
       const typeMap: Record<string, FilterType> = {
         "Contradiction": "contradiction",
@@ -118,7 +172,7 @@ export const AnalysisView = forwardRef<HTMLDivElement, AnalysisViewProps>(
       return typeMap[issue.type] === activeFilter;
     });
 
-    const handleViewDocumentPreview = (issue: typeof MOCK_ISSUES[0]) => {
+    const handleViewDocumentPreview = (issue: typeof allIssues[0]) => {
       setSelectedDocument({
         title: issue.title,
         content: `This is a preview of the document related to "${issue.title}".\n\n${issue.action || "No additional action details available."}\n\nDocument Type: ${issue.type}\nOwner: ${issue.owner || "Unassigned"}\nNumber of Documents: ${issue.docs}`,
@@ -167,7 +221,7 @@ export const AnalysisView = forwardRef<HTMLDivElement, AnalysisViewProps>(
               whiteSpace: 'nowrap',
             }}
           >
-            50+ items • Sorted by Severity • Updated a few seconds ago
+            {allIssues.length}+ items • Sorted by Severity • Updated {config.lastScanTime}
           </p>
 
           {/* Right Section - Action Buttons */}
@@ -426,18 +480,35 @@ export const AnalysisView = forwardRef<HTMLDivElement, AnalysisViewProps>(
                       >
                         {issue.title}
                       </h3>
-                      <p
-                        style={{
-                          fontFamily: 'var(--slds-g-font-family)',
-                          fontSize: 'var(--slds-g-font-scale-base)', // 13px from Figma
-                          fontWeight: 'var(--slds-g-font-weight-4)', // 400 Regular
-                          lineHeight: 'var(--slds-g-line-height-body-base)', // 18px from Figma
-                          color: 'var(--slds-g-color-on-surface-1)', // #5C5C5C
-                          margin: '2px 0 0 0',
-                        }}
-                      >
-                        {issue.type} • {issue.docs} {issue.docs === 1 ? 'doc' : 'docs'} • Owner: {issue.owner || 'Unassigned'}
-                      </p>
+                      <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--slds-g-spacing-2)', flexWrap: 'wrap', marginTop: '2px' }}>
+                        <p
+                          style={{
+                            fontFamily: 'var(--slds-g-font-family)',
+                            fontSize: 'var(--slds-g-font-scale-base)', // 13px from Figma
+                            fontWeight: 'var(--slds-g-font-weight-4)', // 400 Regular
+                            lineHeight: 'var(--slds-g-line-height-body-base)', // 18px from Figma
+                            color: 'var(--slds-g-color-on-surface-1)', // #5C5C5C
+                            margin: 0,
+                          }}
+                        >
+                          {issue.type} • {issue.docs} {issue.docs === 1 ? 'doc' : 'docs'} • Owner: {issue.owner || 'Unassigned'}
+                        </p>
+                        {issue.scoreImpact && (
+                          <span
+                            className="slds-badge"
+                            style={{
+                              backgroundColor: 'rgba(6, 165, 154, 0.1)',
+                              color: '#06A59A',
+                              fontSize: 'var(--slds-g-font-scale-neg-1, 12px)',
+                              fontWeight: 'var(--slds-g-font-weight-6, 590)',
+                              padding: '2px var(--slds-g-spacing-2, 8px)',
+                              borderRadius: 'var(--slds-g-radius-border-1, 4px)',
+                            }}
+                          >
+                            +{issue.scoreImpact} points
+                          </span>
+                        )}
+                      </div>
                     </div>
 
                     {/* Severity Badge */}
