@@ -86,14 +86,15 @@ export function PageHeader({ onRunScan, isScanning }: PageHeaderProps) {
                     color="var(--slds-g-color-accent-2, #0250d9)"
                     className="slds-button__icon slds-button__icon_left"
                   />
-                  <span>{isDayZero ? 'Run Deep Scan' : 'Run Scan'}</span>
+                  <span>{isDayZero ? 'Run Health Scan' : 'Run Scan'}</span>
                   {isDayZero && (
                     <span style={{ 
                       fontSize: 'var(--slds-g-font-scale-neg-1, 12px)', 
                       color: 'var(--slds-g-color-on-surface-1, #5c5c5c)',
-                      marginLeft: 'var(--slds-g-spacing-2, 8px)'
+                      marginLeft: 'var(--slds-g-spacing-2, 8px)',
+                      fontWeight: 'var(--slds-g-font-weight-4, 400)'
                     }}>
-                      Last scanned {config.lastScanTime}
+                      Scan completed {config.lastScanTime}
                     </span>
                   )}
                 </>

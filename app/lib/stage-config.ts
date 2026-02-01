@@ -33,11 +33,12 @@ export interface StageConfig {
 }
 
 // Day Zero Configuration - Initial State
+// Scenario: Brian connects data sources, runs scan, gets instant results
 export const DAY_ZERO_CONFIG: StageConfig = {
   stage: 'day0',
   healthScore: 45,
   theme: 'warning',
-  lastScanTime: '2 hours ago',
+  lastScanTime: 'a few minutes ago', // Scan just completed
   issues: {
     contradictions: 2,
     outdated: 5,
@@ -50,9 +51,17 @@ export const DAY_ZERO_CONFIG: StageConfig = {
     {
       id: 1,
       actionType: 'Health Scan Completed',
-      description: 'Initial scan completed - 45/100 score',
+      description: 'Scan completed - 45/100 score. Critical issues detected.',
       actor: 'System',
-      timestamp: '2 hours ago',
+      timestamp: 'Just now',
+      impactScore: '0'
+    },
+    {
+      id: 2,
+      actionType: 'Data Sources Connected',
+      description: '3 data sources connected: Technical Docs, Knowledge Base, Engineering PDFs',
+      actor: 'Brian',
+      timestamp: '5 minutes ago',
       impactScore: '0'
     }
   ],

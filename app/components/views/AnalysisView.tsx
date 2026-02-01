@@ -41,9 +41,9 @@ function generateIssuesFromConfig() {
     scoreImpact?: number;
   }> = [];
 
-  // Day Zero: Show critical issues
+  // Day Zero: Show critical issues - Prioritized by score impact
   if (config.stage === 'day0') {
-    // PII Issues (Critical - 15 articles)
+    // PII Issues (Critical - 15 articles) - TOP PRIORITY (+20 points)
     if (config.issues.pii > 0) {
       issues.push({
         id: "pii-1",
@@ -57,7 +57,7 @@ function generateIssuesFromConfig() {
       });
     }
 
-    // Contradictions
+    // Contradictions - SECOND PRIORITY (+10 points)
     if (config.issues.contradictions > 0) {
       issues.push({
         id: "contradiction-1",
@@ -73,7 +73,7 @@ function generateIssuesFromConfig() {
       });
     }
 
-    // Outdated
+    // Outdated - THIRD PRIORITY (+5 points)
     if (config.issues.outdated > 0) {
       issues.push({
         id: "outdated-1",
@@ -82,10 +82,11 @@ function generateIssuesFromConfig() {
         severity: "high",
         docs: config.issues.outdated,
         owner: "Mike Wilson",
+        scoreImpact: 5
       });
     }
 
-    // Duplicates
+    // Duplicates - FOURTH PRIORITY (+3 points)
     if (config.issues.duplicates > 0) {
       issues.push({
         id: "duplicate-1",
@@ -93,10 +94,11 @@ function generateIssuesFromConfig() {
         type: "Duplicate",
         severity: "medium",
         docs: config.issues.duplicates,
+        scoreImpact: 3
       });
     }
 
-    // Drafts
+    // Drafts - FIFTH PRIORITY (+2 points)
     if (config.issues.drafts > 0) {
       issues.push({
         id: "draft-1",
@@ -105,8 +107,12 @@ function generateIssuesFromConfig() {
         severity: "high",
         docs: config.issues.drafts,
         owner: "Dev Team",
+        scoreImpact: 2
       });
     }
+
+    // Sort issues by score impact (highest first) for prioritization
+    issues.sort((a, b) => (b.scoreImpact || 0) - (a.scoreImpact || 0));
   } else if (config.stage === 'goal') {
     // Goal: Show resolved/minor issues
     if (config.issues.outdated > 0) {
