@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { ChevronRight, RotateCcw } from "lucide-react";
+import { ChevronRightIcon, RotateCcwIcon } from "../../lib/slds-icons";
 
 type SortOption = "recent" | "oldest" | "type";
 
@@ -275,7 +275,7 @@ export function ArchivedView() {
                 }}
               >
                 <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--slds-g-spacing-2, 8px)', flex: 1 }}>
-                  <ChevronRight
+                  <ChevronRightIcon
                     style={{
                       width: '16px',
                       height: '16px',
@@ -384,7 +384,7 @@ export function ArchivedView() {
                         gap: 'var(--slds-g-spacing-1, 4px)',
                       }}
                     >
-                      <RotateCcw style={{ width: '14px', height: '14px' }} />
+                      <RotateCcwIcon size={14} />
                       Restore
                     </button>
                     <button
@@ -421,7 +421,7 @@ export function ArchivedView() {
               justifyContent: 'center',
             }}
           >
-            <RotateCcw style={{ width: '32px', height: '32px', color: '#C9C9C9' }} />
+            <RotateCcwIcon size={32} color="#C9C9C9" />
           </div>
           <h3
             style={{

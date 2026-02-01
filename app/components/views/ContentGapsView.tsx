@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { TrendingUp, ChevronDown, ChevronRight } from "lucide-react";
+import { TrendingUpIcon, ChevronDownIcon, ChevronRightIcon } from "../../lib/slds-icons";
 
 const FILTER_TABS = [
   { id: "all", label: "All Gaps" },
@@ -186,9 +186,9 @@ export function ContentGapsView() {
             >
               <div style={{ display: 'flex', alignItems: 'flex-start', gap: 'var(--slds-g-spacing-3)' }}>
                 {isExpanded ? (
-                  <ChevronDown style={{ width: '16px', height: '16px', color: 'var(--slds-g-color-brand-base-50)', flexShrink: 0, marginTop: '4px' }} />
+                  <ChevronDownIcon size={16} color="var(--slds-g-color-brand-base-50)" style={{ flexShrink: 0, marginTop: '4px' }} />
                 ) : (
-                  <ChevronRight style={{ width: '16px', height: '16px', color: 'var(--slds-g-color-brand-base-50)', flexShrink: 0, marginTop: '4px' }} />
+                  <ChevronRightIcon size={16} color="var(--slds-g-color-brand-base-50)" style={{ flexShrink: 0, marginTop: '4px' }} />
                 )}
                 <div style={{ flex: 1 }}>
                   <h3 
@@ -227,7 +227,7 @@ export function ContentGapsView() {
                         fontWeight: 'var(--slds-g-font-weight-6)'
                       }}
                     >
-                      <TrendingUp style={{ width: '12px', height: '12px' }} />
+                      <TrendingUpIcon size={12} />
                       {gap.weeklyTrend}
                     </span>
                     <span 

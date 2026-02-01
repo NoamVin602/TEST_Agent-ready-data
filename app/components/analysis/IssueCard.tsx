@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { ChevronRight, Eye } from "lucide-react";
+import { ChevronRightIcon, EyeIcon } from "../../lib/slds-icons";
 import { SeverityBadge, Severity } from "./SeverityBadge";
 import { ComparisonPill } from "./ComparisonPill";
 
@@ -64,7 +64,7 @@ export function IssueCard({
         }}
       >
         <div style={{ display: 'flex', alignItems: 'flex-start', gap: 'var(--slds-g-spacing-2)', flex: 1 }}>
-          <ChevronRight 
+          <ChevronRightIcon 
             style={{
               width: '16px',
               height: '16px',
@@ -178,7 +178,7 @@ export function IssueCard({
                   gap: 'var(--slds-g-spacing-1)',
                 }}
               >
-                <Eye style={{ width: '14px', height: '14px' }} />
+                <EyeIcon size={14} />
                 View Document Preview
               </button>
             )}
