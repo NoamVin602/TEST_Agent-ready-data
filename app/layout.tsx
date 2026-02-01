@@ -2,11 +2,6 @@ import './globals.css'
 import { NavProvider } from './contexts/NavContext'
 import { LayoutContent } from './components/shared/LayoutContent'
 
-export const metadata = {
-  title: 'Data Curation',
-  description: 'Agent-Ready Data Curation Dashboard',
-}
-
 export default function RootLayout({
   children,
 }: {
