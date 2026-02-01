@@ -7,7 +7,7 @@ import { SeverityBadge } from "../analysis/SeverityBadge";
 import { DocumentPreviewModal } from "../shared/DocumentPreviewModal";
 import { PIIBulkActionModal } from "../shared/PIIBulkActionModal";
 import { ExpertAssignmentModal } from "../shared/ExpertAssignmentModal";
-import { AIIcon, ChevronDownIcon, FilterIcon } from "../../lib/slds-icons";
+import { AIIcon, ChevronDownIcon, FilterIcon, CheckCircle2Icon } from "../../lib/slds-icons";
 import { getStageConfig } from "../../lib/stage-config";
 
 interface AnalysisViewProps {

@@ -2,7 +2,8 @@
 
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { XIcon, CheckCircle2Icon, UserIcon } from '../../lib/slds-icons';
+import { XIcon, CheckCircle2Icon } from '../../lib/slds-icons';
+import { UserIcon } from '../../lib/slds-icons';
 import { Spinner } from './Spinner';
 
 interface Expert {
