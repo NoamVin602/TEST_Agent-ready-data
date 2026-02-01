@@ -6,6 +6,7 @@ import { IssueCategory } from "./HomeView";
 import { SeverityBadge } from "../analysis/SeverityBadge";
 import { DocumentPreviewModal } from "../shared/DocumentPreviewModal";
 import { PIIBulkActionModal } from "../shared/PIIBulkActionModal";
+import { ExpertAssignmentModal } from "../shared/ExpertAssignmentModal";
 import { AIIcon, ChevronDownIcon, FilterIcon } from "../../lib/slds-icons";
 import { getStageConfig } from "../../lib/stage-config";
 
@@ -154,7 +155,10 @@ export const AnalysisView = forwardRef<HTMLDivElement, AnalysisViewProps>(
     const [expandedIssues, setExpandedIssues] = useState<string[]>([allIssues[0]?.id || ""]);
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [isPIIModalOpen, setIsPIIModalOpen] = useState(false);
+    const [isExpertModalOpen, setIsExpertModalOpen] = useState(false);
     const [selectedPIIIssue, setSelectedPIIIssue] = useState<typeof allIssues[0] | null>(null);
+    const [selectedContradictionIssue, setSelectedContradictionIssue] = useState<typeof allIssues[0] | null>(null);
+    const [resolvedIssues, setResolvedIssues] = useState<Set<string>>(new Set());
     const [selectedDocument, setSelectedDocument] = useState<{
       title: string;
       content: string;
@@ -211,6 +215,26 @@ export const AnalysisView = forwardRef<HTMLDivElement, AnalysisViewProps>(
       await new Promise(resolve => setTimeout(resolve, 1000));
       // In a real app, this would update the backend
       console.log('Documents archived successfully');
+    };
+
+    const handleAskExpert = (issue: typeof allIssues[0]) => {
+      setSelectedContradictionIssue(issue);
+      setIsExpertModalOpen(true);
+    };
+
+    const handleAssignExpert = async (expertId: string) => {
+      // Simulate sending notification
+      await new Promise(resolve => setTimeout(resolve, 1500));
+      
+      // Simulate expert resolution (Laura confirms 150W is correct)
+      if (expertId === 'laura' && selectedContradictionIssue) {
+        // After 2 seconds, show resolution
+        setTimeout(() => {
+          setResolvedIssues(prev => new Set(prev).add(selectedContradictionIssue.id));
+        }, 2000);
+      }
+      
+      console.log(`Expert ${expertId} notified via Slack`);
     };
 
     return (
@@ -729,6 +753,21 @@ export const AnalysisView = forwardRef<HTMLDivElement, AnalysisViewProps>(
             issueCount={selectedPIIIssue.docs}
             onMask={handleMaskPII}
             onArchive={handleArchivePII}
+          />
+        )}
+
+        {/* Expert Assignment Modal */}
+        {selectedContradictionIssue && (
+          <ExpertAssignmentModal
+            isOpen={isExpertModalOpen}
+            onClose={() => {
+              setIsExpertModalOpen(false);
+              setSelectedContradictionIssue(null);
+            }}
+            issueTitle={selectedContradictionIssue.title}
+            detectedText={selectedContradictionIssue.detected || ''}
+            authoritativeText={selectedContradictionIssue.authoritative || ''}
+            onAssign={handleAssignExpert}
           />
         )}
       </div>
