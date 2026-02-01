@@ -337,9 +337,13 @@ article.slds-card.slds-card_main-content {
 
 .slds-card_boundary {
   border-radius: var(--slds-g-radius-border-2, 8px);
-  margin: 0 !important; /* Remove margin for proper spacing within docked composer - gap handles spacing */
   box-sizing: border-box !important;
   border: 1px solid var(--slds-g-color-border-1, #C9C9C9) !important; /* 1px border as shown in diagram */
+}
+
+/* Cards inside docked composer items should match dashboard card margins */
+.slds-docked-composer__items .slds-card_boundary {
+  margin: 1px 1px 1px 16px !important; /* Match dashboard card margins for alignment */
 }
 
 .slds-card__body_full-height {
@@ -1534,7 +1538,7 @@ button.slds-button.slds-button_neutral:disabled {
   display: flex;
   flex-direction: column;
   align-items: stretch;
-  overflow: hidden;
+  overflow: visible;
   position: relative;
   border-radius: var(--slds-g-radius-border-4, 20px) var(--slds-g-radius-border-4, 20px) 0 0;
   box-shadow: 
@@ -1543,6 +1547,7 @@ button.slds-button.slds-button_neutral:disabled {
     0px 1px 2px 0px rgba(0, 0, 0, 0.08);
   width: 100%;
   height: 100%;
+  min-height: 0;
 }
 
 .slds-docked-composer__body {
@@ -1550,13 +1555,14 @@ button.slds-button.slds-button_neutral:disabled {
   display: flex;
   flex-direction: column;
   align-items: stretch;
-  overflow: hidden;
-  padding: var(--slds-g-spacing-4, 16px) var(--slds-g-spacing-4, 16px) 0 var(--slds-g-spacing-4, 16px);
+  overflow: visible;
+  padding: var(--slds-g-spacing-4, 16px);
   position: relative;
-  flex: 1;
-  min-height: 0;
+  flex: 1 1 auto;
   width: 100%;
   box-sizing: border-box;
+  justify-content: flex-start;
+  min-height: 0;
 }
 
 .slds-docked-composer__footer {
@@ -1639,12 +1645,14 @@ button.slds-button.slds-button_neutral:disabled {
   display: flex;
   flex-direction: column;
   gap: var(--slds-g-spacing-3, 12px);
-  flex: 1;
+  flex: 1 1 auto;
   overflow-y: auto;
-  min-height: 0;
+  overflow-x: visible;
   margin-top: var(--slds-g-spacing-4, 16px);
+  margin-bottom: 0;
   width: 100%;
   box-sizing: border-box;
+  min-height: 0;
 }
 
 .slds-docked-composer__summary {
@@ -1654,8 +1662,8 @@ button.slds-button.slds-button_neutral:disabled {
   padding: var(--slds-g-spacing-3, 12px);
   background-color: var(--slds-g-color-surface-container-2, #F3F3F3);
   border-radius: var(--slds-g-radius-border-2, 8px);
-  margin-top: var(--slds-g-spacing-4, 16px);
-  margin-bottom: var(--slds-g-spacing-4, 16px);
+  margin-top: var(--slds-g-spacing-3, 12px);
+  margin-bottom: 0;
   flex-shrink: 0;
   width: 100%;
   box-sizing: border-box;

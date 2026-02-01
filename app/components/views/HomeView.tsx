@@ -174,6 +174,7 @@ export function HomeView({ onMetricClick }: HomeViewProps) {
       style={{
         padding: 0,
         display: 'flex',
+        alignItems: 'stretch',
         gap: 'var(--slds-g-spacing-4)',
         height: '100%',
         width: '100%',
@@ -181,9 +182,9 @@ export function HomeView({ onMetricClick }: HomeViewProps) {
       }}
     >
       {/* Left Column - Current State Dashboard (75%) */}
-      <div className="slds-grid slds-grid_vertical" style={{ flex: '0 0 75%', minWidth: 0, gap: 'var(--slds-g-spacing-4)' }}>
+      <div className="slds-grid slds-grid_vertical" style={{ flex: '0 0 75%', minWidth: 0, gap: 'var(--slds-g-spacing-4)', display: 'flex', flexDirection: 'column' }}>
         {/* Current State Card Header - SLDS Cosmos Pattern */}
-        <article className="slds-card" style={{ margin: '1px 1px 1px 16px', boxSizing: 'border-box' }}>
+        <article className="slds-card" style={{ margin: '0 1px 1px 16px', boxSizing: 'border-box' }}>
           <div className="slds-card__header">
             <header className="slds-media slds-media_center slds-has-flexi-truncate">
               {/* Icon */}
@@ -340,7 +341,7 @@ export function HomeView({ onMetricClick }: HomeViewProps) {
       </div>
 
       {/* Right Column - Quick Fixes Panel (25%) */}
-      <div style={{ flex: '0 0 25%', minWidth: 0, display: 'flex', flexDirection: 'column' }}>
+      <div style={{ flex: '0 0 25%', minWidth: 0, display: 'flex', flexDirection: 'column', alignSelf: 'stretch', height: '100%' }}>
         <QuickFixesSidebar />
       </div>
     </div>

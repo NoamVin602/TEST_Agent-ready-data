@@ -71,10 +71,10 @@ export function DockedComposer({
   return (
     <div className="slds-docked-composer">
       {/* Body */}
-      <div className="slds-docked-composer__body">
+      <div className="slds-docked-composer__body" style={{ paddingTop: 0 }}>
         {/* Title Section */}
         <div className="slds-grid slds-grid_vertical">
-          <h2 className="slds-text-heading_section slds-m-bottom_medium" style={{ marginTop: 0 }}>
+          <h2 className="slds-text-heading_section slds-m-bottom_medium" style={{ marginTop: 0, paddingTop: '12px' }}>
             {title}
           </h2>
         </div>
@@ -82,8 +82,16 @@ export function DockedComposer({
         {/* Quick Fix Items */}
         <div className="slds-docked-composer__items">
           {visibleItemsList.map((item) => (
-            <article key={item.id} className="slds-card slds-card_boundary" style={{ borderLeft: `4px solid ${item.borderColor}` }}>
-              <div className="slds-card__body slds-card__body_inner">
+            <article 
+              key={item.id} 
+              className="slds-card slds-card_boundary" 
+              style={{ 
+                margin: '1px 1px 1px 16px',
+                boxSizing: 'border-box',
+                borderLeft: `4px solid ${item.borderColor}`
+              }}
+            >
+              <div className="slds-card__body slds-card__body_inner" style={{ padding: '12px', boxSizing: 'border-box' }}>
                 {/* Top: Badge */}
                 <div className="slds-grid slds-grid_align-end slds-m-bottom_small">
                   <span className={`slds-badge ${item.scoreColor === "yellow" ? "slds-badge_warning-light" : "slds-badge_success-light"}`}>

@@ -84,18 +84,20 @@ export function QuickFixesSidebar() {
   };
 
   return (
-    <DockedComposer
-      title="Quick Fixes"
-      items={QUICK_FIXES.map((fix) => ({
-        ...fix,
-        onResolve: () => handleResolve(fix.id),
-      }))}
-      alertMessage={undefined}
-      resolvedCount={resolvedCount}
-      totalIssues={totalIssues}
-      totalScorePotential={totalScorePotential}
-      footerButtonLabel="Resolve All Recommendations"
-      onFooterButtonClick={handleResolveAll}
-    />
+    <div style={{ height: '100%', display: 'flex', flexDirection: 'column' }}>
+      <DockedComposer
+        title="Quick Fixes"
+        items={QUICK_FIXES.map((fix) => ({
+          ...fix,
+          onResolve: () => handleResolve(fix.id),
+        }))}
+        alertMessage={undefined}
+        resolvedCount={resolvedCount}
+        totalIssues={totalIssues}
+        totalScorePotential={totalScorePotential}
+        footerButtonLabel="Resolve All Recommendations"
+        onFooterButtonClick={handleResolveAll}
+      />
+    </div>
   );
 }
