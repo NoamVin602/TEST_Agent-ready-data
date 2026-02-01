@@ -73,8 +73,8 @@ export function DockedComposer({
       {/* Body */}
       <div className="slds-docked-composer__body">
         {/* Title Section */}
-        <div className="slds-grid slds-grid_vertical">
-          <h2 className="slds-text-heading_section slds-m-bottom_medium">
+        <div className="slds-grid slds-grid_vertical" style={{ width: '100%' }}>
+          <h2 className="slds-text-heading_section slds-m-bottom_medium" style={{ marginTop: 0, width: '100%' }}>
             {title}
           </h2>
         </div>
@@ -123,8 +123,9 @@ export function DockedComposer({
               className="slds-grid slds-grid_align-spread slds-grid_vertical-align-center" 
               style={{ 
                 width: '100%', 
-                gap: 'var(--slds-g-spacing-4)',
-                flexWrap: 'wrap'
+                gap: 'var(--slds-g-spacing-3, 12px)',
+                flexWrap: 'wrap',
+                alignItems: 'center'
               }}
             >
               {/* Left: Resolved Count and Progress Bar */}

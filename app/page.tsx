@@ -12,6 +12,7 @@ import { ActivityView } from "./components/views/ActivityView";
 import { RunLogView } from "./components/views/RunLogView";
 import { ConfigView } from "./components/views/ConfigView";
 import { DataCurationView } from "./components/data-curation/DataCurationView";
+import { useNav } from "./contexts/NavContext";
 import "./globals.css";
 
 import { Spinner } from "./components/shared/Spinner";
@@ -102,6 +103,7 @@ const tabContentVariants = {
 };
 
 export default function DataCurationPage() {
+  const { isCollapsed } = useNav();
   const [activeTab, setActiveTab] = useState<TabId>("home");
   const [isScanning, setIsScanning] = useState(false);
   const [showScanModal, setShowScanModal] = useState(false);
@@ -205,10 +207,23 @@ export default function DataCurationPage() {
         overflow: activeTab === "curation" ? "hidden" : 'auto', 
         display: 'flex', 
         flexDirection: 'column',
+        alignItems: 'center',
         backgroundColor: 'rgba(243, 243, 243, 1)',
-        padding: 'var(--slds-g-spacing-4, 16px)',
+        paddingLeft: 'var(--slds-g-spacing-4, 16px)',
+        paddingRight: 'var(--slds-g-spacing-4, 16px)',
+        paddingTop: 'var(--slds-g-spacing-4, 16px)',
+        paddingBottom: 'var(--slds-g-spacing-4, 16px)',
+        transition: 'padding var(--slds-g-transition-base, 0.2s)',
       }}>
-        <article className="slds-card" style={{ maxWidth: '1440px', margin: '1px auto 1px 16px', width: '100%', display: 'flex', flexDirection: 'column', flex: 1, boxSizing: 'border-box' }}>
+        <article className="slds-card slds-card_main-content" style={{ 
+          maxWidth: '1440px',
+          width: '100%', 
+          margin: 0,
+          display: 'flex', 
+          flexDirection: 'column', 
+          flex: 1, 
+          boxSizing: 'border-box' 
+        }}>
           {/* Tabs in Card Header */}
           <div className="slds-card__header" style={{ padding: '12px', borderBottom: 'none', boxSizing: 'border-box' }}>
             <TabNavigation 
