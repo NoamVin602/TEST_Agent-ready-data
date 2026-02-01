@@ -337,7 +337,7 @@ article.slds-card.slds-card_main-content {
 
 .slds-card_boundary {
   border-radius: var(--slds-g-radius-border-2, 8px);
-  margin: 1px 1px 1px 16px !important; /* Top: 1px, Right: 1px, Bottom: 1px, Left: 16px - matching diagram */
+  margin: 0 !important; /* Remove margin for proper spacing within docked composer - gap handles spacing */
   box-sizing: border-box !important;
   border: 1px solid var(--slds-g-color-border-1, #C9C9C9) !important; /* 1px border as shown in diagram */
 }
@@ -598,8 +598,11 @@ article.slds-card.slds-card_main-content {
 }
 
 /* ==========================================
-   SLDS Badges (Cosmos Pattern)
+   SLDS Badges (SLDS Standard Pattern)
+   Based on @agent-ready-data-nextjs/components/badges.md
 ========================================== */
+
+/* Base Badge - Default variant */
 .slds-badge {
   display: inline-flex;
   align-items: center;
@@ -614,45 +617,112 @@ article.slds-card.slds-card_main-content {
   color: #181818;
   border: 1px solid #dddbda;
   white-space: nowrap;
+  text-transform: none; /* Badge labels use title capitalization */
 }
 
-/* Success variant (Green) */
-.slds-badge.slds-theme_success {
+/* Light Badge - Shows less prominent or subtle statuses */
+.slds-badge_lightest {
+  background-color: #FFFFFF;
+  color: #181818;
+  border-color: #dddbda;
+}
+
+/* Inverse Badge - Used in dark-themed UI sections */
+.slds-badge_inverse {
+  background-color: #181818;
+  color: #FFFFFF;
+  border-color: #181818;
+}
+
+/* Success Badge - Communicates positive statuses */
+.slds-badge.slds-theme_success,
+.slds-badge_success {
   background-color: #06A59A;
   color: #FFFFFF;
   border-color: #06A59A;
 }
 
-/* Error variant (Red) */
-.slds-badge.slds-theme_error {
-  background-color: #ea001e;
-  color: #FFFFFF;
-  border-color: #ea001e;
-}
-
-/* Warning variant (Amber/Yellow) */
-.slds-badge.slds-theme_warning {
+/* Warning Badge - Highlights cautionary information */
+.slds-badge.slds-theme_warning,
+.slds-badge_warning {
   background-color: #fe9339;
   color: #FFFFFF;
   border-color: #fe9339;
 }
 
+/* Error Badge - Used for urgent or critical statuses */
+.slds-badge.slds-theme_error,
+.slds-badge_error {
+  background-color: #ea001e;
+  color: #FFFFFF;
+  border-color: #ea001e;
+}
+
 /* Light warning variant (Yellow tint background) - for score badges */
-.slds-badge.slds-badge_warning-light {
-  background-color: var(--slds-g-color-warning-tint, #FEF4E6) !important;
-  color: #5C4033 !important; /* Dark brown text on light yellow background */
-  border: none !important;
-  font-weight: var(--slds-g-font-weight-6, 590) !important;
-  padding: var(--slds-g-spacing-1, 4px) var(--slds-g-spacing-2, 8px) !important;
+.slds-badge_warning-light {
+  background-color: var(--slds-g-color-warning-tint, #FEF4E6);
+  color: #5C4033; /* Dark brown text on light yellow background */
+  border: none;
+  font-weight: var(--slds-g-font-weight-6, 590);
+  padding: var(--slds-g-spacing-1, 4px) var(--slds-g-spacing-2, 8px);
 }
 
 /* Light success variant (Green tint background) - for score badges */
-.slds-badge.slds-badge_success-light {
-  background-color: var(--slds-g-color-success-tint, #E8F5EC) !important;
-  color: #0B5D1E !important; /* Dark green text on light green background */
-  border: none !important;
-  font-weight: var(--slds-g-font-weight-6, 590) !important;
-  padding: var(--slds-g-spacing-1, 4px) var(--slds-g-spacing-2, 8px) !important;
+.slds-badge_success-light {
+  background-color: var(--slds-g-color-success-tint, #E8F5EC);
+  color: #0B5D1E; /* Dark green text on light green background */
+  border: none;
+  font-weight: var(--slds-g-font-weight-6, 590);
+  padding: var(--slds-g-spacing-1, 4px) var(--slds-g-spacing-2, 8px);
+}
+
+/* Custom Badge Variants - Detected, Authoritative, Action */
+.slds-badge_detected {
+  background-color: var(--slds-g-color-badge-detected, #FFE5E5);
+  color: var(--slds-g-color-badge-detected-text, #8B0000);
+  border-color: var(--slds-g-color-badge-detected, #FFE5E5);
+  font-size: var(--slds-g-font-scale-neg-1, 11px);
+  font-weight: var(--slds-g-font-weight-6, 590);
+  padding: 4px var(--slds-g-spacing-2, 8px);
+  border-radius: var(--slds-g-radius-border-4, 20px);
+}
+
+.slds-badge_authoritative {
+  background-color: var(--slds-g-color-badge-authoritative, #D4F4DD);
+  color: var(--slds-g-color-badge-authoritative-text, #0B5D1E);
+  border-color: var(--slds-g-color-badge-authoritative, #D4F4DD);
+  font-size: var(--slds-g-font-scale-neg-1, 11px);
+  font-weight: var(--slds-g-font-weight-6, 590);
+  padding: 4px var(--slds-g-spacing-2, 8px);
+  border-radius: var(--slds-g-radius-border-4, 20px);
+}
+
+.slds-badge_action {
+  background-color: var(--slds-g-color-badge-action, #E8F4FF);
+  color: var(--slds-g-color-badge-action-text, #014486);
+  border-color: var(--slds-g-color-badge-action, #E8F4FF);
+  font-size: var(--slds-g-font-scale-neg-1, 11px);
+  font-weight: var(--slds-g-font-weight-6, 590);
+  padding: 4px var(--slds-g-spacing-2, 8px);
+  border-radius: var(--slds-g-radius-border-3, 12px);
+}
+
+/* Badge Icon Support */
+.slds-badge__icon {
+  display: inline-flex;
+  align-items: center;
+}
+
+.slds-badge__icon_left {
+  margin-right: 0.25rem;
+}
+
+.slds-badge__icon_right {
+  margin-left: 0.25rem;
+}
+
+.slds-badge__icon_inverse {
+  fill: currentColor;
 }
 
 /* Active tab badge override */
@@ -1568,7 +1638,7 @@ button.slds-button.slds-button_neutral:disabled {
 .slds-docked-composer__items {
   display: flex;
   flex-direction: column;
-  gap: var(--slds-g-spacing-2, 8px);
+  gap: var(--slds-g-spacing-3, 12px);
   flex: 1;
   overflow-y: auto;
   min-height: 0;

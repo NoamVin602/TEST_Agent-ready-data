@@ -345,18 +345,7 @@ export const AnalysisView = forwardRef<HTMLDivElement, AnalysisViewProps>(
                       {issue.detected && issue.authoritative && (
                         <div style={{ marginBottom: 'var(--slds-g-spacing-3)' }}>
                           <div style={{ display: 'flex', gap: 'var(--slds-g-spacing-2)', alignItems: 'center', marginBottom: 'var(--slds-g-spacing-1)' }}>
-                            <span
-                              style={{
-                                padding: '4px var(--slds-g-spacing-2)', // 4px 8px
-                                borderRadius: 'var(--slds-g-radius-border-4)', // 20px
-                                backgroundColor: 'var(--slds-g-color-badge-detected)', // #FFE5E5
-                                color: 'var(--slds-g-color-badge-detected-text)', // #8B0000
-                                fontFamily: 'var(--slds-g-font-family)',
-                                fontSize: 'var(--slds-g-font-scale-neg-1)', // 11px
-                                fontWeight: 'var(--slds-g-font-weight-6)', // 590
-                                flexShrink: 0,
-                              }}
-                            >
+                            <span className="slds-badge slds-badge_detected">
                               Detected
                             </span>
                             <span
@@ -372,18 +361,7 @@ export const AnalysisView = forwardRef<HTMLDivElement, AnalysisViewProps>(
                             </span>
                           </div>
                           <div style={{ display: 'flex', gap: 'var(--slds-g-spacing-2)', alignItems: 'center' }}>
-                            <span
-                              style={{
-                                padding: '4px var(--slds-g-spacing-2)', // 4px 8px
-                                borderRadius: 'var(--slds-g-radius-border-4)', // 20px
-                                backgroundColor: 'var(--slds-g-color-badge-authoritative)', // #D4F4DD
-                                color: 'var(--slds-g-color-badge-authoritative-text)', // #0B5D1E
-                                fontFamily: 'var(--slds-g-font-family)',
-                                fontSize: 'var(--slds-g-font-scale-neg-1)', // 11px
-                                fontWeight: 'var(--slds-g-font-weight-6)', // 590
-                                flexShrink: 0,
-                              }}
-                            >
+                            <span className="slds-badge slds-badge_authoritative">
                               Authoritative
                             </span>
                             <span
@@ -405,18 +383,7 @@ export const AnalysisView = forwardRef<HTMLDivElement, AnalysisViewProps>(
                       {issue.action && (
                         <div style={{ marginBottom: 'var(--slds-g-spacing-3)' }}>
                           <div style={{ display: 'flex', gap: 'var(--slds-g-spacing-2)', alignItems: 'flex-start' }}>
-                            <span
-                              style={{
-                                padding: '4px var(--slds-g-spacing-2)', // 4px 8px
-                                borderRadius: 'var(--slds-g-radius-border-3)', // 12px
-                                backgroundColor: 'var(--slds-g-color-badge-action)', // #E8F4FF
-                                color: 'var(--slds-g-color-badge-action-text)', // #014486
-                                fontFamily: 'var(--slds-g-font-family)',
-                                fontSize: 'var(--slds-g-font-scale-neg-1)', // 11px
-                                fontWeight: 'var(--slds-g-font-weight-6)', // 590
-                                flexShrink: 0,
-                              }}
-                            >
+                            <span className="slds-badge slds-badge_action">
                               Action
                             </span>
                             <span

@@ -13,7 +13,6 @@ import { RunLogView } from "./components/views/RunLogView";
 import { ConfigView } from "./components/views/ConfigView";
 import { DataCurationView } from "./components/data-curation/DataCurationView";
 import { useNav } from "./contexts/NavContext";
-import "./globals.css";
 
 import { Spinner } from "./components/shared/Spinner";
 

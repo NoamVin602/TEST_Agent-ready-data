@@ -80,74 +80,25 @@ const getStatusBadge = (status: string) => {
   switch (status) {
     case "completed":
       return (
-        <span
-          className="slds-badge"
-          style={{
-            backgroundColor: 'var(--slds-g-color-success-tint)',
-            color: 'var(--slds-g-color-success-base-50)',
-            fontFamily: 'var(--slds-g-font-family)',
-            fontSize: 'var(--slds-g-font-scale-neg-1)',
-            fontWeight: 'var(--slds-g-font-weight-6)',
-            lineHeight: '17px',
-            padding: 'var(--slds-g-spacing-1) var(--slds-g-spacing-2)',
-            borderRadius: 'var(--slds-g-radius-border-2)'
-          }}
-        >
+        <span className="slds-badge slds-badge_success-light">
           Completed
         </span>
       );
     case "failed":
       return (
-        <span
-          className="slds-badge"
-          style={{
-            backgroundColor: 'var(--slds-g-color-error-tint)',
-            color: 'var(--slds-g-color-error-base-50)',
-            fontFamily: 'var(--slds-g-font-family)',
-            fontSize: 'var(--slds-g-font-scale-neg-1)',
-            fontWeight: 'var(--slds-g-font-weight-6)',
-            lineHeight: '17px',
-            padding: 'var(--slds-g-spacing-1) var(--slds-g-spacing-2)',
-            borderRadius: 'var(--slds-g-radius-border-2)'
-          }}
-        >
+        <span className="slds-badge slds-badge_error">
           Failed
         </span>
       );
     case "running":
       return (
-        <span
-          className="slds-badge"
-          style={{
-            backgroundColor: 'var(--slds-g-color-warning-tint)',
-            color: 'var(--slds-g-color-warning-base-50)',
-            fontFamily: 'var(--slds-g-font-family)',
-            fontSize: 'var(--slds-g-font-scale-neg-1)',
-            fontWeight: 'var(--slds-g-font-weight-6)',
-            lineHeight: '17px',
-            padding: 'var(--slds-g-spacing-1) var(--slds-g-spacing-2)',
-            borderRadius: 'var(--slds-g-radius-border-2)'
-          }}
-        >
+        <span className="slds-badge slds-badge_warning-light">
           Running
         </span>
       );
     default:
       return (
-        <span
-          className="slds-badge"
-          style={{
-            border: '1px solid var(--slds-g-color-border-2)',
-            backgroundColor: 'var(--slds-g-color-neutral-base-100)',
-            color: 'var(--slds-g-color-on-surface-1)',
-            fontFamily: 'var(--slds-g-font-family)',
-            fontSize: 'var(--slds-g-font-scale-neg-1)',
-            fontWeight: 'var(--slds-g-font-weight-4)',
-            lineHeight: '17px',
-            padding: 'var(--slds-g-spacing-1) var(--slds-g-spacing-2)',
-            borderRadius: 'var(--slds-g-radius-border-2)'
-          }}
-        >
+        <span className="slds-badge slds-badge_lightest">
           Unknown
         </span>
       );

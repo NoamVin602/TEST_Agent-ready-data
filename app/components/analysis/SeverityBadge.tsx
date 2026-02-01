@@ -9,11 +9,11 @@ interface SeverityBadgeProps {
 const severityConfig = {
   high: {
     label: "High",
-    className: "slds-badge slds-theme_error"
+    className: "slds-badge slds-badge_error"
   },
   medium: {
     label: "Medium",
-    className: "slds-badge slds-theme_warning"
+    className: "slds-badge slds-badge_warning"
   },
   low: {
     label: "Low",
@@ -25,7 +25,7 @@ export function SeverityBadge({ severity }: SeverityBadgeProps) {
   const config = severityConfig[severity];
 
   return (
-    <span className={config.className} style={{ textTransform: 'capitalize' }}>
+    <span className={config.className}>
       {config.label}
     </span>
   );

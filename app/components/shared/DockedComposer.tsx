@@ -73,8 +73,8 @@ export function DockedComposer({
       {/* Body */}
       <div className="slds-docked-composer__body">
         {/* Title Section */}
-        <div className="slds-grid slds-grid_vertical" style={{ width: '100%' }}>
-          <h2 className="slds-text-heading_section slds-m-bottom_medium" style={{ marginTop: 0, width: '100%' }}>
+        <div className="slds-grid slds-grid_vertical">
+          <h2 className="slds-text-heading_section slds-m-bottom_medium" style={{ marginTop: 0 }}>
             {title}
           </h2>
         </div>
@@ -85,24 +85,24 @@ export function DockedComposer({
             <article key={item.id} className="slds-card slds-card_boundary" style={{ borderLeft: `4px solid ${item.borderColor}` }}>
               <div className="slds-card__body slds-card__body_inner">
                 {/* Top: Badge */}
-                <div className="slds-grid slds-grid_align-end slds-m-bottom_small" style={{ width: '100%' }}>
+                <div className="slds-grid slds-grid_align-end slds-m-bottom_small">
                   <span className={`slds-badge ${item.scoreColor === "yellow" ? "slds-badge_warning-light" : "slds-badge_success-light"}`}>
                     {item.scoreImpact}
                   </span>
                 </div>
 
                 {/* Middle: Title and Description */}
-                <div className="slds-grid slds-grid_vertical slds-m-bottom_small" style={{ width: '100%' }}>
-                  <h3 className="slds-text-heading_small slds-m-bottom_x-small" style={{ marginTop: 0 }}>
+                <div className="slds-grid slds-grid_vertical slds-m-bottom_small">
+                  <h3 className="slds-text-heading_small" style={{ marginTop: 0, marginBottom: 'var(--slds-g-spacing-1, 4px)' }}>
                     {item.title}
                   </h3>
-                  <p className="slds-text-body_small slds-text-color_weak" style={{ marginBottom: 0 }}>
+                  <p className="slds-text-body_small slds-text-color_weak" style={{ marginTop: 0, marginBottom: 0 }}>
                     {item.description}
                   </p>
                 </div>
 
                 {/* Bottom: Action Button */}
-                <div className="slds-grid slds-grid_align-end" style={{ width: '100%' }}>
+                <div className="slds-grid slds-grid_align-end" style={{ marginTop: 0 }}>
                   <button
                     type="button"
                     className="slds-button slds-button_neutral"
@@ -119,15 +119,7 @@ export function DockedComposer({
         {/* Resolution Summary - Responsive */}
         {totalIssues > 0 && (
           <div className="slds-docked-composer__summary">
-            <div 
-              className="slds-grid slds-grid_align-spread slds-grid_vertical-align-center" 
-              style={{ 
-                width: '100%', 
-                gap: 'var(--slds-g-spacing-3, 12px)',
-                flexWrap: 'wrap',
-                alignItems: 'center'
-              }}
-            >
+            <div className="slds-grid slds-grid_align-spread slds-grid_vertical-align-center" style={{ gap: 'var(--slds-g-spacing-3, 12px)', flexWrap: 'wrap' }}>
               {/* Left: Resolved Count and Progress Bar */}
               <div 
                 className="slds-grid slds-grid_vertical" 

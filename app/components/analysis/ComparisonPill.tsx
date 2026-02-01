@@ -24,31 +24,11 @@ const pillConfig = {
 };
 
 export function ComparisonPill({ type, label, content }: ComparisonPillProps) {
-  const config = pillConfig[type];
+  const badgeClass = `slds-badge slds-badge_${type}`;
 
   return (
-    <div
-      style={{
-        display: 'inline-flex',
-        alignItems: 'center',
-        gap: 'var(--slds-g-spacing-1)',
-        padding: '4px var(--slds-g-spacing-2)',
-        borderRadius: 'var(--slds-g-radius-border-3)',
-        backgroundColor: config.backgroundColor,
-        fontSize: 'var(--slds-g-font-scale-neg-1)',
-        fontWeight: 'var(--slds-g-font-weight-4)',
-        lineHeight: 1.4
-      }}
-    >
-      <span 
-        style={{
-          fontWeight: 'var(--slds-g-font-weight-6)',
-          color: config.color
-        }}
-      >
-        {label}
-      </span>
-      <span style={{ color: config.color }}>{content}</span>
-    </div>
+    <span className={badgeClass}>
+      {label}: {content}
+    </span>
   );
 }

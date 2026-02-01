@@ -29,7 +29,7 @@ function formatTimestamp(timestamp: string): string {
 function getImpactScoreBadgeTheme(score: string): string {
   const numScore = parseInt(score.replace(/[^0-9-]/g, ''));
   if (numScore > 0) {
-    return "slds-badge slds-theme_success";
+    return "slds-badge slds-badge_success";
   }
   return "slds-badge";
 }

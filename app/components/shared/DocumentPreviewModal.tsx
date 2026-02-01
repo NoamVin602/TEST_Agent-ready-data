@@ -163,18 +163,7 @@ export function DocumentPreviewModal({
                   >
                     {documentData.detectedText && (
                       <div className="slds-grid" style={{ gap: "var(--slds-g-spacing-2)", alignItems: "center" }}>
-                        <span
-                          className="slds-badge"
-                          style={{
-                            backgroundColor: "var(--slds-g-color-badge-detected, #FFE5E5)",
-                            color: "var(--slds-g-color-badge-detected-text, #8B0000)",
-                            fontSize: "var(--slds-g-font-scale-neg-1)",
-                            fontWeight: "var(--slds-g-font-weight-6)",
-                            padding: "4px var(--slds-g-spacing-2)",
-                            borderRadius: "var(--slds-g-radius-border-4, 20px)",
-                            flexShrink: 0,
-                          }}
-                        >
+                        <span className="slds-badge slds-badge_detected">
                           Detected
                         </span>
                         <span
@@ -192,18 +181,7 @@ export function DocumentPreviewModal({
                     )}
                     {documentData.authoritativeText && (
                       <div className="slds-grid" style={{ gap: "var(--slds-g-spacing-2)", alignItems: "center" }}>
-                        <span
-                          className="slds-badge"
-                          style={{
-                            backgroundColor: "var(--slds-g-color-badge-authoritative, #D4F4DD)",
-                            color: "var(--slds-g-color-badge-authoritative-text, #0B5D1E)",
-                            fontSize: "var(--slds-g-font-scale-neg-1)",
-                            fontWeight: "var(--slds-g-font-weight-6)",
-                            padding: "4px var(--slds-g-spacing-2)",
-                            borderRadius: "var(--slds-g-radius-border-4, 20px)",
-                            flexShrink: 0,
-                          }}
-                        >
+                        <span className="slds-badge slds-badge_authoritative">
                           Authoritative
                         </span>
                         <span
