@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { CheckCircle2, X } from 'lucide-react';
+import { CheckCircle2Icon, XIcon } from '../../lib/slds-icons';
 import { Spinner } from '../shared/Spinner';
 
 interface BatchActionBarProps {
@@ -170,7 +170,7 @@ export function BatchActionBar({
           {isProcessing ? (
             <Spinner size="x-small" variant="default" aria-label="Processing" />
           ) : (
-            <X size={14} />
+            <XIcon size={14} />
           )}
           Exclude All
         </button>
@@ -209,7 +209,7 @@ export function BatchActionBar({
           {isProcessing ? (
             <Spinner size="x-small" variant="inverse" aria-label="Processing" />
           ) : (
-            <CheckCircle2 size={14} />
+            <CheckCircle2Icon size={14} />
           )}
           Approve All
         </button>

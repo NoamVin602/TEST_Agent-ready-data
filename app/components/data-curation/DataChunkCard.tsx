@@ -2,7 +2,7 @@
 
 import React, { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { CheckCircle2, X, Edit2, Save, XCircle, Sparkles, AlertTriangle } from 'lucide-react';
+import { CheckCircle2Icon, XIcon, Edit2Icon, SaveIcon, XCircleIcon, SparklesIcon, AlertTriangleIcon } from '../../lib/slds-icons';
 
 export type ChunkStatus = 'pending' | 'curated' | 'excluded';
 
@@ -236,7 +236,7 @@ export function DataChunkCard({
             zIndex: 1,
           }}
         >
-          <Sparkles size={14} color="#10B981" />
+          <SparklesIcon size={14} color="#10B981" />
           <span
             style={{
               fontSize: 'var(--slds-g-font-scale-neg-1)', // 11px
@@ -292,7 +292,7 @@ export function DataChunkCard({
             zIndex: 1,
           }}
         >
-          <CheckCircle2 size={16} color="#066AFE" />
+          <CheckCircle2Icon size={16} color="#066AFE" />
           <span
             style={{
               fontSize: 'var(--slds-g-font-scale-neg-1)', // 11px
@@ -447,7 +447,7 @@ export function DataChunkCard({
               }}
             >
               <div style={{ display: 'flex', alignItems: 'flex-start', gap: 'var(--slds-g-spacing-1)', marginBottom: 'var(--slds-g-spacing-1)' }}>
-                <AlertTriangle size={14} style={{ flexShrink: 0, marginTop: '2px' }} />
+                <AlertTriangleIcon size={14} style={{ flexShrink: 0, marginTop: '2px' }} />
                 <div>
                   <div style={{ fontWeight: 'var(--slds-g-font-weight-6)', marginBottom: 'var(--slds-g-spacing-1)' }}>
                     Quality Issues Detected:
@@ -505,7 +505,7 @@ export function DataChunkCard({
               e.currentTarget.style.borderColor = 'var(--slds-g-color-border-1)'; // #C9C9C9
             }}
           >
-            <Edit2 size={16} color="var(--slds-g-color-icon-default)" /> {/* #747474 */}
+            <Edit2Icon size={16} color="var(--slds-g-color-icon-default)" /> {/* #747474 */}
           </button>
           <button
             onClick={handleReject}
@@ -529,7 +529,7 @@ export function DataChunkCard({
               e.currentTarget.style.backgroundColor = '#FFFFFF';
             }}
           >
-            <X size={16} color="#EF4444" />
+            <XIcon size={16} color="#EF4444" />
           </button>
           <button
             onClick={handleApprove}
@@ -553,7 +553,7 @@ export function DataChunkCard({
               e.currentTarget.style.backgroundColor = '#066AFE';
             }}
           >
-            <CheckCircle2 size={16} color="#FFFFFF" />
+            <CheckCircle2Icon size={16} color="#FFFFFF" />
           </button>
         </div>
       )}

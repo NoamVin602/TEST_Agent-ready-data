@@ -414,4 +414,29 @@ export const NoteIcon: React.FC<IconProps> = (props) => (
   </SLDSIcon>
 );
 
+// TrendingDown Icon (SLDS: trending_down)
+export const TrendingDownIcon: React.FC<IconProps> = (props) => (
+  <SLDSIcon {...props}>
+    <path d="M23 18l-9.5-9.5-5 5L1 6M7 18H1v6M22 6h6v6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" fill="none"/>
+  </SLDSIcon>
+);
+
+// Minus Icon (SLDS: minus)
+export const MinusIcon: React.FC<IconProps> = (props) => (
+  <SLDSIcon {...props}>
+    <path d="M5 12h14" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" fill="none"/>
+  </SLDSIcon>
+);
+
+// Edit2 Icon (SLDS: edit)
+export const Edit2Icon: React.FC<IconProps> = (props) => (
+  <SLDSIcon {...props}>
+    <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7" stroke="currentColor" strokeWidth="2" fill="none"/>
+    <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z" stroke="currentColor" strokeWidth="2" fill="none"/>
+  </SLDSIcon>
+);
+
+// CheckCircle2 Icon (alias for CheckCircleIcon)
+export const CheckCircle2Icon: React.FC<IconProps> = CheckCircleIcon;
+
 // Additional SLDS icons can be added here as needed

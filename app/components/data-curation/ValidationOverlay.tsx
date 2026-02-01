@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { TrendingUp, TrendingDown, Minus } from 'lucide-react';
+import { TrendingUpIcon, TrendingDownIcon, MinusIcon } from '../../lib/slds-icons';
 
 interface ValidationOverlayProps {
   isVisible: boolean;
@@ -94,9 +94,9 @@ export function ValidationOverlay({
               </div>
 
               <div style={{ flex: 1, display: 'flex', justifyContent: 'center' }}>
-                {isPositive && <TrendingUp size={20} color="#066AFE" />}
-                {isNegative && <TrendingDown size={20} color="#EF4444" />}
-                {isNeutral && <Minus size={20} color="#5C5C5C" />}
+                {isPositive && <TrendingUpIcon size={20} color="#066AFE" />}
+                {isNegative && <TrendingDownIcon size={20} color="#EF4444" />}
+                {isNeutral && <MinusIcon size={20} color="#5C5C5C" />}
               </div>
 
               <div className="slds-grid slds-grid_vertical" style={{ gap: 'var(--slds-g-spacing-1)' }}>
