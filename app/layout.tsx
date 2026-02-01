@@ -12,6 +12,8 @@ export default function RootLayout({
       <head>
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>Data Curation - Agent-Ready Data Dashboard</title>
+        <meta name="description" content="Agent-Ready Data Curation Dashboard" />
       </head>
       <body style={{ margin: 0, padding: 0, fontFamily: 'var(--slds-g-font-family)', backgroundColor: 'var(--slds-g-color-neutral-base-95)' }}>
         <NavProvider>
