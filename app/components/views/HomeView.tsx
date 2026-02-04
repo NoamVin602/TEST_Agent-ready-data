@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { AlertTriangleIcon, ClockIcon, CopyIcon, FileEditIcon, SearchIcon, SparklesIcon, ActivityIcon, ChevronDownIcon, DatabaseIcon, TrendingUpIcon } from "../../lib/slds-icons";
-import { DataHealthDonut } from "../dashboard/DataHealthDonut";
+import { DataHealthBarChart } from "../dashboard/DataHealthBarChart";
 import { DataHealthLineChart } from "../dashboard/DataHealthLineChart";
 import { MetricCard } from "../dashboard/MetricCard";
 import { RecentActivityTable } from "../dashboard/RecentActivityTable";
@@ -118,6 +118,29 @@ export function HomeView({ onMetricClick }: HomeViewProps) {
     }
   ], [config]);
 
+  // Calculate total issues and severity breakdown
+  const totalIssues = React.useMemo(() => {
+    return Object.values(config.issues).reduce((sum, count) => sum + count, 0);
+  }, [config]);
+
+  const highSeverityIssues = React.useMemo(() => {
+    // PII and contradictions are high severity
+    return config.issues.pii + config.issues.contradictions;
+  }, [config]);
+
+  const mediumSeverityIssues = React.useMemo(() => {
+    // Outdated, duplicates, drafts are medium severity
+    return config.issues.outdated + config.issues.duplicates + config.issues.drafts;
+  }, [config]);
+
+  // Calculate overall increase from chart data
+  const overallIncrease = React.useMemo(() => {
+    if (config.chartData.length < 2) return 0;
+    const firstValue = config.chartData[0]?.value || 0;
+    const lastValue = config.chartData[config.chartData.length - 1]?.value || 0;
+    return lastValue - firstValue;
+  }, [config]);
+
   const handleRefresh = async () => {
     setIsRefreshing(true);
     // Simulate refresh operation
@@ -216,7 +239,7 @@ export function HomeView({ onMetricClick }: HomeViewProps) {
           <div className="slds-card__body slds-card__body_inner" style={{ padding: '12px', boxSizing: 'border-box' }}>
             {/* Charts Section - Two nested cards side by side */}
             <div className="slds-grid slds-grid_1-of-2 slds-gutters slds-m-bottom_medium" style={{ minHeight: '400px', alignItems: 'stretch' }}>
-              {/* Data Health Donut Chart */}
+              {/* Data Health Bar Chart */}
               <div className="slds-col slds-size_1-of-2">
                 <article className="slds-card slds-card_full-height" style={{ margin: '1px 1px 1px 16px', boxSizing: 'border-box' }}>
                   <div className="slds-card__header slds-grid">
@@ -238,8 +261,13 @@ export function HomeView({ onMetricClick }: HomeViewProps) {
                       </button>
                     </div>
                   </div>
-                  <div className="slds-card__body slds-card__body_inner slds-card__body_full-height">
-                    <DataHealthDonut percentage={config.healthScore} />
+                  <div className="slds-card__body slds-card__body_inner slds-card__body_full-height" style={{ padding: '12px' }}>
+                    <DataHealthBarChart 
+                      percentage={config.healthScore} 
+                      totalIssues={totalIssues}
+                      highSeverity={highSeverityIssues}
+                      mediumSeverity={mediumSeverityIssues}
+                    />
                   </div>
                 </article>
               </div>
@@ -268,6 +296,79 @@ export function HomeView({ onMetricClick }: HomeViewProps) {
                   </div>
                   <div className="slds-card__body slds-card__body_inner slds-card__body_full-height">
                     <DataHealthLineChart data={config.chartData} currentValue={config.healthScore} />
+                    
+                    {/* Key Findings Section */}
+                    <div style={{ 
+                      padding: '8px', 
+                      marginTop: '12px',
+                      borderRadius: '8px',
+                      backgroundColor: 'var(--slds-g-color-neutral-base-100, #FFFFFF)'
+                    }}>
+                      <div style={{ 
+                        display: 'flex', 
+                        height: '46px', 
+                        alignItems: 'center', 
+                        justifyContent: 'space-between',
+                        gap: '16px'
+                      }}>
+                        {/* Overall Health */}
+                        <div style={{ 
+                          flex: 1, 
+                          display: 'flex', 
+                          flexDirection: 'column', 
+                          gap: '4px',
+                          justifyContent: 'center',
+                          minWidth: 0
+                        }}>
+                          <span
+                            style={{
+                              fontSize: '12px',
+                              lineHeight: '17px',
+                              color: '#5c5c5c',
+                              fontFamily: 'var(--slds-g-font-family)',
+                              fontWeight: 400,
+                              whiteSpace: 'nowrap'
+                            }}
+                          >
+                            Overall Health
+                          </span>
+                          <span className={`slds-badge ${config.healthScore >= 80 ? 'slds-theme_success' : config.healthScore >= 60 ? 'slds-theme_info' : config.healthScore >= 40 ? 'slds-theme_warning' : 'slds-theme_error'}`}>
+                            {config.healthScore}%
+                          </span>
+                        </div>
+
+                        {/* Overall Increase */}
+                        <div style={{ 
+                          flex: 1, 
+                          display: 'flex', 
+                          flexDirection: 'column', 
+                          gap: '4px',
+                          height: '100%',
+                          alignItems: 'flex-start',
+                          maxWidth: '225px',
+                          minWidth: 0
+                        }}>
+                          <span
+                            style={{
+                              fontSize: '12px',
+                              lineHeight: '17px',
+                              color: '#5c5c5c',
+                              fontFamily: 'var(--slds-g-font-family)',
+                              fontWeight: 400,
+                              whiteSpace: 'nowrap',
+                              overflow: 'hidden',
+                              textOverflow: 'ellipsis',
+                              width: '100%'
+                            }}
+                          >
+                            Overall Increase
+                          </span>
+                          <span className={`slds-badge ${overallIncrease > 0 ? 'slds-theme_success' : overallIncrease < 0 ? 'slds-theme_error' : ''}`}>
+                            {overallIncrease > 0 ? '+' : ''}{overallIncrease}%
+                          </span>
+                        </div>
+                      </div>
+                    </div>
                   </div>
                 </article>
               </div>
