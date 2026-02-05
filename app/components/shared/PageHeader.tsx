@@ -1,6 +1,6 @@
 "use client";
 
-import { MetricsIcon, PlayIcon } from "../../lib/slds-icons";
+import { MetricsIcon, PlayIcon, PlusIcon } from "../../lib/slds-icons";
 import { Spinner } from "./Spinner";
 import { getStageConfig } from "../../lib/stage-config";
 
@@ -22,56 +22,132 @@ export function PageHeader({ onRunScan, isScanning }: PageHeaderProps) {
         top: '0',
         zIndex: 900,
         borderBottom: '1px solid var(--slds-g-color-border-1, rgba(201, 201, 201, 1))',
+        padding: 'var(--slds-g-spacing-4, 16px)',
       }}
     >
       {/* Page Header Row */}
-      <div className="slds-page-header__row">
+      <div 
+        className="slds-page-header__row"
+        style={{
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'space-between',
+          gap: 'var(--slds-g-spacing-3, 12px)',
+        }}
+      >
         {/* Title Column */}
-        <div className="slds-page-header__col-title">
-          {/* Media Object for Icon + Title */}
-          <div className="slds-media slds-media_center slds-has-flexi-truncate">
-            {/* Icon */}
-            <div className="slds-media__figure">
-              <div
-                className="slds-icon_container slds-icon-standard-record"
-                style={{
-                  width: '32px',
-                  height: '32px',
-                  borderRadius: 'var(--slds-g-radius-border-2, 8px)',
-                  backgroundColor: '#1B96FF',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                }}
-              >
-                <MetricsIcon
-                  size={20}
-                  color="#FFFFFF"
-                />
-              </div>
+        <div 
+          className="slds-page-header__col-title"
+          style={{
+            flex: '1 0 0',
+            display: 'flex',
+            alignItems: 'center',
+            gap: 'var(--slds-g-spacing-3, 12px)',
+            minHeight: '51px',
+            paddingRight: 'var(--slds-g-spacing-3, 12px)',
+          }}
+        >
+          {/* Icon */}
+          <div className="slds-media__figure">
+            <div
+              className="slds-icon_container slds-icon-standard-record"
+              style={{
+                width: '32px',
+                height: '32px',
+                borderRadius: 'var(--slds-g-radius-border-2, 8px)',
+                backgroundColor: '#1B96FF',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                flexShrink: 0,
+              }}
+            >
+              <MetricsIcon
+                size={20}
+                color="#FFFFFF"
+              />
             </div>
+          </div>
 
-            {/* Title */}
-            <div className="slds-media__body">
-              <h1 className="slds-page-header__title slds-truncate" title="Data Health">
-                Data Health
-              </h1>
-            </div>
+          {/* Title */}
+          <div className="slds-media__body" style={{ flex: '1 0 0', minWidth: 0 }}>
+            <h1 
+              className="slds-page-header__title slds-truncate" 
+              title="Data Health"
+              style={{
+                fontSize: 'var(--slds-g-font-scale-5, 28px)',
+                fontWeight: 'var(--slds-g-font-weight-4, 400)',
+                lineHeight: '35px',
+                color: 'var(--slds-g-color-on-surface-3, #03234d)',
+                margin: 0,
+                overflow: 'hidden',
+                textOverflow: 'ellipsis',
+                whiteSpace: 'nowrap',
+              }}
+            >
+              Data Health
+            </h1>
           </div>
         </div>
 
         {/* Actions Column */}
-        <div className="slds-page-header__col-actions">
-          <div className="slds-page-header__controls">
+        <div 
+          className="slds-page-header__col-actions"
+          style={{
+            display: 'flex',
+            gap: 'var(--slds-g-spacing-2, 8px)',
+            alignItems: 'center',
+            flexShrink: 0,
+            paddingLeft: 'var(--slds-g-spacing-2, 8px)',
+          }}
+        >
+          {/* Connect Data Source Button */}
+          <button
+            type="button"
+            className="slds-button slds-button_neutral"
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+              gap: 'var(--slds-g-spacing-2, 8px)',
+              height: '32px',
+              padding: '0 var(--slds-g-spacing-4, 16px)',
+              fontSize: 'var(--slds-g-font-scale-1, 14px)',
+              fontWeight: 'var(--slds-g-font-weight-6, 590)',
+              lineHeight: '19px',
+              color: 'var(--slds-g-color-on-surface-3, #03234d)',
+              backgroundColor: 'var(--slds-g-color-neutral-base-100, #ffffff)',
+              border: '1px solid var(--slds-g-color-border-1, rgba(201, 201, 201, 1))',
+              borderRadius: 'var(--slds-g-radius-border-2, 8px)',
+            }}
+          >
+            <PlusIcon
+              size={14}
+              color="var(--slds-g-color-on-surface-3, #03234d)"
+              className="slds-button__icon slds-button__icon_left"
+            />
+            <span>Connect Data Source</span>
+          </button>
+
+          {/* Run Health Scan Button */}
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--slds-g-spacing-1, 4px)', alignItems: 'flex-end' }}>
             <button
               type="button"
-              className="slds-button slds-button_brand"
+              className="slds-button slds-button_neutral"
               onClick={onRunScan}
               disabled={isScanning}
               style={{
                 display: 'flex',
                 alignItems: 'center',
-                gap: 'var(--slds-g-spacing-2)',
+                gap: 'var(--slds-g-spacing-2, 8px)',
+                height: '32px',
+                padding: '0 var(--slds-g-spacing-4, 16px)',
+                fontSize: 'var(--slds-g-font-scale-1, 14px)',
+                fontWeight: 'var(--slds-g-font-weight-6, 590)',
+                lineHeight: '19px',
+                color: 'var(--slds-g-color-on-surface-3, #03234d)',
+                backgroundColor: 'var(--slds-g-color-neutral-base-100, #ffffff)',
+                border: '1px solid var(--slds-g-color-border-1, rgba(201, 201, 201, 1))',
+                borderRadius: 'var(--slds-g-radius-border-2, 8px)',
               }}
             >
               {isScanning ? (
@@ -83,23 +159,25 @@ export function PageHeader({ onRunScan, isScanning }: PageHeaderProps) {
                 <>
                   <PlayIcon
                     size={14}
-                    color="var(--slds-g-color-accent-2, #0250d9)"
+                    color="var(--slds-g-color-on-surface-3, #03234d)"
                     className="slds-button__icon slds-button__icon_left"
                   />
                   <span>{isDayZero ? 'Run Health Scan' : 'Run Scan'}</span>
-                  {isDayZero && (
-                    <span style={{ 
-                      fontSize: 'var(--slds-g-font-scale-neg-1, 12px)', 
-                      color: 'var(--slds-g-color-on-surface-1, #5c5c5c)',
-                      marginLeft: 'var(--slds-g-spacing-2, 8px)',
-                      fontWeight: 'var(--slds-g-font-weight-4, 400)'
-                    }}>
-                      Scan completed {config.lastScanTime}
-                    </span>
-                  )}
                 </>
               )}
             </button>
+            {isDayZero && !isScanning && (
+              <span 
+                style={{ 
+                  fontSize: 'var(--slds-g-font-scale-neg-1, 12px)', 
+                  color: 'var(--slds-g-color-on-surface-1, #5c5c5c)',
+                  fontWeight: 'var(--slds-g-font-weight-4, 400)',
+                  lineHeight: '16px',
+                }}
+              >
+                Scan completed {config.lastScanTime}
+              </span>
+            )}
           </div>
         </div>
       </div>
