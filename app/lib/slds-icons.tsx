@@ -167,6 +167,13 @@ export const ChevronDownIcon: React.FC<IconProps> = (props) => (
   </SLDSIcon>
 );
 
+// ChevronUp Icon (SLDS: chevronup)
+export const ChevronUpIcon: React.FC<IconProps> = (props) => (
+  <SLDSIcon {...props}>
+    <path d="M18 15l-6-6-6 6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" fill="none"/>
+  </SLDSIcon>
+);
+
 // X Icon (SLDS: close)
 export const XIcon: React.FC<IconProps> = (props) => (
   <SLDSIcon {...props}>
