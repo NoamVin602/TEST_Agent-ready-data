@@ -23,6 +23,9 @@ export function PageHeader({ onRunScan, isScanning }: PageHeaderProps) {
         zIndex: 900,
         borderBottom: '1px solid var(--slds-g-color-border-1, rgba(201, 201, 201, 1))',
         padding: 'var(--slds-g-spacing-4, 16px)',
+        minHeight: '83px',
+        display: 'flex',
+        alignItems: 'center',
       }}
     >
       {/* Page Header Row */}
@@ -32,6 +35,7 @@ export function PageHeader({ onRunScan, isScanning }: PageHeaderProps) {
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'space-between',
+          width: '100%',
           gap: 'var(--slds-g-spacing-3, 12px)',
         }}
       >
@@ -45,10 +49,11 @@ export function PageHeader({ onRunScan, isScanning }: PageHeaderProps) {
             gap: 'var(--slds-g-spacing-3, 12px)',
             minHeight: '51px',
             paddingRight: 'var(--slds-g-spacing-3, 12px)',
+            minWidth: 0,
           }}
         >
           {/* Icon */}
-          <div className="slds-media__figure">
+          <div className="slds-media__figure" style={{ flexShrink: 0 }}>
             <div
               className="slds-icon_container slds-icon-standard-record"
               style={{
@@ -59,7 +64,6 @@ export function PageHeader({ onRunScan, isScanning }: PageHeaderProps) {
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
-                flexShrink: 0,
               }}
             >
               <MetricsIcon
@@ -70,7 +74,7 @@ export function PageHeader({ onRunScan, isScanning }: PageHeaderProps) {
           </div>
 
           {/* Title */}
-          <div className="slds-media__body" style={{ flex: '1 0 0', minWidth: 0 }}>
+          <div className="slds-media__body" style={{ flex: '1 0 0', minWidth: 0, display: 'flex', alignItems: 'center' }}>
             <h1 
               className="slds-page-header__title slds-truncate" 
               title="Data Health"
@@ -108,6 +112,7 @@ export function PageHeader({ onRunScan, isScanning }: PageHeaderProps) {
             style={{
               display: 'flex',
               alignItems: 'center',
+              justifyContent: 'center',
               gap: 'var(--slds-g-spacing-2, 8px)',
               height: '32px',
               padding: '0 var(--slds-g-spacing-4, 16px)',
@@ -118,6 +123,8 @@ export function PageHeader({ onRunScan, isScanning }: PageHeaderProps) {
               backgroundColor: 'var(--slds-g-color-neutral-base-100, #ffffff)',
               border: '1px solid var(--slds-g-color-border-1, rgba(201, 201, 201, 1))',
               borderRadius: 'var(--slds-g-radius-border-2, 8px)',
+              cursor: 'pointer',
+              whiteSpace: 'nowrap',
             }}
           >
             <PlusIcon
@@ -128,8 +135,16 @@ export function PageHeader({ onRunScan, isScanning }: PageHeaderProps) {
             <span>Connect Data Source</span>
           </button>
 
-          {/* Run Health Scan Button */}
-          <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--slds-g-spacing-1, 4px)', alignItems: 'flex-end' }}>
+          {/* Run Health Scan Button with Status */}
+          <div 
+            style={{ 
+              display: 'flex', 
+              flexDirection: 'column', 
+              gap: 'var(--slds-g-spacing-1, 4px)', 
+              alignItems: 'flex-end',
+              justifyContent: 'center',
+            }}
+          >
             <button
               type="button"
               className="slds-button slds-button_neutral"
@@ -138,6 +153,7 @@ export function PageHeader({ onRunScan, isScanning }: PageHeaderProps) {
               style={{
                 display: 'flex',
                 alignItems: 'center',
+                justifyContent: 'center',
                 gap: 'var(--slds-g-spacing-2, 8px)',
                 height: '32px',
                 padding: '0 var(--slds-g-spacing-4, 16px)',
@@ -148,6 +164,8 @@ export function PageHeader({ onRunScan, isScanning }: PageHeaderProps) {
                 backgroundColor: 'var(--slds-g-color-neutral-base-100, #ffffff)',
                 border: '1px solid var(--slds-g-color-border-1, rgba(201, 201, 201, 1))',
                 borderRadius: 'var(--slds-g-radius-border-2, 8px)',
+                cursor: isScanning ? 'not-allowed' : 'pointer',
+                whiteSpace: 'nowrap',
               }}
             >
               {isScanning ? (
@@ -173,6 +191,8 @@ export function PageHeader({ onRunScan, isScanning }: PageHeaderProps) {
                   color: 'var(--slds-g-color-on-surface-1, #5c5c5c)',
                   fontWeight: 'var(--slds-g-font-weight-4, 400)',
                   lineHeight: '16px',
+                  textAlign: 'right',
+                  whiteSpace: 'nowrap',
                 }}
               >
                 Scan completed {config.lastScanTime}
