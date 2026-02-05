@@ -2,9 +2,8 @@
 
 import React from 'react';
 import { AlertTriangleIcon, ClockIcon, CopyIcon, FileEditIcon, SearchIcon, SparklesIcon, ActivityIcon, ChevronDownIcon, DatabaseIcon, TrendingUpIcon } from "../../lib/slds-icons";
-import { DataHealthBarChart } from "../dashboard/DataHealthBarChart";
+import { DataHealthDonut } from "../dashboard/DataHealthDonut";
 import { DataHealthLineChart } from "../dashboard/DataHealthLineChart";
-import { SourcesCard } from "../dashboard/SourcesCard";
 import { MetricCard } from "../dashboard/MetricCard";
 import { RecentActivityTable } from "../dashboard/RecentActivityTable";
 import { QuickFixesSidebar } from "../shared/QuickFixesSidebar";
@@ -119,26 +118,6 @@ export function HomeView({ onMetricClick }: HomeViewProps) {
     }
   ], [config]);
 
-  // Calculate total issues and severity breakdown
-  const totalIssues = React.useMemo(() => {
-    return Object.values(config.issues).reduce((sum, count) => sum + count, 0);
-  }, [config]);
-
-  const highSeverityIssues = React.useMemo(() => {
-    // PII and contradictions are high severity
-    return config.issues.pii + config.issues.contradictions;
-  }, [config]);
-
-  const mediumSeverityIssues = React.useMemo(() => {
-    // Outdated, duplicates, drafts are medium severity
-    return config.issues.outdated + config.issues.duplicates + config.issues.drafts;
-  }, [config]);
-
-  const lowSeverityIssues = React.useMemo(() => {
-    // Content gaps are low severity
-    return config.issues.contentGaps;
-  }, [config]);
-
   const handleRefresh = async () => {
     setIsRefreshing(true);
     // Simulate refresh operation
@@ -235,43 +214,39 @@ export function HomeView({ onMetricClick }: HomeViewProps) {
 
           {/* Card Body */}
           <div className="slds-card__body slds-card__body_inner" style={{ padding: '12px', boxSizing: 'border-box' }}>
-            {/* Data Health Bar Chart - Full Width */}
-            <article className="slds-card" style={{ margin: '0 0 var(--slds-g-spacing-4, 16px) 0', boxSizing: 'border-box', borderRadius: 'var(--slds-g-radius-border-3, 12px)' }}>
-              <div className="slds-card__header slds-grid">
-                <header className="slds-media slds-media_center slds-has-flexi-truncate">
-                  <div className="slds-media__figure">
-                    <DatabaseIcon size={16} color="#181818" />
+            {/* Charts Section - Two nested cards side by side */}
+            <div className="slds-grid slds-grid_1-of-2 slds-gutters slds-m-bottom_medium" style={{ minHeight: '400px', alignItems: 'stretch' }}>
+              {/* Data Health Donut Chart */}
+              <div className="slds-col slds-size_1-of-2">
+                <article className="slds-card slds-card_full-height" style={{ margin: '1px 1px 1px 16px', boxSizing: 'border-box' }}>
+                  <div className="slds-card__header slds-grid">
+                    <header className="slds-media slds-media_center slds-has-flexi-truncate">
+                      <div className="slds-media__figure">
+                        <DatabaseIcon size={16} color="#181818" />
+                      </div>
+                      <div className="slds-media__body">
+                        <h2 className="slds-card__header-title">Data Health</h2>
+                      </div>
+                    </header>
+                    <div className="slds-no-flex">
+                      <button
+                        type="button"
+                        className="slds-button slds-button_icon slds-button_icon-small"
+                        aria-label="More options"
+                      >
+                        <ChevronDownIcon size={12} color="#747474" />
+                      </button>
+                    </div>
                   </div>
-                  <div className="slds-media__body">
-                    <h2 className="slds-card__header-title">Data Health</h2>
+                  <div className="slds-card__body slds-card__body_inner slds-card__body_full-height">
+                    <DataHealthDonut percentage={config.healthScore} />
                   </div>
-                </header>
-                <div className="slds-no-flex">
-                  <button
-                    type="button"
-                    className="slds-button slds-button_icon slds-button_icon-small"
-                    aria-label="More options"
-                  >
-                    <ChevronDownIcon size={12} color="#747474" />
-                  </button>
-                </div>
+                </article>
               </div>
-              <div className="slds-card__body slds-card__body_inner" style={{ padding: 'var(--slds-g-spacing-3, 12px)' }}>
-                <DataHealthBarChart 
-                  percentage={config.healthScore} 
-                  totalIssues={totalIssues}
-                  highSeverity={highSeverityIssues}
-                  mediumSeverity={mediumSeverityIssues}
-                  lowSeverity={lowSeverityIssues}
-                />
-              </div>
-            </article>
 
-            {/* Charts Section - Line Chart and Sources side by side */}
-            <div className="slds-grid slds-grid_1-of-2 slds-gutters slds-m-bottom_medium" style={{ alignItems: 'stretch' }}>
               {/* Data Health Over Time Line Chart */}
               <div className="slds-col slds-size_1-of-2">
-                <article className="slds-card slds-card_full-height" style={{ margin: '0', boxSizing: 'border-box', borderRadius: 'var(--slds-g-radius-border-3, 12px)' }}>
+                <article className="slds-card slds-card_full-height" style={{ margin: '1px 1px 1px 16px', boxSizing: 'border-box' }}>
                   <div className="slds-card__header slds-grid">
                     <header className="slds-media slds-media_center slds-has-flexi-truncate">
                       <div className="slds-media__figure">
@@ -295,11 +270,6 @@ export function HomeView({ onMetricClick }: HomeViewProps) {
                     <DataHealthLineChart data={config.chartData} currentValue={config.healthScore} />
                   </div>
                 </article>
-              </div>
-
-              {/* Sources Card */}
-              <div className="slds-col slds-size_1-of-2">
-                <SourcesCard />
               </div>
             </div>
 
