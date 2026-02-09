@@ -11,6 +11,7 @@ interface IconProps {
   style?: React.CSSProperties;
   size?: number;
   color?: string;
+  viewBox?: string;
 }
 
 // SLDS Icon Base Component
@@ -19,7 +20,8 @@ export const SLDSIcon: React.FC<IconProps & { children: React.ReactNode }> = ({
   style = {},
   size = 16,
   children,
-  color
+  color,
+  viewBox = "0 0 24 24"
 }) => {
   return (
     <svg
@@ -30,7 +32,7 @@ export const SLDSIcon: React.FC<IconProps & { children: React.ReactNode }> = ({
         fill: color || 'currentColor',
         ...style
       }}
-      viewBox="0 0 24 24"
+      viewBox={viewBox}
       aria-hidden="true"
     >
       {children}
@@ -472,5 +474,32 @@ export const Edit2Icon: React.FC<IconProps> = (props) => (
 
 // CheckCircle2 Icon (alias for CheckCircleIcon)
 export const CheckCircle2Icon: React.FC<IconProps> = CheckCircleIcon;
+
+// Google Drive Icon
+export const GoogleDriveIcon: React.FC<IconProps> = (props) => (
+  <SLDSIcon {...props} viewBox="0 0 32 32">
+    <path d="M8.5 7L16 18.5L23.5 7H8.5Z" fill="#0066DA"/>
+    <path d="M23.5 7L31 18.5H16L8.5 7H23.5Z" fill="#00AC47"/>
+    <path d="M16 18.5L8.5 30L16 30L23.5 18.5H16Z" fill="#EA4335"/>
+    <path d="M8.5 30L16 18.5L8.5 7L1 18.5L8.5 30Z" fill="#FFBA00"/>
+  </SLDSIcon>
+);
+
+// Book Icon (SLDS: knowledge_base)
+export const BookIcon: React.FC<IconProps> = (props) => (
+  <SLDSIcon {...props}>
+    <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20" stroke="currentColor" strokeWidth="2" fill="none"/>
+    <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z" stroke="currentColor" strokeWidth="2" fill="none"/>
+    <path d="M20 2h3.5A2.5 2.5 0 0 1 26 4.5v15a2.5 2.5 0 0 1-2.5 2.5H20" stroke="currentColor" strokeWidth="2" fill="none"/>
+  </SLDSIcon>
+);
+
+// World Icon (SLDS: world)
+export const WorldIcon: React.FC<IconProps> = (props) => (
+  <SLDSIcon {...props}>
+    <circle cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="2" fill="none"/>
+    <path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" stroke="currentColor" strokeWidth="2" fill="none"/>
+  </SLDSIcon>
+);
 
 // Additional SLDS icons can be added here as needed

@@ -9,6 +9,7 @@ import { RecentActivityTable } from "../dashboard/RecentActivityTable";
 import { QuickFixesSidebar } from "../shared/QuickFixesSidebar";
 import { Spinner } from "../shared/Spinner";
 import { getStageConfig } from "../../lib/stage-config";
+import { CardsStats } from "../dashboard/CardsStats";
 
 export type IssueCategory = 
   | "all" 
@@ -140,141 +141,131 @@ export function HomeView({ onMetricClick }: HomeViewProps) {
     >
       {/* Left Column - Current State Dashboard (75%) */}
       <div className="slds-grid slds-grid_vertical" style={{ flex: '0 0 75%', minWidth: 0, gap: 'var(--slds-g-spacing-4)', display: 'flex', flexDirection: 'column' }}>
-        {/* Current State Card Header - SLDS Cosmos Pattern */}
+        {/* Current State Card Header - Matching Figma */}
         <article className="slds-card" style={{ margin: '0 1px 1px 16px', boxSizing: 'border-box' }}>
-          <div className="slds-card__header">
-            <header className="slds-media slds-media_center slds-has-flexi-truncate">
+          <div 
+            className="slds-card__header"
+            style={{
+              height: '75px',
+              padding: 'var(--slds-g-spacing-4, 16px)',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'space-between',
+              boxSizing: 'border-box',
+            }}
+          >
+            {/* Left Section - Icon, Title, Subtitle */}
+            <div 
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                gap: 'var(--slds-g-spacing-3, 12px)',
+                flex: '1 0 0',
+                minWidth: 0,
+              }}
+            >
               {/* Icon */}
-              <div className="slds-media__figure">
-                <div
-                  style={{
-                    width: '24px',
-                    height: '24px',
-                    borderRadius: 'var(--slds-g-radius-border-2, 8px)',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    flexShrink: 0,
-                    overflow: 'hidden',
-                  }}
-                >
-                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <rect width="24" height="24" rx="4" fill="#757575"/>
-                    <path d="M9.62422 6.95983C9.96022 7.00783 10.2722 7.19983 10.3442 7.58383L11.9762 14.0638L14.1122 9.40783C14.2562 9.09583 14.5442 8.92783 14.8562 8.92783L14.9042 8.95183H14.9522C15.2162 8.99983 15.4562 9.16783 15.5762 9.40783L15.6002 9.45583V9.47983L16.7042 11.9998H18.6002C18.9362 11.9998 19.2002 12.2878 19.2002 12.5998V13.0078C19.2002 13.3198 18.9362 13.6078 18.6002 13.6078H16.2242C15.9122 13.6078 15.6242 13.4158 15.4802 13.1278L14.8802 11.7358L12.5522 16.8478V16.8718C12.3842 17.1118 12.1202 17.2798 11.7842 17.2798C11.6642 17.2798 11.5202 17.2318 11.3762 17.1838C11.2802 17.1118 11.1842 17.0398 11.1122 16.9198C11.0402 16.8238 10.9682 16.7278 10.9682 16.6078L9.38422 10.2238L8.13622 13.0798C8.01622 13.3918 7.72822 13.5598 7.41622 13.5598H5.42422C5.11222 13.5598 4.82422 13.3438 4.82422 13.0078V12.5758C4.82422 12.2398 5.08822 11.9758 5.42422 11.9758H6.84022L8.83222 7.43983C8.97622 7.15183 9.28822 6.93583 9.64822 6.95983H9.62422Z" fill="white"/>
-                  </svg>
-                </div>
+              <div 
+                style={{
+                  width: '24px',
+                  height: '24px',
+                  borderRadius: '50%',
+                  backgroundColor: 'var(--slds-g-color-neutral-base-80, #C9C9C9)',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  flexShrink: 0,
+                }}
+              >
+                <ActivityIcon
+                  size={14}
+                  color="var(--slds-g-color-neutral-base-50, #747474)"
+                />
               </div>
               
               {/* Title and Subtitle */}
-              <div className="slds-media__body">
-                <h2 className="slds-card__header-title">
+              <div 
+                style={{
+                  display: 'flex',
+                  flexDirection: 'column',
+                  gap: 'var(--slds-g-spacing-1, 4px)',
+                  minWidth: 0,
+                }}
+              >
+                <h2 
+                  style={{
+                    fontSize: 'var(--slds-g-font-scale-3, 20px)',
+                    fontWeight: 'var(--slds-g-font-weight-4, 400)',
+                    lineHeight: '28px',
+                    color: 'var(--slds-g-color-on-surface-3, #03234d)',
+                    margin: 0,
+                    overflow: 'hidden',
+                    textOverflow: 'ellipsis',
+                    whiteSpace: 'nowrap',
+                  }}
+                >
                   Current State
                 </h2>
                 <p
                   style={{
-                    fontFamily: 'var(--slds-g-font-family)',
-                    fontSize: 'var(--slds-g-font-scale-1, 14px)',
+                    fontSize: 'var(--slds-g-font-scale-base, 13px)',
                     fontWeight: 'var(--slds-g-font-weight-4, 400)',
-                    lineHeight: 'var(--slds-g-line-height-body, 19px)',
+                    lineHeight: '18px',
                     color: 'var(--slds-g-color-on-surface-1, #5C5C5C)',
-                    marginTop: 'var(--slds-g-spacing-1, 4px)',
-                    marginBottom: 0,
+                    margin: 0,
+                    overflow: 'hidden',
+                    textOverflow: 'ellipsis',
+                    whiteSpace: 'nowrap',
                   }}
                 >
                   Your knowledge base AI-readiness overview
                 </p>
               </div>
-              
-              {/* Refresh Button */}
-              <div className="slds-no-flex">
-                <button
-                  type="button"
-                  className="slds-button slds-button_neutral"
-                  aria-label="Refresh"
-                  onClick={handleRefresh}
-                  disabled={isRefreshing}
-                  style={{
-                    display: 'flex',
-                    alignItems: 'center',
-                    gap: 'var(--slds-g-spacing-2)',
-                  }}
-                >
-                  {isRefreshing ? (
-                    <>
-                      <Spinner size="x-small" variant="default" aria-label="Refreshing" />
-                      <span>Refreshing...</span>
-                    </>
-                  ) : (
-                    <span>Refresh</span>
-                  )}
-                </button>
-              </div>
-            </header>
+            </div>
+            
+            {/* Right Section - Last Scan Time */}
+            <div 
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                flexShrink: 0,
+                marginLeft: 'var(--slds-g-spacing-4, 16px)',
+              }}
+            >
+              <span
+                style={{
+                  fontSize: 'var(--slds-g-font-scale-base, 13px)',
+                  fontWeight: 'var(--slds-g-font-weight-4, 400)',
+                  lineHeight: '18px',
+                  color: 'var(--slds-g-color-on-surface-1, #5C5C5C)',
+                  whiteSpace: 'nowrap',
+                }}
+              >
+                Last Scan {config.lastScanTime}
+              </span>
+            </div>
           </div>
 
           {/* Card Body */}
           <div className="slds-card__body slds-card__body_inner" style={{ padding: '12px', boxSizing: 'border-box' }}>
-            {/* Charts Section - Two nested cards side by side */}
-            <div className="slds-grid slds-grid_1-of-2 slds-gutters slds-m-bottom_medium" style={{ minHeight: '400px', alignItems: 'stretch' }}>
-              {/* Data Health Donut Chart */}
-              <div className="slds-col slds-size_1-of-2">
-                <article className="slds-card slds-card_full-height" style={{ margin: '1px 1px 1px 16px', boxSizing: 'border-box' }}>
-                  <div className="slds-card__header slds-grid">
-                    <header className="slds-media slds-media_center slds-has-flexi-truncate">
-                      <div className="slds-media__figure">
-                        <DatabaseIcon size={16} color="#181818" />
-                      </div>
-                      <div className="slds-media__body">
-                        <h2 className="slds-card__header-title">Data Health</h2>
-                      </div>
-                    </header>
-                    <div className="slds-no-flex">
-                      <button
-                        type="button"
-                        className="slds-button slds-button_icon slds-button_icon-small"
-                        aria-label="More options"
-                      >
-                        <ChevronDownIcon size={12} color="#747474" />
-                      </button>
-                    </div>
-                  </div>
-                  <div className="slds-card__body slds-card__body_inner slds-card__body_full-height">
-                    <DataHealthDonut percentage={config.healthScore} />
-                  </div>
-                </article>
-              </div>
-
-              {/* Data Health Over Time Line Chart */}
-              <div className="slds-col slds-size_1-of-2">
-                <article className="slds-card slds-card_full-height" style={{ margin: '1px 1px 1px 16px', boxSizing: 'border-box' }}>
-                  <div className="slds-card__header slds-grid">
-                    <header className="slds-media slds-media_center slds-has-flexi-truncate">
-                      <div className="slds-media__figure">
-                        <TrendingUpIcon size={16} color="#181818" />
-                      </div>
-                      <div className="slds-media__body">
-                        <h2 className="slds-card__header-title">Data Health Over Time</h2>
-                      </div>
-                    </header>
-                    <div className="slds-no-flex">
-                      <button
-                        type="button"
-                        className="slds-button slds-button_icon slds-button_icon-small"
-                        aria-label="More options"
-                      >
-                        <ChevronDownIcon size={12} color="#747474" />
-                      </button>
-                    </div>
-                  </div>
-                  <div className="slds-card__body slds-card__body_inner slds-card__body_full-height">
-                    <DataHealthLineChart data={config.chartData} currentValue={config.healthScore} />
-                  </div>
-                </article>
-              </div>
-            </div>
+            {/* Cards Stats Component */}
+            <CardsStats
+              healthScore={config.healthScore}
+              issuesDetected={config.issues.contradictions + config.issues.outdated + config.issues.duplicates + config.issues.drafts}
+              highSeverityCount={6}
+              mediumSeverityCount={8}
+              chartData={config.chartData}
+              recentActivity={config.recentActivity.map((activity) => ({
+                actionType: activity.actionType,
+                description: activity.description,
+                actor: activity.actor,
+                timestamp: activity.timestamp,
+                impactScore: parseInt(activity.impactScore) || 0,
+              }))}
+            />
 
             {/* Metrics Grid - 2 rows of 3 cards */}
-            <div className="slds-grid slds-grid_wrap" style={{ gap: 'var(--slds-g-spacing-4)', marginBottom: 'var(--slds-g-spacing-4)' }}>
+            <div className="slds-grid slds-grid_wrap" style={{ gap: 'var(--slds-g-spacing-4)', marginTop: 'var(--slds-g-spacing-4)', marginBottom: 'var(--slds-g-spacing-4)' }}>
               {metricsData.map((metric) => (
                 <div key={metric.id} style={{ flex: '1 1 calc(33.333% - var(--slds-g-spacing-4))', minWidth: '200px' }}>
                   <MetricCard
@@ -292,9 +283,6 @@ export function HomeView({ onMetricClick }: HomeViewProps) {
             </div>
           </div>
         </article>
-
-        {/* Recent Activity - Already wrapped in SLDS Card by RecentActivityTable */}
-        <RecentActivityTable activities={config.recentActivity} />
       </div>
 
       {/* Right Column - Quick Fixes Panel (25%) */}

@@ -22,129 +22,133 @@ export function PageHeader({ onRunScan, isScanning }: PageHeaderProps) {
         top: '0',
         zIndex: 900,
         borderBottom: '1px solid var(--slds-g-color-border-1, rgba(201, 201, 201, 1))',
-        padding: 'var(--slds-g-spacing-4, 16px)',
-        minHeight: '83px',
         display: 'flex',
-        alignItems: 'center',
+        flexDirection: 'column',
+        gap: 'var(--slds-g-spacing-4, 16px)',
+        alignItems: 'flex-start',
+        minHeight: '83px',
+        boxSizing: 'border-box',
       }}
     >
-      {/* Page Header Row */}
+      {/* Content Container */}
       <div 
-        className="slds-page-header__row"
         style={{
           display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'space-between',
+          flexDirection: 'column',
+          alignItems: 'flex-start',
+          padding: 'var(--slds-g-spacing-4, 16px)',
           width: '100%',
-          gap: 'var(--slds-g-spacing-3, 12px)',
+          boxSizing: 'border-box',
         }}
       >
-        {/* Title Column */}
+        {/* Page Header Row */}
         <div 
-          className="slds-page-header__col-title"
+          className="slds-page-header__row"
           style={{
-            flex: '1 0 0',
             display: 'flex',
             alignItems: 'center',
-            gap: 'var(--slds-g-spacing-3, 12px)',
-            minHeight: '51px',
-            paddingRight: 'var(--slds-g-spacing-3, 12px)',
-            minWidth: 0,
+            justifyContent: 'space-between',
+            width: '100%',
           }}
         >
-          {/* Icon */}
-          <div className="slds-media__figure" style={{ flexShrink: 0 }}>
-            <div
-              className="slds-icon_container slds-icon-standard-record"
-              style={{
-                width: '32px',
-                height: '32px',
-                borderRadius: 'var(--slds-g-radius-border-2, 8px)',
-                backgroundColor: '#1B96FF',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-              }}
-            >
-              <MetricsIcon
-                size={20}
-                color="#FFFFFF"
-              />
+          {/* Icon + Title Section */}
+          <div 
+            className="slds-page-header__col-title"
+            style={{
+              flex: '1 0 0',
+              display: 'flex',
+              alignItems: 'center',
+              gap: '12px',
+              minHeight: '51px',
+              paddingRight: '12px',
+              minWidth: 0,
+            }}
+          >
+            {/* Icon */}
+            <div className="slds-media__figure" style={{ flexShrink: 0, marginRight: 0 }}>
+              <div
+                className="slds-icon_container slds-icon-standard-record"
+                style={{
+                  width: '32px',
+                  height: '32px',
+                  borderRadius: 'var(--slds-g-radius-border-2, 8px)',
+                  backgroundColor: '#1B96FF',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                }}
+              >
+                <MetricsIcon
+                  size={20}
+                  color="#FFFFFF"
+                />
+              </div>
+            </div>
+
+            {/* Title */}
+            <div className="slds-media__body" style={{ flex: '1 0 0', minWidth: 0 }}>
+              <h1 
+                className="slds-page-header__title slds-truncate" 
+                title="Data Health"
+                style={{
+                  fontSize: 'var(--slds-g-font-scale-5, 28px)',
+                  fontWeight: 'var(--slds-g-font-weight-4, 400)',
+                  lineHeight: '35px',
+                  color: 'var(--slds-g-color-on-surface-3, #03234d)',
+                  margin: 0,
+                  overflow: 'hidden',
+                  textOverflow: 'ellipsis',
+                  whiteSpace: 'nowrap',
+                }}
+              >
+                Data Health
+              </h1>
             </div>
           </div>
 
-          {/* Title */}
-          <div className="slds-media__body" style={{ flex: '1 0 0', minWidth: 0, display: 'flex', alignItems: 'center' }}>
-            <h1 
-              className="slds-page-header__title slds-truncate" 
-              title="Data Health"
+          {/* Page Header Actions */}
+          <div 
+            className="slds-page-header__col-actions"
+            style={{
+              display: 'flex',
+              gap: 'var(--slds-g-spacing-2, 8px)',
+              alignItems: 'center',
+              justifyContent: 'flex-end',
+              flexShrink: 0,
+              paddingLeft: 'var(--slds-g-spacing-2, 8px)',
+            }}
+          >
+            {/* Connect Data Source Button */}
+            <button
+              type="button"
+              className="slds-button slds-button_neutral"
               style={{
-                fontSize: 'var(--slds-g-font-scale-5, 28px)',
-                fontWeight: 'var(--slds-g-font-weight-4, 400)',
-                lineHeight: '35px',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                gap: 'var(--slds-g-spacing-2, 8px)',
+                height: '32px',
+                padding: '0 var(--slds-g-spacing-4, 16px)',
+                fontSize: 'var(--slds-g-font-scale-1, 14px)',
+                fontWeight: 'var(--slds-g-font-weight-6, 590)',
+                lineHeight: '19px',
                 color: 'var(--slds-g-color-on-surface-3, #03234d)',
-                margin: 0,
-                overflow: 'hidden',
-                textOverflow: 'ellipsis',
+                backgroundColor: 'var(--slds-g-color-neutral-base-100, #ffffff)',
+                border: '1px solid var(--slds-g-color-border-1, rgba(201, 201, 201, 1))',
+                borderRadius: 'var(--slds-g-radius-border-2, 8px)',
+                cursor: 'pointer',
                 whiteSpace: 'nowrap',
               }}
             >
-              Data Health
-            </h1>
-          </div>
-        </div>
+              <PlusIcon
+                size={14}
+                color="var(--slds-g-color-on-surface-3, #03234d)"
+                className="slds-button__icon slds-button__icon_left"
+              />
+              <span>Connect Data Source</span>
+            </button>
 
-        {/* Actions Column */}
-        <div 
-          className="slds-page-header__col-actions"
-          style={{
-            display: 'flex',
-            gap: 'var(--slds-g-spacing-2, 8px)',
-            alignItems: 'center',
-            flexShrink: 0,
-            paddingLeft: 'var(--slds-g-spacing-2, 8px)',
-          }}
-        >
-          {/* Connect Data Source Button */}
-          <button
-            type="button"
-            className="slds-button slds-button_neutral"
-            style={{
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              gap: 'var(--slds-g-spacing-2, 8px)',
-              height: '32px',
-              padding: '0 var(--slds-g-spacing-4, 16px)',
-              fontSize: 'var(--slds-g-font-scale-1, 14px)',
-              fontWeight: 'var(--slds-g-font-weight-6, 590)',
-              lineHeight: '19px',
-              color: 'var(--slds-g-color-on-surface-3, #03234d)',
-              backgroundColor: 'var(--slds-g-color-neutral-base-100, #ffffff)',
-              border: '1px solid var(--slds-g-color-border-1, rgba(201, 201, 201, 1))',
-              borderRadius: 'var(--slds-g-radius-border-2, 8px)',
-              cursor: 'pointer',
-              whiteSpace: 'nowrap',
-            }}
-          >
-            <PlusIcon
-              size={14}
-              color="var(--slds-g-color-on-surface-3, #03234d)"
-              className="slds-button__icon slds-button__icon_left"
-            />
-            <span>Connect Data Source</span>
-          </button>
-
-          {/* Run Health Scan Button with Status */}
-          <div 
-            style={{ 
-              display: 'flex', 
-              flexDirection: 'column', 
-              gap: 'var(--slds-g-spacing-1, 4px)', 
-              alignItems: 'flex-end',
-              justifyContent: 'center',
-            }}
-          >
+            {/* Run Health Scan Button */}
             <button
               type="button"
               className="slds-button slds-button_neutral"
@@ -184,20 +188,6 @@ export function PageHeader({ onRunScan, isScanning }: PageHeaderProps) {
                 </>
               )}
             </button>
-            {isDayZero && !isScanning && (
-              <span 
-                style={{ 
-                  fontSize: 'var(--slds-g-font-scale-neg-1, 12px)', 
-                  color: 'var(--slds-g-color-on-surface-1, #5c5c5c)',
-                  fontWeight: 'var(--slds-g-font-weight-4, 400)',
-                  lineHeight: '16px',
-                  textAlign: 'right',
-                  whiteSpace: 'nowrap',
-                }}
-              >
-                Scan completed {config.lastScanTime}
-              </span>
-            )}
           </div>
         </div>
       </div>
