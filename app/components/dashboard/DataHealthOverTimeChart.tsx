@@ -12,24 +12,6 @@ interface DataHealthOverTimeChartProps {
   currentValue: number;
 }
 
-// Format date from "2.20" or "2/20" to "02/10/26" format
-function formatDateForChart(dateStr: string): string {
-  // If already in MM/DD/YY format, return as is
-  if (dateStr.includes('/')) {
-    return dateStr;
-  }
-  // Convert "2.20" format to "02/10/26" format
-  // Assuming format is month.day, convert to MM/DD/YY
-  const parts = dateStr.split('.');
-  if (parts.length === 2) {
-    const month = parts[0].padStart(2, '0');
-    const day = parts[1].padStart(2, '0');
-    // Use current year's last 2 digits, or default to 26
-    return `${month}/${day}/26`;
-  }
-  return dateStr;
-}
-
 export function DataHealthOverTimeChart({ data, currentValue }: DataHealthOverTimeChartProps) {
   const chartHeight = 120;
   const padding = { top: 0, right: 0, bottom: 22, left: 0 };
@@ -40,14 +22,20 @@ export function DataHealthOverTimeChart({ data, currentValue }: DataHealthOverTi
   const svgWidth = 500; // Approximate width
   const svgHeight = chartHeight;
 
+  // Ensure data array exists and has at least one item
+  const safeData = Array.isArray(data) && data.length > 0 ? data : [
+    { date: "2.20", value: 0 },
+    { date: "4.20", value: currentValue || 45 }
+  ];
+  
   // Calculate scales
-  const maxValue = Math.max(...data.map(d => d.value), 100);
-  const minValue = Math.min(...data.map(d => d.value), 0);
+  const maxValue = Math.max(...safeData.map(d => d.value), 100);
+  const minValue = Math.min(...safeData.map(d => d.value), 0);
   const valueRange = maxValue - minValue || 1;
 
   // Generate path for the line
-  const points = data.map((point, index) => {
-    const x = (index / (data.length - 1 || 1)) * svgWidth;
+  const points = safeData.map((point, index) => {
+    const x = (index / (safeData.length - 1 || 1)) * svgWidth;
     const y = svgHeight - padding.bottom - ((point.value - minValue) / valueRange) * chartAreaHeight;
     return { x, y, value: point.value };
   });
@@ -61,9 +49,28 @@ export function DataHealthOverTimeChart({ data, currentValue }: DataHealthOverTi
     ` L ${points[points.length - 1].x} ${svgHeight - padding.bottom}` +
     ` L ${points[0].x} ${svgHeight - padding.bottom} Z`;
 
-  // Find the middle point for highlighting (around 15% based on Figma)
-  const middleIndex = Math.floor(points.length / 2);
-  const middlePoint = points[middleIndex] || points[0];
+  // Get the last point for highlighting
+  const lastPoint = points[points.length - 1] || points[0];
+  
+  // Format dates
+  const firstDate = safeData[0]?.date || "02/10/26";
+  const lastDate = safeData.length > 0 ? safeData[safeData.length - 1]?.date || "03/10/26" : "03/10/26";
+  
+  // Format date from "2.20" or "2/20" to "02/10/26" format
+  function formatDateForChart(dateStr: string): string {
+    // If already in MM/DD/YY format, return as is
+    if (dateStr.includes('/')) {
+      return dateStr;
+    }
+    // Convert "2.20" format to "02/10/26" format
+    const parts = dateStr.split('.');
+    if (parts.length === 2) {
+      const month = parts[0].padStart(2, '0');
+      const day = parts[1].padStart(2, '0');
+      return `${month}/${day}/26`;
+    }
+    return dateStr;
+  }
 
   return (
     <div
@@ -81,7 +88,7 @@ export function DataHealthOverTimeChart({ data, currentValue }: DataHealthOverTi
           height: `${chartHeight}px`,
           alignItems: "center",
           justifyContent: "flex-end",
-          paddingBottom: "22px",
+          paddingBottom: `${padding.bottom}px`,
           paddingRight: "var(--slds-g-spacing-2, 8px)",
           width: `${yAxisWidth}px`,
           flexShrink: 0,
@@ -93,7 +100,8 @@ export function DataHealthOverTimeChart({ data, currentValue }: DataHealthOverTi
             flexDirection: "column",
             height: "100%",
             alignItems: "flex-end",
-            justifyContent: "space-between",
+            justifyContent: "flex-end",
+            paddingBottom: "8px",
           }}
         >
           <div
@@ -106,7 +114,6 @@ export function DataHealthOverTimeChart({ data, currentValue }: DataHealthOverTi
           >
             Health
           </div>
-          <div style={{ height: "18px" }} />
         </div>
       </div>
 
@@ -143,7 +150,7 @@ export function DataHealthOverTimeChart({ data, currentValue }: DataHealthOverTi
             {/* Shaded Area under the line */}
             <path
               d={areaPath}
-              fill="rgba(0, 128, 255, 0.15)"
+              fill="rgba(27, 150, 255, 0.15)"
             />
 
             {/* Line Path */}
@@ -156,24 +163,25 @@ export function DataHealthOverTimeChart({ data, currentValue }: DataHealthOverTi
               strokeLinecap="round"
             />
 
-            {/* Highlighted Data Point */}
+            {/* Highlighted Data Point - Blue circle at the end */}
             <g>
               <circle
-                cx={middlePoint.x}
-                cy={middlePoint.y}
+                cx={lastPoint.x}
+                cy={lastPoint.y}
                 r="4"
                 fill="var(--slds-g-color-chart-blue-2, #0176D3)"
               />
               {/* Percentage label */}
-              <g transform={`translate(${middlePoint.x + 4}, ${middlePoint.y - 8})`}>
+              <g transform={`translate(${lastPoint.x + 8}, ${lastPoint.y})`}>
                 <text
                   x="0"
                   y="0"
                   fill="var(--slds-g-color-on-surface-2, #2e2e2e)"
                   fontSize="10px"
                   fontWeight="var(--slds-g-font-weight-4, 400)"
+                  dominantBaseline="middle"
                 >
-                  {middlePoint.value}%
+                  {currentValue || lastPoint.value}%
                 </text>
               </g>
             </g>
@@ -200,10 +208,10 @@ export function DataHealthOverTimeChart({ data, currentValue }: DataHealthOverTi
               fontWeight: "var(--slds-g-font-weight-4, 400)",
               lineHeight: "18px",
               color: "var(--slds-g-color-on-surface-2, #2e2e2e)",
-              textAlign: "center",
+              textAlign: "left",
             }}
           >
-            {data[0]?.date ? formatDateForChart(data[0].date) : "02/10/26"}
+            {formatDateForChart(firstDate)}
           </div>
           <div
             style={{
@@ -211,10 +219,10 @@ export function DataHealthOverTimeChart({ data, currentValue }: DataHealthOverTi
               fontWeight: "var(--slds-g-font-weight-4, 400)",
               lineHeight: "18px",
               color: "var(--slds-g-color-on-surface-2, #2e2e2e)",
-              textAlign: "center",
+              textAlign: "right",
             }}
           >
-            {data[data.length - 1]?.date ? formatDateForChart(data[data.length - 1].date) : "03/10/26"}
+            {formatDateForChart(lastDate)}
           </div>
         </div>
       </div>
