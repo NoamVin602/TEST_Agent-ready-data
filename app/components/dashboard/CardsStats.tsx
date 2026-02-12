@@ -302,9 +302,14 @@ export function CardsStats({
           <div
             className="slds-card__body slds-card__body_inner"
             style={{
-              padding: "0 var(--slds-g-spacing-3, 12px) var(--slds-g-spacing-3, 12px)",
-              height: "calc(176px - 75px)",
-              overflow: "hidden",
+              display: "flex",
+              padding: "var(--slds-g-spacing-0, 0px) var(--slds-g-spacing-3, 12px) var(--slds-g-spacing-3, 12px) var(--slds-g-spacing-3, 12px)",
+              flexDirection: "column",
+              alignItems: "flex-start",
+              gap: "var(--slds-g-spacing-2, 8px)",
+              flex: "1 0 0",
+              alignSelf: "stretch",
+              background: "var(--slds-g-color-surface-container-1, #FFFFFF)",
             }}
           >
             <div style={{ height: "120px", width: "100%", display: "flex", alignItems: "center" }}>

@@ -66,15 +66,15 @@ export const DAY_ZERO_CONFIG: StageConfig = {
     }
   ],
   chartData: [
-    { date: '2.20', value: 45 },
-    { date: '2.27', value: 45 },
-    { date: '3.06', value: 45 },
-    { date: '3.13', value: 45 },
-    { date: '3.20', value: 45 },
-    { date: '3.27', value: 45 },
-    { date: '4.03', value: 45 },
-    { date: '4.10', value: 45 },
-    { date: '4.17', value: 45 },
+    { date: '2.20', value: 32 },
+    { date: '2.27', value: 34 },
+    { date: '3.06', value: 36 },
+    { date: '3.13', value: 38 },
+    { date: '3.20', value: 39 },
+    { date: '3.27', value: 40 },
+    { date: '4.03', value: 41 },
+    { date: '4.10', value: 43 },
+    { date: '4.17', value: 44 },
     { date: '4.20', value: 45 }
   ]
 };
