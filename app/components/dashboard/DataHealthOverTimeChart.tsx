@@ -14,209 +14,149 @@ interface DataHealthOverTimeChartProps {
 
 export function DataHealthOverTimeChart({ data, currentValue }: DataHealthOverTimeChartProps) {
   const chartRef = React.useRef<HTMLDivElement>(null);
-  const [dimensions, setDimensions] = React.useState({ width: 0, height: 98 });
-  
+  const [chartWidth, setChartWidth] = React.useState(0);
+
   React.useEffect(() => {
     const el = chartRef.current;
     if (!el) return;
-    const update = () => setDimensions({ width: el.clientWidth, height: 98 });
+    const update = () => setChartWidth(el.clientWidth);
     update();
     const ro = new ResizeObserver(update);
     ro.observe(el);
     return () => ro.disconnect();
   }, []);
 
-  const chartHeight = 120;
-  const padding = { top: 10, right: 30, bottom: 22, left: 0 };
-  const yAxisWidth = 60;
-
-  // Use first and last points for two-point chart (Figma)
+  // Data
   const firstPoint = Array.isArray(data) && data.length > 0 ? data[0] : { date: "02/10/26", value: 30 };
   const lastPoint = Array.isArray(data) && data.length > 0 ? data[data.length - 1] : { date: "03/10/26", value: currentValue || 45 };
-  const safeData = [firstPoint, lastPoint];
 
-  // Dynamic scale for visible trend (Figma)
-  const dataMin = Math.min(firstPoint.value, lastPoint.value);
-  const dataMax = Math.max(firstPoint.value, lastPoint.value);
-  const dataRange = dataMax - dataMin || 10;
-  const minValue = Math.max(0, dataMin - dataRange * 0.5);
-  const maxValue = dataMax + dataRange * 0.3;
-  const valueRange = maxValue - minValue;
+  // Tableau Next "Incline" scale — line spans from ~65% to ~10% from top
+  // matching the Figma Tableau Next Visualization Toolkit proportions
+  const dataMin = firstPoint.value;
+  const dataMax = lastPoint.value;
+  const dataRange = Math.max(dataMax - dataMin, 1);
+  const yMin = dataMin - dataRange * 0.63;   // small padding below
+  const yMax = dataMax + dataRange * 0.18;   // small padding above
+  const yRange = yMax - yMin;
 
-  const { width, height } = dimensions;
-  const points = safeData.map((point, index) => {
-    const x = padding.right + (index / (safeData.length - 1 || 1)) * (width - padding.right - 20);
-    const y = padding.top + (1 - (point.value - minValue) / valueRange) * (height - padding.top);
-    return { x, y, value: point.value };
-  });
+  // SVG dimensions
+  const svgH = 80;
+  const padL = 4;
+  const padR = 36;  // room for "45%" label
 
-  // Bézier curve: flatter start, steeper end (Figma)
-  const cp1 = { x: points[0].x + (points[1].x - points[0].x) * 0.5, y: points[0].y - (points[0].y - points[1].y) * 0.1 };
-  const cp2 = { x: points[0].x + (points[1].x - points[0].x) * 0.85, y: points[1].y + (points[0].y - points[1].y) * 0.2 };
-  const pathData = `M ${points[0].x} ${points[0].y} C ${cp1.x} ${cp1.y}, ${cp2.x} ${cp2.y}, ${points[1].x} ${points[1].y}`;
+  const plotW = Math.max(0, chartWidth - padL - padR);
 
-  const areaPath = pathData + ` L ${points[1].x} ${height} L ${points[0].x} ${height} Z`;
-  const endPoint = points[1];
+  // Map value to Y pixel
+  const x0 = padL;
+  const x1 = padL + plotW;
+  const toY = (v: number) => svgH - ((v - yMin) / yRange) * svgH;
+  const y0 = toY(firstPoint.value);   // ~65% from top
+  const y1 = toY(lastPoint.value);    // ~10% from top
+
+  // Tableau Next Incline curve: flat start, accelerating upward (like a parabola)
+  const cp1x = x0 + plotW * 0.45;
+  const cp1y = y0;                        // completely horizontal departure
+  const cp2x = x0 + plotW * 0.78;
+  const cp2y = y1 + (y0 - y1) * 0.12;    // steep arrival, still rising fast
+
+  const linePath = `M ${x0} ${y0} C ${cp1x} ${cp1y}, ${cp2x} ${cp2y}, ${x1} ${y1}`;
+  const areaPath = `${linePath} L ${x1} ${svgH} L ${x0} ${svgH} Z`;
 
   const firstDate = "02/10/26";
   const lastDate = "03/10/26";
 
   return (
-    <div
-      style={{
-        display: "flex",
-        height: `${chartHeight}px`,
-        width: "100%",
-        alignItems: "center",
-      }}
-    >
-      {/* Left Y-Axis */}
+    <div style={{ display: "flex", width: "100%", gap: 0 }}>
+      {/* Y-axis label */}
       <div
         style={{
-          display: "flex",
-          height: `${chartHeight}px`,
-          alignItems: "center",
-          justifyContent: "flex-end",
-          paddingBottom: `${padding.bottom}px`,
-          paddingRight: "var(--slds-g-spacing-2, 8px)",
-          width: `${yAxisWidth}px`,
+          width: "48px",
           flexShrink: 0,
+          display: "flex",
+          alignItems: "flex-end",
+          justifyContent: "flex-end",
+          paddingRight: "8px",
+          paddingBottom: "28px",
         }}
       >
-        <div
+        <span
           style={{
-            display: "flex",
-            flexDirection: "column",
-            height: "100%",
-            alignItems: "flex-end",
-            justifyContent: "flex-end",
-            paddingBottom: "8px",
+            fontSize: "12px",
+            fontWeight: "400",
+            lineHeight: "17px",
+            color: "#5c5c5c",
+            fontFamily: "var(--font-family-base, 'SF Pro', sans-serif)",
           }}
         >
-          <div
-            style={{
-              fontSize: "12px",
-              fontWeight: "400",
-              lineHeight: "17px",
-              color: "#5c5c5c",
-              fontFamily: "var(--font-family-base, 'SF Pro', sans-serif)",
-            }}
-          >
-            Health
-          </div>
-        </div>
+          Health
+        </span>
       </div>
 
-      {/* Chart Area */}
-      <div
-        style={{
-          flex: "1 0 0",
-          height: `${chartHeight}px`,
-          position: "relative",
-          minWidth: 0,
-          display: "flex",
-          flexDirection: "column",
-          justifyContent: "flex-end",
-        }}
-      >
-        {/* Chart Container with Borders */}
+      {/* Chart + X-axis */}
+      <div style={{ flex: 1, minWidth: 0, display: "flex", flexDirection: "column" }}>
+        {/* Plot area with L-shaped border */}
         <div
           ref={chartRef}
           style={{
             borderLeft: "1px solid var(--slds-g-color-border-1, #c9c9c9)",
             borderBottom: "1px solid var(--slds-g-color-border-1, #c9c9c9)",
-            flex: "1 0 0",
-            width: "100%",
             position: "relative",
-            minHeight: 0,
+            height: `${svgH}px`,
+            width: "100%",
           }}
         >
-          {width > 0 && (
+          {chartWidth > 0 && (
             <svg
-              width={width}
-              height={height}
-              style={{ display: "block", position: "absolute", top: 0, left: 0 }}
+              width={chartWidth}
+              height={svgH}
+              style={{ display: "block", overflow: "visible" }}
             >
-              {/* Shaded area - rgba(73,146,254,0.15) per Figma */}
-              <path
-                d={areaPath}
-                fill="rgba(73, 146, 254, 0.15)"
-              />
+              {/* Shaded area - Tableau #EDF4FF */}
+              <path d={areaPath} fill="#EDF4FF" />
 
-              {/* Line - #4992FE, 2.5px per Figma */}
+              {/* Line - #4992FE */}
               <path
-                d={pathData}
+                d={linePath}
                 fill="none"
                 stroke="#4992FE"
-                strokeWidth="2.5"
+                strokeWidth="2"
                 strokeLinejoin="round"
                 strokeLinecap="round"
               />
 
-              {/* End point - blue dot with white stroke per Figma */}
-              <circle
-                cx={endPoint.x}
-                cy={endPoint.y}
-                r="4"
-                fill="#4992FE"
-                stroke="#FFFFFF"
-                strokeWidth="1.5"
-              />
+              {/* End dot */}
+              <circle cx={x1} cy={y1} r="4" fill="#4992FE" stroke="#FFFFFF" strokeWidth="1.5" />
 
               {/* Percentage label */}
               <text
-                x={endPoint.x + 10}
-                y={endPoint.y + 1}
+                x={x1 + 8}
+                y={y1}
                 fill="#2e2e2e"
-                fontSize="10px"
+                fontSize="11px"
                 fontWeight="400"
                 fontFamily="var(--font-family-base, 'SF Pro', sans-serif)"
                 dominantBaseline="middle"
               >
-                {String(currentValue || endPoint.value) + "%"}
+                {String(currentValue || lastPoint.value) + "%"}
               </text>
             </svg>
           )}
         </div>
 
-        {/* X-Axis Labels */}
+        {/* X-axis dates */}
         <div
           style={{
             display: "flex",
-            alignItems: "flex-end",
             justifyContent: "space-between",
-            paddingTop: "var(--slds-g-spacing-3, 12px)",
-            width: "100%",
-            height: `${padding.bottom}px`,
-            position: "absolute",
-            bottom: 0,
-            left: 0,
+            paddingTop: "6px",
           }}
         >
-          <div
-            style={{
-              fontSize: "13px",
-              fontWeight: "400",
-              lineHeight: "18px",
-              color: "#2e2e2e",
-              fontFamily: "var(--font-family-base, 'SF Pro', sans-serif)",
-              textAlign: "left",
-            }}
-          >
+          <span style={{ fontSize: "13px", fontWeight: "400", lineHeight: "18px", color: "#2e2e2e", fontFamily: "var(--font-family-base, 'SF Pro', sans-serif)" }}>
             {firstDate}
-          </div>
-          <div
-            style={{
-              fontSize: "13px",
-              fontWeight: "400",
-              lineHeight: "18px",
-              color: "#2e2e2e",
-              fontFamily: "var(--font-family-base, 'SF Pro', sans-serif)",
-              textAlign: "right",
-            }}
-          >
+          </span>
+          <span style={{ fontSize: "13px", fontWeight: "400", lineHeight: "18px", color: "#2e2e2e", fontFamily: "var(--font-family-base, 'SF Pro', sans-serif)" }}>
             {lastDate}
-          </div>
+          </span>
         </div>
       </div>
     </div>

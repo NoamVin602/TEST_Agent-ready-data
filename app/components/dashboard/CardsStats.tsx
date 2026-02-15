@@ -318,7 +318,7 @@ export function CardsStats({
               background: "var(--slds-g-color-surface-container-1, #FFFFFF)",
             }}
           >
-            <div style={{ height: "120px", width: "100%", display: "flex", alignItems: "center" }}>
+            <div style={{ width: "100%", minWidth: 0 }}>
               <DataHealthOverTimeChart data={chartData} currentValue={healthScore} />
             </div>
           </div>
