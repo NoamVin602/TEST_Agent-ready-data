@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { DatabaseIcon, TrendingUpIcon, ChevronDownIcon, AlertTriangleIcon } from "../../lib/slds-icons";
+import { DatabaseIcon, TrendingUpIcon, ChevronDownIcon, AlertTriangleIcon, AlertTriangleIcon as WarningIcon } from "../../lib/slds-icons";
 import { DataHealthOverTimeChart } from "./DataHealthOverTimeChart";
 import { GoogleDriveIcon, BookIcon, WorldIcon } from "../../lib/slds-icons";
 
@@ -189,7 +189,10 @@ export function CardsStats({
                 >
                   Health indicator
                 </span>
-                <span className="slds-badge slds-theme_warning">Medium</span>
+                <span className="slds-badge slds-theme_warning">
+                  <AlertTriangleIcon size={12} color="currentColor" />
+                  Medium
+                </span>
               </div>
 
               {/* Issues Detected */}

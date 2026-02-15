@@ -48,6 +48,8 @@
   
   --slds-g-color-warning-base-50: #FE9339;
   --slds-g-color-warning-tint: #FEF4E6;
+  --slds-g-color-warning-container-1: #FEF4E6;
+  --slds-g-color-on-warning-1: #5C4033;
   
   --slds-g-color-error-base-50: #C23934;
   --slds-g-color-error-tint: #FDECEC;
@@ -609,13 +611,14 @@ article.slds-card.slds-card_main-content {
 /* Base Badge - Default variant */
 .slds-badge {
   display: inline-flex;
+  height: 25px;
+  padding: var(--slds-g-spacing-1, 4px) var(--slds-g-spacing-2, 8px);
   align-items: center;
-  justify-content: center;
-  padding: 0.125rem 0.5rem; /* Vertical: 0.125rem, Horizontal: 0.5rem */
-  border-radius: 15rem; /* Fully rounded pill shape */
-  font-size: 0.75rem; /* 12px */
-  font-weight: 700; /* Bold */
-  line-height: 1.25;
+  gap: var(--slds-g-spacing-1, 4px);
+  border-radius: 4px;
+  font-size: var(--slds-g-font-scale-neg-1, 12px);
+  font-weight: var(--slds-g-font-weight-4, 400);
+  line-height: 17px;
   text-align: center;
   background-color: #ecebea;
   color: #181818;
@@ -649,9 +652,9 @@ article.slds-card.slds-card_main-content {
 /* Warning Badge - Highlights cautionary information */
 .slds-badge.slds-theme_warning,
 .slds-badge_warning {
-  background-color: #fe9339;
-  color: #FFFFFF;
-  border-color: #fe9339;
+  background-color: var(--slds-g-color-warning-container-1, #FEF4E6);
+  color: var(--slds-g-color-on-warning-1, #5C4033);
+  border: none;
 }
 
 /* Error Badge - Used for urgent or critical statuses */
