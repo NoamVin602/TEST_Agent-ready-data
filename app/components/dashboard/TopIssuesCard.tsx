@@ -21,7 +21,7 @@ const getDocumentsForIssue = (category: string) => {
     return [
       {
         id: "doc1",
-        title: "Solar Consumer User...",
+        title: "Solar Consumer User Guide",
         type: "Web Manual",
         trustScore: 95,
         highlightedText: "...The 'Compact Solar Panel' output is 150W...",
@@ -29,8 +29,8 @@ const getDocumentsForIssue = (category: string) => {
       },
       {
         id: "doc2",
-        title: "CSP-150W Technical...",
-        type: "PDF",
+        title: "CSP-200W Technical Data Sheet",
+        type: "Web Manual",
         trustScore: 10,
         highlightedText: "...The 'Compact Solar Panel' output is 200W...",
         action: "archive" as const,
