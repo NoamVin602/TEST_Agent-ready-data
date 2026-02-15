@@ -1,15 +1,10 @@
 "use client";
 
 import React from 'react';
-import { AlertTriangleIcon, ClockIcon, CopyIcon, FileEditIcon, SearchIcon, SparklesIcon, ActivityIcon, ChevronDownIcon, DatabaseIcon, TrendingUpIcon } from "../../lib/slds-icons";
-import { DataHealthDonut } from "../dashboard/DataHealthDonut";
-import { DataHealthLineChart } from "../dashboard/DataHealthLineChart";
-import { MetricCard } from "../dashboard/MetricCard";
-import { RecentActivityTable } from "../dashboard/RecentActivityTable";
-import { QuickFixesSidebar } from "../shared/QuickFixesSidebar";
-import { Spinner } from "../shared/Spinner";
+import { ActivityIcon } from "../../lib/slds-icons";
 import { getStageConfig } from "../../lib/stage-config";
 import { CardsStats } from "../dashboard/CardsStats";
+import { TopIssuesCard } from "../dashboard/TopIssuesCard";
 
 export type IssueCategory = 
   | "all" 
@@ -28,103 +23,7 @@ interface HomeViewProps {
 const stageConfig = getStageConfig();
 
 export function HomeView({ onMetricClick }: HomeViewProps) {
-  const [isRefreshing, setIsRefreshing] = React.useState(false);
   const config = React.useMemo(() => getStageConfig(), []);
-
-  // Build metrics data from stage config
-  const metricsData = React.useMemo(() => [
-    {
-      id: "contradictions",
-      category: "contradictions" as IssueCategory,
-      title: "Contradictions",
-      value: config.issues.contradictions,
-      change: config.stage === 'day0' ? 0 : -4,
-      changeLabel: config.stage === 'day0' ? "found" : "last 30 days",
-      trend: config.stage === 'day0' ? "neutral" as const : "down" as const,
-      icon: AlertTriangleIcon,
-      colorClass: {
-        background: "rgba(194, 57, 52, 0.1)",
-        text: "var(--slds-g-color-error-base-50)"
-      }
-    },
-    {
-      id: "outdated",
-      category: "outdated" as IssueCategory,
-      title: "Outdated",
-      value: config.issues.outdated,
-      change: config.stage === 'day0' ? 0 : -4,
-      changeLabel: config.stage === 'day0' ? "found" : "last 30 days",
-      trend: config.stage === 'day0' ? "neutral" as const : "down" as const,
-      icon: ClockIcon,
-      colorClass: {
-        background: "rgba(254, 147, 57, 0.1)",
-        text: "var(--slds-g-color-warning-base-50)"
-      }
-    },
-    {
-      id: "duplicates",
-      category: "duplicates" as IssueCategory,
-      title: "Duplicates",
-      value: config.issues.duplicates,
-      change: config.stage === 'day0' ? 0 : 1.3,
-      changeLabel: config.stage === 'day0' ? "found" : "vs last 30 days",
-      trend: config.stage === 'day0' ? "neutral" as const : "up" as const,
-      icon: CopyIcon,
-      colorClass: {
-        background: "rgba(254, 147, 57, 0.1)",
-        text: "var(--slds-g-color-warning-base-50)"
-      }
-    },
-    {
-      id: "drafts",
-      category: "drafts" as IssueCategory,
-      title: "Drafts/WIP",
-      value: config.issues.drafts,
-      change: config.stage === 'day0' ? 0 : 12.3,
-      changeLabel: config.stage === 'day0' ? "found" : "vs last 30 days",
-      trend: config.stage === 'day0' ? "neutral" as const : "up" as const,
-      icon: FileEditIcon,
-      colorClass: {
-        background: "rgba(254, 147, 57, 0.1)",
-        text: "var(--slds-g-color-warning-base-50)"
-      }
-    },
-    {
-      id: "content-gaps",
-      category: "content-gaps" as IssueCategory,
-      title: "Content Gaps",
-      value: config.issues.contentGaps,
-      change: config.stage === 'day0' ? 0 : 12.3,
-      changeLabel: config.stage === 'day0' ? "found" : "vs last 30 days",
-      trend: config.stage === 'day0' ? "neutral" as const : "up" as const,
-      icon: SearchIcon,
-      colorClass: {
-        background: "rgba(254, 147, 57, 0.1)",
-        text: "var(--slds-g-color-warning-base-50)"
-      }
-    },
-    {
-      id: "enrichments",
-      category: "enrichments" as IssueCategory,
-      title: "Enrichments",
-      value: config.stage === 'continuous' ? 3 : 0,
-      change: config.stage === 'continuous' ? 3 : 0,
-      changeLabel: "vs last 30 days",
-      trend: "up" as const,
-      icon: SparklesIcon,
-      colorClass: {
-        background: "rgba(46, 132, 74, 0.1)",
-        text: "var(--slds-g-color-success-base-50)"
-      }
-    }
-  ], [config]);
-
-  const handleRefresh = async () => {
-    setIsRefreshing(true);
-    // Simulate refresh operation
-    await new Promise((resolve) => setTimeout(resolve, 1500));
-    setIsRefreshing(false);
-  };
 
   return (
     <div 
@@ -263,31 +162,13 @@ export function HomeView({ onMetricClick }: HomeViewProps) {
                 impactScore: parseInt(activity.impactScore) || 0,
               }))}
             />
-
-            {/* Metrics Grid - 2 rows of 3 cards */}
-            <div className="slds-grid slds-grid_wrap" style={{ gap: 'var(--slds-g-spacing-4)', marginTop: 'var(--slds-g-spacing-4)', marginBottom: 'var(--slds-g-spacing-4)' }}>
-              {metricsData.map((metric) => (
-                <div key={metric.id} style={{ flex: '1 1 calc(33.333% - var(--slds-g-spacing-4))', minWidth: '200px' }}>
-                  <MetricCard
-                    title={metric.title}
-                    value={metric.value}
-                    change={metric.change}
-                    changeLabel={metric.changeLabel}
-                    trend={metric.trend}
-                    icon={metric.icon}
-                    colorClass={metric.colorClass}
-                    onClick={onMetricClick ? () => onMetricClick(metric.category) : undefined}
-                  />
-                </div>
-              ))}
-            </div>
           </div>
         </article>
       </div>
 
-      {/* Right Column - Quick Fixes Panel (25%) */}
-      <div style={{ flex: '0 0 25%', minWidth: 0, display: 'flex', flexDirection: 'column', alignSelf: 'stretch', height: '100%' }}>
-        <QuickFixesSidebar />
+      {/* Right Column - Top Issues (25%) */}
+      <div style={{ flex: '0 0 25%', minWidth: 0, display: 'flex', flexDirection: 'column', alignSelf: 'stretch', height: '100%', gap: 'var(--slds-g-spacing-4)' }}>
+        <TopIssuesCard issues={config.topIssues} />
       </div>
     </div>
   );

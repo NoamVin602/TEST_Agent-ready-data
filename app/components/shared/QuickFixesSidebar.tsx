@@ -1,325 +1,267 @@
 "use client";
 
-import React, { useState } from "react";
-import { TakeActionModal } from "./TakeActionModal";
-
-interface TopIssue {
-  id: string;
-  type: string;
-  scoreImpact: string;
-  severity: "Low" | "Medium" | "High";
-  description: string;
-}
-
-const TOP_ISSUES: TopIssue[] = [
-  {
-    id: "contradiction",
-    type: "Contradiction",
-    scoreImpact: "+1.5% Health Score",
-    severity: "Medium",
-    description: "Conflicting power output information",
-  },
-  {
-    id: "outdated",
-    type: "Outdated",
-    scoreImpact: "+3% Health Score",
-    severity: "Low",
-    description: "Deprecated product information",
-  },
-];
+import React from "react";
+import { CheckIcon, ArchiveIcon } from "../../lib/slds-icons";
 
 export function QuickFixesSidebar() {
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [selectedIssue, setSelectedIssue] = useState<TopIssue | null>(null);
-
-  const handleTakeAction = (issue: TopIssue) => {
-    setSelectedIssue(issue);
-    setIsModalOpen(true);
-  };
-
-  const handleDismiss = (id: string) => {
-    console.log(`Dismiss ${id}`);
-  };
-
-  const handleReviewAll = () => {
-    console.log("Review all issues");
-  };
-
-  const handleCloseModal = () => {
-    setIsModalOpen(false);
-    setSelectedIssue(null);
-  };
-
-  const handleSave = () => {
-    console.log("Save action for", selectedIssue?.id);
-    // Handle save logic here
-  };
-
-  const handleSendToExpert = () => {
-    console.log("Send to expert for", selectedIssue?.id);
-    // Handle send to expert logic here
-  };
-
-  // Mock document data based on issue type
-  const getDocumentsForIssue = (issue: TopIssue) => {
-    if (issue.type === "Contradiction") {
-      return [
-        {
-          id: "doc1",
-          title: "Solar Consumer User...",
-          type: "Web Manual",
-          trustScore: 95,
-          highlightedText: "...The 'Compact Solar Panel' output is 150W...",
-          action: "keep" as const,
-        },
-        {
-          id: "doc2",
-          title: "CSP-150W Technical...",
-          type: "PDF",
-          trustScore: 10,
-          highlightedText: "...The 'Compact Solar Panel' output is 200W...",
-          action: "archive" as const,
-        },
-      ];
-    } else {
-      // For "Outdated" issues
-      return [
-        {
-          id: "doc1",
-          title: "Product Manual v2.1",
-          type: "PDF",
-          trustScore: 85,
-          highlightedText: "...Latest product specifications...",
-          action: "keep" as const,
-        },
-        {
-          id: "doc2",
-          title: "Product Manual v1.5",
-          type: "PDF",
-          trustScore: 15,
-          highlightedText: "...Deprecated product information...",
-          action: "archive" as const,
-        },
-      ];
-    }
-  };
-
   return (
-    <article 
-      className="slds-card" 
-      style={{ 
-        margin: '0 1px 1px 16px', 
-        boxSizing: 'border-box',
-        height: '100%',
-        display: 'flex',
-        flexDirection: 'column',
-      }}
-    >
+    <article className="slds-card" style={{ margin: '0 1px 1px 16px', boxSizing: 'border-box' }}>
       {/* Card Header */}
-      <div 
-        className="slds-card__header"
-        style={{
-          padding: 'var(--slds-g-spacing-4, 16px)',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'space-between',
-          borderBottom: '1px solid var(--slds-g-color-border-1, rgba(201, 201, 201, 1))',
-        }}
-      >
-        <h2 
-          style={{
-            fontSize: 'var(--slds-g-font-scale-3, 20px)',
-            fontWeight: 'var(--slds-g-font-weight-4, 400)',
-            lineHeight: '28px',
-            color: 'var(--slds-g-color-on-surface-3, #03234d)',
-            margin: 0,
-          }}
-        >
-          Top Issues
-        </h2>
-        <button
-          type="button"
-          className="slds-button slds-button_neutral"
-          onClick={handleReviewAll}
-          style={{
-            fontSize: 'var(--slds-g-font-scale-1, 14px)',
-            fontWeight: 'var(--slds-g-font-weight-6, 590)',
-            lineHeight: '19px',
-            padding: '0 var(--slds-g-spacing-4, 16px)',
-            height: '32px',
-          }}
-        >
-          Review All
-        </button>
+      <div className="slds-card__header" style={{ borderBottom: '1px solid var(--slds-g-color-border-1, rgba(201, 201, 201, 1))' }}>
+        <header className="slds-media slds-media_center slds-has-flexi-truncate">
+          <div className="slds-media__body">
+            <h2 className="slds-card__header-title">
+              <span style={{
+                fontSize: 'var(--slds-g-font-scale-3, 20px)',
+                fontWeight: 'var(--slds-g-font-weight-4, 400)',
+                lineHeight: '28px',
+                color: 'var(--slds-g-color-on-surface-3, #03234d)',
+              }}>
+                Quick Fixes
+              </span>
+            </h2>
+          </div>
+        </header>
       </div>
 
       {/* Card Body */}
-      <div 
-        className="slds-card__body slds-card__body_inner"
-        style={{
-          padding: 'var(--slds-g-spacing-3, 12px)',
-          display: 'flex',
-          flexDirection: 'column',
-          gap: '16px',
-          flex: '1 1 auto',
-          minHeight: 0,
-          overflowY: 'auto',
-        }}
-      >
-        {TOP_ISSUES.map((issue) => (
-          <div
-            key={issue.id}
+      <div className="slds-card__body slds-card__body_inner" style={{ padding: '12px' }}>
+        {/* Alert Banner */}
+        <div
+          style={{
+            backgroundColor: '#FEF4E6',
+            border: '1px solid #E6B800',
+            borderRadius: '4px',
+            padding: '12px',
+            marginBottom: '16px',
+            display: 'flex',
+            alignItems: 'center',
+            gap: '8px',
+          }}
+        >
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" style={{ flexShrink: 0 }}>
+            <path d="M8 1L15 14H1L8 1Z" stroke="#E6B800" strokeWidth="1.5" fill="none" />
+            <path d="M8 6V9" stroke="#E6B800" strokeWidth="1.5" strokeLinecap="round" />
+            <circle cx="8" cy="11.5" r="0.5" fill="#E6B800" />
+          </svg>
+          <span
             style={{
-              backgroundColor: 'var(--slds-g-color-neutral-base-100, #ffffff)',
-              border: '1px solid var(--slds-g-color-surface-container-3, #e5e5e5)',
-              borderRadius: 'var(--slds-g-radius-border-4, 20px)',
-              padding: 'var(--slds-g-spacing-6, 24px) var(--slds-g-spacing-4, 16px)',
-              display: 'flex',
-              flexDirection: 'column',
-              gap: 'var(--slds-g-spacing-3, 12px)',
+              fontSize: '13px',
+              fontWeight: '400',
+              lineHeight: '18px',
+              color: '#5C4033',
             }}
           >
-            {/* Title Row */}
-            <div 
-              style={{
-                display: 'flex',
-                gap: 'var(--slds-g-spacing-2, 8px)',
-                alignItems: 'flex-start',
-                width: '100%',
-              }}
-            >
-              {/* Issue Type and Score Badge */}
-              <div 
+            3 issues affecting your AI readiness score
+          </span>
+        </div>
+
+        {/* Quick Fix Cards */}
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
+          {/* Contradicting Refund Policies Card */}
+          <div
+            style={{
+              backgroundColor: 'white',
+              border: '1px solid #C9C9C9',
+              borderLeft: '4px solid #C23934',
+              borderRadius: '4px',
+              padding: '12px',
+              display: 'flex',
+              flexDirection: 'column',
+              gap: '8px',
+            }}
+          >
+            {/* Icon and Badge Row */}
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
+              <div
                 style={{
+                  width: '24px',
+                  height: '24px',
+                  backgroundColor: '#C23934',
+                  borderRadius: '4px',
                   display: 'flex',
-                  gap: '8px',
                   alignItems: 'center',
-                  flex: '1 0 0',
-                  minWidth: 0,
-                }}
-              >
-                <span
-                  style={{
-                    fontSize: 'var(--slds-g-font-scale-1, 14px)',
-                    fontWeight: 'var(--slds-g-font-weight-6, 590)',
-                    lineHeight: '19px',
-                    color: 'var(--slds-g-color-on-surface-1, #5c5c5c)',
-                    whiteSpace: 'nowrap',
-                  }}
-                >
-                  {issue.type}
-                </span>
-                <span
-                  className="slds-badge slds-theme_success"
-                  style={{
-                    fontSize: 'var(--slds-g-font-scale-1, 14px)',
-                    fontWeight: 'var(--slds-g-font-weight-6, 590)',
-                    lineHeight: '19px',
-                    whiteSpace: 'nowrap',
-                  }}
-                >
-                  {issue.scoreImpact}
-                </span>
-              </div>
-              
-              {/* Severity Badge */}
-              <span
-                className={issue.severity === 'Medium' ? 'slds-badge slds-theme_warning' : 'slds-badge slds-badge_inverse'}
-                style={{
-                  fontSize: 'var(--slds-g-font-scale-1, 14px)',
-                  fontWeight: 'var(--slds-g-font-weight-6, 590)',
-                  lineHeight: '19px',
-                  whiteSpace: 'nowrap',
+                  justifyContent: 'center',
                   flexShrink: 0,
                 }}
               >
-                {issue.severity}
+                <CheckIcon size={16} color="#FFFFFF" />
+              </div>
+              <span
+                className="slds-badge"
+                style={{
+                  backgroundColor: '#FEF4E6',
+                  color: '#5C4033',
+                  fontSize: '12px',
+                  fontWeight: '400',
+                  padding: '4px 8px',
+                  borderRadius: '12px',
+                }}
+              >
+                2 articles
               </span>
             </div>
 
-            {/* Description */}
-            <p
+            {/* Title */}
+            <h3
               style={{
-                fontSize: 'var(--slds-g-font-scale-1, 14px)',
-                fontWeight: 'var(--slds-g-font-weight-4, 400)',
+                fontSize: '14px',
+                fontWeight: '700',
                 lineHeight: '19px',
-                color: '#444444',
+                color: '#2E2E2E',
                 margin: 0,
-                paddingTop: '4px',
               }}
             >
-              {issue.description}
-            </p>
+              Contradicting refund policies
+            </h3>
 
-            {/* Action Buttons */}
-            <div 
+            {/* Action Button */}
+            <button
+              type="button"
+              className="slds-button"
               style={{
-                display: 'flex',
-                gap: '24px',
-                alignItems: 'center',
-                marginTop: '8px',
+                color: '#0250D9',
+                border: '1px solid #0250D9',
+                borderRadius: '9999px',
+                padding: '4px 12px',
+                fontSize: '13px',
+                fontWeight: '400',
+                backgroundColor: 'white',
+                alignSelf: 'flex-start',
               }}
             >
-              <div 
+              Resolve
+            </button>
+          </div>
+
+          {/* Archive Stale Pricing Guide Card */}
+          <div
+            style={{
+              backgroundColor: 'white',
+              border: '1px solid #C9C9C9',
+              borderLeft: '4px solid #FE9339',
+              borderRadius: '4px',
+              padding: '12px',
+              display: 'flex',
+              flexDirection: 'column',
+              gap: '8px',
+            }}
+          >
+            {/* Icon and Badge Row */}
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
+              <div
                 style={{
+                  width: '24px',
+                  height: '24px',
+                  backgroundColor: '#FEF4E6',
+                  borderRadius: '4px',
                   display: 'flex',
-                  gap: 'var(--slds-g-spacing-2, 8px)',
                   alignItems: 'center',
+                  justifyContent: 'center',
+                  flexShrink: 0,
                 }}
               >
-                <button
-                  type="button"
-                  className="slds-button slds-button_brand"
-                  onClick={() => handleTakeAction(issue)}
-                  style={{
-                    fontSize: 'var(--slds-g-font-scale-1, 14px)',
-                    fontWeight: 'var(--slds-g-font-weight-6, 590)',
-                    lineHeight: '19px',
-                    padding: '0 var(--slds-g-spacing-4, 16px)',
-                    height: '32px',
-                  }}
-                >
-                  Take action
-                </button>
-                <button
-                  type="button"
-                  className="slds-button slds-button_neutral"
-                  onClick={() => handleDismiss(issue.id)}
-                  style={{
-                    fontSize: 'var(--slds-g-font-scale-1, 14px)',
-                    fontWeight: 'var(--slds-g-font-weight-6, 590)',
-                    lineHeight: '19px',
-                    padding: '0 var(--slds-g-spacing-4, 16px)',
-                    height: '32px',
-                    backgroundColor: 'transparent',
-                    border: 'none',
-                    color: 'var(--slds-g-color-on-surface-3, #03234d)',
-                  }}
-                >
-                  Dismiss
-                </button>
+                <ArchiveIcon size={16} color="#5C4033" />
               </div>
+              <span
+                className="slds-badge"
+                style={{
+                  backgroundColor: '#D8F3DC',
+                  color: '#1B4D3E',
+                  fontSize: '12px',
+                  fontWeight: '400',
+                  padding: '4px 8px',
+                  borderRadius: '12px',
+                }}
+              >
+                1 article
+              </span>
             </div>
-          </div>
-        ))}
-      </div>
 
-      {/* Take Action Modal */}
-      {selectedIssue && (
-        <TakeActionModal
-          isOpen={isModalOpen}
-          onClose={handleCloseModal}
-          issueType={selectedIssue.type}
-          issueDescription={selectedIssue.description}
-          documents={getDocumentsForIssue(selectedIssue)}
-          expertReviewer={{
-            name: "Laura D.",
-            role: "Product Knowledge Manager",
+            {/* Title */}
+            <h3
+              style={{
+                fontSize: '14px',
+                fontWeight: '700',
+                lineHeight: '19px',
+                color: '#2E2E2E',
+                margin: 0,
+              }}
+            >
+              Archive stale pricing guide
+            </h3>
+
+            {/* Action Button */}
+            <button
+              type="button"
+              className="slds-button"
+              style={{
+                color: '#0250D9',
+                border: '1px solid #0250D9',
+                borderRadius: '9999px',
+                padding: '4px 12px',
+                fontSize: '13px',
+                fontWeight: '400',
+                backgroundColor: 'white',
+                alignSelf: 'flex-start',
+              }}
+            >
+              Archive
+            </button>
+          </div>
+        </div>
+
+        {/* Resolution Summary */}
+        <div
+          style={{
+            marginTop: '16px',
+            padding: '12px',
+            backgroundColor: '#F3F3F3',
+            borderRadius: '4px',
           }}
-          onSave={handleSave}
-          onSendToExpert={handleSendToExpert}
-        />
-      )}
+        >
+          <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '8px' }}>
+            <span style={{ fontSize: '13px', fontWeight: '400', color: '#5C5C5C' }}>
+              1 of 3 resolved
+            </span>
+            <span style={{ fontSize: '13px', fontWeight: '700', color: '#06A59A' }}>
+              +5% health potential
+            </span>
+          </div>
+          <div
+            style={{
+              height: '8px',
+              backgroundColor: '#C9C9C9',
+              borderRadius: '4px',
+              overflow: 'hidden',
+            }}
+          >
+            <div
+              style={{
+                height: '100%',
+                width: '33.33%',
+                backgroundColor: '#06A59A',
+              }}
+            />
+          </div>
+        </div>
+
+        {/* Resolve All Button */}
+        <button
+          type="button"
+          className="slds-button slds-button_brand"
+          style={{
+            width: '100%',
+            marginTop: '16px',
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+            height: '32px',
+          }}
+        >
+          Resolve All Recommendations
+        </button>
+      </div>
     </article>
   );
 }

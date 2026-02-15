@@ -45,6 +45,8 @@
   --slds-g-color-success-base-50: #06A59A;
   --slds-g-color-success-base-40: #194E31;
   --slds-g-color-success-tint: #E8F5EC;
+  --slds-g-color-success-container-1: #D8F3DC;
+  --slds-g-color-on-success-1: #1B4D3E;
   
   --slds-g-color-warning-base-50: #FE9339;
   --slds-g-color-warning-tint: #FEF4E6;
@@ -53,6 +55,8 @@
   
   --slds-g-color-error-base-50: #C23934;
   --slds-g-color-error-tint: #FDECEC;
+  --slds-g-color-error-container-1: #FFE5E5;
+  --slds-g-color-on-error-1: #790000;
   
   /* Chart Colors - Teal */
   --slds-g-color-chart-teal-1: #06A59A;
@@ -644,9 +648,9 @@ article.slds-card.slds-card_main-content {
 /* Success Badge - Communicates positive statuses */
 .slds-badge.slds-theme_success,
 .slds-badge_success {
-  background-color: #06A59A;
-  color: #FFFFFF;
-  border-color: #06A59A;
+  background-color: var(--slds-g-color-success-container-1, #D8F3DC);
+  color: var(--slds-g-color-on-success-1, #1B4D3E);
+  border: none;
 }
 
 /* Warning Badge - Highlights cautionary information */
@@ -660,9 +664,9 @@ article.slds-card.slds-card_main-content {
 /* Error Badge - Used for urgent or critical statuses */
 .slds-badge.slds-theme_error,
 .slds-badge_error {
-  background-color: #ea001e;
-  color: #FFFFFF;
-  border-color: #ea001e;
+  background-color: var(--slds-g-color-error-container-1, #FFE5E5);
+  color: var(--slds-g-color-on-error-1, #790000);
+  border: none;
 }
 
 /* Light warning variant (Yellow tint background) - for score badges */
@@ -1089,6 +1093,47 @@ article.slds-card.slds-card_main-content {
   background-color: #C9C9C9;
   border-color: #C9C9C9;
   color: #FFFFFF;
+}
+
+/* Outline Brand Button - SLDS 2.0 Specification */
+.slds-button_outline-brand {
+  display: inline-flex;
+  height: 32px;
+  padding: 1px var(--slds-g-spacing-4, 16px);
+  justify-content: center;
+  align-items: center;
+  gap: var(--slds-g-spacing-2, 8px);
+  box-sizing: border-box;
+  border: 1px solid var(--slds-g-color-accent-2, #0250D9);
+  border-radius: 9999px;
+  background-color: transparent;
+  color: var(--slds-g-color-accent-2, #0250D9);
+  font-family: var(--slds-g-font-family);
+  font-size: var(--slds-g-font-scale-base, 13px);
+  font-weight: 400;
+  line-height: 1.5;
+  cursor: pointer;
+  transition: background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, color 0.15s ease-in-out;
+  white-space: nowrap;
+}
+
+.slds-button_outline-brand:hover:not(:disabled) {
+  background-color: var(--slds-g-color-accent-2-container-1, rgba(2, 80, 217, 0.05));
+  border-color: var(--slds-g-color-accent-2, #0250D9);
+  color: var(--slds-g-color-accent-2, #0250D9);
+}
+
+.slds-button_outline-brand:active:not(:disabled) {
+  background-color: var(--slds-g-color-accent-2-container-1, rgba(2, 80, 217, 0.1));
+  border-color: var(--slds-g-color-accent-2, #0250D9);
+  color: var(--slds-g-color-accent-2, #0250D9);
+}
+
+.slds-button_outline-brand:disabled {
+  background-color: transparent;
+  border-color: #C9C9C9;
+  color: #C9C9C9;
+  cursor: not-allowed;
 }
 
 /* Secondary Button (Neutral) - SLDS 2.0 Specification */

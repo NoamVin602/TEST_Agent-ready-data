@@ -8,6 +8,14 @@
 
 export type StageType = 'day0' | 'goal' | 'continuous';
 
+export interface TopIssue {
+  id: string;
+  category: string;
+  healthScore: string;
+  severity: "high" | "medium" | "low";
+  description: string;
+}
+
 export interface StageConfig {
   stage: StageType;
   healthScore: number;
@@ -21,6 +29,7 @@ export interface StageConfig {
     contentGaps: number;
     pii: number;
   };
+  topIssues: TopIssue[];
   recentActivity: Array<{
     id: number;
     actionType: string;
@@ -47,6 +56,22 @@ export const DAY_ZERO_CONFIG: StageConfig = {
     contentGaps: 0,
     pii: 15, // Critical: PII detected in 15 articles
   },
+  topIssues: [
+    {
+      id: 'issue-1',
+      category: 'Contradiction',
+      healthScore: '+25% Health Score',
+      severity: 'high',
+      description: 'Conflicting power output information'
+    },
+    {
+      id: 'issue-2',
+      category: 'Outdated',
+      healthScore: '+3% Health Score',
+      severity: 'high',
+      description: 'Deprecated product information'
+    }
+  ],
   recentActivity: [
     {
       id: 1,
@@ -93,6 +118,15 @@ export const GOAL_CONFIG: StageConfig = {
     contentGaps: 0,
     pii: 0,
   },
+  topIssues: [
+    {
+      id: 'issue-1',
+      category: 'Minor Update',
+      healthScore: '+1% Health Score',
+      severity: 'low',
+      description: 'Update API version reference in documentation'
+    }
+  ],
   recentActivity: [
     {
       id: 1,
@@ -155,6 +189,15 @@ export const CONTINUOUS_CONFIG: StageConfig = {
     contentGaps: 3,
     pii: 0,
   },
+  topIssues: [
+    {
+      id: 'issue-1',
+      category: 'Content Gap',
+      healthScore: '+3% Health Score',
+      severity: 'medium',
+      description: 'Missing inverter maintenance documentation'
+    }
+  ],
   recentActivity: [
     {
       id: 1,
