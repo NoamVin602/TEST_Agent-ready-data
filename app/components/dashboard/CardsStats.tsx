@@ -45,7 +45,7 @@ export function CardsStats({
       style={{
         display: "flex",
         flexDirection: "column",
-        gap: "var(--slds-g-spacing-4, 16px)",
+        gap: "16px",
         width: "100%",
         minWidth: 0,
         overflowX: "hidden",
@@ -60,33 +60,40 @@ export function CardsStats({
           display: "flex",
           flexDirection: "column",
           width: "100%",
+          overflow: "hidden",
         }}
       >
         {/* Card Header */}
-        <div className="slds-card__header slds-grid" style={{ padding: "var(--slds-g-spacing-4, 16px)" }}>
-          <header className="slds-media slds-media_center slds-has-flexi-truncate">
-            <div className="slds-media__figure">
-              <DatabaseIcon size={16} color="#181818" />
-            </div>
-            <div className="slds-media__body">
-              <h2 className="slds-card__header-title">Data Health</h2>
-            </div>
-          </header>
-          <div className="slds-no-flex">
-            <button
-              type="button"
-              className="slds-button slds-button_icon slds-button_icon-small"
-              aria-label="More options"
-            >
-              <ChevronDownIcon size={12} color="#747474" />
-            </button>
+        <div style={{ padding: "16px", display: "flex", alignItems: "center", justifyContent: "space-between" }}>
+          <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
+            <DatabaseIcon size={16} color="#181818" />
+            <h2 style={{ fontSize: "20px", fontWeight: 400, lineHeight: "28px", color: "#03234d", margin: 0, fontFamily: "var(--font-family-base, 'SF Pro', sans-serif)" }}>Data Health</h2>
           </div>
+          <span
+            style={{
+              display: "inline-flex",
+              alignItems: "center",
+              gap: "4px",
+              fontSize: "12px",
+              fontWeight: 590,
+              lineHeight: "17px",
+              color: "#06A59A",
+              backgroundColor: "#E1F5F3",
+              padding: "4px 8px",
+              borderRadius: "4px",
+              fontFamily: "var(--font-family-base, 'SF Pro', sans-serif)",
+            }}
+          >
+            <TrendingUpIcon size={12} color="#06A59A" />
+            +15 pts
+          </span>
         </div>
 
         {/* Card Body with Bar Chart and Nested Card */}
         <div
           style={{
             backgroundColor: "#fedfd0",
+            borderRadius: "0 0 var(--slds-g-radius-border-3, 12px) var(--slds-g-radius-border-3, 12px)",
             padding: "0 var(--slds-g-spacing-3, 12px) var(--slds-g-spacing-3, 12px)",
             display: "flex",
             flexDirection: "column",
@@ -127,30 +134,15 @@ export function CardsStats({
                 {orangePercentage}%
               </span>
             </div>
-            {/* Lighter Orange Bar */}
+            {/* Lighter Orange Bar - no label per Figma */}
             <div
               style={{
                 backgroundColor: "#FFC99C",
                 height: "33px",
                 flex: 1,
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                borderRadius: "0 var(--slds-g-radius-border-1, 4px) var(--slds-g-radius-border-1, 4px) 0",
-                minWidth: "60px",
+                borderRadius: "0 4px 4px 0",
               }}
-            >
-              <span
-                style={{
-                  fontSize: "var(--slds-g-font-scale-neg-1, 12px)",
-                  fontWeight: "var(--slds-g-font-weight-6, 590)",
-                  lineHeight: "17px",
-                  color: "var(--slds-g-color-on-surface-2, #2e2e2e)",
-                }}
-              >
-                {lightOrangePercentage}%
-              </span>
-            </div>
+            />
           </div>
 
           {/* Nested Card - Health Indicators */}
@@ -271,19 +263,20 @@ export function CardsStats({
       <div
         style={{
           display: "flex",
-          gap: "var(--slds-g-spacing-4, 16px)",
+          gap: "16px",
           minHeight: "176px",
           width: "100%",
           alignItems: "stretch",
         }}
       >
-        {/* Data Health Over Time Card */}
+        {/* Data Health Over Time Card - 390/698 ≈ 56% per Figma */}
         <div
           className="slds-card"
           style={{
-            flex: "1 0 0",
+            flex: "1 1 0",
+            minWidth: 0,
             minHeight: "176px",
-            borderRadius: "var(--slds-g-radius-border-3, 12px)",
+            borderRadius: "12px",
           }}
         >
           <div className="slds-card__header slds-grid" style={{ padding: "var(--slds-g-spacing-4, 16px)" }}>
@@ -396,9 +389,39 @@ export function CardsStats({
       </div>
 
       {/* Recent Activity Table */}
-      <div className="slds-card" style={{ borderRadius: "var(--slds-g-radius-border-3, 12px)", overflow: "hidden" }}>
-        <div className="slds-card__body slds-card__body_inner" style={{ padding: "var(--slds-g-spacing-3, 12px)" }}>
-          <div className="slds-table_header-fixed_container" style={{ overflowX: "auto", maxWidth: "100%" }}>
+      <div className="slds-card" style={{ borderRadius: "12px", overflow: "hidden" }}>
+        {/* Recent Activity Header */}
+        <div style={{ padding: "16px", display: "flex", alignItems: "center", justifyContent: "space-between", gap: "16px" }}>
+          <h2 style={{ fontSize: "20px", fontWeight: 400, lineHeight: "28px", color: "#03234d", margin: 0, whiteSpace: "nowrap", fontFamily: "var(--font-family-base, 'SF Pro', sans-serif)" }}>
+            Recent Activity
+          </h2>
+          <div style={{ flex: 1, maxWidth: "400px" }}>
+            <div style={{ position: "relative" }}>
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none" style={{ position: "absolute", left: "12px", top: "50%", transform: "translateY(-50%)" }}>
+                <circle cx="7" cy="7" r="5.5" stroke="#706E6B" strokeWidth="1.2"/>
+                <path d="M11 11L14 14" stroke="#706E6B" strokeWidth="1.2" strokeLinecap="round"/>
+              </svg>
+              <input
+                type="text"
+                placeholder="Search..."
+                style={{
+                  width: "100%",
+                  height: "32px",
+                  border: "1px solid #C9C9C9",
+                  borderRadius: "4px",
+                  padding: "0 12px 0 36px",
+                  fontSize: "13px",
+                  color: "#2e2e2e",
+                  outline: "none",
+                  boxSizing: "border-box",
+                  fontFamily: "var(--font-family-base, 'SF Pro', sans-serif)",
+                }}
+              />
+            </div>
+          </div>
+        </div>
+        <div style={{ padding: "0 12px 12px 12px" }}>
+          <div style={{ overflowX: "auto", maxWidth: "100%" }}>
             <table className="slds-table slds-table_cell-buffer slds-table_bordered slds-table_fixed-layout" role="grid">
               <thead>
                 <tr className="slds-line-height_reset">
