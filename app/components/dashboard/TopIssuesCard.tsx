@@ -1,6 +1,7 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
+import { TakeActionModal } from "../shared/TakeActionModal";
 
 interface TopIssue {
   id: string;
@@ -14,7 +15,66 @@ interface TopIssuesCardProps {
   issues: TopIssue[];
 }
 
+// Mock document data for different issue types
+const getDocumentsForIssue = (category: string) => {
+  if (category === "Contradiction") {
+    return [
+      {
+        id: "doc1",
+        title: "Solar Consumer User...",
+        type: "Web Manual",
+        trustScore: 95,
+        highlightedText: "...The 'Compact Solar Panel' output is 150W...",
+        action: "keep" as const,
+      },
+      {
+        id: "doc2",
+        title: "CSP-150W Technical...",
+        type: "PDF",
+        trustScore: 10,
+        highlightedText: "...The 'Compact Solar Panel' output is 200W...",
+        action: "archive" as const,
+      },
+    ];
+  }
+  
+  if (category === "Outdated") {
+    return [
+      {
+        id: "doc3",
+        title: "Product Pricing Guide 2024",
+        type: "Google Docs",
+        trustScore: 60,
+        highlightedText: "...pricing information for our product line as of January 2024...",
+        action: "archive" as const,
+      },
+    ];
+  }
+  
+  return [];
+};
+
 export function TopIssuesCard({ issues }: TopIssuesCardProps) {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedIssue, setSelectedIssue] = useState<TopIssue | null>(null);
+
+  const handleTakeAction = (issue: TopIssue) => {
+    setSelectedIssue(issue);
+    setIsModalOpen(true);
+  };
+
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
+    setSelectedIssue(null);
+  };
+
+  const handleSave = () => {
+    console.log("Save action for", selectedIssue?.id);
+  };
+
+  const handleSendToExpert = () => {
+    console.log("Send to expert for", selectedIssue?.id);
+  };
   return (
     <div
       style={{
@@ -147,6 +207,7 @@ export function TopIssuesCard({ issues }: TopIssuesCardProps) {
                 <button
                   type="button"
                   className="slds-button slds-button_outline-brand"
+                  onClick={() => handleTakeAction(issue)}
                   style={{
                     display: "inline-flex",
                     alignItems: "center",
@@ -174,6 +235,23 @@ export function TopIssuesCard({ issues }: TopIssuesCardProps) {
               </div>
         </div>
       ))}
+
+      {/* Take Action Modal */}
+      {selectedIssue && (
+        <TakeActionModal
+          isOpen={isModalOpen}
+          onClose={handleCloseModal}
+          issueType={selectedIssue.category}
+          issueDescription={selectedIssue.description}
+          documents={getDocumentsForIssue(selectedIssue.category)}
+          expertReviewer={{
+            name: "Laura D.",
+            role: "Product Knowledge Manager",
+          }}
+          onSave={handleSave}
+          onSendToExpert={handleSendToExpert}
+        />
+      )}
     </div>
   );
 }

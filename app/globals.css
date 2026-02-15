@@ -55,7 +55,7 @@
   
   --slds-g-color-error-base-50: #C23934;
   --slds-g-color-error-tint: #FDECEC;
-  --slds-g-color-error-container-1: #FFE5E5;
+  --slds-g-color-error-container-1: #FFEFEF;
   --slds-g-color-on-error-1: #790000;
   
   /* Chart Colors - Teal */
@@ -152,6 +152,11 @@
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+}
+
+html,
+body {
+  overflow-x: hidden;
 }
 
 body {
@@ -310,7 +315,7 @@ body {
   background-color: #FFFFFF;
   border: 1px solid var(--slds-g-color-border-1, #C9C9C9); /* 1px border as shown in diagram */
   border-radius: 0.25rem;
-  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.1);
+  box-shadow: none; /* No shadow - sharp borders per SLDS */
   transition: box-shadow 0.15s ease-in-out;
   margin: 1px 1px 1px 16px !important; /* Top: 1px, Right: 1px, Bottom: 1px, Left: 16px - matching diagram */
   box-sizing: border-box !important; /* Ensure border-box model */
@@ -329,11 +334,11 @@ article.slds-card.slds-card_main-content {
 }
 
 .slds-card:hover {
-  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.1);
+  box-shadow: none;
 }
 
 .slds-card[role="button"]:hover {
-  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.1);
+  box-shadow: none;
 }
 
 .slds-card[role="button"]:focus {
@@ -664,7 +669,7 @@ article.slds-card.slds-card_main-content {
 /* Error Badge - Used for urgent or critical statuses */
 .slds-badge.slds-theme_error,
 .slds-badge_error {
-  background-color: var(--slds-g-color-error-container-1, #FFE5E5);
+  background-color: var(--slds-g-color-error-container-1);
   color: var(--slds-g-color-on-error-1, #790000);
   border: none;
 }

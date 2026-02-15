@@ -200,6 +200,7 @@ export default function DataCurationPage() {
       <div style={{ 
         flex: 1, 
         overflow: activeTab === "curation" ? "hidden" : 'auto', 
+        overflowX: 'hidden',
         display: 'flex', 
         flexDirection: 'column',
         alignItems: 'center',
@@ -213,6 +214,7 @@ export default function DataCurationPage() {
         <article className="slds-card slds-card_main-content" style={{ 
           maxWidth: '1440px',
           width: '100%', 
+          minWidth: 0,
           margin: 0,
           display: 'flex', 
           flexDirection: 'column', 

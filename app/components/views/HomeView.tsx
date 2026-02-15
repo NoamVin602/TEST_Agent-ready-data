@@ -35,11 +35,13 @@ export function HomeView({ onMetricClick }: HomeViewProps) {
         gap: 'var(--slds-g-spacing-4)',
         height: '100%',
         width: '100%',
+        minWidth: 0,
+        overflowX: 'hidden',
         backgroundColor: 'transparent'
       }}
     >
       {/* Left Column - Current State Dashboard (75%) */}
-      <div className="slds-grid slds-grid_vertical" style={{ flex: '0 0 75%', minWidth: 0, gap: 'var(--slds-g-spacing-4)', display: 'flex', flexDirection: 'column' }}>
+      <div className="slds-grid slds-grid_vertical" style={{ flex: '0 0 75%', minWidth: 0, gap: 'var(--slds-g-spacing-4)', display: 'flex', flexDirection: 'column', overflow: 'hidden' }}>
         {/* Current State Card Header - Matching Figma */}
         <article className="slds-card" style={{ margin: '0 1px 1px 16px', boxSizing: 'border-box' }}>
           <div 
@@ -167,7 +169,7 @@ export function HomeView({ onMetricClick }: HomeViewProps) {
       </div>
 
       {/* Right Column - Top Issues (25%) */}
-      <div style={{ flex: '0 0 25%', minWidth: 0, display: 'flex', flexDirection: 'column', alignSelf: 'stretch', height: '100%', gap: 'var(--slds-g-spacing-4)' }}>
+      <div style={{ flex: '0 0 25%', minWidth: 0, display: 'flex', flexDirection: 'column', alignSelf: 'stretch', height: '100%', gap: 'var(--slds-g-spacing-4)', overflow: 'hidden' }}>
         <TopIssuesCard issues={config.topIssues} />
       </div>
     </div>

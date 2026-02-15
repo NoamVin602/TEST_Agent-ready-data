@@ -4,8 +4,8 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
-    "start": "next start -p $PORT",
+    "build": "next build && (cp -r public .next/standalone/ 2>/dev/null || true) && (cp -r .next/static .next/standalone/.next/static 2>/dev/null || true)",
+    "start": "node .next/standalone/server.js",
     "lint": "next lint"
   },
   "dependencies": {

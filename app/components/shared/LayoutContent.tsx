@@ -9,7 +9,7 @@ export function LayoutContent({ children }: { children: React.ReactNode }) {
   const { setIsCollapsed } = useNav();
 
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', height: '100vh' }}>
+    <div style={{ display: 'flex', flexDirection: 'column', height: '100vh', overflowX: 'hidden' }}>
       {/* Global Header */}
       <GlobalHeader />
       
@@ -22,7 +22,7 @@ export function LayoutContent({ children }: { children: React.ReactNode }) {
         <LeftNavigation onCollapseChange={setIsCollapsed} />
         
         {/* Page Content */}
-        <main style={{ flex: 1, overflow: 'auto' }}>
+        <main style={{ flex: 1, overflow: 'auto', overflowX: 'hidden', minWidth: 0 }}>
           {children}
         </main>
       </div>

@@ -47,6 +47,8 @@ export function CardsStats({
         flexDirection: "column",
         gap: "var(--slds-g-spacing-4, 16px)",
         width: "100%",
+        minWidth: 0,
+        overflowX: "hidden",
       }}
     >
       {/* Top Card - Data Health with Bar Chart */}
@@ -270,8 +272,9 @@ export function CardsStats({
         style={{
           display: "flex",
           gap: "var(--slds-g-spacing-4, 16px)",
-          height: "176px",
+          minHeight: "176px",
           width: "100%",
+          alignItems: "stretch",
         }}
       >
         {/* Data Health Over Time Card */}
@@ -279,7 +282,7 @@ export function CardsStats({
           className="slds-card"
           style={{
             flex: "1 0 0",
-            height: "176px",
+            minHeight: "176px",
             borderRadius: "var(--slds-g-radius-border-3, 12px)",
           }}
         >
@@ -329,10 +332,13 @@ export function CardsStats({
             display: "flex",
             flexDirection: "column",
             gap: "var(--slds-g-spacing-3, 12px)",
-            height: "100%",
+            minHeight: "176px",
             padding: "var(--slds-g-spacing-2, 8px) var(--slds-g-spacing-4, 16px)",
             width: "292px",
+            minWidth: "292px",
+            maxWidth: "292px",
             flexShrink: 0,
+            overflow: "hidden",
           }}
         >
           <h3
@@ -362,6 +368,7 @@ export function CardsStats({
                     display: "flex",
                     gap: "var(--slds-g-spacing-3, 12px)",
                     alignItems: "flex-start",
+                    minHeight: 0,
                   }}
                 >
                   <div style={{ width: "20px", height: "20px", flexShrink: 0 }}>
@@ -373,6 +380,10 @@ export function CardsStats({
                       fontWeight: "var(--slds-g-font-weight-4, 400)",
                       lineHeight: "20px",
                       color: "var(--slds-g-color-on-surface-2, #2e2e2e)",
+                      wordBreak: "break-word",
+                      overflowWrap: "anywhere",
+                      flex: 1,
+                      minWidth: 0,
                     }}
                   >
                     {source.name}
@@ -385,9 +396,9 @@ export function CardsStats({
       </div>
 
       {/* Recent Activity Table */}
-      <div className="slds-card" style={{ borderRadius: "var(--slds-g-radius-border-3, 12px)" }}>
+      <div className="slds-card" style={{ borderRadius: "var(--slds-g-radius-border-3, 12px)", overflow: "hidden" }}>
         <div className="slds-card__body slds-card__body_inner" style={{ padding: "var(--slds-g-spacing-3, 12px)" }}>
-          <div className="slds-table_header-fixed_container">
+          <div className="slds-table_header-fixed_container" style={{ overflowX: "auto", maxWidth: "100%" }}>
             <table className="slds-table slds-table_cell-buffer slds-table_bordered slds-table_fixed-layout" role="grid">
               <thead>
                 <tr className="slds-line-height_reset">
